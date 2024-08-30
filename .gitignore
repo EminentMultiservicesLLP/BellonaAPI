@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/BellonaAPI/.vs
+/BellonaAPI/bin
+/BellonaAPI/obj
+/BellonaAPI/packages
+/BellonaAPI/uploads
+/BellonaDAL/bin
+/BellonaDAL/obj
+/packages
