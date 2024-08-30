@@ -1,0 +1,436 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{55AC7941-6D9F-454B-8FAD-EE81DF506A58}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BellonaAPI</RootNamespace>
+    <AssemblyName>BellonaAPI</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <IncludeIisSettings>true</IncludeIisSettings>
+    <RegisterForComInterop>true</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PublishDatabases>false</PublishDatabases>
+    <RegisterForComInterop>true</RegisterForComInterop>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonDataLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Meghna new\Dashboard\Dashboard\API\SalesDashboard_API\bin\CommonDataLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Documents\Received Files\bin\bin\CommonLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Meghna new\Dashboard\Dashboard\API\SalesDashboard_API\bin\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Meghna new\Dashboard\Dashboard\API\SalesDashboard_API\bin\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Meghna new\Dashboard\Dashboard\API\SalesDashboard_API\bin\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.6.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.3.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.3.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\BIN\API\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Compile Include="App_Start\BundleCollection.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\B2CBillingController.cs" />
+    <Compile Include="Controllers\BillingDashboardController.cs" />
+    <Compile Include="Controllers\CashSubmissionController.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\EInvoiceUploadDownloadController.cs" />
+    <Compile Include="Controllers\GuestController.cs" />
+    <Compile Include="Controllers\HistoryDashboardController.cs" />
+    <Compile Include="Controllers\InventoryEntryController.cs" />
+    <Compile Include="Controllers\ItemMasterController.cs" />
+    <Compile Include="Controllers\OutletItemMappingController.cs" />
+    <Compile Include="Controllers\PresentDashboardController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\ProspectController.cs" />
+    <Compile Include="Controllers\ProspectDashboardController.cs" />
+    <Compile Include="Controllers\ScheduleStockCountController.cs" />
+    <Compile Include="Controllers\SiteMasterController.cs" />
+    <Compile Include="DataAccess\Class\BillingDashboardRepository.cs" />
+    <Compile Include="DataAccess\Class\BillingRepository.cs" />
+    <Compile Include="DataAccess\Class\BrandRepository.cs" />
+    <Compile Include="DataAccess\Class\CashSubmissionRepository.cs" />
+    <Compile Include="DataAccess\Class\CityRepository.cs" />
+    <Compile Include="DataAccess\Class\ClusterRepository.cs" />
+    <Compile Include="DataAccess\Class\CommonRepository.cs" />
+    <Compile Include="DataAccess\Class\CountryRepository.cs" />
+    <Compile Include="DataAccess\Class\CurrencyRepository.cs" />
+    <Compile Include="DataAccess\Class\DashboardRepository.cs" />
+    <Compile Include="DataAccess\Class\Deliver_GuestPartners.cs" />
+    <Compile Include="DataAccess\Class\EInvoiceUploadDownloadRepository.cs" />
+    <Compile Include="DataAccess\Class\GuestRepository.cs" />
+    <Compile Include="DataAccess\Class\HistoryDashboardRepository.cs" />
+    <Compile Include="DataAccess\Class\InventoryEntryRepository.cs" />
+    <Compile Include="DataAccess\Class\ItemMasterRepository.cs" />
+    <Compile Include="DataAccess\Class\MastersRepository.cs" />
+    <Compile Include="DataAccess\Class\OutletItemMappingRepository.cs" />
+    <Compile Include="DataAccess\Class\OutletRepository.cs" />
+    <Compile Include="DataAccess\Class\PresentDashboardRepository.cs" />
+    <Compile Include="DataAccess\Class\ProspectDashboardRepository.cs" />
+    <Compile Include="DataAccess\Class\ProspectRepository.cs" />
+    <Compile Include="DataAccess\Class\RegionRepository.cs" />
+    <Compile Include="DataAccess\Class\ScheduleStockCountRepository.cs" />
+    <Compile Include="DataAccess\Class\SiteMasterRepository.cs" />
+    <Compile Include="DataAccess\Class\TransactionRepository.cs" />
+    <Compile Include="DataAccess\Class\UserMenuRightsRepository.cs" />
+    <Compile Include="DataAccess\Class\UserProfileReposiotory.cs" />
+    <Compile Include="DataAccess\Interface\IBillingDashboardRepository.cs" />
+    <Compile Include="DataAccess\Interface\IBillingRepository.cs" />
+    <Compile Include="DataAccess\Interface\IBrandRepository.cs" />
+    <Compile Include="DataAccess\Interface\iCashSubmissionRepository.cs" />
+    <Compile Include="DataAccess\Interface\ICityRepository.cs" />
+    <Compile Include="DataAccess\Interface\IClusterRepository.cs" />
+    <Compile Include="DataAccess\Interface\ICommonRepository.cs" />
+    <Compile Include="DataAccess\Interface\ICountryRepository.cs" />
+    <Compile Include="DataAccess\Interface\ICurrencyRepository.cs" />
+    <Compile Include="DataAccess\Interface\IDashboardRepository.cs" />
+    <Compile Include="DataAccess\Interface\IDeliver_GuestPartners.cs" />
+    <Compile Include="DataAccess\Interface\IEInvoiceUploadDownloadRepository.cs" />
+    <Compile Include="DataAccess\Interface\IGuestRepository.cs" />
+    <Compile Include="DataAccess\Interface\IHistoryDashboardRepository.cs" />
+    <Compile Include="DataAccess\Interface\IInventoryEntryRepository.cs" />
+    <Compile Include="DataAccess\Interface\IItemMasterRepository.cs" />
+    <Compile Include="DataAccess\Interface\IMastersRepository.cs" />
+    <Compile Include="DataAccess\Interface\IOutletItemMappingRepository.cs" />
+    <Compile Include="DataAccess\Interface\IOutletRepository.cs" />
+    <Compile Include="DataAccess\Interface\IPresentDashboardRepository.cs" />
+    <Compile Include="DataAccess\Interface\IProspectDashboardRepository.cs" />
+    <Compile Include="DataAccess\Interface\IProspectRepository.cs" />
+    <Compile Include="DataAccess\Interface\IRegionRepository.cs" />
+    <Compile Include="DataAccess\Interface\IScheduleStockCountRepository.cs" />
+    <Compile Include="DataAccess\Interface\ISiteMasterRepository.cs" />
+    <Compile Include="DataAccess\Interface\ITransactionRepository.cs" />
+    <Compile Include="DataAccess\Interface\IUserMenuRightsRepository.cs" />
+    <Compile Include="DataAccess\Interface\IUserProfilRepository.cs" />
+    <Compile Include="Filters\CustomExceptionFilter.cs" />
+    <Compile Include="Filters\GZipCompressionAttribute.cs" />
+    <Compile Include="Filters\RequiredSessionAttribute.cs" />
+    <Content Include="packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.xml" />
+    <Content Include="packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\netstandard2.0\System.Net.Http.Formatting.xml" />
+    <Content Include="packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\portable-wp8+netcore45+net45+wp81+wpa81\System.Net.Http.Formatting.xml" />
+    <Content Include="packages\Microsoft.AspNet.WebApi.Core.5.2.4\lib\net45\System.Web.Http.xml" />
+    <Content Include="packages\Microsoft.AspNet.WebApi.WebHost.5.2.4\lib\net45\System.Web.Http.WebHost.xml" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\Roslyn45\csc.exe" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\Roslyn45\csi.exe" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\Roslyn45\vbc.exe" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\Roslyn45\VBCSCompiler.exe" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\RoslynLatest\csc.exe" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\RoslynLatest\csi.exe" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\RoslynLatest\vbc.exe" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\RoslynLatest\VBCSCompiler.exe" />
+    <Content Include="packages\Newtonsoft.Json.11.0.1\lib\net20\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.11.0.1\lib\net35\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.11.0.1\lib\net40\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.11.0.1\lib\netstandard1.0\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.11.0.1\lib\netstandard1.3\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.11.0.1\lib\netstandard2.0\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.11.0.1\lib\portable-net40+sl5+win8+wp8+wpa81\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.11.0.1\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.xml" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netcoreapp2.0\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.2\LICENSE.TXT" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.2\ref\netstandard1.0\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.2\ref\netstandard2.0\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.2\THIRD-PARTY-NOTICES.TXT" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.2\useSharedDesignerContext.txt" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.2\version.txt" />
+    <Content Include="uploads\DMS\G-001245\un.jpg" />
+    <Content Include="uploads\GuestImage\21052024\un.jpg" />
+    <Content Include="uploads\GuestImage\21052024\underConstruction.png" />
+    <Content Include="uploads\Inventory\InventoryEntry\OutletID3\66366705-12ec-46f2-913d-bd207819b7c2 %282%29.jpg" />
+    <Content Include="uploads\Inventory\InventoryEntry\OutletID3\a 1b02e8f-47cb-48ee-8237-624e606d10a8.jpg" />
+    <Content Include="uploads\Inventory\InventoryEntry\OutletID4\66366705-12ec-46f2-913d-bd207819b7c2 %282%29.jpg" />
+    <Content Include="uploads\Inventory\InventoryEntry\OutletID4\a 1b02e8f-47cb-48ee-8237-624e606d10a8.jpg" />
+    <Content Include="uploads\Inventory\InventoryEntry\OutletID4\IMG_9324.JPEG" />
+    <Content Include="uploads\Inventory\InventoryEntry\OutletID4\zzz.jpg" />
+    <Content Include="uploads\Inventory\InventoryEntry\OutletID5\images.jpg" />
+    <Content Include="uploads\Inventory\ItemMaster\28052024\Mechcon-01.jpg" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\UnityResolver.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
+    <Compile Include="Controllers\OutletController.cs" />
+    <Compile Include="Controllers\CountryController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserProfileController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ActionUserDetail.cs" />
+    <Compile Include="Models\AddDocument.cs" />
+    <Compile Include="Models\BillingModel.cs" />
+    <Compile Include="Models\BudgetModel.cs" />
+    <Compile Include="Models\CashAuth.cs" />
+    <Compile Include="Models\DailyExpense.cs" />
+    <Compile Include="Models\DailySale.cs" />
+    <Compile Include="Models\DailyTarget.cs" />
+    <Compile Include="Models\DailyTargetCC.cs" />
+    <Compile Include="Models\Dashboard\CashDepositStatus.cs" />
+    <Compile Include="Models\Dashboard\PresentDashboard.cs" />
+    <Compile Include="Models\Dashboard\ProspectDashboard.cs" />
+    <Compile Include="Models\Dashboard\SaleDineIn.cs" />
+    <Compile Include="Models\DSREntry.cs" />
+    <Compile Include="Models\EInvoiceUploadDownload.cs" />
+    <Compile Include="Models\GuestModel.cs" />
+    <Compile Include="Models\Inventory\InventoryEntry.cs" />
+    <Compile Include="Models\Inventory\ItemMaster.cs" />
+    <Compile Include="Models\Inventory\OutletItemMapping.cs" />
+    <Compile Include="Models\Inventory\ScheduleStockCount.cs" />
+    <Compile Include="Models\Masters\AdminModels.cs" />
+    <Compile Include="Models\MenuUserRightsModel.cs" />
+    <Compile Include="Models\MonthlyExpense.cs" />
+    <Compile Include="Models\OutletAccess.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Prospect.cs" />
+    <Compile Include="Models\RoleAccess.cs" />
+    <Compile Include="Models\SiteModel.cs" />
+    <Compile Include="Models\UserAccess.cs" />
+    <Compile Include="Models\UserProfile.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryCollection\QueryList.cs" />
+    <Compile Include="QueryCollection\SalesDetails.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="packages\Microsoft.AspNet.WebApi.5.2.4\.signature.p7s" />
+    <Content Include="packages\Microsoft.AspNet.WebApi.5.2.4\Microsoft.AspNet.WebApi.5.2.4.nupkg" />
+    <Content Include="packages\Microsoft.AspNet.WebApi.Client.5.2.4\.signature.p7s" />
+    <Content Include="packages\Microsoft.AspNet.WebApi.Client.5.2.4\Microsoft.AspNet.WebApi.Client.5.2.4.nupkg" />
+    <Content Include="packages\Microsoft.AspNet.WebApi.Core.5.2.4\.signature.p7s" />
+    <Content Include="packages\Microsoft.AspNet.WebApi.Core.5.2.4\Content\web.config.transform" />
+    <Content Include="packages\Microsoft.AspNet.WebApi.Core.5.2.4\Microsoft.AspNet.WebApi.Core.5.2.4.nupkg" />
+    <Content Include="packages\Microsoft.AspNet.WebApi.WebHost.5.2.4\.signature.p7s" />
+    <Content Include="packages\Microsoft.AspNet.WebApi.WebHost.5.2.4\Microsoft.AspNet.WebApi.WebHost.5.2.4.nupkg" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\.signature.p7s" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.Extensions.props" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.Extensions.props" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\content\net45\app.config.install.xdt" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\content\net45\app.config.uninstall.xdt" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\content\net45\web.config.install.xdt" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\content\net45\web.config.uninstall.xdt" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\content\net46\app.config.install.xdt" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\content\net46\app.config.uninstall.xdt" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\content\net46\web.config.install.xdt" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\content\net46\web.config.uninstall.xdt" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0.nupkg" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\net45\install.ps1" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\net45\uninstall.ps1" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\Roslyn45\csc.exe.config" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\Roslyn45\csc.rsp" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\Roslyn45\csi.rsp" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\Roslyn45\Microsoft.CSharp.Core.targets" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\Roslyn45\Microsoft.VisualBasic.Core.targets" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\Roslyn45\vbc.exe.config" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\Roslyn45\vbc.rsp" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\Roslyn45\VBCSCompiler.exe.config" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\RoslynLatest\csc.exe.config" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\RoslynLatest\csc.rsp" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\RoslynLatest\csi.exe.config" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\RoslynLatest\csi.rsp" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\RoslynLatest\Microsoft.CSharp.Core.targets" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\RoslynLatest\Microsoft.Managed.Core.targets" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\RoslynLatest\Microsoft.VisualBasic.Core.targets" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\RoslynLatest\vbc.exe.config" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\RoslynLatest\vbc.rsp" />
+    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\tools\RoslynLatest\VBCSCompiler.exe.config" />
+    <Content Include="packages\Newtonsoft.Json.11.0.1\.signature.p7s" />
+    <Content Include="packages\Newtonsoft.Json.11.0.1\LICENSE.md" />
+    <Content Include="packages\Newtonsoft.Json.11.0.1\Newtonsoft.Json.11.0.1.nupkg" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.2\.signature.p7s" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.2\System.Runtime.CompilerServices.Unsafe.4.5.2.nupkg" />
+    <Content Include="packages\Unity.5.11.7\.signature.p7s" />
+    <Content Include="packages\Unity.5.11.7\Unity.5.11.7.nupkg" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="uploads\15052024\grn\PendingItemGRNWise.pdf" />
+    <Content Include="uploads\1\15052024\testGrn\PendingItemGRNWise.pdf" />
+    <Content Include="uploads\3\17052024\grn\PendingItemGRNWise.pdf" />
+    <Content Include="uploads\5\17052024\GRN-123456\MaterialIssueDetail.pdf" />
+    <Content Include="uploads\DMS\GRN Date\MaterialIssueDetail.pdf" />
+    <Content Include="uploads\DMS\GRN-123456\GRNDetails %2810%29.pdf" />
+    <Content Include="uploads\DMS\GRN-123456\GRNDetails %282%29.pdf" />
+    <Content Include="uploads\DMS\GRN-123456\Inferno Care LLP - Industrial safety Profile. %282%29.pdf" />
+    <Content Include="uploads\DMS\GRN-123456\MaterialIssueDetail.pdf" />
+    <Content Include="uploads\DMS\grn-87545\PendingItemGRNWise.pdf" />
+    <Content Include="uploads\DMS\GRN-878646\GRNDetails %2810%29.pdf" />
+    <Content Include="uploads\DMS\GRN77\PendingItemGRNWise.pdf" />
+    <Content Include="uploads\DMS\grn\GRNDetails %2810%29.pdf" />
+    <Content Include="uploads\DMS\grn\MaterialIssueDetail.pdf" />
+    <Content Include="uploads\DMS\testGrn\PurchaseIndentRpt %281%29.pdf" />
+    <Content Include="uploads\Inventory\InventoryEntry\OutletID3\Form6_S13163O6N1704241200071.pdf.pdf" />
+    <Content Include="uploads\Inventory\InventoryEntry\OutletID3\PurchaseReport %281%29.pdf" />
+    <Content Include="uploads\Inventory\InventoryEntry\OutletID3\PurchaseReport %282%29.pdf" />
+    <Content Include="uploads\Inventory\InventoryEntry\OutletID3\PurchaseReportVert %283%29.pdf" />
+    <Content Include="uploads\Inventory\InventoryEntry\OutletID3\PurchaseReportVert %284%29.pdf" />
+    <Content Include="uploads\Inventory\InventoryEntry\OutletID4\Form6_S13163O6N1704241200071.pdf.pdf" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\BillingDashboard\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52355</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1058/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
