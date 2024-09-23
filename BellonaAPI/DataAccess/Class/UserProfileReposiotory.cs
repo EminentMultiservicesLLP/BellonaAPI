@@ -683,12 +683,13 @@ namespace BellonaAPI.DataAccess.Class
                         DocumentId = row.Field<int>("DocumentId"),
                         GrnNo = row.Field<string>("GRN"),                  
                         PurchaseOrder = row.Field<string>("POOrder"),
-                        strPODate = row.Field<string>("POCreationDate"),
+                        strPOCreationDate = row.Field<string>("POCreationDate"),
                         //strPODate = Convert.ToDateTime(row.Field<DateTime>("PODate")).ToString("dd-MMM-yyyy"),
                         strBilldate = row.Field<string>("GRNDate"),
                         //strBilldate = Convert.ToDateTime(row.Field<DateTime>("GRNDate")).ToString("dd-MMM-yyyy"),
                         VendorName= row.Field<string>("SupplierName"),
                         FileName = row.Field<string>("FileName"),
+                        OutletName = row.Field<string>("OutletName"),
                         IsManualUpload = row.Field<bool>("IsManualUploaded")
                          
     }).ToList();

@@ -91,6 +91,9 @@
         public const string GetCostOfGoods = "dbsp_GetCostOfGoods";
         public const string GetCostOfOther = "dbsp_GetOtherCostDetails_Chart";
 
+        public const string GetAllWeeks = "dbsp_GetAllWeeks";
+        public const string GetDistinctYear = "dbsp_GetDistinctYear";
+        public const string SaveWeeklyExpense = "dbsp_SAVE_WeeklyExpense";
 
         /************ History Chart ****************************/
         public const string GetCashFlowBreakup_Chart_History = "dbsp_GetCashFlowBreakup_History_Chart";

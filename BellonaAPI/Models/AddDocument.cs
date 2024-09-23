@@ -38,7 +38,7 @@ namespace BellonaAPI.Models
         public int PurchaseOrderId { get; set; }
         public string PurchaseOrder { get; set; }
         public DateTime PODate { get; set; }
-        public string strPODate { get; set; }
+        public string strPOCreationDate { get; set; }
         public int DocumentId { get; set; }
         public string FileName { get; set; }
         public bool IsManualUpload { get; set;  }

@@ -13,6 +13,7 @@ namespace BellonaAPI.Models
         public int ExpenseDay { get; set; }
         public int ExpenseMonth { get; set; }
         public int ExpenseYear { get; set; }
+        public int Week { get; set; }
         public DateTime ExpenseDate { get; set; }
         public decimal D_Supplies_BOH { get; set; }
         public decimal D_Supplies_Cleaning { get; set; }
@@ -39,6 +40,21 @@ namespace BellonaAPI.Models
         public bool IsStock { get; set; }
         public bool IsOpeningStock { get; set; }
         public List<DailyExpense> DailyExpenseEntries { get; set; }
+    }
 
+    public class financialYear
+    {
+        public int YearId { get; set; }
+        public int Year { get; set; }
+        public int IsCurrentYear { get; set; }
+    }
+    public class WeekModel
+    {
+        public int DateRangeId { get; set; }
+        public string Period { get; set; }
+        public string WeekRange { get; set; }
+        public string Dates { get; set; }
+        public string Days { get; set; }
+        public string WeekNo { get; set; }
     }
 }

@@ -23,7 +23,11 @@ namespace BellonaAPI.DataAccess.Interface
         
         bool UpdateBudget(BudgetModel _data, out string resultOutputMessage);
         bool DeleteBudget(int BudgetId);
-        List<DailyExpense> GetDailyExpenseEntries(Guid userId, int menuId, int outletID, int expenseMonth, int expenseYear);
+        List<DailyExpense> GetDailyExpenseEntries(Guid userId, int menuId, int outletID, int expenseMonth, int expenseYear, int week);
         bool SaveDailyExpense(DailyExpense DailyExpenseEntries);
+        List<WeekModel> GetAllWeeks(Guid userId, int year);
+        List<financialYear> GetFinancialYear(Guid userId);
+
+        bool SaveWeeklyExpense(WeeklyExpenseModel _data);
     }
 }

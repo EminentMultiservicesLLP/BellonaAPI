@@ -520,7 +520,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<DailyExpense> GetDailyExpenseEntries(Guid userId, int menuId, int outletID, int expenseMonth, int expenseYear)
+        public List<DailyExpense> GetDailyExpenseEntries(Guid userId, int menuId, int outletID, int expenseMonth, int expenseYear, int week)
         {
             List<DailyExpense> _result = null; int isSuccess = 0; string returnMessage = "";
             TryCatch.Run(() =>
@@ -533,6 +533,7 @@ namespace BellonaAPI.DataAccess.Class
                     dbCol.Add(new DBParameter("OutletID", outletID, DbType.Int32));
                     dbCol.Add(new DBParameter("ExpenseMonth", expenseMonth, DbType.Int32));
                     dbCol.Add(new DBParameter("ExpenseYear", expenseYear, DbType.Int32));
+                    dbCol.Add(new DBParameter("Week", week, DbType.Int32));
                     dbCol.Add(new DBParameter("IsSuccessFullyExecuted", isSuccess, DbType.Int32, ParameterDirection.Output));
                     dbCol.Add(new DBParameter("ReturnMessage", returnMessage, DbType.String, ParameterDirection.Output));
 
@@ -541,6 +542,7 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         DailyExpenseId = row.Field<int>("DailyExpenseId"),
                         OutletID = row.Field<int>("OutletID"),                        
+                        Week = row.Field<int>("WeekNo"),                        
                         ExpenseDay = row.Field<int>("ExpenseDay"),
                         ExpenseMonth = row.Field<int>("ExpenseMonth"),
                         ExpenseYear = row.Field<int>("ExpenseYear"),                       
@@ -611,6 +613,87 @@ namespace BellonaAPI.DataAccess.Class
             return IsSuccess;
         }
 
+
+        public List<WeekModel> GetAllWeeks(Guid userId, int year)
+        {
+            List<WeekModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();                 
+                    dbCol.Add(new DBParameter("Year", year, DbType.Int32));
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetAllWeeks, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new WeekModel
+                    {
+                        DateRangeId = row.Field<int>("DateRangeId"),
+                        WeekRange = row.Field<string>("WeekRange"),
+                        Period = row.Field<string>("Period"),
+                        Days = row.Field<string>("Days"),
+                        Dates = row.Field<string>("Dates"),
+                        WeekNo = row.Field<string>("WeekNo")
+                      
+                    }).OrderBy(o => o.DateRangeId).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetAllWeeks:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
         
+        public List<financialYear> GetFinancialYear(Guid userId)
+        {
+            List<financialYear> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {                    
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetDistinctYear,  CommandType.StoredProcedure);
+                    _result = dtData.AsEnumerable().Select(row => new financialYear
+                    {
+                        Year = row.Field<int>("Year"),
+                        IsCurrentYear = row.Field<int>("IsCurrentYear")           
+                    }).OrderBy(o => o.Year).ToList();
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetFinancialYear:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
+        public bool SaveWeeklyExpense(WeeklyExpenseModel _data)
+        {
+            // Logger.LogInfo("Started execution of SaveWeeklyExpense from Repository TransactionRepository at " + DateTime.Now.ToLongDateString());
+            bool IsSuccess = false; string ReturnMessage = string.Empty;
+            var modelData = Common.ToXML(_data);
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("WeeklyExpenseDetails", modelData, DbType.Xml));
+                    dbCol.Add(new DBParameter("IsSuccessFullyExecuted", IsSuccess, DbType.Boolean, ParameterDirection.Output));
+                    dbCol.Add(new DBParameter("ReturnMessage", ReturnMessage, DbType.String, ParameterDirection.Output));
+
+                    IsSuccess = Convert.ToBoolean(Dbhelper.ExecuteNonQuery(QueryList.SaveWeeklyExpense, dbCol, CommandType.StoredProcedure));
+                    if (IsSuccess) Logger.LogInfo("    Output message of UpdateMonthlyExpense from Repository TransactionRepository : " + ReturnMessage);
+                    else Logger.LogInfo("    Failed Output message of UpdateMonthlyExpense from Repository TransactionRepository : " + ReturnMessage);
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository UpdateMonthlyExpense:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            }).Finally(() =>
+            {
+                Logger.LogInfo("Completed execution of UpdateMonthlyExpense from Repository TransactionRepository at " + DateTime.Now.ToLongDateString());
+            });
+            return IsSuccess;
+        }
+
     }
 }

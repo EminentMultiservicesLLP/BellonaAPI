@@ -1,12 +1,11 @@
-﻿using CommonLayer;
+﻿using BellonaAPI.DataAccess.Interface;
 using BellonaAPI.Filters;
-using BellonaAPI.DataAccess.Interface;
-using BellonaAPI.Models.Masters;
+using BellonaAPI.Models;
+using CommonLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using System;
-using BellonaAPI.Models;
 
 namespace BellonaAPI.Controllers
 {
@@ -154,9 +153,9 @@ namespace BellonaAPI.Controllers
         [Route("GetDailyExpenseEntries")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetDailyExpenseEntries(string userId, int menuId, int outletID , int expenseMonth , int expenseYear )
+        public IHttpActionResult GetDailyExpenseEntries(string userId, int menuId, int outletID , int expenseMonth , int expenseYear , int week)
         {            
-            List<DailyExpense> _result = _iRepo.GetDailyExpenseEntries(new Guid(userId), menuId, outletID, expenseMonth, expenseYear);
+            List<DailyExpense> _result = _iRepo.GetDailyExpenseEntries(new Guid(userId), menuId, outletID, expenseMonth, expenseYear, week);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve GetBudgetDetailByID data"));
         }
@@ -170,5 +169,33 @@ namespace BellonaAPI.Controllers
             else return BadRequest("Failed to Save Daily Expense Entries");
         }
 
+        [Route("GetAllWeeks")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetAllWeeks(Guid userId, int year)
+        {
+            List<WeekModel> _result = _iRepo.GetAllWeeks(userId, year);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve  All Weeks data"));
+        }
+
+        [Route("SaveWeeklyExpense")]
+        [AcceptVerbs("POST")]
+        [ValidationActionFilter]
+        public IHttpActionResult SaveWeeklyExpense(WeeklyExpenseModel _data)
+        {
+            if (_iRepo.SaveWeeklyExpense(_data)) return Ok(new { IsSuccess = true, Message = "Successfully Saved Weekly Expense Entry" });
+            else return BadRequest("Failed to Save Weekly Expense Entry");
+        }
+
+        [Route("GetFinancialYear")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetFinancialYear(Guid userId)
+        {
+            List<financialYear> _result = _iRepo.GetFinancialYear(userId);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve  Distinct Financial Year"));
+        }
     }
 }
