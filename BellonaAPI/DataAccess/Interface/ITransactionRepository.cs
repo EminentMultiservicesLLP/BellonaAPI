@@ -27,7 +27,19 @@ namespace BellonaAPI.DataAccess.Interface
         bool SaveDailyExpense(DailyExpense DailyExpenseEntries);
         List<WeekModel> GetAllWeeks(Guid userId, int year);
         List<financialYear> GetFinancialYear(Guid userId);
-
         bool SaveWeeklyExpense(WeeklyExpenseModel _data);
+
+        #region SalesBudget
+        List<SalesCategoryModel> GetSalesCategory();
+        SalesBudget GetSalesBudget(int? OutletID , int? Year, int? Month);
+        List<SalesCategoryBudget> GetSalesCategoryBudget(int? OutletID , int? Year, int? Month);
+        List<SalesDayBudget> GetSalesDayBudget(int? OutletID , int? Year, int? Month);
+        bool SaveSalesBudget(SalesBudget model);
+        List<SalesBudgetDetail> GetSalesBudgetDetails(int? OutletID , int? Year, int? Month);
+        #endregion SalesBudget
+
+        #region TBUpload
+        List<TBErrorLog> CheckTBErrorLog();
+        #endregion TBUpload
     }
 }

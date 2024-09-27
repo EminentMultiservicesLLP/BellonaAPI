@@ -95,6 +95,15 @@
         public const string GetDistinctYear = "dbsp_GetDistinctYear";
         public const string SaveWeeklyExpense = "dbsp_SAVE_WeeklyExpense";
 
+        public const string GetSalesCategory = "dbsp_GetSalesCategory";
+        public const string GetSalesBudget = "dbsp_GetSalesBudget";
+        public const string GetSalesCategoryBudget = "dbsp_GetSalesCategoryBudget";
+        public const string GetSalesDayBudget = "dbsp_GetSalesDayBudget";
+        public const string SaveSalesBudget = "dbsp_SaveSalesBudget";
+        public const string GetSalesBudgetDetails = "dbsp_GetSalesBudgetDetails";
+
+        public const string CheckTBErrorLog = "dbsp_CheckTBErrorLog";
+
         /************ History Chart ****************************/
         public const string GetCashFlowBreakup_Chart_History = "dbsp_GetCashFlowBreakup_History_Chart";
         public const string GetCashFlowBreakup_Trend_Chart_History = "dbsp_GetCashFlowBreakup_Trend_History_Chart";
