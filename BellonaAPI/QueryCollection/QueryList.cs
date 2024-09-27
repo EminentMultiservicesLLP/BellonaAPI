@@ -26,6 +26,8 @@
 
         public const string GetDSREntryList = "dbsp_GET_DSREntries";
         public const string UpdateDSREntry = "dbsp_SAVE_DSREntry";
+        public const string GetDSR_Summary = "dbsp_GetDSR_Summary";
+
 
         public const string GetMonthlyExpenseDetailByID = "dbsp_GET_MonthlyExpenseDetailByID";
         public const string GetActualMonthlyExpenseDetailByID = "dbsp_GET_ActualMonthlyExpenseDetailByID";
@@ -94,6 +96,7 @@
         public const string GetAllWeeks = "dbsp_GetAllWeeks";
         public const string GetDistinctYear = "dbsp_GetDistinctYear";
         public const string SaveWeeklyExpense = "dbsp_SAVE_WeeklyExpense";
+        public const string GetWeeklyExpense = "dbsp_GET_WeeklyExpense";
 
         public const string GetSalesCategory = "dbsp_GetSalesCategory";
         public const string GetSalesBudget = "dbsp_GetSalesBudget";

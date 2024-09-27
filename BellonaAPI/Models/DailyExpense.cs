@@ -56,5 +56,6 @@ namespace BellonaAPI.Models
         public string Dates { get; set; }
         public string Days { get; set; }
         public string WeekNo { get; set; }
+        public int IsExist { get; set; }
     }
 }

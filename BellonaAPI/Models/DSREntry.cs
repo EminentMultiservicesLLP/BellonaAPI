@@ -65,4 +65,74 @@ namespace BellonaAPI.Models
         public int GuestCount { get; set; }
     }
 
+    public class DSR_Summary
+    {
+     
+        public int  OutletID { get; set; }
+        public string BranchName { get; set; }
+        public string BranchCode { get; set; }
+        public string InvoiceNumber { get; set; }
+
+        // Sales fields
+        public decimal FoodSaleNet { get; set; }
+        public decimal BeverageSaleNet { get; set; }
+        public decimal LiquorSaleNet { get; set; }
+        public decimal TobaccoSaleNet { get; set; }
+        public decimal OtherSale1Net { get; set; }
+        public decimal DiscountAmount { get; set; }
+        public decimal ServiceChargeAmount { get; set; }
+        public decimal DirectCharge { get; set; }
+        public decimal SalesNetTotal { get; set; }
+        public decimal SalesTotalWithSC { get; set; }
+
+        // Delivery-related fields
+        public decimal DeliveryFoodSaleNet { get; set; }
+        public decimal DeliveryBeverageSaleNet { get; set; }
+
+        // Dine-in Sales fields
+        public decimal DineInFoodSaleNet { get; set; }
+        public decimal DineInBeverageSaleNet { get; set; }
+        public decimal DineInLiquorSaleNet { get; set; }
+        public decimal DineInTobaccoNet { get; set; }
+        public decimal DineInOthersNet { get; set; }
+        public decimal DineInCovers { get; set; }
+        public decimal ApcDineIn { get; set; }
+
+        // Delivery channels
+
+        public decimal ZomatoDeliveryBillsNo { get; set; }
+        public decimal ZomatoDeliverySaleNet { get; set; }
+        public decimal SwiggyDeliveryBillsNo { get; set; }
+        public decimal SwiggyDeliverySaleNet { get; set; }
+        public decimal DeliveryChannel3BillsNo { get; set; }
+        public decimal DeliveryChannel3SaleNet { get; set; }
+        public decimal DeliveryBillsTotalNo { get; set; }
+        public decimal DeliveryBillsAmountTotal { get; set; }
+
+        // Aggregator-specific dine-in fields
+        public decimal ZomatoDineInSaleNet { get; set; }
+        public decimal ZomatoDineInCovers { get; set; }
+        public decimal ZomatoDineInBills { get; set; }
+        public decimal AvgBillAmountZomato { get; set; }
+
+
+        // DineOut
+        public decimal DineOutDineInSaleNet { get; set; }
+        public decimal DineOutDineInCovers { get; set; }
+        public decimal DineOutDineInBills { get; set; }
+        public decimal AvgBillAmountDineOut { get; set; }
+
+        //EasyDinnerDine
+        public decimal EazyDinerDineInSaleNet { get; set; }
+        public decimal EazyDinerDineInCovers { get; set; }
+        public decimal EazyDinerDineInBills { get; set; }
+        public decimal AvgBillAmountEazyDiner { get; set; }
+
+        //OtherAggregator
+        public decimal OtherAggregatorDineInSaleNet { get; set; }
+        public decimal OtherAggregatorDineInCovers { get; set; }
+        public decimal OtherAggregatorDineInBills { get; set; }
+        public decimal AvgBillAmountOtherAggregator { get; set; }
+    }
+
 }

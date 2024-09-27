@@ -180,9 +180,9 @@ namespace BellonaAPI.Controllers
         [Route("GetAllWeeks")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetAllWeeks(Guid userId, int year)
+        public IHttpActionResult GetAllWeeks(Guid userId, int year, int outletId)
         {
-            List<WeekModel> _result = _iRepo.GetAllWeeks(userId, year);
+            List<WeekModel> _result = _iRepo.GetAllWeeks(userId, year, outletId);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve  All Weeks data"));
         }
@@ -194,6 +194,16 @@ namespace BellonaAPI.Controllers
         {
             if (_iRepo.SaveWeeklyExpense(_data)) return Ok(new { IsSuccess = true, Message = "Successfully Saved Weekly Expense Entry" });
             else return BadRequest("Failed to Save Weekly Expense Entry");
+        }
+
+        [Route("GetWeeklyExpense")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetWeeklyExpense(Guid userId, int menuId, int outletID, int expenseYear, string week)
+        {
+            List<WeeklyExpense> _result = _iRepo.GetWeeklyExpense(userId, menuId, outletID, expenseYear, week);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve  Expense Weeks data"));
         }
 
         [Route("GetFinancialYear")]
@@ -326,4 +336,14 @@ namespace BellonaAPI.Controllers
         #endregion TBUpload
     }
 
+        [Route("GetDSR_Summary")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetDSR_Summary( string startDate, string endDate, String outletCode)
+        {
+            List<DSR_Summary> _result = _iRepo.GetDSR_Summary(outletCode,startDate,endDate);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve  GET_Summary"));
+        }
+    }
 }

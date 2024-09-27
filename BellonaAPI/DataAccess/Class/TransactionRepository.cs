@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
-
 namespace BellonaAPI.DataAccess.Class
 {
     public class TransactionRepository : ITransactionRepository
@@ -614,7 +613,7 @@ namespace BellonaAPI.DataAccess.Class
         }
 
 
-        public List<WeekModel> GetAllWeeks(Guid userId, int year)
+        public List<WeekModel> GetAllWeeks(Guid userId, int year, int outletId)
         {
             List<WeekModel> _result = null;
             TryCatch.Run(() =>
@@ -623,6 +622,7 @@ namespace BellonaAPI.DataAccess.Class
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
                     dbCol.Add(new DBParameter("Year", year, DbType.Int32));
+                    dbCol.Add(new DBParameter("OutletID", outletId, DbType.Int32));
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetAllWeeks, dbCol, CommandType.StoredProcedure);
 
                     _result = dtData.AsEnumerable().Select(row => new WeekModel
@@ -632,7 +632,8 @@ namespace BellonaAPI.DataAccess.Class
                         Period = row.Field<string>("Period"),
                         Days = row.Field<string>("Days"),
                         Dates = row.Field<string>("Dates"),
-                        WeekNo = row.Field<string>("WeekNo")
+                        WeekNo = row.Field<string>("WeekNo"),
+                        IsExist = row.Field<int>("IsExist"),
 
                     }).OrderBy(o => o.DateRangeId).ToList();
 
@@ -669,7 +670,7 @@ namespace BellonaAPI.DataAccess.Class
 
         public bool SaveWeeklyExpense(WeeklyExpenseModel _data)
         {
-            // Logger.LogInfo("Started execution of SaveWeeklyExpense from Repository TransactionRepository at " + DateTime.Now.ToLongDateString());
+
             bool IsSuccess = false; string ReturnMessage = string.Empty;
             var modelData = Common.ToXML(_data);
             TryCatch.Run(() =>
@@ -682,12 +683,12 @@ namespace BellonaAPI.DataAccess.Class
                     dbCol.Add(new DBParameter("ReturnMessage", ReturnMessage, DbType.String, ParameterDirection.Output));
 
                     IsSuccess = Convert.ToBoolean(Dbhelper.ExecuteNonQuery(QueryList.SaveWeeklyExpense, dbCol, CommandType.StoredProcedure));
-                    if (IsSuccess) Logger.LogInfo("    Output message of UpdateMonthlyExpense from Repository TransactionRepository : " + ReturnMessage);
+                    if (IsSuccess) Logger.LogInfo("Output message of UpdateMonthlyExpense from Repository TransactionRepository : " + ReturnMessage);
                     else Logger.LogInfo("    Failed Output message of UpdateMonthlyExpense from Repository TransactionRepository : " + ReturnMessage);
                 }
             }).IfNotNull((ex) =>
             {
-                Logger.LogError("Error in TransactionRepository UpdateMonthlyExpense:" + ex.Message + Environment.NewLine + ex.StackTrace);
+                Logger.LogError("Error in TransactionRepository WeeklyExpenses :" + ex.Message + Environment.NewLine + ex.StackTrace);
             }).Finally(() =>
             {
                 Logger.LogInfo("Completed execution of UpdateMonthlyExpense from Repository TransactionRepository at " + DateTime.Now.ToLongDateString());
@@ -898,5 +899,221 @@ namespace BellonaAPI.DataAccess.Class
         }
         #endregion TBUpload
     }
+
+        public List<WeeklyExpense> GetWeeklyExpense(Guid userId, int menuId, int outletID, int expenseYear, string week)
+        {
+            List<WeeklyExpense> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("OutletID", outletID, DbType.Int32));
+                    dbCol.Add(new DBParameter("FinancialYear", expenseYear, DbType.Int32));
+                    dbCol.Add(new DBParameter("Weeks", week, DbType.String));
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeeklyExpense, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new WeeklyExpense
+                    {
+                        WeeklyExpenseId = row.Field<int>("WeeklyExpenseId"),
+                        OutletID = row.Field<int>("OutletID"),
+                        ExpenseMonth = row.Field<int>("ExpenseMonth"),
+                        ExpenseYear = row.Field<int>("ExpenseYear"),
+                        FinancialYear = row.Field<int>("FinancialYear"),
+                        ExpenseWeek = row.Field<int>("ExpenseWeek"),
+                        WeekNo = row.Field<string>("Weeks"),
+                        EquipmentHireCharges_DJEvents = row.Field<decimal>("EquipmentHireCharges_DJEvents"),
+                        EquipmentHireCharges_Kitchen = row.Field<decimal>("EquipmentHireCharges_Kitchen"),
+                        EquipmentHireCharges_Banquet = row.Field<decimal>("EquipmentHireCharges_Banquet"),
+                        Total_EquipmentHireCharges = row.Field<decimal>("Total_EquipmentHireCharges"),
+
+                        BusinessPromotion_AdvertisementExpenses = row.Field<decimal>("BusinessPromotion_AdvertisementExpenses"),
+                        BusinessPromotion_CommissionBrokerageExpenses = row.Field<decimal>("BusinessPromotion_CommissionBrokerageExpenses"),
+                        BusinessPromotion_Entertainment = row.Field<decimal>("BusinessPromotion_Entertainment"),
+                        BusinessPromotion_SalesPromotion = row.Field<decimal>("BusinessPromotion_SalesPromotion"),
+                        Total_BusinessPromotionMarketing = row.Field<decimal>("Total_BusinessPromotionMarketing"),
+
+                        FinanceCost_BankCharges = row.Field<decimal>("FinanceCost_BankCharges"),
+                        FinanceCost_CommissionOnAggregators = row.Field<decimal>("FinanceCost_CommissionOnAggregators"),
+                        FinanceCost_CommissionOnCardSettlement = row.Field<decimal>("FinanceCost_CommissionOnCardSettlement"),
+                        Total_FinanceCost = row.Field<decimal>("Total_FinanceCost"),
+
+                        NonFoodConsumable_GeneralSupplies = row.Field<decimal>("NonFoodConsumable_GeneralSupplies"),
+                        NonFoodConsumable_LiquidContainerNitrogen = row.Field<decimal>("NonFoodConsumable_LiquidContainerNitrogen"),
+                        NonFoodConsumable_PackingMaterials = row.Field<decimal>("NonFoodConsumable_PackingMaterials"),
+                        Total_NonFoodConsumable = row.Field<decimal>("Total_NonFoodConsumable"),
+
+                        LegalFees_LegalCharges = row.Field<decimal>("LegalFees_LegalCharges"),
+                        LegalFees_ProfessionalCharges = row.Field<decimal>("LegalFees_ProfessionalCharges"),
+                        LegalFees_StatutoryAuditFees = row.Field<decimal>("LegalFees_StatutoryAuditFees"),
+                        Total_LegalFees = row.Field<decimal>("Total_LegalFees"),
+
+                        LicenseFees_FranchiseFees = row.Field<decimal>("LicenseFees_FranchiseFees"),
+                        LicenseFees_LicensePermitCharges = row.Field<decimal>("LicenseFees_LicensePermitCharges"),
+                        Total_LicenseFees = row.Field<decimal>("Total_LicenseFees"),
+
+                        ManPowerCost_BonusToStaff = row.Field<decimal>("ManPowerCost_BonusToStaff"),
+                        ManPowerCost_CasualLabourCharges = row.Field<decimal>("ManPowerCost_CasualLabourCharges"),
+                        ManPowerCost_ConveyanceAllowance = row.Field<decimal>("ManPowerCost_ConveyanceAllowance"),
+                        ManPowerCost_ESIC = row.Field<decimal>("ManPowerCost_ESIC"),
+                        ManPowerCost_PF = row.Field<decimal>("ManPowerCost_PF"),
+                        ManPowerCost_HousekeepingExpenses = row.Field<decimal>("ManPowerCost_HousekeepingExpenses"),
+                        ManPowerCost_Insurance = row.Field<decimal>("ManPowerCost_Insurance"),
+                        ManPowerCost_LeaveEncashment = row.Field<decimal>("ManPowerCost_LeaveEncashment"),
+                        ManPowerCost_MedicalExpenses = row.Field<decimal>("ManPowerCost_MedicalExpenses"),
+                        ManPowerCost_PFAdmin = row.Field<decimal>("ManPowerCost_PFAdmin"),
+                        ManPowerCost_RecruitmentCost = row.Field<decimal>("ManPowerCost_RecruitmentCost"),
+                        ManPowerCost_SalaryAllowances = row.Field<decimal>("ManPowerCost_SalaryAllowances"),
+                        ManPowerCost_ServiceChargePayOut = row.Field<decimal>("ManPowerCost_ServiceChargePayOut"),
+                        ManPowerCost_AccommodationElectricityCharges = row.Field<decimal>("ManPowerCost_AccommodationElectricityCharges"),
+                        ManPowerCost_AccommodationWaterCharges = row.Field<decimal>("ManPowerCost_AccommodationWaterCharges"),
+                        ManPowerCost_StaffFoodExpense = row.Field<decimal>("ManPowerCost_StaffFoodExpense"),
+                        ManPowerCost_StaffRoomRent = row.Field<decimal>("ManPowerCost_StaffRoomRent"),
+                        ManPowerCost_StaffWelfareExpenses = row.Field<decimal>("ManPowerCost_StaffWelfareExpenses"),
+                        ManPowerCost_Uniforms = row.Field<decimal>("ManPowerCost_Uniforms"),
+                        ManPowerCost_SecurityExpenses = row.Field<decimal>("ManPowerCost_SecurityExpenses"),
+                        Total_ManPowerCost = row.Field<decimal>("Total_ManPowerCost"),
+
+                        OtherOperational_CCGPurchase = row.Field<decimal>("OtherOperational_CCGPurchase"),
+                        OtherOperational_ConveyanceExpenses = row.Field<decimal>("OtherOperational_ConveyanceExpenses"),
+                        OtherOperational_FreightCharges = row.Field<decimal>("OtherOperational_FreightCharges"),
+                        OtherOperational_MiscellaneousCharges = row.Field<decimal>("OtherOperational_MiscellaneousCharges"),
+                        OtherOperational_LaundryCharges = row.Field<decimal>("OtherOperational_LaundryCharges"),
+                        OtherOperational_LodgingBoarding = row.Field<decimal>("OtherOperational_LodgingBoarding"),
+                        OtherOperational_OfficeExpense = row.Field<decimal>("OtherOperational_OfficeExpense"),
+                        OtherOperational_OfficeExpensesGuest = row.Field<decimal>("OtherOperational_OfficeExpensesGuest"),
+                        OtherOperational_PrintingStationary = row.Field<decimal>("OtherOperational_PrintingStationary"),
+                        OtherOperational_Transportation = row.Field<decimal>("OtherOperational_Transportation"),
+                        OtherOperational_TravellingLocal = row.Field<decimal>("OtherOperational_TravellingLocal"),
+                        Total_OtherOperational = row.Field<decimal>("Total_OtherOperational"),
+
+                        PrintingStationery_PostageCourier = row.Field<decimal>("PrintingStationery_PostageCourier"),
+
+                        RentOccupationCost_CAMCharges = row.Field<decimal>("RentOccupationCost_CAMCharges"),
+                        RentOccupationCost_PropertyTax = row.Field<decimal>("RentOccupationCost_PropertyTax"),
+                        RentOccupationCost_PropertyTaxMall = row.Field<decimal>("RentOccupationCost_PropertyTaxMall"),
+                        RentOccupationCost_RentRevenueCharges = row.Field<decimal>("RentOccupationCost_RentRevenueCharges"),
+                        Total_RentOccupationCost = row.Field<decimal>("Total_RentOccupationCost"),
+
+                        RepairMaintenance_AMCComputerSoftware = row.Field<decimal>("RepairMaintenance_AMCComputerSoftware"),
+                        RepairMaintenance_PestControlAC = row.Field<decimal>("RepairMaintenance_PestControlAC"),
+                        RepairMaintenance_Civil = row.Field<decimal>("RepairMaintenance_Civil"),
+                        RepairMaintenance_Others = row.Field<decimal>("RepairMaintenance_Others"),
+                        Total_RepairMaintenance = row.Field<decimal>("Total_RepairMaintenance"),
+
+                        TelephoneInternet_CableCharges = row.Field<decimal>("TelephoneInternet_CableCharges"),
+                        TelephoneInternet_InternetExpenses = row.Field<decimal>("TelephoneInternet_InternetExpenses"),
+                        TelephoneInternet_TelephoneExpenses = row.Field<decimal>("TelephoneInternet_TelephoneExpenses"),
+                        TelephoneInternet_TelephoneExpensesMobile = row.Field<decimal>("TelephoneInternet_TelephoneExpensesMobile"),
+                        Total_TelephoneInternet = row.Field<decimal>("Total_TelephoneInternet"),
+
+                        UtilityEnergyCost_DGCharges = row.Field<decimal>("UtilityEnergyCost_DGCharges"),
+                        UtilityEnergyCost_ElectricityCharges = row.Field<decimal>("UtilityEnergyCost_ElectricityCharges"),
+                        UtilityEnergyCost_ElectricityInfraCharges = row.Field<decimal>("UtilityEnergyCost_ElectricityInfraCharges"),
+                        UtilityEnergyCost_GasCharges = row.Field<decimal>("UtilityEnergyCost_GasCharges"),
+                        UtilityEnergyCost_HVACCharges = row.Field<decimal>("UtilityEnergyCost_HVACCharges"),
+                        UtilityEnergyCost_WaterCharges = row.Field<decimal>("UtilityEnergyCost_WaterCharges"),
+                        Total_UtilityEnergyCost = row.Field<decimal>("Total_UtilityEnergyCost"),
+
+                        Total_WeeklyExpense = row.Field<decimal>("Total_WeeklyExpense"),
+
+
+                    }).OrderBy(o => o.WeeklyExpenseId).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Get Expenses Week:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
+        #region GET_DSR_Summary
+        public  List<DSR_Summary> GetDSR_Summary(String outletCode, string startDate, string endDate)
+        {
+            List<DSR_Summary> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("branchCode", outletCode, DbType.String));                    
+                    dbCol.Add(new DBParameter("Enddt", endDate, DbType.String));
+                    dbCol.Add(new DBParameter("Startdt", startDate, DbType.String));
+                      
+                    DataTable dsData = Dbhelper.ExecuteDataTable(QueryList.GetDSR_Summary, dbCol, CommandType.StoredProcedure);
+                    _result = dsData.AsEnumerable().Select(row => new DSR_Summary
+                    {
+                        //OutletID = row.Field<int>("OutletID"),
+                        BranchName = row.Field<string>("BranchName"),
+                        BranchCode = row.Field<string>("BranchCode"),
+
+                        FoodSaleNet = row.Field<decimal>("FoodSaleNet"),
+                        BeverageSaleNet = row.Field<decimal>("BeverageSaleNet"),
+                        LiquorSaleNet = row.Field<decimal>("LiquorSaleNet"),
+                        TobaccoSaleNet = row.Field<decimal>("TobaccoSaleNet"),
+                        OtherSale1Net = row.Field<decimal>("OtherSale1Net"),
+                        DiscountAmount = row.Field<decimal>("DiscountAmount"),
+                        ServiceChargeAmount = row.Field<decimal>("ServiceChargeAmount"),
+                        DirectCharge = row.Field<decimal>("DirectCharge"),
+                        SalesNetTotal = row.Field<decimal>("SalesNetTotal"),
+                        SalesTotalWithSC = row.Field<decimal>("SalesTotalWithSC"),
+
+                        DeliveryFoodSaleNet = row.Field<decimal>("DeliveryFoodSaleNet"),
+                        DeliveryBeverageSaleNet = row.Field<decimal>("DeliveryBeverageSaleNet"),
+                        DineInFoodSaleNet = row.Field<decimal>("DineInFoodSaleNet"),
+                        DineInBeverageSaleNet = row.Field<decimal>("DineInBeverageSaleNet"),
+                        DineInLiquorSaleNet = row.Field<decimal>("DineInLiquorSaleNet"),
+                        DineInTobaccoNet = row.Field<decimal>("DineInTobaccoNet"),
+                        DineInOthersNet = row.Field<decimal>("DineInOthersNet"),
+                        DineInCovers = row.Field<decimal>("DineInCovers"),
+                        ApcDineIn = row.Field<decimal>("ApcDineIn"),
+
+                        ZomatoDeliveryBillsNo = row.Field<decimal>("ZomatoDeliveryBillsNo"),
+                        ZomatoDeliverySaleNet = row.Field<decimal>("ZomatoDeliverySaleNet"),
+                        SwiggyDeliveryBillsNo = row.Field<decimal>("SwiggyDeliveryBillsNo"),
+                        SwiggyDeliverySaleNet = row.Field<decimal>("SwiggyDeliverySaleNet"),
+                        DeliveryChannel3BillsNo = row.Field<decimal>("DeliveryChannel3BillsNo"),
+                        DeliveryChannel3SaleNet = row.Field<decimal>("DeliveryChannel3SaleNet"),
+                        DeliveryBillsTotalNo = row.Field<decimal>("DeliveryBillsTotalNo"),
+                        DeliveryBillsAmountTotal = row.Field<decimal>("DeliveryBillsAmountTotal"),
+
+                        ZomatoDineInSaleNet = row.Field<decimal>("ZomatoDineInSaleNet"),
+                        ZomatoDineInCovers = row.Field<decimal>("ZomatoDineInCovers"),
+                        ZomatoDineInBills = row.Field<decimal>("ZomatoDineInBills"),
+                        AvgBillAmountZomato = row.Field<decimal>("AvgBillAmountZomato"),
+
+                        DineOutDineInSaleNet = row.Field<decimal>("DineOutDineInSaleNet"),
+                        DineOutDineInCovers = row.Field<decimal>("DineOutDineInCovers"),
+                        DineOutDineInBills = row.Field<decimal>("DineOutDineInBills"),
+                        AvgBillAmountDineOut = row.Field<decimal>("AvgBillAmountDineOut"),
+
+                        EazyDinerDineInSaleNet = row.Field<decimal>("EazyDinerDineInSaleNet"),
+                        EazyDinerDineInCovers = row.Field<decimal>("EazyDinerDineInCovers"),
+                        EazyDinerDineInBills = row.Field<decimal>("EazyDinerDineInBills"),
+                        AvgBillAmountEazyDiner = row.Field<decimal>("AvgBillAmountEazyDiner"),
+
+                        OtherAggregatorDineInSaleNet = row.Field<decimal>("OtherAggregatorDineInSaleNet"),
+                        OtherAggregatorDineInCovers = row.Field<decimal>("OtherAggregatorDineInCovers"),
+                        OtherAggregatorDineInBills = row.Field<decimal>("OtherAggregatorDineInBills"),
+                        AvgBillAmountOtherAggregator = row.Field<decimal>("AvgBillAmountOtherAggregator"),
+
+                    }).OrderBy(o => o.BranchName).ToList();
+                }
+            }).IfNotNull((ex) =>
+                    {
+                        Logger.LogError("Error in TransactionRepository GET DRS_Summery:" + ex.Message + Environment.NewLine + ex.StackTrace);
+                    });
+
+            return _result;
+
+        }
+
+        #endregion GET_DSR_Summary    
+    }
+
 
 }
