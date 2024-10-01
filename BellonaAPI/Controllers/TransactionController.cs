@@ -280,6 +280,7 @@ namespace BellonaAPI.Controllers
         #endregion SalesBudget
 
         #region TBUpload
+
         [Route("SaveTBUpload")]
         [ValidationActionFilter]
         public async Task<IHttpActionResult> SaveTBUpload()
@@ -291,17 +292,17 @@ namespace BellonaAPI.Controllers
 
             var files = System.Web.HttpContext.Current.Request.Files;
 
-
             if (files.Count > 0)
             {
                 var relativePath = ConfigurationManager.AppSettings["FileSavePathForTBUploads"];
-                var fileSavePath = HttpContext.Current.Server.MapPath(relativePath);
+                string fileSavePath = Path.IsPathRooted(relativePath) ? relativePath : HttpContext.Current.Server.MapPath(relativePath);
 
                 if (!Directory.Exists(fileSavePath))
                 {
                     Directory.CreateDirectory(fileSavePath);
                 }
-                var path = string.Empty;
+
+                string filePath = string.Empty;
 
                 for (int i = 0; i < files.Count; i++)
                 {
@@ -310,20 +311,22 @@ namespace BellonaAPI.Controllers
                     {
                         if (file != null)
                         {
-                            var filePath = Path.Combine(fileSavePath, file.FileName);
+                            filePath = Path.Combine(fileSavePath, file.FileName);
                             file.SaveAs(filePath);
                         }
                     }).IfNotNull(ex =>
                     {
-                        Logger.LogError("Error in TransactionController SaveTBUpload:" + "Error saving file: " + file.FileName + Environment.NewLine + ex.StackTrace);
+                        Logger.LogError($"Error in TransactionController SaveTBUpload: Error saving file: {file.FileName}\n{ex.StackTrace}");
                     });
                 }
 
-                return Ok(new { IsSuccess = true, Message = "TBUpload Saved Successfully!" });
+                return Content(HttpStatusCode.OK, new { FilePath = filePath });
             }
 
             return BadRequest("Failed to Save TBUpload");
         }
+
+
 
         [Route("CheckTBErrorLog")]
         [AcceptVerbs("GET")]
@@ -335,14 +338,14 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to retrieve  TBErrorLog"));
         }
         #endregion TBUpload
-    
+
 
         [Route("GetDSR_Summary")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetDSR_Summary( string startDate, string endDate, String outletCode)
+        public IHttpActionResult GetDSR_Summary(string startDate, string endDate, String outletCode)
         {
-            List<DSR_Summary> _result = _iRepo.GetDSR_Summary(outletCode,startDate,endDate);
+            List<DSR_Summary> _result = _iRepo.GetDSR_Summary(outletCode, startDate, endDate);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve  GET_Summary"));
         }
