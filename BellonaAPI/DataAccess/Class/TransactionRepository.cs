@@ -1117,12 +1117,17 @@ namespace BellonaAPI.DataAccess.Class
             List<DSR_Summary> _result = null;
             TryCatch.Run(() =>
             {
+               
                 using (DBHelper Dbhelper = new DBHelper())
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
-                    dbCol.Add(new DBParameter("branchCode", outletCode, DbType.String));
                     dbCol.Add(new DBParameter("Enddt", endDate, DbType.String));
                     dbCol.Add(new DBParameter("Startdt", startDate, DbType.String));
+                   if(outletCode != "--ALL--")
+                    {
+                    dbCol.Add(new DBParameter("branchCode", outletCode, DbType.String));
+                    }
+
 
                     DataTable dsData = Dbhelper.ExecuteDataTable(QueryList.GetDSR_Summary, dbCol, CommandType.StoredProcedure);
                     _result = dsData.AsEnumerable().Select(row => CreateSummaryFromRow(row)).OrderBy(o => o.BranchName).ToList();

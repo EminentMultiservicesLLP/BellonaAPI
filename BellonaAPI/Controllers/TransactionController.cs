@@ -340,7 +340,7 @@ namespace BellonaAPI.Controllers
         [Route("GetDSR_Summary")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetDSR_Summary( string startDate, string endDate, String outletCode)
+        public IHttpActionResult GetDSR_Summary( string startDate, string endDate, string outletCode)
         {
             List<DSR_Summary> _result = _iRepo.GetDSR_Summary(outletCode,startDate,endDate);
             if (_result != null) return Ok(_result);
