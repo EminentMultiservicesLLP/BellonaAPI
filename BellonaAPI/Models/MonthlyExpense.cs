@@ -224,7 +224,7 @@ namespace BellonaAPI.Models
         public int OutletID { get; set; }
         public int ExpenseMonth { get; set; }
         public int ExpenseYear { get; set; }
-        public int FinancialYear { get; set; }
+        public string FinancialYear { get; set; }
         public int ExpenseWeek { get; set; }
         public string WeekNo { get; set; }
         public decimal Expense_EquipmentHireCharges { get; set; }

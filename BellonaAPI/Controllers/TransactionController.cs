@@ -29,15 +29,15 @@ namespace BellonaAPI.Controllers
             _iRepo = irepo;
         }
 
-        [Route("GetDSREntries")]
-        [AcceptVerbs("GET")]
-        [ValidationActionFilter]
-        public IHttpActionResult GetDSREntries(string userId, int menuId, int? dsrEntryID = null)
-        {
-            List<DSREntry> _result = _iRepo.GetDSREntries(new Guid(userId), menuId, dsrEntryID).ToList();
-            if (_result != null) return Ok(_result);
-            else return InternalServerError(new System.Exception("Failed to retrieve DSREntry data"));
-        }
+        //[Route("GetDSREntries")]
+        //[AcceptVerbs("GET")]
+        //[ValidationActionFilter]
+        //public IHttpActionResult GetDSREntries(string userId, int menuId, int? dsrEntryID = null)
+        //{
+        //    List<DSREntry> _result = _iRepo.GetDSREntries(new Guid(userId), menuId, dsrEntryID).ToList();
+        //    if (_result != null) return Ok(_result);
+        //    else return InternalServerError(new System.Exception("Failed to retrieve DSREntry data"));
+        //}
 
         [Route("SaveDSREntry")]
         [AcceptVerbs("POST")]
@@ -180,7 +180,7 @@ namespace BellonaAPI.Controllers
         [Route("GetAllWeeks")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetAllWeeks(Guid userId, int year, int outletId)
+        public IHttpActionResult GetAllWeeks(Guid userId, string year, int outletId)
         {
             List<WeekModel> _result = _iRepo.GetAllWeeks(userId, year, outletId);
             if (_result != null) return Ok(_result);
@@ -199,7 +199,7 @@ namespace BellonaAPI.Controllers
         [Route("GetWeeklyExpense")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetWeeklyExpense(Guid userId, int menuId, int outletID, int expenseYear, string week)
+        public IHttpActionResult GetWeeklyExpense(Guid userId, int menuId, int outletID, string expenseYear, string week)
         {
             List<WeeklyExpense> _result = _iRepo.GetWeeklyExpense(userId, menuId, outletID, expenseYear, week);
             if (_result != null) return Ok(_result);
@@ -301,6 +301,7 @@ namespace BellonaAPI.Controllers
                 {
                     Directory.CreateDirectory(fileSavePath);
                 }
+                var path = string.Empty;
 
                 for (int i = 0; i < files.Count; i++)
                 {
@@ -334,7 +335,7 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to retrieve  TBErrorLog"));
         }
         #endregion TBUpload
-    }
+    
 
         [Route("GetDSR_Summary")]
         [AcceptVerbs("GET")]

@@ -8,7 +8,7 @@ namespace BellonaAPI.DataAccess.Interface
 {
     public interface ITransactionRepository
     {
-        IEnumerable<DSREntry> GetDSREntries(Guid userId,int menuId, int? dsrEntryId = null);
+       // IEnumerable<DSREntry> GetDSREntries(Guid userId,int menuId, int? dsrEntryId = null);
         bool UpdateDSREntry(DSREntry _data);
         bool DeleteDSRENtry(int DSREntryID);
 
@@ -26,7 +26,7 @@ namespace BellonaAPI.DataAccess.Interface
         bool DeleteBudget(int BudgetId);
         List<DailyExpense> GetDailyExpenseEntries(Guid userId, int menuId, int outletID, int expenseMonth, int expenseYear, int week);
         bool SaveDailyExpense(DailyExpense DailyExpenseEntries);
-        List<WeekModel> GetAllWeeks(Guid userId, int year, int outletId);
+        List<WeekModel> GetAllWeeks(Guid userId, string year, int outletId);
         List<financialYear> GetFinancialYear(Guid userId);
         bool SaveWeeklyExpense(WeeklyExpenseModel _data);
 
@@ -42,8 +42,8 @@ namespace BellonaAPI.DataAccess.Interface
         #region TBUpload
         List<TBErrorLog> CheckTBErrorLog();
         #endregion TBUpload
-        bool SaveWeeklyExpense(WeeklyExpenseModel _data);
-        List<WeeklyExpense> GetWeeklyExpense(Guid userId,int menuId,int outletID,int expenseYear,string week);
+        
+        List<WeeklyExpense> GetWeeklyExpense(Guid userId,int menuId,int outletID,string expenseYear,string week);
 
         List<DSR_Summary> GetDSR_Summary(String outletCode, string startDate, string endDate);
     }
