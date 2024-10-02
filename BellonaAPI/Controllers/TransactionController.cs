@@ -280,7 +280,6 @@ namespace BellonaAPI.Controllers
         #endregion SalesBudget
 
         #region TBUpload
-
         [Route("SaveTBUpload")]
         [ValidationActionFilter]
         public async Task<IHttpActionResult> SaveTBUpload()
@@ -320,13 +319,11 @@ namespace BellonaAPI.Controllers
                     });
                 }
 
-                return Content(HttpStatusCode.OK, new { FilePath = filePath });
+                return Content(HttpStatusCode.OK, new { file_path = filePath });
             }
 
             return BadRequest("Failed to Save TBUpload");
         }
-
-
 
         [Route("CheckTBErrorLog")]
         [AcceptVerbs("GET")]
@@ -338,7 +335,6 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to retrieve  TBErrorLog"));
         }
         #endregion TBUpload
-
 
         [Route("GetDSR_Summary")]
         [AcceptVerbs("GET")]
