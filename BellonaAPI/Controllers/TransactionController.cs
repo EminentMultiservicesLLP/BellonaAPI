@@ -2,9 +2,17 @@
 using BellonaAPI.Filters;
 using BellonaAPI.Models;
 using CommonLayer;
+using CommonLayer.Extensions;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 
 namespace BellonaAPI.Controllers
@@ -21,15 +29,15 @@ namespace BellonaAPI.Controllers
             _iRepo = irepo;
         }
 
-        [Route("GetDSREntries")]
-        [AcceptVerbs("GET")]
-        [ValidationActionFilter]
-        public IHttpActionResult GetDSREntries(string userId,int menuId, int? dsrEntryID = null)
-        {
-            List<DSREntry> _result = _iRepo.GetDSREntries(new Guid(userId), menuId, dsrEntryID).ToList();
-            if (_result != null) return Ok(_result);
-            else return InternalServerError(new System.Exception("Failed to retrieve DSREntry data"));
-        }
+        //[Route("GetDSREntries")]
+        //[AcceptVerbs("GET")]
+        //[ValidationActionFilter]
+        //public IHttpActionResult GetDSREntries(string userId, int menuId, int? dsrEntryID = null)
+        //{
+        //    List<DSREntry> _result = _iRepo.GetDSREntries(new Guid(userId), menuId, dsrEntryID).ToList();
+        //    if (_result != null) return Ok(_result);
+        //    else return InternalServerError(new System.Exception("Failed to retrieve DSREntry data"));
+        //}
 
         [Route("SaveDSREntry")]
         [AcceptVerbs("POST")]
@@ -43,9 +51,9 @@ namespace BellonaAPI.Controllers
         [Route("GetMonthlyExpenseEntries")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetMonthlyExpenseEntries(Guid userId,int menuId, int? outletId = 0, int? expenseMonth =0, int? expenseYear =0)
+        public IHttpActionResult GetMonthlyExpenseEntries(Guid userId, int menuId, int? outletId = 0, int? expenseMonth = 0, int? expenseYear = 0)
         {
-            List<MonthlyExpenseList> _result = _iRepo.GetMonthlyExpensesEntries(userId,menuId, outletId, expenseMonth, expenseYear).ToList();
+            List<MonthlyExpenseList> _result = _iRepo.GetMonthlyExpensesEntries(userId, menuId, outletId, expenseMonth, expenseYear).ToList();
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve GetMonthlyExpenseEntries data"));
         }
@@ -60,7 +68,7 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to retrieve GetActualMonthlyExpenseEntries data"));
         }
 
-        
+
         [Route("GetExpenseDetailbyOutlet_Month")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
@@ -153,8 +161,8 @@ namespace BellonaAPI.Controllers
         [Route("GetDailyExpenseEntries")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetDailyExpenseEntries(string userId, int menuId, int outletID , int expenseMonth , int expenseYear , int week)
-        {            
+        public IHttpActionResult GetDailyExpenseEntries(string userId, int menuId, int outletID, int expenseMonth, int expenseYear, int week)
+        {
             List<DailyExpense> _result = _iRepo.GetDailyExpenseEntries(new Guid(userId), menuId, outletID, expenseMonth, expenseYear, week);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve GetBudgetDetailByID data"));
@@ -172,9 +180,9 @@ namespace BellonaAPI.Controllers
         [Route("GetAllWeeks")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetAllWeeks(Guid userId, int year)
+        public IHttpActionResult GetAllWeeks(Guid userId, string year, int outletId)
         {
-            List<WeekModel> _result = _iRepo.GetAllWeeks(userId, year);
+            List<WeekModel> _result = _iRepo.GetAllWeeks(userId, year, outletId);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve  All Weeks data"));
         }
@@ -188,6 +196,16 @@ namespace BellonaAPI.Controllers
             else return BadRequest("Failed to Save Weekly Expense Entry");
         }
 
+        [Route("GetWeeklyExpense")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetWeeklyExpense(Guid userId, int menuId, int outletID, string expenseYear, string week)
+        {
+            List<WeeklyExpense> _result = _iRepo.GetWeeklyExpense(userId, menuId, outletID, expenseYear, week);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve  Expense Weeks data"));
+        }
+
         [Route("GetFinancialYear")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
@@ -196,6 +214,137 @@ namespace BellonaAPI.Controllers
             List<financialYear> _result = _iRepo.GetFinancialYear(userId);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve  Distinct Financial Year"));
+        }
+
+        #region SalesBudget
+        [Route("GetSalesCategory")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetSalesCategory()
+        {
+            List<SalesCategoryModel> _result = _iRepo.GetSalesCategory();
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve  SalesCategoryModel"));
+        }
+
+        [Route("GetSalesBudget")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetSalesBudget(int? OutletID = null, int? Year = null, int? Month = null)
+        {
+            SalesBudget _result = _iRepo.GetSalesBudget(OutletID, Year, Month);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve  SalesBudget"));
+        }
+
+        [Route("GetSalesCategoryBudget")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetSalesCategoryBudget(int? OutletID = null, int? Year = null, int? Month = null)
+        {
+            List<SalesCategoryBudget> _result = _iRepo.GetSalesCategoryBudget(OutletID, Year, Month);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve  SalesCategoryBudget"));
+        }
+
+        [Route("GetSalesDayBudget")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetSalesDayBudget(int? OutletID = null, int? Year = null, int? Month = null)
+        {
+            List<SalesDayBudget> _result = _iRepo.GetSalesDayBudget(OutletID, Year, Month);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve  SalesDayBudget"));
+        }
+
+        [Route("SaveSalesBudget")]
+        [AcceptVerbs("POST")]
+        [ValidationActionFilter]
+        public IHttpActionResult SaveSalesBudget(SalesBudget model)
+        {
+            if (_iRepo.SaveSalesBudget(model)) return Ok(new { IsSuccess = true, Message = "SalesBudget Save Successfully." });
+            else return BadRequest("SalesBudget Save Failed");
+        }
+
+
+        [Route("GetSalesBudgetDetails")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetSalesBudgetDetails(int? OutletID = null, int? Year = null, int? Month = null)
+        {
+            List<SalesBudgetDetail> _result = _iRepo.GetSalesBudgetDetails(OutletID, Year, Month);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve  SalesBudgetDetail"));
+        }
+
+        #endregion SalesBudget
+
+        #region TBUpload
+        [Route("SaveTBUpload")]
+        [ValidationActionFilter]
+        public async Task<IHttpActionResult> SaveTBUpload()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+
+            var files = System.Web.HttpContext.Current.Request.Files;
+
+
+            if (files.Count > 0)
+            {
+                var relativePath = ConfigurationManager.AppSettings["FileSavePathForTBUploads"];
+                var fileSavePath = HttpContext.Current.Server.MapPath(relativePath);
+
+                if (!Directory.Exists(fileSavePath))
+                {
+                    Directory.CreateDirectory(fileSavePath);
+                }
+                var path = string.Empty;
+
+                for (int i = 0; i < files.Count; i++)
+                {
+                    var file = files[i];
+                    TryCatch.Run(() =>
+                    {
+                        if (file != null)
+                        {
+                            var filePath = Path.Combine(fileSavePath, file.FileName);
+                            file.SaveAs(filePath);
+                        }
+                    }).IfNotNull(ex =>
+                    {
+                        Logger.LogError("Error in TransactionController SaveTBUpload:" + "Error saving file: " + file.FileName + Environment.NewLine + ex.StackTrace);
+                    });
+                }
+
+                return Ok(new { IsSuccess = true, Message = "TBUpload Saved Successfully!" });
+            }
+
+            return BadRequest("Failed to Save TBUpload");
+        }
+
+        [Route("CheckTBErrorLog")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult CheckTBErrorLog()
+        {
+            List<TBErrorLog> _result = _iRepo.CheckTBErrorLog();
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve  TBErrorLog"));
+        }
+        #endregion TBUpload
+    
+
+        [Route("GetDSR_Summary")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetDSR_Summary( string startDate, string endDate, string outletCode)
+        {
+            List<DSR_Summary> _result = _iRepo.GetDSR_Summary(outletCode,startDate,endDate);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve  GET_Summary"));
         }
     }
 }

@@ -26,6 +26,8 @@
 
         public const string GetDSREntryList = "dbsp_GET_DSREntries";
         public const string UpdateDSREntry = "dbsp_SAVE_DSREntry";
+        public const string GetDSR_Summary = "dbsp_GetDSR_Summary";
+
 
         public const string GetMonthlyExpenseDetailByID = "dbsp_GET_MonthlyExpenseDetailByID";
         public const string GetActualMonthlyExpenseDetailByID = "dbsp_GET_ActualMonthlyExpenseDetailByID";
@@ -94,6 +96,16 @@
         public const string GetAllWeeks = "dbsp_GetAllWeeks";
         public const string GetDistinctYear = "dbsp_GetDistinctYear";
         public const string SaveWeeklyExpense = "dbsp_SAVE_WeeklyExpense";
+        public const string GetWeeklyExpense = "dbsp_GET_WeeklyExpense";
+
+        public const string GetSalesCategory = "dbsp_GetSalesCategory";
+        public const string GetSalesBudget = "dbsp_GetSalesBudget";
+        public const string GetSalesCategoryBudget = "dbsp_GetSalesCategoryBudget";
+        public const string GetSalesDayBudget = "dbsp_GetSalesDayBudget";
+        public const string SaveSalesBudget = "dbsp_SaveSalesBudget";
+        public const string GetSalesBudgetDetails = "dbsp_GetSalesBudgetDetails";
+
+        public const string CheckTBErrorLog = "dbsp_CheckTBErrorLog";
 
         /************ History Chart ****************************/
         public const string GetCashFlowBreakup_Chart_History = "dbsp_GetCashFlowBreakup_History_Chart";

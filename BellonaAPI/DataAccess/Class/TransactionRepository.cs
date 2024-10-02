@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
-
 namespace BellonaAPI.DataAccess.Class
 {
     public class TransactionRepository : ITransactionRepository
@@ -32,89 +31,89 @@ namespace BellonaAPI.DataAccess.Class
             throw new NotImplementedException();
         }
 
-        public IEnumerable<DSREntry> GetDSREntries(Guid userId,int menuId, int? dsrEntryId = null)
-        {
-            List<DSREntry> _result = null;
-            TryCatch.Run(() =>
-            {
-                using (DBHelper Dbhelper = new DBHelper())
-                {
-                    DBParameterCollection dbCol = new DBParameterCollection();
-                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
-                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32)); 
-                    if (dsrEntryId != null && dsrEntryId > 0) dbCol.Add(new DBParameter("DSREntryId", dsrEntryId, DbType.Int32));
+        //public IEnumerable<DSREntry> GetDSREntries(Guid userId, int menuId, int? dsrEntryId = null)
+        //{
+        //    List<DSREntry> _result = null;
+        //    TryCatch.Run(() =>
+        //    {
+        //        using (DBHelper Dbhelper = new DBHelper())
+        //        {
+        //            DBParameterCollection dbCol = new DBParameterCollection();
+        //            dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+        //            dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+        //            if (dsrEntryId != null && dsrEntryId > 0) dbCol.Add(new DBParameter("DSREntryId", dsrEntryId, DbType.Int32));
 
-                    DataSet dsData = Dbhelper.ExecuteDataSet(QueryList.GetDSREntryList, dbCol, CommandType.StoredProcedure);
+        //            DataSet dsData = Dbhelper.ExecuteDataSet(QueryList.GetDSREntryList, dbCol, CommandType.StoredProcedure);
 
-                    var guestPartnersList = (dsData != null && dsData.Tables.Count >2) ?  dsData.Tables[2].AsEnumerable().Select(row => new GuestPartnersDailySales
-                    {
-                        DSREntryID = row.Field<int>("DSREntryID"),
-                        GuestPartnerName = row.Field<string>("GuestPartnerName"),
-                        GuestPartnerID = row.Field<int>("GuestPartnerID"),
-                        GuestCount = row.Field<int>("GuestCount")
-                    }).ToArray() : new GuestPartnersDailySales[] { };
+        //            var guestPartnersList = (dsData != null && dsData.Tables.Count > 2) ? dsData.Tables[2].AsEnumerable().Select(row => new GuestPartnersDailySales
+        //            {
+        //                DSREntryID = row.Field<int>("DSREntryID"),
+        //                GuestPartnerName = row.Field<string>("GuestPartnerName"),
+        //                GuestPartnerID = row.Field<int>("GuestPartnerID"),
+        //                GuestCount = row.Field<int>("GuestCount")
+        //            }).ToArray() : new GuestPartnersDailySales[] { };
 
-                    var deliveryPartnersList = (dsData != null && dsData.Tables.Count > 1) ? dsData.Tables[1].AsEnumerable().Select(row => new DeliveryPartnersDailySales
-                    {
-                        DSREntryID = row.Field<int>("DSREntryID"),
-                        DeliveryPartnerID = row.Field<int>("DeliveryPartnerID"),
-                        DeliveryPartnerName = row.Field<string>("DeliveryPartnerName"),
-                        SaleAmount = row.Field<decimal>("SaleAmount")
-                    }).ToArray() : new DeliveryPartnersDailySales[] { };
+        //            var deliveryPartnersList = (dsData != null && dsData.Tables.Count > 1) ? dsData.Tables[1].AsEnumerable().Select(row => new DeliveryPartnersDailySales
+        //            {
+        //                DSREntryID = row.Field<int>("DSREntryID"),
+        //                DeliveryPartnerID = row.Field<int>("DeliveryPartnerID"),
+        //                DeliveryPartnerName = row.Field<string>("DeliveryPartnerName"),
+        //                SaleAmount = row.Field<decimal>("SaleAmount")
+        //            }).ToArray() : new DeliveryPartnersDailySales[] { };
 
-                    _result = dsData.Tables[0].AsEnumerable().Select(row => new DSREntry
-                    {
-                        DSREntryID = row.Field<int>("DSREntryID"),
-                        OutletID = row.Field<int>("OutletID"),
-                        DSREntryDate = row.Field<DateTime>("DSREntryDate"),
-                        SaleLunchDinein = row.Field<decimal>("SaleLunchDinein"),
-                        SaleEveningDinein = row.Field<decimal>("SaleEveningDinein"),
+        //            _result = dsData.Tables[0].AsEnumerable().Select(row => new DSREntry
+        //            {
+        //                DSREntryID = row.Field<int>("DSREntryID"),
+        //                OutletID = row.Field<int>("OutletID"),
+        //                DSREntryDate = row.Field<DateTime>("DSREntryDate"),
+        //                SaleLunchDinein = row.Field<decimal>("SaleLunchDinein"),
+        //                SaleEveningDinein = row.Field<decimal>("SaleEveningDinein"),
 
-                        SaleDinnerDinein = row.Field<decimal>("SaleDinnerDinein"),
-                        SaleTakeAway = row.Field<decimal>("SaleTakeAway"),
-                        SaleFood = row.Field<decimal>("SaleFood"),
-                        SaleBeverage = row.Field<decimal>("SaleBeverage"),
-                        SaleWine = row.Field<decimal>("SaleWine"),
-                        SaleBeer = row.Field<decimal>("SaleBeer"),
-                        SaleLiquor = row.Field<decimal>("SaleLiquor"),
-                        SaleTobacco = row.Field<decimal>("SaleTobacco"),
-                        SaleOther = row.Field<decimal>("SaleOther"),
-                        ItemsPerBill = row.Field<int>("ItemsPerBill"),
-                        CTCSalary = row.Field<decimal>("CTCSalary"),
-                        ServiceCharge = row.Table.Columns.Contains("ServiceCharge") == false ? 0 : (row.Field<decimal?>("ServiceCharge") == null ? 0 : row.Field<decimal>("ServiceCharge")),
+        //                SaleDinnerDinein = row.Field<decimal>("SaleDinnerDinein"),
+        //                SaleTakeAway = row.Field<decimal>("SaleTakeAway"),
+        //                SaleFood = row.Field<decimal>("SaleFood"),
+        //                SaleBeverage = row.Field<decimal>("SaleBeverage"),
+        //                SaleWine = row.Field<decimal>("SaleWine"),
+        //                SaleBeer = row.Field<decimal>("SaleBeer"),
+        //                SaleLiquor = row.Field<decimal>("SaleLiquor"),
+        //                SaleTobacco = row.Field<decimal>("SaleTobacco"),
+        //                SaleOther = row.Field<decimal>("SaleOther"),
+        //                ItemsPerBill = row.Field<int>("ItemsPerBill"),
+        //                CTCSalary = row.Field<decimal>("CTCSalary"),
+        //                ServiceCharge = row.Table.Columns.Contains("ServiceCharge") == false ? 0 : (row.Field<decimal?>("ServiceCharge") == null ? 0 : row.Field<decimal>("ServiceCharge")),
 
-                        TotalNoOfBills = row.Field<int>("TotalNoOfBills"),
-                        GuestCountLunch = row.Field<int>("GuestCountLunch"),
-                        GuestCountEvening = row.Field<int>("GuestCountEvening"),
-                        GuestCountDinner = row.Field<int>("GuestCountDinner"),
-                        CashCollected = row.Field<decimal>("CashCollected"),
-                        CashStatus= row.Field<int>("CashStatus"),
-                        DeliveryPartners = dsrEntryId != null && dsrEntryId > 0 ? deliveryPartnersList : new DeliveryPartnersDailySales[] { } ,
-                        GuestPartners= dsrEntryId != null && dsrEntryId > 0 ? guestPartnersList : new GuestPartnersDailySales[] {},
-                        TotalDelivery = (deliveryPartnersList.Where(w => w.DSREntryID == row.Field<int>("DSREntryID")).Sum(s => s.SaleAmount) + row.Field<decimal>("SaleTakeAway")),
-                        TotalGuestByPartners = guestPartnersList.Where(w => w.DSREntryID == row.Field<int>("DSREntryID")).Sum(s => s.GuestCount),
-                    }).OrderBy(o => o.DSREntryDate).ToList();
+        //                TotalNoOfBills = row.Field<int>("TotalNoOfBills"),
+        //                GuestCountLunch = row.Field<int>("GuestCountLunch"),
+        //                GuestCountEvening = row.Field<int>("GuestCountEvening"),
+        //                GuestCountDinner = row.Field<int>("GuestCountDinner"),
+        //                CashCollected = row.Field<decimal>("CashCollected"),
+        //                CashStatus = row.Field<int>("CashStatus"),
+        //                DeliveryPartners = dsrEntryId != null && dsrEntryId > 0 ? deliveryPartnersList : new DeliveryPartnersDailySales[] { },
+        //                GuestPartners = dsrEntryId != null && dsrEntryId > 0 ? guestPartnersList : new GuestPartnersDailySales[] { },
+        //                TotalDelivery = (deliveryPartnersList.Where(w => w.DSREntryID == row.Field<int>("DSREntryID")).Sum(s => s.SaleAmount) + row.Field<decimal>("SaleTakeAway")),
+        //                TotalGuestByPartners = guestPartnersList.Where(w => w.DSREntryID == row.Field<int>("DSREntryID")).Sum(s => s.GuestCount),
+        //            }).OrderBy(o => o.DSREntryDate).ToList();
 
-                    if (_result != null && _result.Count > 0) 
-                    {
-                        _result.ForEach(f =>
-                        {
-                            f.TotalDinein = (f.SaleFood + f.SaleLiquor + f.SaleBeer + f.SaleWine + f.SaleTobacco + f.SaleOther + f.SaleBeverage);
-                            //f.TotalDinein = (f.SaleLunchDinein + f.SaleEveningDinein + f.SaleDinnerDinein);  CHANGED BECAUSE NOW NOT ALL OUTLET PROVIDES LUNCH/EVEING/DINNER DETAILS
-                            f.TotalGuestDirect = (f.GuestCountLunch + f.GuestCountEvening + f.GuestCountDinner);
-                            //f.TotalDelivery = (f.DeliveryPartners.Where(w=> w.DSREntryID == f.DSREntryID).Sum(s => s.SaleAmount) + f.SaleTakeAway);
-                            f.TotalSale = f.TotalDinein + f.TotalDelivery;
-                            //f.TotalGuestByPartners = f.GuestPartners.Where(w => w.DSREntryID == f.DSREntryID).Sum(s => s.GuestCount);
-                        });
-                    }
-                }
-            }).IfNotNull((ex) =>
-            {
-                Logger.LogError("Error in TransactionRepository GetDSREnties:" + ex.Message + Environment.NewLine + ex.StackTrace);
-            });
+        //            if (_result != null && _result.Count > 0)
+        //            {
+        //                _result.ForEach(f =>
+        //                {
+        //                    f.TotalDinein = (f.SaleFood + f.SaleLiquor + f.SaleBeer + f.SaleWine + f.SaleTobacco + f.SaleOther + f.SaleBeverage);
+        //                    //f.TotalDinein = (f.SaleLunchDinein + f.SaleEveningDinein + f.SaleDinnerDinein);  CHANGED BECAUSE NOW NOT ALL OUTLET PROVIDES LUNCH/EVEING/DINNER DETAILS
+        //                    f.TotalGuestDirect = (f.GuestCountLunch + f.GuestCountEvening + f.GuestCountDinner);
+        //                    //f.TotalDelivery = (f.DeliveryPartners.Where(w=> w.DSREntryID == f.DSREntryID).Sum(s => s.SaleAmount) + f.SaleTakeAway);
+        //                    f.TotalSale = f.TotalDinein + f.TotalDelivery;
+        //                    //f.TotalGuestByPartners = f.GuestPartners.Where(w => w.DSREntryID == f.DSREntryID).Sum(s => s.GuestCount);
+        //                });
+        //            }
+        //        }
+        //    }).IfNotNull((ex) =>
+        //    {
+        //        Logger.LogError("Error in TransactionRepository GetDSREnties:" + ex.Message + Environment.NewLine + ex.StackTrace);
+        //    });
 
-            return _result;
-        }
+        //    return _result;
+        //}
 
         public MonthlyExpense GetMonthlyExpensesByID(Guid userId, int monthlyExpenseId, bool isActualExpense = false)
         {
@@ -172,10 +171,10 @@ namespace BellonaAPI.DataAccess.Class
 
             var deliveryPartnersList = (dsData != null && dsData.Tables.Count > 1) ? dsData.Tables[1].AsEnumerable().Select(row => new DeliveryPartnersMonthlyExpense
             {
-                MonthlyExpenseID = row.Table.Columns.Contains("MonthlyExpenseID")== false? 0 : (row.Field<int?>("MonthlyExpenseID")  == null ? 0: row.Field<int>("MonthlyExpenseID")),
-                DeliveryPartnerID = row.Table.Columns.Contains("DeliveryPartnerID")== false? 0 : (row.Field<int?>("DeliveryPartnerID") == null ? 0 :row.Field<int>("DeliveryPartnerID")),
+                MonthlyExpenseID = row.Table.Columns.Contains("MonthlyExpenseID") == false ? 0 : (row.Field<int?>("MonthlyExpenseID") == null ? 0 : row.Field<int>("MonthlyExpenseID")),
+                DeliveryPartnerID = row.Table.Columns.Contains("DeliveryPartnerID") == false ? 0 : (row.Field<int?>("DeliveryPartnerID") == null ? 0 : row.Field<int>("DeliveryPartnerID")),
                 DeliveryPartnerName = row.Field<string>("DeliveryPartnerName"),
-                Amount = row.Table.Columns.Contains("Amount")== false? 0 : (row.Field<decimal?>("Amount") == null ? 0: row.Field<decimal>("Amount"))
+                Amount = row.Table.Columns.Contains("Amount") == false ? 0 : (row.Field<decimal?>("Amount") == null ? 0 : row.Field<decimal>("Amount"))
             }).ToArray() : new DeliveryPartnersMonthlyExpense[] { };
 
             _result = dsData.Tables[0].AsEnumerable().Select(row => new MonthlyExpense
@@ -260,7 +259,7 @@ namespace BellonaAPI.DataAccess.Class
                 Property_Cam = row.Field<decimal>("Property_Cam"),
                 Property_LateFees = row.Field<decimal>("Property_LateFees"),
                 Property_Rent = row.Field<decimal>("Property_Rent"),
-                Property_RentPerc = row.Table.Columns.Contains("Property_RentPerc")== false? 0 : (row.Field<decimal?>("Property_RentPerc") == null ? 0: row.Field<decimal>("Property_RentPerc")),
+                Property_RentPerc = row.Table.Columns.Contains("Property_RentPerc") == false ? 0 : (row.Field<decimal?>("Property_RentPerc") == null ? 0 : row.Field<decimal>("Property_RentPerc")),
                 Property_Tax = row.Field<decimal>("Property_Tax"),
 
                 Royalty_Charge = row.Field<decimal>("Royalty_Charge"),
@@ -323,7 +322,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public IEnumerable<MonthlyExpenseList> GetMonthlyExpensesEntries(Guid userId,int menuId, int? outletID = 0, int? expenseMonth = 0, int? expenseYear = 0, bool isActualExpense = false)
+        public IEnumerable<MonthlyExpenseList> GetMonthlyExpensesEntries(Guid userId, int menuId, int? outletID = 0, int? expenseMonth = 0, int? expenseYear = 0, bool isActualExpense = false)
         {
             List<MonthlyExpenseList> _result = new List<MonthlyExpenseList>(); int isSuccess = 0; string returnMessage = "";
             TryCatch.Run(() =>
@@ -367,9 +366,9 @@ namespace BellonaAPI.DataAccess.Class
                         //ASPG_Total = row.Field<decimal>("ASPG_Total"),
                         //SaleBreakUp_Total = row.Field<decimal>("SaleBreakUp_Total"),
                         //Utilization_Total = row.Field<decimal>("Utilization_Total"),
-                    }).OrderByDescending(o => o.ExpenseYear).ThenByDescending(o=> o.ExpenseMonth).ToList();
+                    }).OrderByDescending(o => o.ExpenseYear).ThenByDescending(o => o.ExpenseMonth).ToList();
 
-                    
+
                 }
             }).IfNotNull((ex) =>
             {
@@ -486,7 +485,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        
+
 
         public List<BudgetList_ForGrid> GetBudgetList(Guid userId, int menuId)
         {
@@ -494,7 +493,7 @@ namespace BellonaAPI.DataAccess.Class
             TryCatch.Run(() =>
             {
                 using (DBHelper Dbhelper = new DBHelper())
-                {                    
+                {
                     DBParameterCollection dbCol = new DBParameterCollection();
                     dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
                     dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
@@ -541,14 +540,14 @@ namespace BellonaAPI.DataAccess.Class
                     _result = dsData.Tables[0].AsEnumerable().Select(row => new DailyExpense
                     {
                         DailyExpenseId = row.Field<int>("DailyExpenseId"),
-                        OutletID = row.Field<int>("OutletID"),                        
-                        Week = row.Field<int>("WeekNo"),                        
+                        OutletID = row.Field<int>("OutletID"),
+                        Week = row.Field<int>("WeekNo"),
                         ExpenseDay = row.Field<int>("ExpenseDay"),
                         ExpenseMonth = row.Field<int>("ExpenseMonth"),
-                        ExpenseYear = row.Field<int>("ExpenseYear"),                       
+                        ExpenseYear = row.Field<int>("ExpenseYear"),
 
                         D_LabourCost_CTC = row.Field<decimal>("D_LabourCost_CTC"),
-                      
+
                         D_ProductionCost_Beer = row.Field<decimal>("D_ProductionCost_Beer"),
                         D_ProductionCost_Beverage = row.Field<decimal>("D_ProductionCost_Beverage"),
                         D_ProductionCost_Food = row.Field<decimal>("D_ProductionCost_Food"),
@@ -587,7 +586,7 @@ namespace BellonaAPI.DataAccess.Class
             Logger.LogInfo("Started execution of UpdateMonthlyExpense from Repository TransactionRepository at " + DateTime.Now.ToLongDateString());
             bool IsSuccess = false; string ReturnMessage = string.Empty;
             var DailyEntries = DailyExpenseEntries.DailyExpenseEntries;
-            
+
             var modelData = Common.ToXML(DailyEntries);
             TryCatch.Run(() =>
             {
@@ -614,15 +613,16 @@ namespace BellonaAPI.DataAccess.Class
         }
 
 
-        public List<WeekModel> GetAllWeeks(Guid userId, int year)
+        public List<WeekModel> GetAllWeeks(Guid userId, string year, int outletId)
         {
             List<WeekModel> _result = null;
             TryCatch.Run(() =>
             {
                 using (DBHelper Dbhelper = new DBHelper())
                 {
-                    DBParameterCollection dbCol = new DBParameterCollection();                 
-                    dbCol.Add(new DBParameter("Year", year, DbType.Int32));
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("Year", year, DbType.String));
+                    dbCol.Add(new DBParameter("OutletID", outletId, DbType.Int32));
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetAllWeeks, dbCol, CommandType.StoredProcedure);
 
                     _result = dtData.AsEnumerable().Select(row => new WeekModel
@@ -632,8 +632,9 @@ namespace BellonaAPI.DataAccess.Class
                         Period = row.Field<string>("Period"),
                         Days = row.Field<string>("Days"),
                         Dates = row.Field<string>("Dates"),
-                        WeekNo = row.Field<string>("WeekNo")
-                      
+                        WeekNo = row.Field<string>("WeekNo"),
+                        IsExist = row.Field<int>("IsExist"),
+
                     }).OrderBy(o => o.DateRangeId).ToList();
 
                 }
@@ -644,19 +645,19 @@ namespace BellonaAPI.DataAccess.Class
 
             return _result;
         }
-        
+
         public List<financialYear> GetFinancialYear(Guid userId)
         {
             List<financialYear> _result = null;
             TryCatch.Run(() =>
             {
                 using (DBHelper Dbhelper = new DBHelper())
-                {                    
-                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetDistinctYear,  CommandType.StoredProcedure);
+                {
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetDistinctYear, CommandType.StoredProcedure);
                     _result = dtData.AsEnumerable().Select(row => new financialYear
                     {
-                        Year = row.Field<int>("Year"),
-                        IsCurrentYear = row.Field<int>("IsCurrentYear")           
+                        Year = row.Field<string>("Year"),
+                        IsCurrentYear = row.Field<int>("IsCurrentYear")
                     }).OrderBy(o => o.Year).ToList();
                 }
             }).IfNotNull((ex) =>
@@ -669,7 +670,7 @@ namespace BellonaAPI.DataAccess.Class
 
         public bool SaveWeeklyExpense(WeeklyExpenseModel _data)
         {
-            // Logger.LogInfo("Started execution of SaveWeeklyExpense from Repository TransactionRepository at " + DateTime.Now.ToLongDateString());
+
             bool IsSuccess = false; string ReturnMessage = string.Empty;
             var modelData = Common.ToXML(_data);
             TryCatch.Run(() =>
@@ -682,12 +683,12 @@ namespace BellonaAPI.DataAccess.Class
                     dbCol.Add(new DBParameter("ReturnMessage", ReturnMessage, DbType.String, ParameterDirection.Output));
 
                     IsSuccess = Convert.ToBoolean(Dbhelper.ExecuteNonQuery(QueryList.SaveWeeklyExpense, dbCol, CommandType.StoredProcedure));
-                    if (IsSuccess) Logger.LogInfo("    Output message of UpdateMonthlyExpense from Repository TransactionRepository : " + ReturnMessage);
+                    if (IsSuccess) Logger.LogInfo("Output message of UpdateMonthlyExpense from Repository TransactionRepository : " + ReturnMessage);
                     else Logger.LogInfo("    Failed Output message of UpdateMonthlyExpense from Repository TransactionRepository : " + ReturnMessage);
                 }
             }).IfNotNull((ex) =>
             {
-                Logger.LogError("Error in TransactionRepository UpdateMonthlyExpense:" + ex.Message + Environment.NewLine + ex.StackTrace);
+                Logger.LogError("Error in TransactionRepository WeeklyExpenses :" + ex.Message + Environment.NewLine + ex.StackTrace);
             }).Finally(() =>
             {
                 Logger.LogInfo("Completed execution of UpdateMonthlyExpense from Repository TransactionRepository at " + DateTime.Now.ToLongDateString());
@@ -695,5 +696,467 @@ namespace BellonaAPI.DataAccess.Class
             return IsSuccess;
         }
 
+        #region SalesBudget
+        public List<SalesCategoryModel> GetSalesCategory()
+        {
+            List<SalesCategoryModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetSalesCategory, CommandType.StoredProcedure);
+                    _result = dtData.AsEnumerable().Select(row => new SalesCategoryModel
+                    {
+                        SalesCategoryID = row.Field<int>("SalesCategoryID"),
+                        SalesCategory = row.Field<string>("SalesCategory")
+                    }).OrderBy(o => o.SalesCategory).ToList();
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetSalesCategory:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        public SalesBudget GetSalesBudget(int? OutletID, int? Year, int? Month)
+        {
+            SalesBudget _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection pm = new DBParameterCollection();
+                    pm.Add(new DBParameter("OutletID", OutletID, DbType.Int32));
+                    pm.Add(new DBParameter("Year", Year, DbType.Int32));
+                    pm.Add(new DBParameter("Month", Month, DbType.Int32));
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetSalesBudget, pm, CommandType.StoredProcedure);
+                    _result = dtData.AsEnumerable().Select(row => new SalesBudget
+                    {
+                        SalesBudgetID = row.Field<int>("SalesBudgetID"),
+                        TotalBudgetAmount = row.Field<decimal>("TotalBudgetAmount"),
+                    }).FirstOrDefault();
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetSalesBudget:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        public List<SalesCategoryBudget> GetSalesCategoryBudget(int? OutletID, int? Year, int? Month)
+        {
+            List<SalesCategoryBudget> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection pm = new DBParameterCollection();
+                    pm.Add(new DBParameter("OutletID", OutletID, DbType.Int32));
+                    pm.Add(new DBParameter("Year", Year, DbType.Int32));
+                    pm.Add(new DBParameter("Month", Month, DbType.Int32));
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetSalesCategoryBudget, pm, CommandType.StoredProcedure);
+                    _result = dtData.AsEnumerable().Select(row => new SalesCategoryBudget
+                    {
+                        SalesCategoryID = row.Field<int>("SalesCategoryID"),
+                        SalesCategory = row.Field<string>("SalesCategory"),
+                        CategorySalesPercentage = row.Field<decimal?>("CategorySalesPercentage"),
+                        CategorySalesAmount = row.Field<decimal?>("CategorySalesAmount"),
+                    }).OrderBy(o => o.SalesCategory).ToList();
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetSalesCategoryBudget:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        public List<SalesDayBudget> GetSalesDayBudget(int? OutletID, int? Year, int? Month)
+        {
+            List<SalesDayBudget> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection pm = new DBParameterCollection();
+                    pm.Add(new DBParameter("OutletID", OutletID, DbType.Int32));
+                    pm.Add(new DBParameter("Year", Year, DbType.Int32));
+                    pm.Add(new DBParameter("Month", Month, DbType.Int32));
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetSalesDayBudget, pm, CommandType.StoredProcedure);
+                    _result = dtData.AsEnumerable().Select(row => new SalesDayBudget
+                    {
+                        Day = row.Field<string>("Day"),
+                        NumberOfDays = row.Field<int>("NumberOfDays"),
+                        DaySalesPercentage = row.Field<decimal?>("DaySalesPercentage"),
+                        DaySalesAmount = row.Field<decimal?>("DaySalesAmount"),
+                    }).ToList();
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetSalesDayBudget:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        public bool SaveSalesBudget(SalesBudget model)
+        {
+            var SalesCategoryBudgetXML = model.SalesCategoryBudget != null ? Common.ToXML(model.SalesCategoryBudget) : string.Empty;
+            var SalesDayBudgetXML = model.SalesDayBudget != null ? Common.ToXML(model.SalesDayBudget) : string.Empty;
+            int SalesBudgetID = 0;
+
+            using (DBHelper dbHelper = new DBHelper())
+            {
+                IDbTransaction transaction = dbHelper.BeginTransaction();
+                TryCatch.Run(() =>
+                {
+                    DBParameterCollection paramCollection = new DBParameterCollection();
+                    paramCollection.Add(new DBParameter("OutletID", model.OutletID, DbType.Int32));
+                    paramCollection.Add(new DBParameter("Year", model.Year, DbType.Int32));
+                    paramCollection.Add(new DBParameter("Month", model.Month, DbType.Int32));
+                    paramCollection.Add(new DBParameter("TotalBudgetAmount", model.TotalBudgetAmount, DbType.Decimal));
+                    paramCollection.Add(new DBParameter("CreatedBy", model.CreatedBy, DbType.String));
+                    paramCollection.Add(new DBParameter("UpdatedBy", model.UpdatedBy, DbType.String));
+                    paramCollection.Add(new DBParameter("SalesCategoryBudgetXML", SalesCategoryBudgetXML, DbType.Xml));
+                    paramCollection.Add(new DBParameter("SalesDayBudgetXML", SalesDayBudgetXML, DbType.Xml));
+
+                    var iResult = dbHelper.ExecuteScalar(QueryList.SaveSalesBudget, paramCollection, transaction, CommandType.StoredProcedure);
+                    SalesBudgetID = Convert.ToInt32(iResult.ToString());
+
+                    dbHelper.CommitTransaction(transaction);
+                }).IfNotNull(ex =>
+                {
+                    dbHelper.RollbackTransaction(transaction);
+                });
+
+                return SalesBudgetID > 0;
+            }
+        }
+        public List<SalesBudgetDetail> GetSalesBudgetDetails(int? OutletID, int? Year, int? Month)
+        {
+            List<SalesBudgetDetail> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection pm = new DBParameterCollection();
+                    pm.Add(new DBParameter("OutletID", OutletID, DbType.Int32));
+                    pm.Add(new DBParameter("Year", Year, DbType.Int32));
+                    pm.Add(new DBParameter("Month", Month, DbType.Int32));
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetSalesBudgetDetails, pm, CommandType.StoredProcedure);
+                    _result = dtData.AsEnumerable().Select(row => new SalesBudgetDetail
+                    {
+                        SalesBudgetDetailsID = row.Field<long>("SalesBudgetDetailsID"),
+                        SalesBudgetID = row.Field<int>("SalesBudgetID"),
+                        SalesCategoryID = row.Field<int>("SalesCategoryID"),
+                        SalesCategory = row.Field<string>("SalesCategory"),
+                        CategoryAmount = row.Field<decimal>("CategoryAmount"),
+                        Date = row.Field<DateTime>("Date"),
+                        strDate = row.Field<string>("strDate"),
+                        Year = row.Field<int>("Year"),
+                        Month = row.Field<int>("Month"),
+                        WeekNo = row.Field<int>("WeekNo"),
+                        DayID = row.Field<int>("DayID"),
+                        DayName = row.Field<string>("DayName"),
+                        DayNo = row.Field<int>("DayNo"),
+                    }).ToList();
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetSalesBudgetDetails:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
+        #endregion SalesBudget
+
+        #region TBUpload
+        public List<TBErrorLog> CheckTBErrorLog()
+        {
+            List<TBErrorLog> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.CheckTBErrorLog, CommandType.StoredProcedure);
+                    _result = dtData.AsEnumerable().Select(row => new TBErrorLog
+                    {
+                        Id = row.Field<int>("Id"),
+                        ErrorProcess = row.Field<string>("ErrorProcess"),
+                        FileId = row.Field<int>("FileId"),
+                        ErrorMessage = row.Field<string>("ErrorMessage"),
+                        RowNumber = row.Field<int>("RowNumber"),
+                        ColNumber = row.Field<int>("ColNumber"),
+                        ColName = row.Field<string>("ColName"),
+                        ErrorTime = row.Field<DateTime>("ErrorTime"),
+                    }).ToList();
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository CheckTBErrorLog:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        #endregion TBUpload
+
+
+        public List<WeeklyExpense> GetWeeklyExpense(Guid userId, int menuId, int outletID, string expenseYear, string week)
+        {
+            List<WeeklyExpense> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("OutletID", outletID, DbType.Int32));
+                    dbCol.Add(new DBParameter("FinancialYear", expenseYear, DbType.String));
+                    dbCol.Add(new DBParameter("Weeks", week, DbType.String));
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeeklyExpense, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new WeeklyExpense
+                    {
+                        WeeklyExpenseId = row.Field<int>("WeeklyExpenseId"),
+                        OutletID = row.Field<int>("OutletID"),
+                        ExpenseMonth = row.Field<int>("ExpenseMonth"),
+                        ExpenseYear = row.Field<int>("ExpenseYear"),
+                        FinancialYear = row.Field<string>("FinancialYear"),
+                        ExpenseWeek = row.Field<int>("ExpenseWeek"),
+                        WeekNo = row.Field<string>("Weeks"),
+                        EquipmentHireCharges_DJEvents = row.Field<decimal>("EquipmentHireCharges_DJEvents"),
+                        EquipmentHireCharges_Kitchen = row.Field<decimal>("EquipmentHireCharges_Kitchen"),
+                        EquipmentHireCharges_Banquet = row.Field<decimal>("EquipmentHireCharges_Banquet"),
+                        Total_EquipmentHireCharges = row.Field<decimal>("Total_EquipmentHireCharges"),
+
+                        BusinessPromotion_AdvertisementExpenses = row.Field<decimal>("BusinessPromotion_AdvertisementExpenses"),
+                        BusinessPromotion_CommissionBrokerageExpenses = row.Field<decimal>("BusinessPromotion_CommissionBrokerageExpenses"),
+                        BusinessPromotion_Entertainment = row.Field<decimal>("BusinessPromotion_Entertainment"),
+                        BusinessPromotion_SalesPromotion = row.Field<decimal>("BusinessPromotion_SalesPromotion"),
+                        Total_BusinessPromotionMarketing = row.Field<decimal>("Total_BusinessPromotionMarketing"),
+
+                        FinanceCost_BankCharges = row.Field<decimal>("FinanceCost_BankCharges"),
+                        FinanceCost_CommissionOnAggregators = row.Field<decimal>("FinanceCost_CommissionOnAggregators"),
+                        FinanceCost_CommissionOnCardSettlement = row.Field<decimal>("FinanceCost_CommissionOnCardSettlement"),
+                        Total_FinanceCost = row.Field<decimal>("Total_FinanceCost"),
+
+                        NonFoodConsumable_GeneralSupplies = row.Field<decimal>("NonFoodConsumable_GeneralSupplies"),
+                        NonFoodConsumable_LiquidContainerNitrogen = row.Field<decimal>("NonFoodConsumable_LiquidContainerNitrogen"),
+                        NonFoodConsumable_PackingMaterials = row.Field<decimal>("NonFoodConsumable_PackingMaterials"),
+                        Total_NonFoodConsumable = row.Field<decimal>("Total_NonFoodConsumable"),
+
+                        LegalFees_LegalCharges = row.Field<decimal>("LegalFees_LegalCharges"),
+                        LegalFees_ProfessionalCharges = row.Field<decimal>("LegalFees_ProfessionalCharges"),
+                        LegalFees_StatutoryAuditFees = row.Field<decimal>("LegalFees_StatutoryAuditFees"),
+                        Total_LegalFees = row.Field<decimal>("Total_LegalFees"),
+
+                        LicenseFees_FranchiseFees = row.Field<decimal>("LicenseFees_FranchiseFees"),
+                        LicenseFees_LicensePermitCharges = row.Field<decimal>("LicenseFees_LicensePermitCharges"),
+                        Total_LicenseFees = row.Field<decimal>("Total_LicenseFees"),
+
+                        ManPowerCost_BonusToStaff = row.Field<decimal>("ManPowerCost_BonusToStaff"),
+                        ManPowerCost_CasualLabourCharges = row.Field<decimal>("ManPowerCost_CasualLabourCharges"),
+                        ManPowerCost_ConveyanceAllowance = row.Field<decimal>("ManPowerCost_ConveyanceAllowance"),
+                        ManPowerCost_ESIC = row.Field<decimal>("ManPowerCost_ESIC"),
+                        ManPowerCost_PF = row.Field<decimal>("ManPowerCost_PF"),
+                        ManPowerCost_HousekeepingExpenses = row.Field<decimal>("ManPowerCost_HousekeepingExpenses"),
+                        ManPowerCost_Insurance = row.Field<decimal>("ManPowerCost_Insurance"),
+                        ManPowerCost_LeaveEncashment = row.Field<decimal>("ManPowerCost_LeaveEncashment"),
+                        ManPowerCost_MedicalExpenses = row.Field<decimal>("ManPowerCost_MedicalExpenses"),
+                        ManPowerCost_PFAdmin = row.Field<decimal>("ManPowerCost_PFAdmin"),
+                        ManPowerCost_RecruitmentCost = row.Field<decimal>("ManPowerCost_RecruitmentCost"),
+                        ManPowerCost_SalaryAllowances = row.Field<decimal>("ManPowerCost_SalaryAllowances"),
+                        ManPowerCost_ServiceChargePayOut = row.Field<decimal>("ManPowerCost_ServiceChargePayOut"),
+                        ManPowerCost_AccommodationElectricityCharges = row.Field<decimal>("ManPowerCost_AccommodationElectricityCharges"),
+                        ManPowerCost_AccommodationWaterCharges = row.Field<decimal>("ManPowerCost_AccommodationWaterCharges"),
+                        ManPowerCost_StaffFoodExpense = row.Field<decimal>("ManPowerCost_StaffFoodExpense"),
+                        ManPowerCost_StaffRoomRent = row.Field<decimal>("ManPowerCost_StaffRoomRent"),
+                        ManPowerCost_StaffWelfareExpenses = row.Field<decimal>("ManPowerCost_StaffWelfareExpenses"),
+                        ManPowerCost_Uniforms = row.Field<decimal>("ManPowerCost_Uniforms"),
+                        ManPowerCost_SecurityExpenses = row.Field<decimal>("ManPowerCost_SecurityExpenses"),
+                        Total_ManPowerCost = row.Field<decimal>("Total_ManPowerCost"),
+
+                        OtherOperational_CCGPurchase = row.Field<decimal>("OtherOperational_CCGPurchase"),
+                        OtherOperational_ConveyanceExpenses = row.Field<decimal>("OtherOperational_ConveyanceExpenses"),
+                        OtherOperational_FreightCharges = row.Field<decimal>("OtherOperational_FreightCharges"),
+                        OtherOperational_MiscellaneousCharges = row.Field<decimal>("OtherOperational_MiscellaneousCharges"),
+                        OtherOperational_LaundryCharges = row.Field<decimal>("OtherOperational_LaundryCharges"),
+                        OtherOperational_LodgingBoarding = row.Field<decimal>("OtherOperational_LodgingBoarding"),
+                        OtherOperational_OfficeExpense = row.Field<decimal>("OtherOperational_OfficeExpense"),
+                        OtherOperational_OfficeExpensesGuest = row.Field<decimal>("OtherOperational_OfficeExpensesGuest"),
+                        OtherOperational_PrintingStationary = row.Field<decimal>("OtherOperational_PrintingStationary"),
+                        OtherOperational_Transportation = row.Field<decimal>("OtherOperational_Transportation"),
+                        OtherOperational_TravellingLocal = row.Field<decimal>("OtherOperational_TravellingLocal"),
+                        Total_OtherOperational = row.Field<decimal>("Total_OtherOperational"),
+
+                        PrintingStationery_PostageCourier = row.Field<decimal>("PrintingStationery_PostageCourier"),
+
+                        RentOccupationCost_CAMCharges = row.Field<decimal>("RentOccupationCost_CAMCharges"),
+                        RentOccupationCost_PropertyTax = row.Field<decimal>("RentOccupationCost_PropertyTax"),
+                        RentOccupationCost_PropertyTaxMall = row.Field<decimal>("RentOccupationCost_PropertyTaxMall"),
+                        RentOccupationCost_RentRevenueCharges = row.Field<decimal>("RentOccupationCost_RentRevenueCharges"),
+                        Total_RentOccupationCost = row.Field<decimal>("Total_RentOccupationCost"),
+
+                        RepairMaintenance_AMCComputerSoftware = row.Field<decimal>("RepairMaintenance_AMCComputerSoftware"),
+                        RepairMaintenance_PestControlAC = row.Field<decimal>("RepairMaintenance_PestControlAC"),
+                        RepairMaintenance_Civil = row.Field<decimal>("RepairMaintenance_Civil"),
+                        RepairMaintenance_Others = row.Field<decimal>("RepairMaintenance_Others"),
+                        Total_RepairMaintenance = row.Field<decimal>("Total_RepairMaintenance"),
+
+                        TelephoneInternet_CableCharges = row.Field<decimal>("TelephoneInternet_CableCharges"),
+                        TelephoneInternet_InternetExpenses = row.Field<decimal>("TelephoneInternet_InternetExpenses"),
+                        TelephoneInternet_TelephoneExpenses = row.Field<decimal>("TelephoneInternet_TelephoneExpenses"),
+                        TelephoneInternet_TelephoneExpensesMobile = row.Field<decimal>("TelephoneInternet_TelephoneExpensesMobile"),
+                        Total_TelephoneInternet = row.Field<decimal>("Total_TelephoneInternet"),
+
+                        UtilityEnergyCost_DGCharges = row.Field<decimal>("UtilityEnergyCost_DGCharges"),
+                        UtilityEnergyCost_ElectricityCharges = row.Field<decimal>("UtilityEnergyCost_ElectricityCharges"),
+                        UtilityEnergyCost_ElectricityInfraCharges = row.Field<decimal>("UtilityEnergyCost_ElectricityInfraCharges"),
+                        UtilityEnergyCost_GasCharges = row.Field<decimal>("UtilityEnergyCost_GasCharges"),
+                        UtilityEnergyCost_HVACCharges = row.Field<decimal>("UtilityEnergyCost_HVACCharges"),
+                        UtilityEnergyCost_WaterCharges = row.Field<decimal>("UtilityEnergyCost_WaterCharges"),
+                        Total_UtilityEnergyCost = row.Field<decimal>("Total_UtilityEnergyCost"),
+
+                        Total_WeeklyExpense = row.Field<decimal>("Total_WeeklyExpense"),
+
+
+                    }).OrderBy(o => o.WeeklyExpenseId).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetWeeklyExpense:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
+        #region GET_DSR_Summary
+        //public List<DSR_Summary> GetDSR_Summary(String outletCode, string startDate, string endDate)
+        //{
+        //    List<DSR_Summary> _result = null;
+        //    TryCatch.Run(() =>
+        //    {
+        //        using (DBHelper Dbhelper = new DBHelper())
+        //        {
+        //            DBParameterCollection dbCol = new DBParameterCollection();
+        //            dbCol.Add(new DBParameter("branchCode", outletCode, DbType.String));
+        //            dbCol.Add(new DBParameter("Enddt", endDate, DbType.String));
+        //            dbCol.Add(new DBParameter("Startdt", startDate, DbType.String));
+
+        //            DataTable dsData = Dbhelper.ExecuteDataTable(QueryList.GetDSR_Summary, dbCol, CommandType.StoredProcedure);
+        //            _result = dsData.AsEnumerable().Select(row => new DSR_Summary
+        //            {
+        //            //OutletID = row.Field<int>("OutletID"),
+        //            BranchName = row.Field<string>("BranchName"),
+        //                BranchCode = row.Field<string>("BranchCode"),
+
+        //                FoodSaleNet = row.Field<decimal>("FoodSaleNet"),
+        //                BeverageSaleNet = row.Field<decimal>("BeverageSaleNet"),
+        //                LiquorSaleNet = row.Field<decimal>("LiquorSaleNet"),
+        //                TobaccoSaleNet = row.Field<decimal>("TobaccoSaleNet"),
+        //                OtherSale1Net = row.Field<decimal>("OtherSale1Net"),
+        //                DiscountAmount = row.Field<decimal>("DiscountAmount"),
+        //                ServiceChargeAmount = row.Field<decimal>("ServiceChargeAmount"),
+        //                DirectCharge = row.Field<decimal>("DirectCharge"),
+        //                SalesNetTotal = row.Field<decimal>("SalesNetTotal"),
+        //                SalesTotalWithSC = row.Field<decimal>("SalesTotalWithSC"),
+
+        //                DeliveryFoodSaleNet = row.Field<decimal>("DeliveryFoodSaleNet"),
+        //                DeliveryBeverageSaleNet = row.Field<decimal>("DeliveryBeverageSaleNet"),
+        //                DineInFoodSaleNet = row.Field<decimal>("DineInFoodSaleNet"),
+        //                DineInBeverageSaleNet = row.Field<decimal>("DineInBeverageSaleNet"),
+        //                DineInLiquorSaleNet = row.Field<decimal>("DineInLiquorSaleNet"),
+        //                DineInTobaccoNet = row.Field<decimal>("DineInTobaccoNet"),
+        //                DineInOthersNet = row.Field<decimal>("DineInOthersNet"),
+        //                DineInCovers = row.Field<decimal>("DineInCovers"),
+        //                ApcDineIn = row.Field<decimal>("ApcDineIn"),
+
+        //                ZomatoDeliveryBillsNo = row.Field<decimal>("ZomatoDeliveryBillsNo"),
+        //                ZomatoDeliverySaleNet = row.Field<decimal>("ZomatoDeliverySaleNet"),
+        //                SwiggyDeliveryBillsNo = row.Field<decimal>("SwiggyDeliveryBillsNo"),
+        //                SwiggyDeliverySaleNet = row.Field<decimal>("SwiggyDeliverySaleNet"),
+        //                DeliveryChannel3BillsNo = row.Field<decimal>("DeliveryChannel3BillsNo"),
+        //                DeliveryChannel3SaleNet = row.Field<decimal>("DeliveryChannel3SaleNet"),
+        //                DeliveryBillsTotalNo = row.Field<decimal>("DeliveryBillsTotalNo"),
+        //                DeliveryBillsAmountTotal = row.Field<decimal>("DeliveryBillsAmountTotal"),
+
+        //                ZomatoDineInSaleNet = row.Field<decimal>("ZomatoDineInSaleNet"),
+        //                ZomatoDineInCovers = row.Field<decimal>("ZomatoDineInCovers"),
+        //                ZomatoDineInBills = row.Field<decimal>("ZomatoDineInBills"),
+        //                AvgBillAmountZomato = row.Field<decimal>("AvgBillAmountZomato"),
+
+        //                DineOutDineInSaleNet = row.Field<decimal>("DineOutDineInSaleNet"),
+        //                DineOutDineInCovers = row.Field<decimal>("DineOutDineInCovers"),
+        //                DineOutDineInBills = row.Field<decimal>("DineOutDineInBills"),
+        //                AvgBillAmountDineOut = row.Field<decimal>("AvgBillAmountDineOut"),
+
+        //                EazyDinerDineInSaleNet = row.Field<decimal>("EazyDinerDineInSaleNet"),
+        //                EazyDinerDineInCovers = row.Field<decimal>("EazyDinerDineInCovers"),
+        //                EazyDinerDineInBills = row.Field<decimal>("EazyDinerDineInBills"),
+        //                AvgBillAmountEazyDiner = row.Field<decimal>("AvgBillAmountEazyDiner"),
+
+        //                OtherAggregatorDineInSaleNet = row.Field<decimal>("OtherAggregatorDineInSaleNet"),
+        //                OtherAggregatorDineInCovers = row.Field<decimal>("OtherAggregatorDineInCovers"),
+        //                OtherAggregatorDineInBills = row.Field<decimal>("OtherAggregatorDineInBills"),
+        //                AvgBillAmountOtherAggregator = row.Field<decimal>("AvgBillAmountOtherAggregator"),
+
+        //            }).OrderBy(o => o.BranchName).ToList();
+        //        }
+        //    }).IfNotNull((ex) =>
+        //            {
+        //                Logger.LogError("Error in TransactionRepository GET DRS_Summery:" + ex.Message + Environment.NewLine + ex.StackTrace);
+        //            });
+
+        //    return _result;
+
+        //}
+
+        public List<DSR_Summary> GetDSR_Summary(string outletCode, string startDate, string endDate)
+        {
+            List<DSR_Summary> _result = null;
+            TryCatch.Run(() =>
+            {
+               
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("Enddt", endDate, DbType.String));
+                    dbCol.Add(new DBParameter("Startdt", startDate, DbType.String));
+                   if(outletCode != "--ALL--")
+                    {
+                    dbCol.Add(new DBParameter("branchCode", outletCode, DbType.String));
+                    }
+
+
+                    DataTable dsData = Dbhelper.ExecuteDataTable(QueryList.GetDSR_Summary, dbCol, CommandType.StoredProcedure);
+                    _result = dsData.AsEnumerable().Select(row => CreateSummaryFromRow(row)).OrderBy(o => o.BranchName).ToList();
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GET DRS_Summery:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
+        private DSR_Summary CreateSummaryFromRow(DataRow row)
+        {
+            var summary = new DSR_Summary();
+            foreach (var prop in typeof(DSR_Summary).GetProperties())
+            {
+                if (row.Table.Columns.Contains(prop.Name))
+                {
+                    if (row[prop.Name] != DBNull.Value)
+                    {
+                        prop.SetValue(summary, Convert.ChangeType(row[prop.Name], prop.PropertyType));
+                    }
+                }
+            }
+            return summary;
+        }
+        #endregion GET_DSR_Summary    
     }
 }
+
+

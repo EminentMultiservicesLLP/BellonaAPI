@@ -45,7 +45,7 @@ namespace BellonaAPI.Models
     public class financialYear
     {
         public int YearId { get; set; }
-        public int Year { get; set; }
+        public string Year { get; set; }
         public int IsCurrentYear { get; set; }
     }
     public class WeekModel
@@ -56,5 +56,6 @@ namespace BellonaAPI.Models
         public string Dates { get; set; }
         public string Days { get; set; }
         public string WeekNo { get; set; }
+        public int IsExist { get; set; }
     }
 }
