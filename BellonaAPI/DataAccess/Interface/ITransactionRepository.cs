@@ -45,6 +45,6 @@ namespace BellonaAPI.DataAccess.Interface
         
         List<WeeklyExpense> GetWeeklyExpense(Guid userId,int menuId,int outletID,string expenseYear,string week);
 
-        List<DSR_Summary> GetDSR_Summary(String outletCode, string startDate, string endDate);
+        List<DSR_Summary> GetDSR_Summary(string outletCode, string startDate, string endDate);
     }
 }
