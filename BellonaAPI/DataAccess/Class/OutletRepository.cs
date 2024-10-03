@@ -119,6 +119,8 @@ namespace BellonaAPI.DataAccess.Class
                         RentType = row.Field<int?>("RentType") == null ? 0 : row.Field<int>("RentType"),
                         CountryID = row.Field<int>("CountryID"),
                         CountryName = row.Field<string>("CountryName"),
+                        ClusterID = row.Field<int>("ClusterID"),
+                        ClusterName = row.Field<string>("ClusterName"),
                         RegionID = row.Field<int>("RegionID"),
                         RegionName = row.Field<string>("RegionName"),
                         Zip = row.Field<string>("Zip"),

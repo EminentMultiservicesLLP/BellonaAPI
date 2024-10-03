@@ -8,7 +8,8 @@ namespace BellonaAPI.DataAccess.Interface
 {
     public interface ITransactionRepository
     {
-       // IEnumerable<DSREntry> GetDSREntries(Guid userId,int menuId, int? dsrEntryId = null);
+        // IEnumerable<DSREntry> GetDSREntries(Guid userId,int menuId, int? dsrEntryId = null);
+        IEnumerable<Cluster> getCluster(string userId, int? CityID);
         bool UpdateDSREntry(DSREntry _data);
         bool DeleteDSRENtry(int DSREntryID);
 

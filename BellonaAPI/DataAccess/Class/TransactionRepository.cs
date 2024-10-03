@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using BellonaAPI.Models.Masters;
 
 namespace BellonaAPI.DataAccess.Class
 {
@@ -29,6 +30,31 @@ namespace BellonaAPI.DataAccess.Class
         public bool DeleteMonthlyExpense(int MonthlyExpenseID, bool isActualExpense = false)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<Cluster> getCluster(string userId, int? CityID)
+        {
+            List<Cluster> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection paramCollection = new DBParameterCollection();
+                    paramCollection.Add(new DBParameter("CityID", CityID, DbType.Int32));
+                    paramCollection.Add(new DBParameter("UserId", userId, DbType.String));
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetDashboardCluster, paramCollection, CommandType.StoredProcedure);
+                    _result = dtData.AsEnumerable().Select(row => new Cluster
+                    {
+                        ClusterID = row.Field<int>("ClusterID"),
+                        ClusterName = row.Field<string>("ClusterName"),
+                    }).OrderBy(o => o.CityName).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in Billing Dashboard Repository GetCluster:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+            return _result;
         }
 
         //public IEnumerable<DSREntry> GetDSREntries(Guid userId, int menuId, int? dsrEntryId = null)
@@ -1123,7 +1149,7 @@ namespace BellonaAPI.DataAccess.Class
                     DBParameterCollection dbCol = new DBParameterCollection();
                     dbCol.Add(new DBParameter("Enddt", endDate, DbType.String));
                     dbCol.Add(new DBParameter("Startdt", startDate, DbType.String));
-                   if(outletCode != "--ALL--")
+                   if(outletCode != "")
                     {
                     dbCol.Add(new DBParameter("branchCode", outletCode, DbType.String));
                     }

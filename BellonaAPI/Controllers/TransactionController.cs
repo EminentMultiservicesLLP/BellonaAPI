@@ -1,6 +1,7 @@
 ﻿using BellonaAPI.DataAccess.Interface;
 using BellonaAPI.Filters;
 using BellonaAPI.Models;
+using BellonaAPI.Models.Masters;
 using CommonLayer;
 using CommonLayer.Extensions;
 using Newtonsoft.Json;
@@ -38,6 +39,16 @@ namespace BellonaAPI.Controllers
         //    if (_result != null) return Ok(_result);
         //    else return InternalServerError(new System.Exception("Failed to retrieve DSREntry data"));
         //}
+
+        [Route("getCluster")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetCluster(string userId, int? CityID = null)
+        {
+            List<Cluster> _result = _iRepo.getCluster(userId, CityID).ToList();
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Clusters"));
+        }
 
         [Route("SaveDSREntry")]
         [AcceptVerbs("POST")]
@@ -336,6 +347,7 @@ namespace BellonaAPI.Controllers
         }
         #endregion TBUpload
 
+        #region DSR 
         [Route("GetDSR_Summary")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
@@ -345,5 +357,16 @@ namespace BellonaAPI.Controllers
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve  GET_Summary"));
         }
+
+        [Route("GetDSR_Summary")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetDSR_Summary(string startDate, string endDate)
+        {
+            List<DSR_Summary> _result = _iRepo.GetDSR_Summary("", startDate, endDate);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve  GET_Summary"));
+        }
+        #endregion DSR
     }
 }
