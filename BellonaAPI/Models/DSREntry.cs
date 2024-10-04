@@ -67,7 +67,11 @@ namespace BellonaAPI.Models
 
     public class DSR_Summary
     {
-        public int  OutletID { get; set; }
+        public int OutletID { get; set; }
+        public int CityID { get; set; }
+        public string CityName { get; set; }
+        public int ClusterID { get; set; }
+        public string ClusterName { get; set; }
         public string BranchName { get; set; }
         public string BranchCode { get; set; }
         public string InvoiceNumber { get; set; }

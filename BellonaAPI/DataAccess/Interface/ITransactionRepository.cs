@@ -8,7 +8,8 @@ namespace BellonaAPI.DataAccess.Interface
 {
     public interface ITransactionRepository
     {
-       // IEnumerable<DSREntry> GetDSREntries(Guid userId,int menuId, int? dsrEntryId = null);
+        // IEnumerable<DSREntry> GetDSREntries(Guid userId,int menuId, int? dsrEntryId = null);
+        IEnumerable<Cluster> getCluster(string userId, int? CityID);
         bool UpdateDSREntry(DSREntry _data);
         bool DeleteDSRENtry(int DSREntryID);
 
@@ -45,6 +46,6 @@ namespace BellonaAPI.DataAccess.Interface
         
         List<WeeklyExpense> GetWeeklyExpense(Guid userId,int menuId,int outletID,string expenseYear,string week);
 
-        List<DSR_Summary> GetDSR_Summary(string outletCode, string startDate, string endDate);
+        List<DSR_Summary> GetDSR_Summary(string outletCode, string startDate, string endDate, int cityId, int clusterId );
     }
 }
