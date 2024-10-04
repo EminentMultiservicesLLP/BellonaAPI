@@ -1138,7 +1138,7 @@ namespace BellonaAPI.DataAccess.Class
 
         //}
 
-        public List<DSR_Summary> GetDSR_Summary(string outletCode, string startDate, string endDate)
+        public List<DSR_Summary> GetDSR_Summary(string outletCode, string startDate, string endDate, int cityId, int clusterId)
         {
             List<DSR_Summary> _result = null;
             TryCatch.Run(() =>
@@ -1149,11 +1149,19 @@ namespace BellonaAPI.DataAccess.Class
                     DBParameterCollection dbCol = new DBParameterCollection();
                     dbCol.Add(new DBParameter("Enddt", endDate, DbType.String));
                     dbCol.Add(new DBParameter("Startdt", startDate, DbType.String));
-                   if(outletCode != "")
+               
+                    if(outletCode != "")
                     {
                     dbCol.Add(new DBParameter("branchCode", outletCode, DbType.String));
                     }
-
+                    else if(clusterId > 0)
+                    {
+                    dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    } 
+                    else if(cityId > 0)
+                    {
+                    dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
 
                     DataTable dsData = Dbhelper.ExecuteDataTable(QueryList.GetDSR_Summary, dbCol, CommandType.StoredProcedure);
                     _result = dsData.AsEnumerable().Select(row => CreateSummaryFromRow(row)).OrderBy(o => o.BranchName).ToList();

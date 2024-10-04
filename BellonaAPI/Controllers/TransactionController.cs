@@ -348,24 +348,37 @@ namespace BellonaAPI.Controllers
         #endregion TBUpload
 
         #region DSR 
-        [Route("GetDSR_Summary")]
-        [AcceptVerbs("GET")]
-        [ValidationActionFilter]
-        public IHttpActionResult GetDSR_Summary( string startDate, string endDate, string outletCode)
-        {
-            List<DSR_Summary> _result = _iRepo.GetDSR_Summary(outletCode, startDate, endDate);
-            if (_result != null) return Ok(_result);
-            else return InternalServerError(new System.Exception("Failed to retrieve  GET_Summary"));
-        }
+        //[Route("GetDSR_Summary")]
+        //[AcceptVerbs("GET")]
+        //[ValidationActionFilter]
+        //public IHttpActionResult GetDSR_Summary( string startDate, string endDate, string outletCode)
+        //{
+        //    List<DSR_Summary> _result = _iRepo.GetDSR_Summary(outletCode, startDate, endDate);
+        //    if (_result != null) return Ok(_result);
+        //    else return InternalServerError(new System.Exception("Failed to retrieve  GET_Summary"));
+        //}
+
+        //[Route("GetDSR_Summary")]
+        //[AcceptVerbs("GET")]
+        //[ValidationActionFilter]
+        //public IHttpActionResult GetDSR_Summary(string startDate, string endDate)
+        //{
+        //    List<DSR_Summary> _result = _iRepo.GetDSR_Summary("", startDate, endDate);
+        //    if (_result != null) return Ok(_result);
+        //    else return InternalServerError(new System.Exception("Failed to retrieve  GET_Summary"));
+        //}
+
 
         [Route("GetDSR_Summary")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetDSR_Summary(string startDate, string endDate)
+        public IHttpActionResult GetDSR_Summary(string startDate, string endDate, string outletCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<DSR_Summary> _result = _iRepo.GetDSR_Summary("", startDate, endDate);
-            if (_result != null) return Ok(_result);
-            else return InternalServerError(new System.Exception("Failed to retrieve  GET_Summary"));
+            List<DSR_Summary> _result = _iRepo.GetDSR_Summary(outletCode ?? "", startDate, endDate, cityId  ?? 0, clusterId ?? 0);
+            if (_result != null)
+                return Ok(_result);
+            else
+                return InternalServerError(new System.Exception("Failed to retrieve GET_Summary"));
         }
         #endregion DSR
     }
