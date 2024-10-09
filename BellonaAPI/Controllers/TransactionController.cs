@@ -348,27 +348,6 @@ namespace BellonaAPI.Controllers
         #endregion TBUpload
 
         #region DSR 
-        //[Route("GetDSR_Summary")]
-        //[AcceptVerbs("GET")]
-        //[ValidationActionFilter]
-        //public IHttpActionResult GetDSR_Summary( string startDate, string endDate, string outletCode)
-        //{
-        //    List<DSR_Summary> _result = _iRepo.GetDSR_Summary(outletCode, startDate, endDate);
-        //    if (_result != null) return Ok(_result);
-        //    else return InternalServerError(new System.Exception("Failed to retrieve  GET_Summary"));
-        //}
-
-        //[Route("GetDSR_Summary")]
-        //[AcceptVerbs("GET")]
-        //[ValidationActionFilter]
-        //public IHttpActionResult GetDSR_Summary(string startDate, string endDate)
-        //{
-        //    List<DSR_Summary> _result = _iRepo.GetDSR_Summary("", startDate, endDate);
-        //    if (_result != null) return Ok(_result);
-        //    else return InternalServerError(new System.Exception("Failed to retrieve  GET_Summary"));
-        //}
-
-
         [Route("GetDSR_Summary")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
@@ -381,5 +360,17 @@ namespace BellonaAPI.Controllers
                 return InternalServerError(new System.Exception("Failed to retrieve GET_Summary"));
         }
         #endregion DSR
+
+        #region WeeklyMIS
+        [Route("GetWeeklySaleDetails")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetWeeklySaleDetails(string week, string branchCode= null, int? cityId=null, int? clusterId=null)
+        {
+            List<WeeklyMIS> _result = _iRepo.GetWeeklySaleDetails(week, branchCode??"", cityId?? 0, clusterId??0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Weekly Sales Details."));
+        }
+        #endregion WeeklyMIS
     }
 }
