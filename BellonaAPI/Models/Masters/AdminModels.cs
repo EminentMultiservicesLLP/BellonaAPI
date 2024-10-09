@@ -98,6 +98,7 @@ namespace BellonaAPI.Models.Masters
         public int RentType { get; set; }
 
         public decimal OutletArea { get; set; }
+        public decimal OutletCover { get; set; }
         public int IsServiceChargeApplicable { get; set; }
         public bool IsActive { get; set; }
 

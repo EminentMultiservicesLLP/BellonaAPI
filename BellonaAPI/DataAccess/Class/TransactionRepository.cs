@@ -1190,6 +1190,50 @@ namespace BellonaAPI.DataAccess.Class
             return summary;
         }
         #endregion GET_DSR_Summary    
+
+        public List<WeeklyMIS> GetWeeklySaleDetails(string week, string branchCode, int cityId, int clusterId)
+        {
+            List<WeeklyMIS> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                          
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                   
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeeklySaleDetails, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new WeeklyMIS
+                    {
+                        InvoiceDay = row.Field<string>("InvoiceDay"),
+                        FoodSale = row.Field<decimal>("FoodSale"),
+                        BeverageSale = row.Field<decimal>("BeverageSale"),
+                        LiquorSale = row.Field<decimal>("LiquorSale"),
+                        TobaccoSale = row.Field<decimal>("TobaccoSale"),
+                        OtherSale = row.Field<decimal>("OtherSale")  
+                    }).OrderBy(o => o.InvoiceDay).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetWeeklyExpense:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
     }
 }
 
