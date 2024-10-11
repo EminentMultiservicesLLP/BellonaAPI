@@ -371,6 +371,18 @@ namespace BellonaAPI.Controllers
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Weekly Sales Details."));
         }
-        #endregion WeeklyMIS
+        #endregion WeeklyMIS 
+
+        #region DSR Sanpshot
+        [Route("GetSanpshotWeeklyData")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetSanpshotWeeklyData(int WeekNo, string Year, int OutletId)
+        {
+            List<WeeklySnapshot> _result = _iRepo.GetSanpshotWeeklyData(WeekNo, Year, OutletId);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Weekly Snapshot Data."));
+        }
+        #endregion  DSR Sanpshot
     }
 }

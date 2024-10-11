@@ -98,6 +98,7 @@
         public const string SaveWeeklyExpense = "dbsp_SAVE_WeeklyExpense";
         public const string GetWeeklyExpense = "dbsp_GET_WeeklyExpense";
         public const string GetWeeklySaleDetails = "dbsp_GetWeeklySaleDetails";
+        public const string GetSanpshotWeeklyData = "dbsp_GetWeeklyDSRSnapshot";
 
         public const string GetSalesCategory = "dbsp_GetSalesCategory";
         public const string GetSalesBudget = "dbsp_GetSalesBudget";

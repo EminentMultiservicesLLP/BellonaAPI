@@ -638,7 +638,6 @@ namespace BellonaAPI.DataAccess.Class
             return IsSuccess;
         }
 
-
         public List<WeekModel> GetAllWeeks(Guid userId, string year, int outletId)
         {
             List<WeekModel> _result = null;
@@ -660,6 +659,7 @@ namespace BellonaAPI.DataAccess.Class
                         Dates = row.Field<string>("Dates"),
                         WeekNo = row.Field<string>("WeekNo"),
                         IsExist = row.Field<int>("IsExist"),
+                        WeekDate = Convert.ToDateTime(row.Field<DateTime>("WeekDate")).ToString("yyyy-MM-dd"),                      
 
                     }).OrderBy(o => o.DateRangeId).ToList();
 
@@ -668,7 +668,6 @@ namespace BellonaAPI.DataAccess.Class
             {
                 Logger.LogError("Error in TransactionRepository GetAllWeeks:" + ex.Message + Environment.NewLine + ex.StackTrace);
             });
-
             return _result;
         }
 
@@ -1190,7 +1189,8 @@ namespace BellonaAPI.DataAccess.Class
             return summary;
         }
         #endregion GET_DSR_Summary    
-
+        
+        #region weeklyMIS
         public List<WeeklyMIS> GetWeeklySaleDetails(string week, string branchCode, int cityId, int clusterId)
         {
             List<WeeklyMIS> _result = null;
@@ -1234,6 +1234,46 @@ namespace BellonaAPI.DataAccess.Class
 
             return _result;
         }
+        #endregion weeklyMIS
+
+        #region DSR Snapshot
+        public List<WeeklySnapshot> GetSanpshotWeeklyData(int WeekNo, string Year, int OutletId)
+        {
+            List<WeeklySnapshot> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("WeekNo", WeekNo, DbType.Int32));
+                    dbCol.Add(new DBParameter("FinancialYear", Year, DbType.String));
+                    dbCol.Add(new DBParameter("OutletId", OutletId, DbType.Int32));
+                    
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetSanpshotWeeklyData, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new WeeklySnapshot
+                    {
+                        SnapshotType = row.Field<string>("SnapshotType"),
+                        Monday = row.Field<string>("Monday"),
+                        Tuesday = row.Field<string>("Tuesday"),
+                        Wednesday = row.Field<string>("Wednesday"),
+                        Thursday = row.Field<string>("Thursday"),
+                        Friday = row.Field<string>("Friday"), 
+                        Saturday = row.Field<string>("Saturday"), 
+                        Sunday = row.Field<string>("Sunday"), 
+                    }).OrderBy(o => o.SnapshotType).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetSanpshotWeeklyData:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        #endregion DSR Snapshot
     }
 }
 
