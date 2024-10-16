@@ -1339,6 +1339,46 @@ namespace BellonaAPI.DataAccess.Class
 
             return _result;
         }
+
+
+
+        public List<WeeklySnapshot> GetItem86SnapshotDetails(int WeekNo, string Year)
+        {
+            List<WeeklySnapshot> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("Week", WeekNo, DbType.Int32));
+                    dbCol.Add(new DBParameter("FinancialYear", Year, DbType.String));
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetItem86SnapshotDetails, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new WeeklySnapshot
+                    {
+                        SnapshotType = row.Field<string>("SnapshotType"),
+                        ClusterName= row.Field<string>("ClusterName"),
+                        OutletName= row.Field<string>("OutletName"),
+                        Monday = row.Field<string>("Monday"),
+                        Tuesday = row.Field<string>("Tuesday"),
+                        Wednesday = row.Field<string>("Wednesday"),
+                        Thursday = row.Field<string>("Thursday"),
+                        Friday = row.Field<string>("Friday"),
+                        Saturday = row.Field<string>("Saturday"),
+                        Sunday = row.Field<string>("Sunday"),
+                    }).OrderBy(o => o.SnapshotType).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetSanpshotWeeklyData:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
         #endregion DSR Snapshot
     }
 }

@@ -19,6 +19,9 @@ namespace BellonaAPI.Models
     }
     public class WeeklySnapshot
     {
+        public string ClusterName { get; set; }
+        public string OutletName { get; set; }
+        public int OutletID { get; set; }
         public string SnapshotType { get; set; }
         public string Monday { get; set; }
         public string Tuesday { get; set; }
