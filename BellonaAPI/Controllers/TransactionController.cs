@@ -382,7 +382,27 @@ namespace BellonaAPI.Controllers
             List<WeeklySnapshot> _result = _iRepo.GetSanpshotWeeklyData(WeekNo, Year, OutletId);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Weekly Snapshot Data."));
+        }  
+
+        [Route("SaveSnapshotEntry")]
+        [AcceptVerbs("POST")]
+        [ValidationActionFilter]
+        public IHttpActionResult SaveSnapshotEntry(SnapshotModel SnapshotEntry)
+        {
+            if (_iRepo.SaveSnapshotEntry(SnapshotEntry)) return Ok(new { IsSuccess = true, Message = "Successfully Saved Snapshot Entries" });
+            else return BadRequest("Failed to Save Daily Expense Entries");
         }
+
+        [Route("GetWeeklySalesSnapshot")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetWeeklySalesSnapshot(string Week, string Year, int OutletId)
+        {
+            List<WeeklySalesSnapshot> _result = _iRepo.GetWeeklySalesSnapshot(Week,Year,OutletId);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Weekly Sales Data."));
+        }
+
         #endregion  DSR Sanpshot
     }
 }

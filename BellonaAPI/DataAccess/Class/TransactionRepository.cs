@@ -658,6 +658,7 @@ namespace BellonaAPI.DataAccess.Class
                         Days = row.Field<string>("Days"),
                         Dates = row.Field<string>("Dates"),
                         WeekNo = row.Field<string>("WeekNo"),
+                        FinancialYear = row.Field<string>("FinancialYear"),
                         IsExist = row.Field<int>("IsExist"),
                         WeekDate = Convert.ToDateTime(row.Field<DateTime>("WeekDate")).ToString("yyyy-MM-dd"),                      
 
@@ -1248,8 +1249,7 @@ namespace BellonaAPI.DataAccess.Class
 
                     dbCol.Add(new DBParameter("WeekNo", WeekNo, DbType.Int32));
                     dbCol.Add(new DBParameter("FinancialYear", Year, DbType.String));
-                    dbCol.Add(new DBParameter("OutletId", OutletId, DbType.Int32));
-                    
+                    dbCol.Add(new DBParameter("OutletId", OutletId, DbType.Int32));                   
 
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetSanpshotWeeklyData, dbCol, CommandType.StoredProcedure);
 
@@ -1269,6 +1269,72 @@ namespace BellonaAPI.DataAccess.Class
             }).IfNotNull((ex) =>
             {
                 Logger.LogError("Error in TransactionRepository GetSanpshotWeeklyData:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
+        public bool SaveSnapshotEntry(SnapshotModel SnapshotEntry)
+        {
+
+            bool IsSuccess = false; string ReturnMessage = string.Empty;
+            var modelData = Common.ToXML(SnapshotEntry);
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("SnapshotEntryDetails", modelData, DbType.Xml));
+                    dbCol.Add(new DBParameter("IsSuccessFullyExecuted", IsSuccess, DbType.Boolean, ParameterDirection.Output));
+                    dbCol.Add(new DBParameter("ReturnMessage", ReturnMessage, DbType.String, ParameterDirection.Output));
+
+                    IsSuccess = Convert.ToBoolean(Dbhelper.ExecuteNonQuery(QueryList.SaveSnapshotEntry, dbCol, CommandType.StoredProcedure));
+                    if (IsSuccess) Logger.LogInfo("Output message of UpdateMonthlyExpense from Repository TransactionRepository : " + ReturnMessage);
+                    else Logger.LogInfo("    Failed Output message of UpdateMonthlyExpense from Repository TransactionRepository : " + ReturnMessage);
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository WeeklyExpenses :" + ex.Message + Environment.NewLine + ex.StackTrace);
+            }).Finally(() =>
+            {
+                Logger.LogInfo("Completed execution of UpdateMonthlyExpense from Repository TransactionRepository at " + DateTime.Now.ToLongDateString());
+            });
+            return IsSuccess;
+        }
+
+
+
+        public List<WeeklySalesSnapshot> GetWeeklySalesSnapshot(string Week, string Year, int OutletId)
+        {
+            List<WeeklySalesSnapshot> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("Week", Week, DbType.String));
+                    dbCol.Add(new DBParameter("Year", Year, DbType.String));
+                    dbCol.Add(new DBParameter("OutletID", OutletId, DbType.Int32));
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeeklySalesData, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new WeeklySalesSnapshot
+                    {
+                        Category = row.Field<string>("Category"),
+                        Monday = row.Field<decimal>("Monday"),
+                        Tuesday = row.Field<decimal>("Tuesday"),
+                        Wednesday = row.Field<decimal>("Wednesday"),
+                        Thursday = row.Field<decimal>("Thursday"),
+                        Friday = row.Field<decimal>("Friday"),
+                        Saturday = row.Field<decimal>("Saturday"),
+                        Sunday = row.Field<decimal>("Sunday"),
+                    }).OrderBy(o => o.Category).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetWeeklySalesSnapshot:" + ex.Message + Environment.NewLine + ex.StackTrace);
             });
 
             return _result;

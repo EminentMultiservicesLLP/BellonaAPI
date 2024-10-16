@@ -57,6 +57,7 @@ namespace BellonaAPI.Models
         public string WeekDate { get; set; }
         public string Days { get; set; }
         public string WeekNo { get; set; }
+        public string FinancialYear { get; set; }
         public int IsExist { get; set; }
     }
 }
