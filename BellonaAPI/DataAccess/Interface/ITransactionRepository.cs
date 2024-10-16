@@ -48,5 +48,8 @@ namespace BellonaAPI.DataAccess.Interface
 
         List<DSR_Summary> GetDSR_Summary(string outletCode, string startDate, string endDate, int cityId, int clusterId);
         List<WeeklyMIS> GetWeeklySaleDetails(string week, string branchCode, int cityId, int clusterId);
+        List<WeeklySnapshot> GetSanpshotWeeklyData(int WeekNo, string Year, int OutletId);
+        bool SaveSnapshotEntry(SnapshotModel SnapshotEntry);
+        List<WeeklySalesSnapshot> GetWeeklySalesSnapshot(string Week, string Year, int OutletId);
     }
 }

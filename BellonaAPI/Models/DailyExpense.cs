@@ -54,8 +54,10 @@ namespace BellonaAPI.Models
         public string Period { get; set; }
         public string WeekRange { get; set; }
         public string Dates { get; set; }
+        public string WeekDate { get; set; }
         public string Days { get; set; }
         public string WeekNo { get; set; }
+        public string FinancialYear { get; set; }
         public int IsExist { get; set; }
     }
 }
