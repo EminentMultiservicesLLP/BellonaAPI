@@ -56,6 +56,7 @@ namespace BellonaAPI.DataAccess.Class
                         CurrencyID = row.Field<int>("CurrencyID"),
                         CurrencyName = row.Field<string>("CurrencyName"),
                         OutletArea = row.Field<decimal>("OutletArea"),
+                        OutletCover = row.Field<decimal>("OutletCover"),
                         IsServiceChargeApplicable = row.Field<int?>("IsServiceChargeApplicable") == null ? 0: row.Field<int>("IsServiceChargeApplicable"),
                         IsActive = Convert.ToBoolean(row.Field<int>("IsActive")),
                     }).OrderBy(o => o.CountryName).ToList();
@@ -175,6 +176,7 @@ namespace BellonaAPI.DataAccess.Class
                     dbCol.Add(new DBParameter("UpdatedIPAddress", _data.UpdatedIPAddress, DbType.String));
                     dbCol.Add(new DBParameter("UpdatedMacID", _data.UpdatedMacID, DbType.String));
                     dbCol.Add(new DBParameter("UpdatedMacName", _data.UpdatedMacName, DbType.String));
+                    dbCol.Add(new DBParameter("OutletCover", _data.OutletCover, DbType.Decimal));
                     dbCol.Add(new DBParameter("DelvPartners", xmldata, DbType.Xml));
                     IsSuccess = Convert.ToBoolean(Dbhelper.ExecuteNonQuery(QueryList.UpdateOutlet, dbCol, CommandType.StoredProcedure));
                 }

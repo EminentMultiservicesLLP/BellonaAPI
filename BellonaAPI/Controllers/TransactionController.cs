@@ -352,27 +352,6 @@ namespace BellonaAPI.Controllers
         #endregion TBUpload
 
         #region DSR 
-        //[Route("GetDSR_Summary")]
-        //[AcceptVerbs("GET")]
-        //[ValidationActionFilter]
-        //public IHttpActionResult GetDSR_Summary( string startDate, string endDate, string outletCode)
-        //{
-        //    List<DSR_Summary> _result = _iRepo.GetDSR_Summary(outletCode, startDate, endDate);
-        //    if (_result != null) return Ok(_result);
-        //    else return InternalServerError(new System.Exception("Failed to retrieve  GET_Summary"));
-        //}
-
-        //[Route("GetDSR_Summary")]
-        //[AcceptVerbs("GET")]
-        //[ValidationActionFilter]
-        //public IHttpActionResult GetDSR_Summary(string startDate, string endDate)
-        //{
-        //    List<DSR_Summary> _result = _iRepo.GetDSR_Summary("", startDate, endDate);
-        //    if (_result != null) return Ok(_result);
-        //    else return InternalServerError(new System.Exception("Failed to retrieve  GET_Summary"));
-        //}
-
-
         [Route("GetDSR_Summary")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
@@ -385,5 +364,49 @@ namespace BellonaAPI.Controllers
                 return InternalServerError(new System.Exception("Failed to retrieve GET_Summary"));
         }
         #endregion DSR
+
+        #region WeeklyMIS
+        [Route("GetWeeklySaleDetails")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetWeeklySaleDetails(string week, string branchCode= null, int? cityId=null, int? clusterId=null)
+        {
+            List<WeeklyMIS> _result = _iRepo.GetWeeklySaleDetails(week, branchCode??"", cityId?? 0, clusterId??0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Weekly Sales Details."));
+        }
+        #endregion WeeklyMIS 
+
+        #region DSR Sanpshot
+        [Route("GetSanpshotWeeklyData")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetSanpshotWeeklyData(int WeekNo, string Year, int OutletId)
+        {
+            List<WeeklySnapshot> _result = _iRepo.GetSanpshotWeeklyData(WeekNo, Year, OutletId);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Weekly Snapshot Data."));
+        }  
+
+        [Route("SaveSnapshotEntry")]
+        [AcceptVerbs("POST")]
+        [ValidationActionFilter]
+        public IHttpActionResult SaveSnapshotEntry(SnapshotModel SnapshotEntry)
+        {
+            if (_iRepo.SaveSnapshotEntry(SnapshotEntry)) return Ok(new { IsSuccess = true, Message = "Successfully Saved Snapshot Entries" });
+            else return BadRequest("Failed to Save Daily Expense Entries");
+        }
+
+        [Route("GetWeeklySalesSnapshot")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetWeeklySalesSnapshot(string Week, string Year, int OutletId)
+        {
+            List<WeeklySalesSnapshot> _result = _iRepo.GetWeeklySalesSnapshot(Week,Year,OutletId);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Weekly Sales Data."));
+        }
+
+        #endregion  DSR Sanpshot
     }
 }
