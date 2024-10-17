@@ -16,4 +16,15 @@ namespace BellonaAPI.Models
         public Decimal TobaccoSale { get; set; }
         public Decimal OtherSale { get; set; }
     }
+    public class SalesVsBudget
+    {
+        public string Date { get; set; }
+        public decimal NetAmount { get; set; }
+        public decimal BudgetAmount { get; set; }
+    }
+    public class WeeklyCoversTrend
+    {
+        public string SessionName { get; set; }
+        public Dictionary<string, int> DailyCovers { get; set; }
+    }
 }
