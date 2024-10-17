@@ -51,5 +51,6 @@ namespace BellonaAPI.DataAccess.Interface
         List<WeeklySnapshot> GetSanpshotWeeklyData(int WeekNo, string Year, int OutletId);
         bool SaveSnapshotEntry(SnapshotModel SnapshotEntry);
         List<WeeklySalesSnapshot> GetWeeklySalesSnapshot(string Week, string Year, int OutletId);
+        List<WeeklySnapshot> GetItem86SnapshotDetails(int WeekNo, string Year);
     }
 }
