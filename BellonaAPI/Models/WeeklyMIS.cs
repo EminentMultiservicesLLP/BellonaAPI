@@ -16,4 +16,19 @@ namespace BellonaAPI.Models
         public Decimal TobaccoSale { get; set; }
         public Decimal OtherSale { get; set; }
     }
+    //public class CoverTrendChart
+    //{
+    //    public int Id { get; set; }
+    //    public string Session { get; set; }
+
+    //}
+
+    public class TimeWiseSalesBreakup
+    {
+        public int Id { get; set; }
+        public string SessionName { get; set; }
+        public Decimal Session_NetAmount { get; set; }
+        public Decimal Total_NetAmount { get; set; }
+        public Decimal Percentage { get; set; }
+    }
 }

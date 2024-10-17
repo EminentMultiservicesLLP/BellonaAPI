@@ -1192,7 +1192,7 @@ namespace BellonaAPI.DataAccess.Class
         #endregion GET_DSR_Summary    
         
         #region weeklyMIS
-        public List<WeeklyMIS> GetWeeklySaleDetails(string week, string branchCode, int cityId, int clusterId)
+        public List<WeeklyMIS> GetWeeklySaleDetails(string FinancialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<WeeklyMIS> _result = null;
             TryCatch.Run(() =>
@@ -1235,6 +1235,50 @@ namespace BellonaAPI.DataAccess.Class
 
             return _result;
         }
+
+        public List<TimeWiseSalesBreakup> GetTimeWiseSalesBreakup(string FinancialYear, string week, string branchCode, int cityId, int clusterId)
+        {
+            List<TimeWiseSalesBreakup> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", FinancialYear, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetTimeWiseSalesBreakup, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new TimeWiseSalesBreakup
+                    {
+                        SessionName = row.Field<string>("SessionName"),
+                        Session_NetAmount = row.Field<decimal>("SESSION_NETAMOUNT"),
+                        Total_NetAmount = row.Field<decimal>("TOTAL_NETAMOUNT"),
+                        Percentage = row.Field<decimal>("Percentage")                       
+                    }).OrderBy(o => o.SessionName).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetWeeklyExpense:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
         #endregion weeklyMIS
 
         #region DSR Snapshot

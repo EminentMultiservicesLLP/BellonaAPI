@@ -365,12 +365,23 @@ namespace BellonaAPI.Controllers
         [Route("GetWeeklySaleDetails")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetWeeklySaleDetails(string week, string branchCode= null, int? cityId=null, int? clusterId=null)
+        public IHttpActionResult GetWeeklySaleDetails(string FinancialYear, string week, string branchCode= null, int? cityId=null, int? clusterId=null)
         {
-            List<WeeklyMIS> _result = _iRepo.GetWeeklySaleDetails(week, branchCode??"", cityId?? 0, clusterId??0);
+            List<WeeklyMIS> _result = _iRepo.GetWeeklySaleDetails(FinancialYear,week, branchCode??"", cityId?? 0, clusterId??0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Weekly Sales Details."));
         }
+
+        [Route("GetTimeWiseSalesBreakup")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetTimeWiseSalesBreakup(string FinancialYear,string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<TimeWiseSalesBreakup> _result = _iRepo.GetTimeWiseSalesBreakup(FinancialYear,week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Timewise sales breakup."));
+        }
+
         #endregion WeeklyMIS 
 
         #region DSR Sanpshot
