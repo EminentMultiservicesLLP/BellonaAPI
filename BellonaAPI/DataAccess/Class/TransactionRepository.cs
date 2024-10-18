@@ -1499,6 +1499,7 @@ namespace BellonaAPI.DataAccess.Class
 
             return _result;
         }
+
         public List<LiquorVsBudgetTrend> GetLiquorVsBudgetTrend(string FinancialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<LiquorVsBudgetTrend> _result = null;
