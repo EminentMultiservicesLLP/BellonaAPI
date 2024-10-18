@@ -100,6 +100,8 @@
         public const string GetWeeklySaleDetails = "dbsp_GetWeeklySaleDetails";
         public const string GetLast12Weeks_SalesVsBudget = "dbsp_GetLast12Weeks_SalesVsBudget";
         public const string GetWeekly_CoversTrend = "dbsp_GetWeekly_CoversTrend";
+        public const string GetBeverageVsBudgetTrend = "dbsp_GetBeverageVsBudgetTrend";
+        public const string GetTobaccoVsBudgetTrend = "dbsp_GetTobaccoVsBudgetTrend";
         public const string GetSanpshotWeeklyData = "dbsp_GetWeeklyDSRSnapshot";
         public const string SaveSnapshotEntry = "dbsp_SaveSnapshotEntry";
         public const string GetWeeklySalesData = "dbsp_getSnapshotWeeklySalesData";

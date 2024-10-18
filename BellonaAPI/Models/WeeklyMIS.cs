@@ -43,7 +43,19 @@ namespace BellonaAPI.Models
     public class WeeklyCoversTrend
     {
         public string SessionName { get; set; }
-        public Dictionary<string, int> DailyCovers { get; set; }
+        public Dictionary<string, int> SessionDetails { get; set; } = new Dictionary<string, int>();
+    }
+    public class BeverageVsBudgetTrend
+    {
+        public string Date { get; set; }
+        public decimal NetAmount { get; set; }
+        public decimal BudgetAmount { get; set; }
+    }
+    public class TobaccoVsBudgetTrend
+    {
+        public string Date { get; set; }
+        public decimal NetAmount { get; set; }
+        public decimal BudgetAmount { get; set; }
     }
 
     public class LiquorVsBudgetTrend

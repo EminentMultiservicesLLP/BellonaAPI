@@ -404,10 +404,30 @@ namespace BellonaAPI.Controllers
         {
             List<WeeklyCoversTrend> _result = _iRepo.GetWeeklyCoversTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
 
-            if (_result != null && _result.Any())
+            if (_result != null)
                 return Ok(_result);
             else
                 return InternalServerError(new System.Exception("Failed to retrieve Weekly Covers Trend details."));
+        }
+
+        [Route("GetBeverageVsBudgetTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetBeverageVsBudgetTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<BeverageVsBudgetTrend> _result = _iRepo.GetBeverageVsBudgetTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve BeverageVsBudgetTrend Details."));
+        }
+
+        [Route("GetTobaccoVsBudgetTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetTobaccoVsBudgetTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<TobaccoVsBudgetTrend> _result = _iRepo.GetTobaccoVsBudgetTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve TobaccoVsBudgetTrend Details."));
         }
 
         [Route("GetAvgCoversTrend")]
