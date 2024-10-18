@@ -43,4 +43,7 @@ namespace BellonaAPI.Models
         public decimal Saturday { get; set; }
         public decimal Sunday { get; set; }
     }
+
+
+
 }
