@@ -1220,11 +1220,11 @@ namespace BellonaAPI.DataAccess.Class
                     _result = dtData.AsEnumerable().Select(row => new WeeklyMIS
                     {
                         InvoiceDay = row.Field<string>("InvoiceDay"),
-                        FoodSale = row.Field<decimal>("FoodSale"),
-                        BeverageSale = row.Field<decimal>("BeverageSale"),
-                        LiquorSale = row.Field<decimal>("LiquorSale"),
-                        TobaccoSale = row.Field<decimal>("TobaccoSale"),
-                        OtherSale = row.Field<decimal>("OtherSale")
+                        FoodSale = row.Field<decimal?>("FoodSale"),
+                        BeverageSale = row.Field<decimal?>("BeverageSale"),
+                        LiquorSale = row.Field<decimal?>("LiquorSale"),
+                        TobaccoSale = row.Field<decimal?>("TobaccoSale"),
+                        OtherSale = row.Field<decimal?>("OtherSale")
                     }).OrderBy(o => o.InvoiceDay).ToList();
 
                 }
@@ -1403,8 +1403,8 @@ namespace BellonaAPI.DataAccess.Class
                     _result = dtData.AsEnumerable().Select(row => new TobaccoVsBudgetTrend
                     {
                         Date = row.Field<string>("Date"),
-                        NetAmount = row.Field<decimal>("NETAMOUNT"),
-                        BudgetAmount = row.Field<decimal>("BudgetAmount"),
+                        NetAmount = row.Field<decimal?>("NETAMOUNT"),
+                        BudgetAmount = row.Field<decimal?>("BudgetAmount"),
                     }).OrderBy(o => o.Date).ToList();
 
                 }
@@ -1488,7 +1488,7 @@ namespace BellonaAPI.DataAccess.Class
                     _result = dtData.AsEnumerable().Select(row => new AverageCoverTrend
                     {
                         InvoiceDay = row.Field<string>("InvoiceDay"),
-                        ApcDineIn = row.Field<decimal>("ApcDineIn")
+                        ApcDineIn = row.Field<decimal?>("ApcDineIn")
                     }).OrderBy(o => o.InvoiceDay).ToList();
 
                 }
