@@ -1265,8 +1265,8 @@ namespace BellonaAPI.DataAccess.Class
                     _result = dtData.AsEnumerable().Select(row => new SalesVsBudget
                     {
                         Date = row.Field<string>("Date"),
-                        NetAmount = row.Field<decimal>("NetAmount"),
-                        BudgetAmount = row.Field<decimal>("BudgetAmount"),
+                        NetAmount = row.Field<decimal?>("NetAmount"),
+                        BudgetAmount = row.Field<decimal?>("BudgetAmount"),
                     }).OrderBy(o => o.Date).ToList();
 
                 }
@@ -1361,8 +1361,8 @@ namespace BellonaAPI.DataAccess.Class
                     _result = dtData.AsEnumerable().Select(row => new BeverageVsBudgetTrend
                     {
                         Date = row.Field<string>("Date"),
-                        NetAmount = row.Field<decimal>("NETAMOUNT"),
-                        BudgetAmount = row.Field<decimal>("BudgetAmount"),
+                        NetAmount = row.Field<decimal?>("NETAMOUNT"),
+                        BudgetAmount = row.Field<decimal?>("BudgetAmount"),
                     }).OrderBy(o => o.Date).ToList();
 
                 }
@@ -1445,8 +1445,8 @@ namespace BellonaAPI.DataAccess.Class
                     _result = dtData.AsEnumerable().Select(row => new TimeWiseSalesBreakup
                     {
                         SessionName = row.Field<string>("SessionName"),
-                        Session_NetAmount = row.Field<decimal>("SESSION_NETAMOUNT"),
-                        Total_NetAmount = row.Field<decimal>("TOTAL_NETAMOUNT"),
+                        Session_NetAmount = row.Field<decimal?>("SESSION_NETAMOUNT"),
+                        Total_NetAmount = row.Field<decimal?>("TOTAL_NETAMOUNT"),
                         Percentage = row.Field<decimal>("Percentage")                       
                     }).OrderBy(o => o.SessionName).ToList();
 
@@ -1528,8 +1528,8 @@ namespace BellonaAPI.DataAccess.Class
                     _result = dtData.AsEnumerable().Select(row => new LiquorVsBudgetTrend
                     {
                         Date = row.Field<string>("Date"),
-                        NetAmount = row.Field<decimal>("NETAMOUNT"),
-                        BudgetAmount = row.Field<decimal>("BudgetAmount"),
+                        NetAmount = row.Field<decimal?>("NETAMOUNT"),
+                        BudgetAmount = row.Field<decimal?>("BudgetAmount"),
                     }).OrderBy(o => o.Date).ToList();
 
                 }
@@ -1570,8 +1570,8 @@ namespace BellonaAPI.DataAccess.Class
                     _result = dtData.AsEnumerable().Select(row => new FoodVsBudgetTrend
                     {
                         Date = row.Field<string>("Date"),
-                        NetAmount = row.Field<decimal>("NETAMOUNT"),
-                        BudgetAmount = row.Field<decimal>("BudgetAmount"),
+                        NetAmount = row.Field<decimal?>("NETAMOUNT"),
+                        BudgetAmount = row.Field<decimal?>("BudgetAmount"),
                     }).OrderBy(o => o.Date).ToList();
 
                 }
@@ -1582,6 +1582,9 @@ namespace BellonaAPI.DataAccess.Class
 
             return _result;
         }
+
+
+
         #endregion weeklyMIS
 
         #region DSR Snapshot

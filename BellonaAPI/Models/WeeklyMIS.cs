@@ -20,17 +20,17 @@ namespace BellonaAPI.Models
 
     public class TimeWiseSalesBreakup
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string SessionName { get; set; }
-        public Decimal Session_NetAmount { get; set; }
-        public Decimal Total_NetAmount { get; set; }
-        public Decimal Percentage { get; set; }
+        public Decimal? Session_NetAmount { get; set; }
+        public Decimal? Total_NetAmount { get; set; }
+        public Decimal? Percentage { get; set; }
     }
     public class SalesVsBudget
     {
         public string Date { get; set; }
-        public decimal NetAmount { get; set; }
-        public decimal BudgetAmount { get; set; }
+        public decimal? NetAmount { get; set; }
+        public decimal? BudgetAmount { get; set; }
     }
 
     public class AverageCoverTrend    
@@ -48,8 +48,8 @@ namespace BellonaAPI.Models
     public class BeverageVsBudgetTrend
     {
         public string Date { get; set; }
-        public decimal NetAmount { get; set; }
-        public decimal BudgetAmount { get; set; }
+        public decimal? NetAmount { get; set; }
+        public decimal? BudgetAmount { get; set; }
     }
     public class TobaccoVsBudgetTrend
     {
@@ -61,14 +61,14 @@ namespace BellonaAPI.Models
     public class LiquorVsBudgetTrend
     {
         public string Date { get; set; }
-        public decimal NetAmount { get; set; }
-        public decimal BudgetAmount { get; set; }
+        public decimal? NetAmount { get; set; }
+        public decimal? BudgetAmount { get; set; }
     }
     public class FoodVsBudgetTrend
     {
         public string Date { get; set; }
-        public decimal NetAmount { get; set; }
-        public decimal BudgetAmount { get; set; }
+        public decimal? NetAmount { get; set; }
+        public decimal? BudgetAmount { get; set; }
     }
 
 }
