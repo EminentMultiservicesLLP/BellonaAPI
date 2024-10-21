@@ -71,4 +71,20 @@ namespace BellonaAPI.Models
         public decimal? BudgetAmount { get; set; }
     }
 
+    public class MISWeeklyDataModel
+    {
+        public decimal? AcutalSale { get; set; }
+        public decimal? Budget { get; set; }
+        public decimal? Variance { get; set; }
+        public int? Covers { get; set; }
+        public decimal? DineInSale { get; set; }
+        public decimal? GrossProfit { get; set; }
+        public decimal? NetProfit { get; set; }
+        public decimal? SalePerSQft { get; set; }
+        public decimal? APC { get; set; }
+        public decimal? DeliverySale { get; set; }
+        public decimal? NetDiscountAmount { get; set; }
+        public decimal? NetChargeAmount { get; set; }
+        public decimal? DirectCharge { get; set; }
+    }
 }

@@ -110,6 +110,7 @@
         public const string GetAvgCoversTrend = "dbsp_GetAvgCoversTrend";
         public const string GetLiquorVsBudgetTrend = "dbsp_GetLiquorVsBudgetTrend";
         public const string GetFoodVsBudgetTrend = "dbsp_GetFoodVsBudgetTrend";
+        public const string GetWeeklyMISData = "dbsp_GetWeeklyMISData";
 
         public const string GetSalesCategory = "dbsp_GetSalesCategory";
         public const string GetSalesBudget = "dbsp_GetSalesBudget";

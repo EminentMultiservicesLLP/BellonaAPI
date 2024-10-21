@@ -1585,6 +1585,59 @@ namespace BellonaAPI.DataAccess.Class
         }
 
 
+        public List<MISWeeklyDataModel> GetWeeklyMISData(string FinancialYear, string week, string branchCode, int cityId, int clusterId)
+        {
+            List<MISWeeklyDataModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", FinancialYear, DbType.String));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeeklyMISData, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new MISWeeklyDataModel
+                    {
+                        AcutalSale = row.Field<decimal?>("ACTUALSALE"),
+                        Budget = row.Field<decimal?>("BUDGET"),
+                        Variance = row.Field<decimal?>("VARIANCE"),
+                        Covers = row.Field<int?>("COVERS"),
+                        DineInSale = row.Field<decimal?>("DINEINSALE"),
+                        GrossProfit = row.Field<decimal?>("GROSSPROFIT"),
+                        NetProfit = row.Field<decimal?>("NETPROFIT"),
+                        SalePerSQft = row.Field<decimal?>("SALEPERSQFT"),
+                        APC = row.Field<decimal?>("APC"),
+                        DeliverySale = row.Field<decimal?>("DELIVERYSALE"),
+                        NetChargeAmount = row.Field<decimal?>("NetChargeAmount"),
+                        NetDiscountAmount = row.Field<decimal?>("NetDiscountAmount"),
+                        DirectCharge = row.Field<decimal?>("DirectCharge")                     
+                        
+                    
+                    }).OrderBy(o => o.AcutalSale).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Weekly MIS Data:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
 
         #endregion weeklyMIS
 

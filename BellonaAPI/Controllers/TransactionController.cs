@@ -369,23 +369,12 @@ namespace BellonaAPI.Controllers
         [Route("GetWeeklySaleDetails")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetWeeklySaleDetails(string FinancialYear, string week, string branchCode= null, int? cityId=null, int? clusterId=null)
+        public IHttpActionResult GetWeeklySaleDetails(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<WeeklyMIS> _result = _iRepo.GetWeeklySaleDetails(FinancialYear,week, branchCode??"", cityId?? 0, clusterId??0);
+            List<WeeklyMIS> _result = _iRepo.GetWeeklySaleDetails(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Weekly Sales Details."));
         }
-
-        [Route("GetTimeWiseSalesBreakup")]
-        [AcceptVerbs("GET")]
-        [ValidationActionFilter]
-        public IHttpActionResult GetTimeWiseSalesBreakup(string FinancialYear,string week, string branchCode = null, int? cityId = null, int? clusterId = null)
-        {
-            List<TimeWiseSalesBreakup> _result = _iRepo.GetTimeWiseSalesBreakup(FinancialYear,week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
-            if (_result != null) return Ok(_result);
-            else return InternalServerError(new System.Exception("Failed to retrieve Timewise sales breakup."));
-        }
-
 
         [Route("GetLast12Weeks_SalesVsBudget")]
         [AcceptVerbs("GET")]
@@ -430,34 +419,14 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to retrieve TobaccoVsBudgetTrend Details."));
         }
 
-        [Route("GetAvgCoversTrend")]
+        [Route("GetWeeklyMISData")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetAvgCoversTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetWeeklyMISData(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<AverageCoverTrend> _result = _iRepo.GetAvgCoversTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<MISWeeklyDataModel> _result = _iRepo.GetWeeklyMISData(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
-            else return InternalServerError(new System.Exception("Failed to retrieve Average Cover Trends Details."));
-        }
-
-        [Route("GetLiquorVsBudgetTrend")]
-        [AcceptVerbs("GET")]
-        [ValidationActionFilter]
-        public IHttpActionResult GetLiquorVsBudgetTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
-        {
-            List<LiquorVsBudgetTrend> _result = _iRepo.GetLiquorVsBudgetTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
-            if (_result != null) return Ok(_result);
-            else return InternalServerError(new System.Exception("Failed to retrieve Liquor Vs Budget Trend Details."));
-        }  
-        
-        [Route("GetFoodVsBudgetTrend")]
-        [AcceptVerbs("GET")]
-        [ValidationActionFilter]
-        public IHttpActionResult GetFoodVsBudgetTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
-        {
-            List<FoodVsBudgetTrend> _result = _iRepo.GetFoodVsBudgetTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
-            if (_result != null) return Ok(_result);
-            else return InternalServerError(new System.Exception("Failed to retrieve Food vs Budget Trend Details."));
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Weekly MISData Details."));
         }
 
         #endregion WeeklyMIS 
