@@ -7,14 +7,14 @@ namespace BellonaAPI.Models
 {
     public class WeeklyMIS
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         //public DateTime InvoiceDay { get; set; }
         public string InvoiceDay { get; set; }
-        public Decimal FoodSale { get; set; }
-        public Decimal BeverageSale { get; set; }
-        public Decimal LiquorSale { get; set; }
-        public Decimal TobaccoSale { get; set; }
-        public Decimal OtherSale { get; set; }
+        public Decimal? FoodSale { get; set; }
+        public Decimal? BeverageSale { get; set; }
+        public Decimal? LiquorSale { get; set; }
+        public Decimal? TobaccoSale { get; set; }
+        public Decimal? OtherSale { get; set; }
     }
    
 
@@ -36,9 +36,9 @@ namespace BellonaAPI.Models
     public class AverageCoverTrend    
     {
         public string InvoiceDay { get; set; }
-        public decimal ApcDineIn { get; set; }
-        public decimal TotalCovers { get; set; }
-        public decimal TotalSale { get; set; }
+        public decimal? ApcDineIn { get; set; }
+        public decimal? TotalCovers { get; set; }
+        public decimal? TotalSale { get; set; }
     }
     public class WeeklyCoversTrend
     {
@@ -54,8 +54,8 @@ namespace BellonaAPI.Models
     public class TobaccoVsBudgetTrend
     {
         public string Date { get; set; }
-        public decimal NetAmount { get; set; }
-        public decimal BudgetAmount { get; set; }
+        public decimal? NetAmount { get; set; }
+        public decimal? BudgetAmount { get; set; }
     }
 
     public class LiquorVsBudgetTrend
