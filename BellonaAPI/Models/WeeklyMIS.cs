@@ -73,7 +73,7 @@ namespace BellonaAPI.Models
 
     public class MISWeeklyDataModel
     {
-        public decimal? AcutalSale { get; set; }
+        public decimal? ActualSale { get; set; }
         public decimal? Budget { get; set; }
         public decimal? Variance { get; set; }
         public int? Covers { get; set; }

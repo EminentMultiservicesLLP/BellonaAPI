@@ -419,6 +419,46 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to retrieve TobaccoVsBudgetTrend Details."));
         }
 
+        [Route("GetTimeWiseSalesBreakup")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetTimeWiseSalesBreakup(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<TimeWiseSalesBreakup> _result = _iRepo.GetTimeWiseSalesBreakup(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetTimeWiseSalesBreakup Details."));
+        }
+
+        [Route("GetAvgCoversTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetAvgCoversTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<AverageCoverTrend> _result = _iRepo.GetAvgCoversTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetAvgCoversTrend Details."));
+        }
+
+        [Route("GetLiquorVsBudgetTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetLiquorVsBudgetTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<LiquorVsBudgetTrend> _result = _iRepo.GetLiquorVsBudgetTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetLiquorVsBudgetTrend Details."));
+        }
+
+        [Route("GetFoodVsBudgetTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetFoodVsBudgetTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<FoodVsBudgetTrend> _result = _iRepo.GetFoodVsBudgetTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetFoodVsBudgetTrend Details."));
+        }
+
         [Route("GetWeeklyMISData")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
@@ -471,15 +511,6 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to retrieve Weekly Sales Data."));
         }
 
-        [Route("GetItem86SnapshotDetails")]
-        [AcceptVerbs("GET")]
-        [ValidationActionFilter]
-        public IHttpActionResult GetItem86SnapshotDetails(int WeekNo, string Year)
-        {
-            List<WeeklySnapshot> _result = _iRepo.GetItem86SnapshotDetails(WeekNo,Year);
-            if (_result != null) return Ok(_result);
-            else return InternalServerError(new System.Exception("Failed to retrieve Weekly Sales Data."));
-        }
 
         #endregion  DSR Sanpshot
     }
