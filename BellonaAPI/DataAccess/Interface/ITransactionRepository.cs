@@ -45,14 +45,20 @@ namespace BellonaAPI.DataAccess.Interface
         #endregion TBUpload
         
         List<WeeklyExpense> GetWeeklyExpense(Guid userId,int menuId,int outletID,string expenseYear,string week);
-
         List<DSR_Summary> GetDSR_Summary(string outletCode, string startDate, string endDate, int cityId, int clusterId);
         List<WeeklyMIS> GetWeeklySaleDetails(string FinancialYear, string week, string branchCode, int cityId, int clusterId);
+
+        #region MIS weekly chart
         List<SalesVsBudget> GetLast12Weeks_SalesVsBudget(string financialYear, string week, string branchCode, int cityId, int clusterId);
         List<WeeklyCoversTrend> GetWeeklyCoversTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
         List<BeverageVsBudgetTrend> GetBeverageVsBudgetTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
         List<TobaccoVsBudgetTrend> GetTobaccoVsBudgetTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
-        List<MISWeeklyDataModel> GetWeeklyMISData(string FinancialYear, string week, string branchCode, int cityId, int clusterId);
+        List<TimeWiseSalesBreakup> GetTimeWiseSalesBreakup(string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<AverageCoverTrend> GetAvgCoversTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<LiquorVsBudgetTrend> GetLiquorVsBudgetTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<FoodVsBudgetTrend> GetFoodVsBudgetTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<MISWeeklyDataModel> GetWeeklyMISData(string FinancialYear, string week, string branchCode, int cityId, int clusterId); 
+        #endregion
         List<WeeklySnapshot> GetSanpshotWeeklyData(int WeekNo, string Year, int OutletId);
         bool SaveSnapshotEntry(SnapshotModel SnapshotEntry);
         List<WeeklySalesSnapshot> GetWeeklySalesSnapshot(string Week, string Year, int OutletId);
