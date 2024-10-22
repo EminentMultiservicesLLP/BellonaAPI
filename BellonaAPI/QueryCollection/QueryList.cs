@@ -97,7 +97,7 @@
         public const string GetDistinctYear = "dbsp_GetDistinctYear";
         public const string SaveWeeklyExpense = "dbsp_SAVE_WeeklyExpense";
         public const string GetWeeklyExpense = "dbsp_GET_WeeklyExpense";
-        public const string GetWeeklySaleDetails = "dbsp_GetWeeklySaleDetails";
+        public const string GetWeeklySaleDetails = "dbsp_GetWeekly_SaleTrend";
         public const string GetLast12Weeks_SalesVsBudget = "dbsp_GetLast12Weeks_SalesVsBudget";
         public const string GetWeekly_CoversTrend = "dbsp_GetWeekly_CoversTrend";
         public const string GetBeverageVsBudgetTrend = "dbsp_GetBeverageVsBudgetTrend";

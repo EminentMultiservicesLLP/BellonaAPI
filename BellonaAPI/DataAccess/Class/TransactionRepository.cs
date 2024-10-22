@@ -1201,6 +1201,7 @@ namespace BellonaAPI.DataAccess.Class
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
 
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", FinancialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
                     {
