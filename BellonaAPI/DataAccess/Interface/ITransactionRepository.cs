@@ -47,7 +47,12 @@ namespace BellonaAPI.DataAccess.Interface
         List<WeeklyExpense> GetWeeklyExpense(Guid userId,int menuId,int outletID,string expenseYear,string week);
 
         List<DSR_Summary> GetDSR_Summary(string outletCode, string startDate, string endDate, int cityId, int clusterId);
-        List<WeeklyMIS> GetWeeklySaleDetails(string week, string branchCode, int cityId, int clusterId);
+        List<WeeklyMIS> GetWeeklySaleDetails(string FinancialYear, string week, string branchCode, int cityId, int clusterId);
+        List<SalesVsBudget> GetLast12Weeks_SalesVsBudget(string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<WeeklyCoversTrend> GetWeeklyCoversTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<BeverageVsBudgetTrend> GetBeverageVsBudgetTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<TobaccoVsBudgetTrend> GetTobaccoVsBudgetTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<MISWeeklyDataModel> GetWeeklyMISData(string FinancialYear, string week, string branchCode, int cityId, int clusterId);
         List<WeeklySnapshot> GetSanpshotWeeklyData(int WeekNo, string Year, int OutletId);
         bool SaveSnapshotEntry(SnapshotModel SnapshotEntry);
         List<WeeklySalesSnapshot> GetWeeklySalesSnapshot(string Week, string Year, int OutletId);
