@@ -1763,8 +1763,10 @@ namespace BellonaAPI.DataAccess.Class
                     _result = dtData.AsEnumerable().Select(row => new WeeklySnapshot
                     {
                         SnapshotType = row.Field<string>("SnapshotType"),
+
                         ClusterName = row.Field<string>("ClusterName"),
                         OutletName = row.Field<string>("OutletName"),
+
                         Monday = row.Field<string>("Monday"),
                         Tuesday = row.Field<string>("Tuesday"),
                         Wednesday = row.Field<string>("Wednesday"),

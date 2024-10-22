@@ -106,11 +106,13 @@
         public const string SaveSnapshotEntry = "dbsp_SaveSnapshotEntry";
         public const string GetWeeklySalesData = "dbsp_getSnapshotWeeklySalesData";
         public const string GetItem86SnapshotDetails = "dbsp_GetItem86SnapshotDetails";
+
         public const string GetTimeWiseSalesBreakup = "dbsp_GetWeekly_TimeWiseSaleBreakup";
         public const string GetAvgCoversTrend = "dbsp_GetAvgCoversTrend";
         public const string GetLiquorVsBudgetTrend = "dbsp_GetLiquorVsBudgetTrend";
         public const string GetFoodVsBudgetTrend = "dbsp_GetFoodVsBudgetTrend";
         public const string GetWeeklyMISData = "dbsp_GetWeeklyMISData";
+
 
         public const string GetSalesCategory = "dbsp_GetSalesCategory";
         public const string GetSalesBudget = "dbsp_GetSalesBudget";
