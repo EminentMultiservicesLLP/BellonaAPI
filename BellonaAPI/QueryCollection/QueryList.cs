@@ -112,6 +112,7 @@
         public const string GetLiquorVsBudgetTrend = "dbsp_GetLiquorVsBudgetTrend";
         public const string GetFoodVsBudgetTrend = "dbsp_GetFoodVsBudgetTrend";
         public const string GetWeeklyMISData = "dbsp_GetWeeklyMISData";
+        public const string GetCogsBreakUp = "dbsp_GetCogsBreakUp";
 
 
         public const string GetSalesCategory = "dbsp_GetSalesCategory";

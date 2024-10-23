@@ -469,6 +469,15 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to retrieve Get Weekly MISData Details."));
         }
 
+        [Route("GetCogsBreakUp")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetCogsBreakUp(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<CogsBreakUp> _result = _iRepo.GetCogsBreakUp(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetCogsBreakUp Details."));
+        }
         #endregion WeeklyMIS 
 
         #region DSR Sanpshot

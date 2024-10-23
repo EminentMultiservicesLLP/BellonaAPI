@@ -87,4 +87,10 @@ namespace BellonaAPI.Models
         public decimal? NetChargeAmount { get; set; }
         public decimal? DirectCharge { get; set; }
     }
+    public class CogsBreakUp
+    {
+        public string Category { get; set; }
+        public decimal? Amount { get; set; }
+        public decimal? Percentage { get; set; }
+    }
 }
