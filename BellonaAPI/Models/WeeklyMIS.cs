@@ -86,5 +86,15 @@ namespace BellonaAPI.Models
         public decimal? NetDiscountAmount { get; set; }
         public decimal? NetChargeAmount { get; set; }
         public decimal? DirectCharge { get; set; }
+        public decimal? TakeAway { get; set; }
+        public decimal? OtherSale { get; set; }
+        public decimal? ADC { get; set; }
+    }
+
+    public class SaleTrendModel
+    {
+        public string Date { get; set; }
+        public decimal? Percentage { get; set; }
+        public decimal? Value { get; set; }
     }
 }
