@@ -1624,6 +1624,7 @@ namespace BellonaAPI.DataAccess.Class
 
             return _result;
         }
+
         public List<SaleTrendModel> GetGrossProfitTrend(string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<SaleTrendModel> _result = null;
@@ -1665,6 +1666,7 @@ namespace BellonaAPI.DataAccess.Class
 
             return _result;
         }
+
         public List<SaleTrendModel> GetNetProfitTrend(string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<SaleTrendModel> _result = null;
