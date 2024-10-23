@@ -116,6 +116,8 @@
         public const string GetNetProfitTrend = "dbsp_GetNetProfitTrend";
         public const string GetWeeklyMISData = "dbsp_GetWeeklyMISData";
         public const string GetCogsBreakUp = "dbsp_GetCogsBreakUp";
+        public const string GetUtilityCost = "dbsp_GetUtilityCost";
+        public const string GetMarketingPromotionCost = "dbsp_GetBusinessPromotion";
 
 
         public const string GetSalesCategory = "dbsp_GetSalesCategory";

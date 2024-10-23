@@ -508,6 +508,27 @@ namespace BellonaAPI.Controllers
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve GetCogsBreakUp Details."));
         }
+
+        [Route("GetUtilityCost")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetUtilityCost(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<UtilityCostModel> _result = _iRepo.GetUtilityCost(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get UtilityCost Details."));
+        }
+
+         [Route("GetMarketingPromotionCost")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetMarketingPromotionCost(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<MarketingPromotion> _result = _iRepo.GetMarketingPromotionCost(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get MarketingPromotionCost Details."));
+        }
+
         #endregion WeeklyMIS 
 
         #region DSR Sanpshot

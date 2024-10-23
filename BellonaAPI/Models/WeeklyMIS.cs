@@ -103,4 +103,19 @@ namespace BellonaAPI.Models
         public decimal? Amount { get; set; }
         public decimal? Percentage { get; set; }
     }
+
+    public class UtilityCostModel
+    {
+        public string UtilityCost { get; set; }
+        public decimal? Amount { get; set; }
+        public decimal? Percentage { get; set; }
+    }
+
+
+    public class MarketingPromotion
+    {
+        public string BusinessPromotion { get; set; }
+        public decimal? Amount { get; set; }
+        public decimal? Percentage { get; set; }
+    }
 }

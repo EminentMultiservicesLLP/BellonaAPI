@@ -1804,6 +1804,89 @@ namespace BellonaAPI.DataAccess.Class
 
             return _result;
         }
+        public List<UtilityCostModel> GetUtilityCost(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        {
+            List<UtilityCostModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetUtilityCost, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new UtilityCostModel
+                    {
+                        UtilityCost = row.Field<string>("UtilityCost"),
+                        Amount = row.Field<decimal?>("Amount"),
+                        Percentage = row.Field<decimal?>("Percentage"),
+                    }).OrderBy(o => o.UtilityCost).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Get Utility Cost:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        public List<MarketingPromotion> GetMarketingPromotionCost(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        {
+            List<MarketingPromotion> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetMarketingPromotionCost, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new MarketingPromotion
+                    {
+                        BusinessPromotion = row.Field<string>("BusinessPromotion"),
+                        Amount = row.Field<decimal?>("Amount"),
+                        Percentage = row.Field<decimal?>("Percentage"),
+                    }).OrderBy(o => o.BusinessPromotion).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Get Utility Cost:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
 
         #endregion weeklyMIS
 
