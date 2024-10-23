@@ -46,9 +46,9 @@ namespace BellonaAPI.DataAccess.Interface
         
         List<WeeklyExpense> GetWeeklyExpense(Guid userId,int menuId,int outletID,string expenseYear,string week);
         List<DSR_Summary> GetDSR_Summary(string outletCode, string startDate, string endDate, int cityId, int clusterId);
-        List<WeeklyMIS> GetWeeklySaleDetails(string FinancialYear, string week, string branchCode, int cityId, int clusterId);
 
         #region MIS weekly chart
+        List<WeeklyMIS> GetWeeklySaleDetails(string FinancialYear, string week, string branchCode, int cityId, int clusterId);
         List<SalesVsBudget> GetLast12Weeks_SalesVsBudget(string financialYear, string week, string branchCode, int cityId, int clusterId);
         List<WeeklyCoversTrend> GetWeeklyCoversTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
         List<BeverageVsBudgetTrend> GetBeverageVsBudgetTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
@@ -57,6 +57,9 @@ namespace BellonaAPI.DataAccess.Interface
         List<AverageCoverTrend> GetAvgCoversTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
         List<LiquorVsBudgetTrend> GetLiquorVsBudgetTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
         List<FoodVsBudgetTrend> GetFoodVsBudgetTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<SaleTrendModel> GetDailySaleTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<SaleTrendModel> GetGrossProfitTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<SaleTrendModel> GetNetProfitTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
         List<MISWeeklyDataModel> GetWeeklyMISData(string FinancialYear, string week, string branchCode, int cityId, int clusterId); 
         List<CogsBreakUp> GetCogsBreakUp(string financialYear, string week, string branchCode, int cityId, int clusterId);
         #endregion

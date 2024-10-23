@@ -458,6 +458,36 @@ namespace BellonaAPI.Controllers
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve GetFoodVsBudgetTrend Details."));
         }
+        
+        [Route("GetDailySaleTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetDailySaleTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<SaleTrendModel> _result = _iRepo.GetDailySaleTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Daily Sale Trend Details."));
+        }
+        
+        [Route("GetGrossProfitTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetGrossProfitTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<SaleTrendModel> _result = _iRepo.GetGrossProfitTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Gross Profit Trend Details."));
+        }   
+
+        [Route("GetNetProfitTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetNetProfitTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<SaleTrendModel> _result = _iRepo.GetNetProfitTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Net Profit Trend Details."));
+        }
 
         [Route("GetWeeklyMISData")]
         [AcceptVerbs("GET")]

@@ -925,7 +925,6 @@ namespace BellonaAPI.DataAccess.Class
         }
         #endregion TBUpload
 
-
         public List<WeeklyExpense> GetWeeklyExpense(Guid userId, int menuId, int outletID, string expenseYear, string week)
         {
             List<WeeklyExpense> _result = null;
@@ -1447,7 +1446,7 @@ namespace BellonaAPI.DataAccess.Class
                         SessionName = row.Field<string>("SessionName"),
                         Session_NetAmount = row.Field<decimal?>("SESSION_NETAMOUNT"),
                         Total_NetAmount = row.Field<decimal?>("TOTAL_NETAMOUNT"),
-                        Percentage = row.Field<decimal>("Percentage")                       
+                        Percentage = row.Field<decimal>("Percentage")
                     }).OrderBy(o => o.SessionName).ToList();
 
                 }
@@ -1584,6 +1583,130 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
+        public List<SaleTrendModel> GetDailySaleTrend(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        {
+            List<SaleTrendModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetDailySaleTrend, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new SaleTrendModel
+                    {
+                        Date = row.Field<string>("Date"),
+                        Percentage = row.Field<decimal?>("Percentage"),
+                        Value = row.Field<decimal?>("Value"),
+                    }).OrderBy(o => o.Date).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Get Daily Sales Trend :" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        public List<SaleTrendModel> GetGrossProfitTrend(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        {
+            List<SaleTrendModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetGrossProfitTrend, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new SaleTrendModel
+                    {
+                        Date = row.Field<string>("Date"),
+                        Percentage = row.Field<decimal?>("Percentage"),
+                        Value = row.Field<decimal?>("Value"),
+                    }).OrderBy(o => o.Date).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Get Gross Profit Trend :" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        public List<SaleTrendModel> GetNetProfitTrend(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        {
+            List<SaleTrendModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetNetProfitTrend, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new SaleTrendModel
+                    {
+                        Date = row.Field<string>("Date"),
+                        Percentage = row.Field<decimal?>("Percentage"),
+                        Value = row.Field<decimal?>("Value"),
+                    }).OrderBy(o => o.Date).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Get Net Profit Trend :" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
         public List<MISWeeklyDataModel> GetWeeklyMISData(string FinancialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<MISWeeklyDataModel> _result = null;
@@ -1624,9 +1747,9 @@ namespace BellonaAPI.DataAccess.Class
                         DeliverySale = row.Field<decimal?>("DELIVERYSALE"),
                         NetChargeAmount = row.Field<decimal?>("NetChargeAmount"),
                         NetDiscountAmount = row.Field<decimal?>("NetDiscountAmount"),
-                        DirectCharge = row.Field<decimal?>("DirectCharge")                     
-                        
-                    
+                        DirectCharge = row.Field<decimal?>("DirectCharge")
+
+
                     }).OrderBy(o => o.ActualSale).ToList();
 
                 }
@@ -1739,7 +1862,7 @@ namespace BellonaAPI.DataAccess.Class
                 }
             }).IfNotNull((ex) =>
             {
-                Logger.LogError("Error in TransactionRepository WeeklyExpenses :" + ex.Message + Environment.NewLine + ex.StackTrace);
+                Logger.LogError("Error in TransactionRepository GetSanpshotWeeklyData :" + ex.Message + Environment.NewLine + ex.StackTrace);
             }).Finally(() =>
             {
                 Logger.LogInfo("Completed execution of UpdateMonthlyExpense from Repository TransactionRepository at " + DateTime.Now.ToLongDateString());
