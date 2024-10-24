@@ -458,6 +458,36 @@ namespace BellonaAPI.Controllers
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve GetFoodVsBudgetTrend Details."));
         }
+        
+        [Route("GetDailySaleTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetDailySaleTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<SaleTrendModel> _result = _iRepo.GetDailySaleTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Daily Sale Trend Details."));
+        }
+        
+        [Route("GetGrossProfitTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetGrossProfitTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<SaleTrendModel> _result = _iRepo.GetGrossProfitTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Gross Profit Trend Details."));
+        }   
+
+        [Route("GetNetProfitTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetNetProfitTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<SaleTrendModel> _result = _iRepo.GetNetProfitTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Net Profit Trend Details."));
+        }
 
         [Route("GetWeeklyMISData")]
         [AcceptVerbs("GET")]
@@ -467,6 +497,67 @@ namespace BellonaAPI.Controllers
             List<MISWeeklyDataModel> _result = _iRepo.GetWeeklyMISData(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Get Weekly MISData Details."));
+        }
+
+        [Route("GetCogsBreakUp")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetCogsBreakUp(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<CogsBreakUp> _result = _iRepo.GetCogsBreakUp(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetCogsBreakUp Details."));
+        }
+
+        [Route("GetUtilityCost")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetUtilityCost(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<UtilityCostModel> _result = _iRepo.GetUtilityCost(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get UtilityCost Details."));
+        }
+
+        [Route("GetMarketingPromotionCost")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetMarketingPromotionCost(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<MarketingPromotion> _result = _iRepo.GetMarketingPromotionCost(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get MarketingPromotionCost Details."));
+        }
+
+        [Route("GetOtherOperationalCost")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetOtherOperationalCost(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<OtherOperationalCostModel> _result = _iRepo.GetOtherOperationalCost(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Other Operational Cost Details."));
+        }
+
+
+        [Route("GetOccupationalCost")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetOccupationalCost(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<OccupationalCostModel> _result = _iRepo.GetOccupationalCost(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Rent and Occupational Cost Details."));
+        }
+
+        [Route("GetCostBreakUp")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetCostBreakUp(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<CostBreakUpModel> _result = _iRepo.GetCostBreakUp(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Cost BreakUp Details."));
         }
 
         #endregion WeeklyMIS 

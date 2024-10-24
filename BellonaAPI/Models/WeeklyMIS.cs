@@ -86,5 +86,56 @@ namespace BellonaAPI.Models
         public decimal? NetDiscountAmount { get; set; }
         public decimal? NetChargeAmount { get; set; }
         public decimal? DirectCharge { get; set; }
+        public decimal? TakeAway { get; set; }
+        public decimal? OtherSale { get; set; }
+        public decimal? ADC { get; set; }
+    }
+
+    public class SaleTrendModel
+    {
+        public string Date { get; set; }
+        public decimal? Percentage { get; set; }
+        public decimal? Value { get; set; }
+    }
+    public class CogsBreakUp
+    {
+        public string Category { get; set; }
+        public decimal? Amount { get; set; }
+        public decimal? Percentage { get; set; }
+    }
+
+    public class UtilityCostModel
+    {
+        public string UtilityCost { get; set; }
+        public decimal? Amount { get; set; }
+        public decimal? Percentage { get; set; }
+    }
+
+
+    public class MarketingPromotion
+    {
+        public string BusinessPromotion { get; set; }
+        public decimal? Amount { get; set; }
+        public decimal? Percentage { get; set; }
+    }
+    public class OtherOperationalCostModel
+    {
+        public string OtherOperationalCost { get; set; }
+        public decimal? Amount { get; set; }
+        public decimal? Percentage { get; set; }
+    }
+
+    public class OccupationalCostModel
+    {
+        public string OccupationalCost { get; set; }
+        public decimal? Amount { get; set; }
+        public decimal? Percentage { get; set; }
+    }
+
+    public class CostBreakUpModel
+    {
+        public string CostBreakUp { get; set; }
+        public decimal? Amount { get; set; }
+        public decimal? Percentage { get; set; }
     }
 }

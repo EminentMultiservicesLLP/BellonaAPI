@@ -694,6 +694,137 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
+        public List<WeeklyExpense> GetWeeklyExpense(Guid userId, int menuId, int outletID, string expenseYear, string week)
+        {
+            List<WeeklyExpense> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("OutletID", outletID, DbType.Int32));
+                    dbCol.Add(new DBParameter("FinancialYear", expenseYear, DbType.String));
+                    dbCol.Add(new DBParameter("Weeks", week, DbType.String));
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeeklyExpense, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new WeeklyExpense
+                    {
+                        WeeklyExpenseId = row.Field<int>("WeeklyExpenseId"),
+                        OutletID = row.Field<int>("OutletID"),
+                        ExpenseMonth = row.Field<int>("ExpenseMonth"),
+                        ExpenseYear = row.Field<int>("ExpenseYear"),
+                        FinancialYear = row.Field<string>("FinancialYear"),
+                        ExpenseWeek = row.Field<int>("ExpenseWeek"),
+                        WeekNo = row.Field<string>("Weeks"),
+                        EquipmentHireCharges_DJEvents = row.Field<decimal?>("EquipmentHireCharges_DJEvents"),
+                        EquipmentHireCharges_Kitchen = row.Field<decimal?>("EquipmentHireCharges_Kitchen"),
+                        EquipmentHireCharges_Banquet = row.Field<decimal?>("EquipmentHireCharges_Banquet"),
+                        Total_EquipmentHireCharges = row.Field<decimal?>("Total_EquipmentHireCharges"),
+
+                        BusinessPromotion_AdvertisementExpenses = row.Field<decimal?>("BusinessPromotion_AdvertisementExpenses"),
+                        BusinessPromotion_CommissionBrokerageExpenses = row.Field<decimal?>("BusinessPromotion_CommissionBrokerageExpenses"),
+                        BusinessPromotion_Entertainment = row.Field<decimal?>("BusinessPromotion_Entertainment"),
+                        BusinessPromotion_SalesPromotion = row.Field<decimal?>("BusinessPromotion_SalesPromotion"),
+                        Total_BusinessPromotionMarketing = row.Field<decimal?>("Total_BusinessPromotionMarketing"),
+
+                        FinanceCost_BankCharges = row.Field<decimal?>("FinanceCost_BankCharges"),
+                        FinanceCost_CommissionOnAggregators = row.Field<decimal?>("FinanceCost_CommissionOnAggregators"),
+                        FinanceCost_CommissionOnCardSettlement = row.Field<decimal?>("FinanceCost_CommissionOnCardSettlement"),
+                        Total_FinanceCost = row.Field<decimal?>("Total_FinanceCost"),
+
+                        NonFoodConsumable_GeneralSupplies = row.Field<decimal?>("NonFoodConsumable_GeneralSupplies"),
+                        NonFoodConsumable_LiquidContainerNitrogen = row.Field<decimal?>("NonFoodConsumable_LiquidContainerNitrogen"),
+                        NonFoodConsumable_PackingMaterials = row.Field<decimal?>("NonFoodConsumable_PackingMaterials"),
+                        Total_NonFoodConsumable = row.Field<decimal?>("Total_NonFoodConsumable"),
+
+                        LegalFees_LegalCharges = row.Field<decimal?>("LegalFees_LegalCharges"),
+                        LegalFees_ProfessionalCharges = row.Field<decimal?>("LegalFees_ProfessionalCharges"),
+                        LegalFees_StatutoryAuditFees = row.Field<decimal?>("LegalFees_StatutoryAuditFees"),
+                        Total_LegalFees = row.Field<decimal?>("Total_LegalFees"),
+
+                        LicenseFees_FranchiseFees = row.Field<decimal?>("LicenseFees_FranchiseFees"),
+                        LicenseFees_LicensePermitCharges = row.Field<decimal?>("LicenseFees_LicensePermitCharges"),
+                        Total_LicenseFees = row.Field<decimal?>("Total_LicenseFees"),
+
+                        ManPowerCost_BonusToStaff = row.Field<decimal?>("ManPowerCost_BonusToStaff"),
+                        ManPowerCost_CasualLabourCharges = row.Field<decimal?>("ManPowerCost_CasualLabourCharges"),
+                        ManPowerCost_ConveyanceAllowance = row.Field<decimal?>("ManPowerCost_ConveyanceAllowance"),
+                        ManPowerCost_ESIC = row.Field<decimal?>("ManPowerCost_ESIC"),
+                        ManPowerCost_PF = row.Field<decimal?>("ManPowerCost_PF"),
+                        ManPowerCost_HousekeepingExpenses = row.Field<decimal?>("ManPowerCost_HousekeepingExpenses"),
+                        ManPowerCost_Insurance = row.Field<decimal?>("ManPowerCost_Insurance"),
+                        ManPowerCost_LeaveEncashment = row.Field<decimal?>("ManPowerCost_LeaveEncashment"),
+                        ManPowerCost_MedicalExpenses = row.Field<decimal?>("ManPowerCost_MedicalExpenses"),
+                        ManPowerCost_PFAdmin = row.Field<decimal?>("ManPowerCost_PFAdmin"),
+                        ManPowerCost_RecruitmentCost = row.Field<decimal?>("ManPowerCost_RecruitmentCost"),
+                        ManPowerCost_SalaryAllowances = row.Field<decimal?>("ManPowerCost_SalaryAllowances"),
+                        ManPowerCost_ServiceChargePayOut = row.Field<decimal?>("ManPowerCost_ServiceChargePayOut"),
+                        ManPowerCost_AccommodationElectricityCharges = row.Field<decimal?>("ManPowerCost_AccommodationElectricityCharges"),
+                        ManPowerCost_AccommodationWaterCharges = row.Field<decimal?>("ManPowerCost_AccommodationWaterCharges"),
+                        ManPowerCost_StaffFoodExpense = row.Field<decimal?>("ManPowerCost_StaffFoodExpense"),
+                        ManPowerCost_StaffRoomRent = row.Field<decimal?>("ManPowerCost_StaffRoomRent"),
+                        ManPowerCost_StaffWelfareExpenses = row.Field<decimal?>("ManPowerCost_StaffWelfareExpenses"),
+                        ManPowerCost_Uniforms = row.Field<decimal?>("ManPowerCost_Uniforms"),
+                        ManPowerCost_SecurityExpenses = row.Field<decimal?>("ManPowerCost_SecurityExpenses"),
+                        Total_ManPowerCost = row.Field<decimal?>("Total_ManPowerCost"),
+
+                        OtherOperational_CCGPurchase = row.Field<decimal?>("OtherOperational_CCGPurchase"),
+                        OtherOperational_ConveyanceExpenses = row.Field<decimal?>("OtherOperational_ConveyanceExpenses"),
+                        OtherOperational_FreightCharges = row.Field<decimal?>("OtherOperational_FreightCharges"),
+                        OtherOperational_MiscellaneousCharges = row.Field<decimal?>("OtherOperational_MiscellaneousCharges"),
+                        OtherOperational_LaundryCharges = row.Field<decimal?>("OtherOperational_LaundryCharges"),
+                        OtherOperational_LodgingBoarding = row.Field<decimal?>("OtherOperational_LodgingBoarding"),
+                        OtherOperational_OfficeExpense = row.Field<decimal?>("OtherOperational_OfficeExpense"),
+                        OtherOperational_OfficeExpensesGuest = row.Field<decimal?>("OtherOperational_OfficeExpensesGuest"),
+                        OtherOperational_PrintingStationary = row.Field<decimal?>("OtherOperational_PrintingStationary"),
+                        OtherOperational_Transportation = row.Field<decimal?>("OtherOperational_Transportation"),
+                        OtherOperational_TravellingLocal = row.Field<decimal?>("OtherOperational_TravellingLocal"),
+                        Total_OtherOperational = row.Field<decimal?>("Total_OtherOperational"),
+
+                        PrintingStationery_PostageCourier = row.Field<decimal?>("PrintingStationery_PostageCourier"),
+
+                        RentOccupationCost_CAMCharges = row.Field<decimal?>("RentOccupationCost_CAMCharges"),
+                        RentOccupationCost_PropertyTax = row.Field<decimal?>("RentOccupationCost_PropertyTax"),
+                        RentOccupationCost_PropertyTaxMall = row.Field<decimal?>("RentOccupationCost_PropertyTaxMall"),
+                        RentOccupationCost_RentRevenueCharges = row.Field<decimal?>("RentOccupationCost_RentRevenueCharges"),
+                        RentOccupationCost_RentRevenuePerc = row.Field<decimal?>("RentOccupationCost_RentRevenuePerc"),
+                        Total_RentOccupationCost = row.Field<decimal?>("Total_RentOccupationCost"),
+
+                        RepairMaintenance_AMCComputerSoftware = row.Field<decimal?>("RepairMaintenance_AMCComputerSoftware"),
+                        RepairMaintenance_PestControlAC = row.Field<decimal?>("RepairMaintenance_PestControlAC"),
+                        RepairMaintenance_Civil = row.Field<decimal?>("RepairMaintenance_Civil"),
+                        RepairMaintenance_Others = row.Field<decimal?>("RepairMaintenance_Others"),
+                        Total_RepairMaintenance = row.Field<decimal?>("Total_RepairMaintenance"),
+
+                        TelephoneInternet_CableCharges = row.Field<decimal?>("TelephoneInternet_CableCharges"),
+                        TelephoneInternet_InternetExpenses = row.Field<decimal?>("TelephoneInternet_InternetExpenses"),
+                        TelephoneInternet_TelephoneExpenses = row.Field<decimal?>("TelephoneInternet_TelephoneExpenses"),
+                        TelephoneInternet_TelephoneExpensesMobile = row.Field<decimal?>("TelephoneInternet_TelephoneExpensesMobile"),
+                        Total_TelephoneInternet = row.Field<decimal?>("Total_TelephoneInternet"),
+
+                        UtilityEnergyCost_DGCharges = row.Field<decimal?>("UtilityEnergyCost_DGCharges"),
+                        UtilityEnergyCost_ElectricityCharges = row.Field<decimal?>("UtilityEnergyCost_ElectricityCharges"),
+                        UtilityEnergyCost_ElectricityInfraCharges = row.Field<decimal?>("UtilityEnergyCost_ElectricityInfraCharges"),
+                        UtilityEnergyCost_GasCharges = row.Field<decimal?>("UtilityEnergyCost_GasCharges"),
+                        UtilityEnergyCost_HVACCharges = row.Field<decimal?>("UtilityEnergyCost_HVACCharges"),
+                        UtilityEnergyCost_WaterCharges = row.Field<decimal?>("UtilityEnergyCost_WaterCharges"),
+                        Total_UtilityEnergyCost = row.Field<decimal?>("Total_UtilityEnergyCost"),
+
+                        Total_WeeklyExpense = row.Field<decimal?>("Total_WeeklyExpense"),
+
+
+                    }).OrderBy(o => o.WeeklyExpenseId).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetWeeklyExpense:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
         public bool SaveWeeklyExpense(WeeklyExpenseModel _data)
         {
 
@@ -925,137 +1056,6 @@ namespace BellonaAPI.DataAccess.Class
         }
         #endregion TBUpload
 
-
-        public List<WeeklyExpense> GetWeeklyExpense(Guid userId, int menuId, int outletID, string expenseYear, string week)
-        {
-            List<WeeklyExpense> _result = null;
-            TryCatch.Run(() =>
-            {
-                using (DBHelper Dbhelper = new DBHelper())
-                {
-                    DBParameterCollection dbCol = new DBParameterCollection();
-                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
-                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
-                    dbCol.Add(new DBParameter("OutletID", outletID, DbType.Int32));
-                    dbCol.Add(new DBParameter("FinancialYear", expenseYear, DbType.String));
-                    dbCol.Add(new DBParameter("Weeks", week, DbType.String));
-                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeeklyExpense, dbCol, CommandType.StoredProcedure);
-
-                    _result = dtData.AsEnumerable().Select(row => new WeeklyExpense
-                    {
-                        WeeklyExpenseId = row.Field<int>("WeeklyExpenseId"),
-                        OutletID = row.Field<int>("OutletID"),
-                        ExpenseMonth = row.Field<int>("ExpenseMonth"),
-                        ExpenseYear = row.Field<int>("ExpenseYear"),
-                        FinancialYear = row.Field<string>("FinancialYear"),
-                        ExpenseWeek = row.Field<int>("ExpenseWeek"),
-                        WeekNo = row.Field<string>("Weeks"),
-                        EquipmentHireCharges_DJEvents = row.Field<decimal>("EquipmentHireCharges_DJEvents"),
-                        EquipmentHireCharges_Kitchen = row.Field<decimal>("EquipmentHireCharges_Kitchen"),
-                        EquipmentHireCharges_Banquet = row.Field<decimal>("EquipmentHireCharges_Banquet"),
-                        Total_EquipmentHireCharges = row.Field<decimal>("Total_EquipmentHireCharges"),
-
-                        BusinessPromotion_AdvertisementExpenses = row.Field<decimal>("BusinessPromotion_AdvertisementExpenses"),
-                        BusinessPromotion_CommissionBrokerageExpenses = row.Field<decimal>("BusinessPromotion_CommissionBrokerageExpenses"),
-                        BusinessPromotion_Entertainment = row.Field<decimal>("BusinessPromotion_Entertainment"),
-                        BusinessPromotion_SalesPromotion = row.Field<decimal>("BusinessPromotion_SalesPromotion"),
-                        Total_BusinessPromotionMarketing = row.Field<decimal>("Total_BusinessPromotionMarketing"),
-
-                        FinanceCost_BankCharges = row.Field<decimal>("FinanceCost_BankCharges"),
-                        FinanceCost_CommissionOnAggregators = row.Field<decimal>("FinanceCost_CommissionOnAggregators"),
-                        FinanceCost_CommissionOnCardSettlement = row.Field<decimal>("FinanceCost_CommissionOnCardSettlement"),
-                        Total_FinanceCost = row.Field<decimal>("Total_FinanceCost"),
-
-                        NonFoodConsumable_GeneralSupplies = row.Field<decimal>("NonFoodConsumable_GeneralSupplies"),
-                        NonFoodConsumable_LiquidContainerNitrogen = row.Field<decimal>("NonFoodConsumable_LiquidContainerNitrogen"),
-                        NonFoodConsumable_PackingMaterials = row.Field<decimal>("NonFoodConsumable_PackingMaterials"),
-                        Total_NonFoodConsumable = row.Field<decimal>("Total_NonFoodConsumable"),
-
-                        LegalFees_LegalCharges = row.Field<decimal>("LegalFees_LegalCharges"),
-                        LegalFees_ProfessionalCharges = row.Field<decimal>("LegalFees_ProfessionalCharges"),
-                        LegalFees_StatutoryAuditFees = row.Field<decimal>("LegalFees_StatutoryAuditFees"),
-                        Total_LegalFees = row.Field<decimal>("Total_LegalFees"),
-
-                        LicenseFees_FranchiseFees = row.Field<decimal>("LicenseFees_FranchiseFees"),
-                        LicenseFees_LicensePermitCharges = row.Field<decimal>("LicenseFees_LicensePermitCharges"),
-                        Total_LicenseFees = row.Field<decimal>("Total_LicenseFees"),
-
-                        ManPowerCost_BonusToStaff = row.Field<decimal>("ManPowerCost_BonusToStaff"),
-                        ManPowerCost_CasualLabourCharges = row.Field<decimal>("ManPowerCost_CasualLabourCharges"),
-                        ManPowerCost_ConveyanceAllowance = row.Field<decimal>("ManPowerCost_ConveyanceAllowance"),
-                        ManPowerCost_ESIC = row.Field<decimal>("ManPowerCost_ESIC"),
-                        ManPowerCost_PF = row.Field<decimal>("ManPowerCost_PF"),
-                        ManPowerCost_HousekeepingExpenses = row.Field<decimal>("ManPowerCost_HousekeepingExpenses"),
-                        ManPowerCost_Insurance = row.Field<decimal>("ManPowerCost_Insurance"),
-                        ManPowerCost_LeaveEncashment = row.Field<decimal>("ManPowerCost_LeaveEncashment"),
-                        ManPowerCost_MedicalExpenses = row.Field<decimal>("ManPowerCost_MedicalExpenses"),
-                        ManPowerCost_PFAdmin = row.Field<decimal>("ManPowerCost_PFAdmin"),
-                        ManPowerCost_RecruitmentCost = row.Field<decimal>("ManPowerCost_RecruitmentCost"),
-                        ManPowerCost_SalaryAllowances = row.Field<decimal>("ManPowerCost_SalaryAllowances"),
-                        ManPowerCost_ServiceChargePayOut = row.Field<decimal>("ManPowerCost_ServiceChargePayOut"),
-                        ManPowerCost_AccommodationElectricityCharges = row.Field<decimal>("ManPowerCost_AccommodationElectricityCharges"),
-                        ManPowerCost_AccommodationWaterCharges = row.Field<decimal>("ManPowerCost_AccommodationWaterCharges"),
-                        ManPowerCost_StaffFoodExpense = row.Field<decimal>("ManPowerCost_StaffFoodExpense"),
-                        ManPowerCost_StaffRoomRent = row.Field<decimal>("ManPowerCost_StaffRoomRent"),
-                        ManPowerCost_StaffWelfareExpenses = row.Field<decimal>("ManPowerCost_StaffWelfareExpenses"),
-                        ManPowerCost_Uniforms = row.Field<decimal>("ManPowerCost_Uniforms"),
-                        ManPowerCost_SecurityExpenses = row.Field<decimal>("ManPowerCost_SecurityExpenses"),
-                        Total_ManPowerCost = row.Field<decimal>("Total_ManPowerCost"),
-
-                        OtherOperational_CCGPurchase = row.Field<decimal>("OtherOperational_CCGPurchase"),
-                        OtherOperational_ConveyanceExpenses = row.Field<decimal>("OtherOperational_ConveyanceExpenses"),
-                        OtherOperational_FreightCharges = row.Field<decimal>("OtherOperational_FreightCharges"),
-                        OtherOperational_MiscellaneousCharges = row.Field<decimal>("OtherOperational_MiscellaneousCharges"),
-                        OtherOperational_LaundryCharges = row.Field<decimal>("OtherOperational_LaundryCharges"),
-                        OtherOperational_LodgingBoarding = row.Field<decimal>("OtherOperational_LodgingBoarding"),
-                        OtherOperational_OfficeExpense = row.Field<decimal>("OtherOperational_OfficeExpense"),
-                        OtherOperational_OfficeExpensesGuest = row.Field<decimal>("OtherOperational_OfficeExpensesGuest"),
-                        OtherOperational_PrintingStationary = row.Field<decimal>("OtherOperational_PrintingStationary"),
-                        OtherOperational_Transportation = row.Field<decimal>("OtherOperational_Transportation"),
-                        OtherOperational_TravellingLocal = row.Field<decimal>("OtherOperational_TravellingLocal"),
-                        Total_OtherOperational = row.Field<decimal>("Total_OtherOperational"),
-
-                        PrintingStationery_PostageCourier = row.Field<decimal>("PrintingStationery_PostageCourier"),
-
-                        RentOccupationCost_CAMCharges = row.Field<decimal>("RentOccupationCost_CAMCharges"),
-                        RentOccupationCost_PropertyTax = row.Field<decimal>("RentOccupationCost_PropertyTax"),
-                        RentOccupationCost_PropertyTaxMall = row.Field<decimal>("RentOccupationCost_PropertyTaxMall"),
-                        RentOccupationCost_RentRevenueCharges = row.Field<decimal>("RentOccupationCost_RentRevenueCharges"),
-                        Total_RentOccupationCost = row.Field<decimal>("Total_RentOccupationCost"),
-
-                        RepairMaintenance_AMCComputerSoftware = row.Field<decimal>("RepairMaintenance_AMCComputerSoftware"),
-                        RepairMaintenance_PestControlAC = row.Field<decimal>("RepairMaintenance_PestControlAC"),
-                        RepairMaintenance_Civil = row.Field<decimal>("RepairMaintenance_Civil"),
-                        RepairMaintenance_Others = row.Field<decimal>("RepairMaintenance_Others"),
-                        Total_RepairMaintenance = row.Field<decimal>("Total_RepairMaintenance"),
-
-                        TelephoneInternet_CableCharges = row.Field<decimal>("TelephoneInternet_CableCharges"),
-                        TelephoneInternet_InternetExpenses = row.Field<decimal>("TelephoneInternet_InternetExpenses"),
-                        TelephoneInternet_TelephoneExpenses = row.Field<decimal>("TelephoneInternet_TelephoneExpenses"),
-                        TelephoneInternet_TelephoneExpensesMobile = row.Field<decimal>("TelephoneInternet_TelephoneExpensesMobile"),
-                        Total_TelephoneInternet = row.Field<decimal>("Total_TelephoneInternet"),
-
-                        UtilityEnergyCost_DGCharges = row.Field<decimal>("UtilityEnergyCost_DGCharges"),
-                        UtilityEnergyCost_ElectricityCharges = row.Field<decimal>("UtilityEnergyCost_ElectricityCharges"),
-                        UtilityEnergyCost_ElectricityInfraCharges = row.Field<decimal>("UtilityEnergyCost_ElectricityInfraCharges"),
-                        UtilityEnergyCost_GasCharges = row.Field<decimal>("UtilityEnergyCost_GasCharges"),
-                        UtilityEnergyCost_HVACCharges = row.Field<decimal>("UtilityEnergyCost_HVACCharges"),
-                        UtilityEnergyCost_WaterCharges = row.Field<decimal>("UtilityEnergyCost_WaterCharges"),
-                        Total_UtilityEnergyCost = row.Field<decimal>("Total_UtilityEnergyCost"),
-
-                        Total_WeeklyExpense = row.Field<decimal>("Total_WeeklyExpense"),
-
-
-                    }).OrderBy(o => o.WeeklyExpenseId).ToList();
-
-                }
-            }).IfNotNull((ex) =>
-            {
-                Logger.LogError("Error in TransactionRepository GetWeeklyExpense:" + ex.Message + Environment.NewLine + ex.StackTrace);
-            });
-
-            return _result;
-        }
 
         #region GET_DSR_Summary
         //public List<DSR_Summary> GetDSR_Summary(String outletCode, string startDate, string endDate)
@@ -1448,7 +1448,7 @@ namespace BellonaAPI.DataAccess.Class
                         SessionName = row.Field<string>("SessionName"),
                         Session_NetAmount = row.Field<decimal?>("SESSION_NETAMOUNT"),
                         Total_NetAmount = row.Field<decimal?>("TOTAL_NETAMOUNT"),
-                        Percentage = row.Field<decimal>("Percentage")                       
+                        Percentage = row.Field<decimal>("Percentage")
                     }).OrderBy(o => o.SessionName).ToList();
 
                 }
@@ -1585,6 +1585,132 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
+        public List<SaleTrendModel> GetDailySaleTrend(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        {
+            List<SaleTrendModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetDailySaleTrend, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new SaleTrendModel
+                    {
+                        Date = row.Field<string>("Date"),
+                        Percentage = row.Field<decimal?>("Percentage"),
+                        Value = row.Field<decimal?>("Value"),
+                    }).OrderBy(o => o.Date).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Get Daily Sales Trend :" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
+        public List<SaleTrendModel> GetGrossProfitTrend(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        {
+            List<SaleTrendModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetGrossProfitTrend, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new SaleTrendModel
+                    {
+                        Date = row.Field<string>("Date"),
+                        Percentage = row.Field<decimal?>("Percentage"),
+                        Value = row.Field<decimal?>("Value"),
+                    }).OrderBy(o => o.Date).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Get Gross Profit Trend :" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
+        public List<SaleTrendModel> GetNetProfitTrend(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        {
+            List<SaleTrendModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetNetProfitTrend, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new SaleTrendModel
+                    {
+                        Date = row.Field<string>("Date"),
+                        Percentage = row.Field<decimal?>("Percentage"),
+                        Value = row.Field<decimal?>("Value"),
+                    }).OrderBy(o => o.Date).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Get Net Profit Trend :" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
         public List<MISWeeklyDataModel> GetWeeklyMISData(string FinancialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<MISWeeklyDataModel> _result = null;
@@ -1625,9 +1751,9 @@ namespace BellonaAPI.DataAccess.Class
                         DeliverySale = row.Field<decimal?>("DELIVERYSALE"),
                         NetChargeAmount = row.Field<decimal?>("NetChargeAmount"),
                         NetDiscountAmount = row.Field<decimal?>("NetDiscountAmount"),
-                        DirectCharge = row.Field<decimal?>("DirectCharge")                     
-                        
-                    
+                        DirectCharge = row.Field<decimal?>("DirectCharge")
+
+
                     }).OrderBy(o => o.ActualSale).ToList();
 
                 }
@@ -1639,6 +1765,257 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
+        public List<CogsBreakUp> GetCogsBreakUp(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        {
+            List<CogsBreakUp> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetCogsBreakUp, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new CogsBreakUp
+                    {
+                        Category = row.Field<string>("Category"),
+                        Amount = row.Field<decimal?>("Amount"),
+                        Percentage = row.Field<decimal?>("Percentage"),
+                    }).OrderBy(o => o.Category).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Get Food Vs Budget Trend for 12weeks:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
+        public List<UtilityCostModel> GetUtilityCost(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        {
+            List<UtilityCostModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetUtilityCost, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new UtilityCostModel
+                    {
+                        UtilityCost = row.Field<string>("UtilityCost"),
+                        Amount = row.Field<decimal?>("Amount"),
+                        Percentage = row.Field<decimal?>("Percentage"),
+                    }).OrderBy(o => o.UtilityCost).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Get Utility Cost:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
+        public List<MarketingPromotion> GetMarketingPromotionCost(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        {
+            List<MarketingPromotion> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetMarketingPromotionCost, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new MarketingPromotion
+                    {
+                        BusinessPromotion = row.Field<string>("BusinessPromotion"),
+                        Amount = row.Field<decimal?>("Amount"),
+                        Percentage = row.Field<decimal?>("Percentage"),
+                    }).OrderBy(o => o.BusinessPromotion).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Get Utility Cost:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        
+        public List<OtherOperationalCostModel> GetOtherOperationalCost(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        {
+            List<OtherOperationalCostModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetOtherOperationalCost, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new OtherOperationalCostModel
+                    {
+                        OtherOperationalCost = row.Field<string>("OtherOperationalCost"),
+                        Amount = row.Field<decimal?>("Amount"),
+                        Percentage = row.Field<decimal?>("Percentage"),
+                    }).OrderBy(o => o.OtherOperationalCost).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository  Other Operational Cost:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
+        public List<OccupationalCostModel> GetOccupationalCost(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        {
+            List<OccupationalCostModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetOccupationalCost, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new OccupationalCostModel
+                    {
+                        OccupationalCost = row.Field<string>("OccupationalCost"),
+                        Amount = row.Field<decimal?>("Amount"),
+                        Percentage = row.Field<decimal?>("Percentage"),
+                    }).OrderBy(o => o.OccupationalCost).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Occupational Cost:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
+        public List<CostBreakUpModel> GetCostBreakUp(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        {
+            List<CostBreakUpModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetCostBreakUp, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new CostBreakUpModel
+                    {
+                        CostBreakUp = row.Field<string>("CostBreakUp"),
+                        Amount = row.Field<decimal?>("Amount"),
+                        Percentage = row.Field<decimal?>("Percentage"),
+                    }).OrderBy(o => o.CostBreakUp).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Get Cost Breakup:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
         #endregion weeklyMIS
 
         #region DSR Snapshot
@@ -1698,7 +2075,7 @@ namespace BellonaAPI.DataAccess.Class
                 }
             }).IfNotNull((ex) =>
             {
-                Logger.LogError("Error in TransactionRepository WeeklyExpenses :" + ex.Message + Environment.NewLine + ex.StackTrace);
+                Logger.LogError("Error in TransactionRepository GetSanpshotWeeklyData :" + ex.Message + Environment.NewLine + ex.StackTrace);
             }).Finally(() =>
             {
                 Logger.LogInfo("Completed execution of UpdateMonthlyExpense from Repository TransactionRepository at " + DateTime.Now.ToLongDateString());

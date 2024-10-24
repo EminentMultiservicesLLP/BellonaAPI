@@ -227,113 +227,114 @@ namespace BellonaAPI.Models
         public string FinancialYear { get; set; }
         public int ExpenseWeek { get; set; }
         public string WeekNo { get; set; }
-        public decimal Expense_EquipmentHireCharges { get; set; }
-        public decimal EquipmentHireCharges_DJEvents { get; set; }
-        public decimal EquipmentHireCharges_Kitchen { get; set; }
-        public decimal EquipmentHireCharges_Banquet { get; set; }
-        public decimal Total_EquipmentHireCharges { get; set; }
+        public decimal? Expense_EquipmentHireCharges { get; set; }
+        public decimal? EquipmentHireCharges_DJEvents { get; set; }
+        public decimal? EquipmentHireCharges_Kitchen { get; set; }
+        public decimal? EquipmentHireCharges_Banquet { get; set; }
+        public decimal? Total_EquipmentHireCharges { get; set; }
 
-        public decimal BusinessPromotion_AdvertisementExpenses { get; set; }
-        public decimal BusinessPromotion_CommissionBrokerageExpenses { get; set; }
-        public decimal BusinessPromotion_Entertainment { get; set; }
-        public decimal BusinessPromotion_SalesPromotion { get; set; }
-        public decimal Total_BusinessPromotionMarketing { get; set; }
+        public decimal? BusinessPromotion_AdvertisementExpenses { get; set; }
+        public decimal? BusinessPromotion_CommissionBrokerageExpenses { get; set; }
+        public decimal? BusinessPromotion_Entertainment { get; set; }
+        public decimal? BusinessPromotion_SalesPromotion { get; set; }
+        public decimal? Total_BusinessPromotionMarketing { get; set; }
 
-        public decimal Expense_FinanceCost { get; set; }
-        public decimal FinanceCost_BankCharges { get; set; }
-        public decimal FinanceCost_CommissionOnAggregators { get; set; }
-        public decimal FinanceCost_CommissionOnCardSettlement { get; set; }
-        public decimal Total_FinanceCost { get; set; }
+        public decimal? Expense_FinanceCost { get; set; }
+        public decimal? FinanceCost_BankCharges { get; set; }
+        public decimal? FinanceCost_CommissionOnAggregators { get; set; }
+        public decimal? FinanceCost_CommissionOnCardSettlement { get; set; }
+        public decimal? Total_FinanceCost { get; set; }
 
-        public decimal Expense_NonFoodConsumable { get; set; }
-        public decimal NonFoodConsumable_GeneralSupplies { get; set; }
-        public decimal NonFoodConsumable_LiquidContainerNitrogen { get; set; }
-        public decimal NonFoodConsumable_PackingMaterials { get; set; }
-        public decimal Total_NonFoodConsumable { get; set; }
+        public decimal? Expense_NonFoodConsumable { get; set; }
+        public decimal? NonFoodConsumable_GeneralSupplies { get; set; }
+        public decimal? NonFoodConsumable_LiquidContainerNitrogen { get; set; }
+        public decimal? NonFoodConsumable_PackingMaterials { get; set; }
+        public decimal? Total_NonFoodConsumable { get; set; }
 
-        public decimal Expense_LegalFees { get; set; }
-        public decimal LegalFees_LegalCharges { get; set; }
-        public decimal LegalFees_ProfessionalCharges { get; set; }
-        public decimal LegalFees_StatutoryAuditFees { get; set; }
-        public decimal Total_LegalFees { get; set; }
+        public decimal? Expense_LegalFees { get; set; }
+        public decimal? LegalFees_LegalCharges { get; set; }
+        public decimal? LegalFees_ProfessionalCharges { get; set; }
+        public decimal? LegalFees_StatutoryAuditFees { get; set; }
+        public decimal? Total_LegalFees { get; set; }
 
-        public decimal Expense_LicenseFees { get; set; }
-        public decimal LicenseFees_FranchiseFees { get; set; }
-        public decimal LicenseFees_LicensePermitCharges { get; set; }
-        public decimal Total_LicenseFees { get; set; }
+        public decimal? Expense_LicenseFees { get; set; }
+        public decimal? LicenseFees_FranchiseFees { get; set; }
+        public decimal? LicenseFees_LicensePermitCharges { get; set; }
+        public decimal? Total_LicenseFees { get; set; }
 
-        public decimal Expense_ManPowerCost { get; set; }
-        public decimal ManPowerCost_BonusToStaff { get; set; }
-        public decimal ManPowerCost_CasualLabourCharges { get; set; }
-        public decimal ManPowerCost_ConveyanceAllowance { get; set; }
-        public decimal ManPowerCost_ESIC { get; set; }
-        public decimal ManPowerCost_PF { get; set; }
-        public decimal ManPowerCost_HousekeepingExpenses { get; set; }
-        public decimal ManPowerCost_Insurance { get; set; }
-        public decimal ManPowerCost_LeaveEncashment { get; set; }
-        public decimal ManPowerCost_MedicalExpenses { get; set; }
-        public decimal ManPowerCost_PFAdmin { get; set; }
-        public decimal ManPowerCost_RecruitmentCost { get; set; }
-        public decimal ManPowerCost_SalaryAllowances { get; set; }
-        public decimal ManPowerCost_ServiceChargePayOut { get; set; }
-        public decimal ManPowerCost_AccommodationElectricityCharges { get; set; }
-        public decimal ManPowerCost_AccommodationWaterCharges { get; set; }
-        public decimal ManPowerCost_StaffFoodExpense { get; set; }
-        public decimal ManPowerCost_StaffRoomRent { get; set; }
-        public decimal ManPowerCost_StaffWelfareExpenses { get; set; }
-        public decimal ManPowerCost_Uniforms { get; set; }
-        public decimal ManPowerCost_SecurityExpenses { get; set; }
-        public decimal Total_ManPowerCost { get; set; }
+        public decimal? Expense_ManPowerCost { get; set; }
+        public decimal? ManPowerCost_BonusToStaff { get; set; }
+        public decimal? ManPowerCost_CasualLabourCharges { get; set; }
+        public decimal? ManPowerCost_ConveyanceAllowance { get; set; }
+        public decimal? ManPowerCost_ESIC { get; set; }
+        public decimal? ManPowerCost_PF { get; set; }
+        public decimal? ManPowerCost_HousekeepingExpenses { get; set; }
+        public decimal? ManPowerCost_Insurance { get; set; }
+        public decimal? ManPowerCost_LeaveEncashment { get; set; }
+        public decimal? ManPowerCost_MedicalExpenses { get; set; }
+        public decimal? ManPowerCost_PFAdmin { get; set; }
+        public decimal? ManPowerCost_RecruitmentCost { get; set; }
+        public decimal? ManPowerCost_SalaryAllowances { get; set; }
+        public decimal? ManPowerCost_ServiceChargePayOut { get; set; }
+        public decimal? ManPowerCost_AccommodationElectricityCharges { get; set; }
+        public decimal? ManPowerCost_AccommodationWaterCharges { get; set; }
+        public decimal? ManPowerCost_StaffFoodExpense { get; set; }
+        public decimal? ManPowerCost_StaffRoomRent { get; set; }
+        public decimal? ManPowerCost_StaffWelfareExpenses { get; set; }
+        public decimal? ManPowerCost_Uniforms { get; set; }
+        public decimal? ManPowerCost_SecurityExpenses { get; set; }
+        public decimal? Total_ManPowerCost { get; set; }
 
-        public decimal Expense_OtherOperational { get; set; }
-        public decimal OtherOperational_CCGPurchase { get; set; }
-        public decimal OtherOperational_ConveyanceExpenses { get; set; }
-        public decimal OtherOperational_FreightCharges { get; set; }
-        public decimal OtherOperational_MiscellaneousCharges { get; set; }
-        public decimal OtherOperational_LaundryCharges { get; set; }
-        public decimal OtherOperational_LodgingBoarding { get; set; }
-        public decimal OtherOperational_OfficeExpense { get; set; }
-        public decimal OtherOperational_OfficeExpensesGuest { get; set; }
-        public decimal OtherOperational_PrintingStationary { get; set; }
-        public decimal OtherOperational_Transportation { get; set; }
-        public decimal OtherOperational_TravellingLocal { get; set; }
-        public decimal Total_OtherOperational { get; set; }
+        public decimal? Expense_OtherOperational { get; set; }
+        public decimal? OtherOperational_CCGPurchase { get; set; }
+        public decimal? OtherOperational_ConveyanceExpenses { get; set; }
+        public decimal? OtherOperational_FreightCharges { get; set; }
+        public decimal? OtherOperational_MiscellaneousCharges { get; set; }
+        public decimal? OtherOperational_LaundryCharges { get; set; }
+        public decimal? OtherOperational_LodgingBoarding { get; set; }
+        public decimal? OtherOperational_OfficeExpense { get; set; }
+        public decimal? OtherOperational_OfficeExpensesGuest { get; set; }
+        public decimal? OtherOperational_PrintingStationary { get; set; }
+        public decimal? OtherOperational_Transportation { get; set; }
+        public decimal? OtherOperational_TravellingLocal { get; set; }
+        public decimal? Total_OtherOperational { get; set; }
 
-        public decimal Expense_PrintingStationery { get; set; }
-        public decimal PrintingStationery_PostageCourier { get; set; }
+        public decimal? Expense_PrintingStationery { get; set; }
+        public decimal? PrintingStationery_PostageCourier { get; set; }
 
-        public decimal RentOccupationCost_CAMCharges { get; set; }
-        public decimal RentOccupationCost_PropertyTax { get; set; }
-        public decimal RentOccupationCost_PropertyTaxMall { get; set; }
-        public decimal RentOccupationCost_RentRevenueCharges { get; set; }
-        public decimal Total_RentOccupationCost { get; set; }
+        public decimal? RentOccupationCost_CAMCharges { get; set; }
+        public decimal? RentOccupationCost_PropertyTax { get; set; }
+        public decimal? RentOccupationCost_PropertyTaxMall { get; set; }
+        public decimal? RentOccupationCost_RentRevenueCharges { get; set; }
+        public decimal? RentOccupationCost_RentRevenuePerc { get; set; }
+        public decimal? Total_RentOccupationCost { get; set; }
 
 
-        public decimal Expense_RepairMaintenance { get; set; }
-        public decimal RepairMaintenance_AMCComputerSoftware { get; set; }
-        public decimal RepairMaintenance_PestControlAC { get; set; }
-        public decimal RepairMaintenance_Civil { get; set; }
-        public decimal RepairMaintenance_Others { get; set; }
-        public decimal Total_RepairMaintenance { get; set; }
+        public decimal? Expense_RepairMaintenance { get; set; }
+        public decimal? RepairMaintenance_AMCComputerSoftware { get; set; }
+        public decimal? RepairMaintenance_PestControlAC { get; set; }
+        public decimal? RepairMaintenance_Civil { get; set; }
+        public decimal? RepairMaintenance_Others { get; set; }
+        public decimal? Total_RepairMaintenance { get; set; }
 
-        public decimal Expense_TelephoneInternet { get; set; }
-        public decimal TelephoneInternet_CableCharges { get; set; }
-        public decimal TelephoneInternet_InternetExpenses { get; set; }
-        public decimal TelephoneInternet_TelephoneExpenses { get; set; }
-        public decimal TelephoneInternet_TelephoneExpensesMobile { get; set; }
-        public decimal Total_TelephoneInternet { get; set; }
+        public decimal? Expense_TelephoneInternet { get; set; }
+        public decimal? TelephoneInternet_CableCharges { get; set; }
+        public decimal? TelephoneInternet_InternetExpenses { get; set; }
+        public decimal? TelephoneInternet_TelephoneExpenses { get; set; }
+        public decimal? TelephoneInternet_TelephoneExpensesMobile { get; set; }
+        public decimal? Total_TelephoneInternet { get; set; }
 
-        public decimal Expense_UtilityEnergyCost { get; set; }
-        public decimal UtilityEnergyCost_DGCharges { get; set; }
-        public decimal UtilityEnergyCost_ElectricityCharges { get; set; }
-        public decimal UtilityEnergyCost_ElectricityInfraCharges { get; set; }
-        public decimal UtilityEnergyCost_GasCharges { get; set; }
-        public decimal UtilityEnergyCost_GasInfraCharges { get; set; }
-        public decimal UtilityEnergyCost_HVACCharges { get; set; }
-        public decimal UtilityEnergyCost_WaterCharges { get; set; }
-        public decimal Total_UtilityEnergyCost { get; set; }
+        public decimal? Expense_UtilityEnergyCost { get; set; }
+        public decimal? UtilityEnergyCost_DGCharges { get; set; }
+        public decimal? UtilityEnergyCost_ElectricityCharges { get; set; }
+        public decimal? UtilityEnergyCost_ElectricityInfraCharges { get; set; }
+        public decimal? UtilityEnergyCost_GasCharges { get; set; }
+        public decimal? UtilityEnergyCost_GasInfraCharges { get; set; }
+        public decimal? UtilityEnergyCost_HVACCharges { get; set; }
+        public decimal? UtilityEnergyCost_WaterCharges { get; set; }
+        public decimal? Total_UtilityEnergyCost { get; set; }
 
-        public decimal Total_WeeklyExpense { get; set; }        
+        public decimal? Total_WeeklyExpense { get; set; }        
 
         public Guid? UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
