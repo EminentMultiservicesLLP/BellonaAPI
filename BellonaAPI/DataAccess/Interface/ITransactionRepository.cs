@@ -64,6 +64,9 @@ namespace BellonaAPI.DataAccess.Interface
         List<CogsBreakUp> GetCogsBreakUp(string financialYear, string week, string branchCode, int cityId, int clusterId);
         List<UtilityCostModel> GetUtilityCost(string financialYear, string week, string branchCode, int cityId, int clusterId);
         List<MarketingPromotion> GetMarketingPromotionCost(string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<OtherOperationalCostModel> GetOtherOperationalCost(string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<OccupationalCostModel> GetOccupationalCost(string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<CostBreakUpModel> GetCostBreakUp(string financialYear, string week, string branchCode, int cityId, int clusterId);
         #endregion
         List<WeeklySnapshot> GetSanpshotWeeklyData(int WeekNo, string Year, int OutletId);
         bool SaveSnapshotEntry(SnapshotModel SnapshotEntry);

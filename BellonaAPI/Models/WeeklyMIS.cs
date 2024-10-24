@@ -118,4 +118,24 @@ namespace BellonaAPI.Models
         public decimal? Amount { get; set; }
         public decimal? Percentage { get; set; }
     }
+    public class OtherOperationalCostModel
+    {
+        public string OtherOperationalCost { get; set; }
+        public decimal? Amount { get; set; }
+        public decimal? Percentage { get; set; }
+    }
+
+    public class OccupationalCostModel
+    {
+        public string OccupationalCost { get; set; }
+        public decimal? Amount { get; set; }
+        public decimal? Percentage { get; set; }
+    }
+
+    public class CostBreakUpModel
+    {
+        public string CostBreakUp { get; set; }
+        public decimal? Amount { get; set; }
+        public decimal? Percentage { get; set; }
+    }
 }

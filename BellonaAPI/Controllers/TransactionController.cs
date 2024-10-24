@@ -519,7 +519,7 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to retrieve Get UtilityCost Details."));
         }
 
-         [Route("GetMarketingPromotionCost")]
+        [Route("GetMarketingPromotionCost")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
         public IHttpActionResult GetMarketingPromotionCost(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
@@ -527,6 +527,37 @@ namespace BellonaAPI.Controllers
             List<MarketingPromotion> _result = _iRepo.GetMarketingPromotionCost(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Get MarketingPromotionCost Details."));
+        }
+
+        [Route("GetOtherOperationalCost")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetOtherOperationalCost(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<OtherOperationalCostModel> _result = _iRepo.GetOtherOperationalCost(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Other Operational Cost Details."));
+        }
+
+
+        [Route("GetOccupationalCost")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetOccupationalCost(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<OccupationalCostModel> _result = _iRepo.GetOccupationalCost(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Rent and Occupational Cost Details."));
+        }
+
+        [Route("GetCostBreakUp")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetCostBreakUp(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        {
+            List<CostBreakUpModel> _result = _iRepo.GetCostBreakUp(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Cost BreakUp Details."));
         }
 
         #endregion WeeklyMIS 
