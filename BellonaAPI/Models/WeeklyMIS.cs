@@ -89,6 +89,15 @@ namespace BellonaAPI.Models
         public decimal? TakeAway { get; set; }
         public decimal? OtherSale { get; set; }
         public decimal? ADC { get; set; }
+
+
+        public decimal? SALEPERC { get; set; }
+        public decimal? SALEVARPERC { get; set; }
+        public decimal? GROSSPERC { get; set; }
+        public decimal? NETPERC { get; set; }
+        public decimal? DININPERC { get; set; }
+        public decimal? DELIVERYPERC { get; set; }
+
     }
 
     public class SaleTrendModel

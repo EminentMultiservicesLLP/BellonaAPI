@@ -1748,11 +1748,20 @@ namespace BellonaAPI.DataAccess.Class
                         NetProfit = row.Field<decimal?>("NETPROFIT"),
                         SalePerSQft = row.Field<decimal?>("SALEPERSQFT"),
                         APC = row.Field<decimal?>("APC"),
+                        ADC = row.Field<decimal?>("ADC"),
                         DeliverySale = row.Field<decimal?>("DELIVERYSALE"),
                         NetChargeAmount = row.Field<decimal?>("NetChargeAmount"),
                         NetDiscountAmount = row.Field<decimal?>("NetDiscountAmount"),
-                        DirectCharge = row.Field<decimal?>("DirectCharge")
+                        DirectCharge = row.Field<decimal?>("DirectCharge"),
+                        TakeAway = row.Field<decimal?>("TakeAway"),
+                        OtherSale = row.Field<decimal?>("OtherSale"),
 
+                        SALEPERC = row.Field<decimal?>("SALEPERC"),
+                        SALEVARPERC = row.Field<decimal?>("SALEVARPERC"),
+                        GROSSPERC = row.Field<decimal?>("GROSSPERC"),
+                        NETPERC = row.Field<decimal?>("NETPERC"),
+                        DININPERC = row.Field<decimal?>("DININPERC"),
+                        DELIVERYPERC = row.Field<decimal?>("DELIVERYPERC")
 
                     }).OrderBy(o => o.ActualSale).ToList();
 
