@@ -1613,9 +1613,9 @@ namespace BellonaAPI.DataAccess.Class
 
                     _result = dtData.AsEnumerable().Select(row => new SaleTrendModel
                     {
-                        Date = row.Field<string>("Date"),
-                        Percentage = row.Field<decimal?>("Percentage"),
-                        Value = row.Field<decimal?>("Value"),
+                        Date = row.Field<string>("DATE"),
+                        Percentage = row.Field<decimal?>("NETPERC"),
+                        Value = row.Field<decimal?>("NETAMOUNT"),
                     }).OrderBy(o => o.Date).ToList();
 
                 }

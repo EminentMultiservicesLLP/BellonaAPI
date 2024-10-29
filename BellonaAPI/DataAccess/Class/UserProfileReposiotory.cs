@@ -474,7 +474,8 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         //UserId = row.Field<int>("UserId"),
                         MenuId = row.Field<int>("MenuId"),
-                        MenuName = row.Field<string>("MenuName"),                    
+                        MenuName = row.Field<string>("MenuName"),
+                        ParentMenuName = row.Field<string>("ParentMenuName"),                    
                         State = row.Field<bool>("AccessState"),
                         ReadWriteAcc = row.Field<bool>("ReadWriteAcc")
                     }).ToList();
