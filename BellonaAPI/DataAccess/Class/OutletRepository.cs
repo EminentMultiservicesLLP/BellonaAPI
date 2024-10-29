@@ -114,6 +114,8 @@ namespace BellonaAPI.DataAccess.Class
                         OutletAddress = row.Field<string>("Address"),
                         CityID = row.Field<int>("CityID"),
                         CityName = row.Field<string>("CityName"),
+                        BrandID = row.Field<int>("BrandID"),
+                        BrandName = row.Field<string>("BrandName"),
                         TimeZoneValue = row.Field<string>("TimeZoneValue"),
                         IsNextDayFreeze = Convert.ToBoolean(row.Field<int>("IsNextDayFreeze")),
                         FreezeTime = row.Field<string>("FreezeTime"),

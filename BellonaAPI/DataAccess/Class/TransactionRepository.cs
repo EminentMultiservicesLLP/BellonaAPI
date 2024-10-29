@@ -32,7 +32,32 @@ namespace BellonaAPI.DataAccess.Class
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Cluster> getCluster(string userId, int? CityID)
+        public IEnumerable<City> getCity(string userId, int? BrandID)
+        {
+            List<City> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection paramCollection = new DBParameterCollection();
+                    paramCollection.Add(new DBParameter("BrandID", BrandID, DbType.Int32));
+                    paramCollection.Add(new DBParameter("UserId", userId, DbType.String));
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetDashboardCitiesByBrand, paramCollection, CommandType.StoredProcedure);
+                    _result = dtData.AsEnumerable().Select(row => new City
+                    {
+                        CityID = row.Field<int>("CityID"),
+                        CityName = row.Field<string>("CityName"),
+                    }).OrderBy(o => o.CityName).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in Billing Dashboard Repository GetCity:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+            return _result;
+        }
+
+        public IEnumerable<Cluster> getCluster(string userId, int? BrandID, int? CityID)
         {
             List<Cluster> _result = null;
             TryCatch.Run(() =>
@@ -41,6 +66,7 @@ namespace BellonaAPI.DataAccess.Class
                 {
                     DBParameterCollection paramCollection = new DBParameterCollection();
                     paramCollection.Add(new DBParameter("CityID", CityID, DbType.Int32));
+                    paramCollection.Add(new DBParameter("BrandID", BrandID, DbType.Int32));
                     paramCollection.Add(new DBParameter("UserId", userId, DbType.String));
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetDashboardCluster, paramCollection, CommandType.StoredProcedure);
                     _result = dtData.AsEnumerable().Select(row => new Cluster
