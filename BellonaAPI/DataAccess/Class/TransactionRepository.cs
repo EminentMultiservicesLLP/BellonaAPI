@@ -1192,7 +1192,7 @@ namespace BellonaAPI.DataAccess.Class
         #endregion GET_DSR_Summary    
 
         #region weeklyMIS
-        public List<WeeklyMIS> GetWeeklySaleDetails(string FinancialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<WeeklyMIS> GetWeeklySaleDetails(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<WeeklyMIS> _result = null;
             TryCatch.Run(() =>
@@ -1201,7 +1201,9 @@ namespace BellonaAPI.DataAccess.Class
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
 
-                    dbCol.Add(new DBParameter("FINANCIALYEAR", FinancialYear, DbType.String));
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
                     {
@@ -1237,7 +1239,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<SalesVsBudget> GetLast12Weeks_SalesVsBudget(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<SalesVsBudget> GetLast12Weeks_SalesVsBudget(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<SalesVsBudget> _result = null;
             TryCatch.Run(() =>
@@ -1245,7 +1247,8 @@ namespace BellonaAPI.DataAccess.Class
                 using (DBHelper Dbhelper = new DBHelper())
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
-
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
@@ -1279,7 +1282,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<WeeklyCoversTrend> GetWeeklyCoversTrend(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<WeeklyCoversTrend> GetWeeklyCoversTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<WeeklyCoversTrend> result = null;
             TryCatch.Run(() =>
@@ -1287,7 +1290,8 @@ namespace BellonaAPI.DataAccess.Class
                 using (DBHelper dbHelper = new DBHelper())
                 {
                     var dbCol = new DBParameterCollection();
-
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
 
@@ -1333,7 +1337,7 @@ namespace BellonaAPI.DataAccess.Class
             return result;
         }
 
-        public List<BeverageVsBudgetTrend> GetBeverageVsBudgetTrend(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<BeverageVsBudgetTrend> GetBeverageVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<BeverageVsBudgetTrend> _result = null;
             TryCatch.Run(() =>
@@ -1341,7 +1345,8 @@ namespace BellonaAPI.DataAccess.Class
                 using (DBHelper Dbhelper = new DBHelper())
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
-
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
@@ -1375,7 +1380,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<TobaccoVsBudgetTrend> GetTobaccoVsBudgetTrend(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<TobaccoVsBudgetTrend> GetTobaccoVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<TobaccoVsBudgetTrend> _result = null;
             TryCatch.Run(() =>
@@ -1383,7 +1388,8 @@ namespace BellonaAPI.DataAccess.Class
                 using (DBHelper Dbhelper = new DBHelper())
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
-
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
@@ -1417,7 +1423,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<TimeWiseSalesBreakup> GetTimeWiseSalesBreakup(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<TimeWiseSalesBreakup> GetTimeWiseSalesBreakup(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<TimeWiseSalesBreakup> _result = null;
             TryCatch.Run(() =>
@@ -1425,7 +1431,8 @@ namespace BellonaAPI.DataAccess.Class
                 using (DBHelper Dbhelper = new DBHelper())
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
-
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     if (branchCode != "")
@@ -1460,7 +1467,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<AverageCoverTrend> GetAvgCoversTrend(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<AverageCoverTrend> GetAvgCoversTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<AverageCoverTrend> _result = null;
             TryCatch.Run(() =>
@@ -1468,7 +1475,8 @@ namespace BellonaAPI.DataAccess.Class
                 using (DBHelper Dbhelper = new DBHelper())
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
-
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
@@ -1501,7 +1509,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<LiquorVsBudgetTrend> GetLiquorVsBudgetTrend(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<LiquorVsBudgetTrend> GetLiquorVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<LiquorVsBudgetTrend> _result = null;
             TryCatch.Run(() =>
@@ -1509,7 +1517,8 @@ namespace BellonaAPI.DataAccess.Class
                 using (DBHelper Dbhelper = new DBHelper())
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
-
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
@@ -1543,7 +1552,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<FoodVsBudgetTrend> GetFoodVsBudgetTrend(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<FoodVsBudgetTrend> GetFoodVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<FoodVsBudgetTrend> _result = null;
             TryCatch.Run(() =>
@@ -1551,7 +1560,8 @@ namespace BellonaAPI.DataAccess.Class
                 using (DBHelper Dbhelper = new DBHelper())
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
-
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
@@ -1585,7 +1595,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<SaleTrendModel> GetDailySaleTrend(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<SaleTrendModel> GetDailySaleTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<SaleTrendModel> _result = null;
             TryCatch.Run(() =>
@@ -1593,7 +1603,8 @@ namespace BellonaAPI.DataAccess.Class
                 using (DBHelper Dbhelper = new DBHelper())
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
-
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
@@ -1627,7 +1638,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<SaleTrendModel> GetGrossProfitTrend(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<SaleTrendModel> GetGrossProfitTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<SaleTrendModel> _result = null;
             TryCatch.Run(() =>
@@ -1635,7 +1646,8 @@ namespace BellonaAPI.DataAccess.Class
                 using (DBHelper Dbhelper = new DBHelper())
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
-
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
@@ -1669,7 +1681,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<SaleTrendModel> GetNetProfitTrend(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<SaleTrendModel> GetNetProfitTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<SaleTrendModel> _result = null;
             TryCatch.Run(() =>
@@ -1677,7 +1689,8 @@ namespace BellonaAPI.DataAccess.Class
                 using (DBHelper Dbhelper = new DBHelper())
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
-
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
@@ -1711,7 +1724,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<MISWeeklyDataModel> GetWeeklyMISData(string FinancialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<MISWeeklyDataModel> GetWeeklyMISData(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<MISWeeklyDataModel> _result = null;
             TryCatch.Run(() =>
@@ -1719,8 +1732,9 @@ namespace BellonaAPI.DataAccess.Class
                 using (DBHelper Dbhelper = new DBHelper())
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
-
-                    dbCol.Add(new DBParameter("FINANCIALYEAR", FinancialYear, DbType.String));
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear,DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
                     {
@@ -1774,7 +1788,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<CogsBreakUp> GetCogsBreakUp(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<CogsBreakUp> GetCogsBreakUp(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<CogsBreakUp> _result = null;
             TryCatch.Run(() =>
@@ -1782,7 +1796,8 @@ namespace BellonaAPI.DataAccess.Class
                 using (DBHelper Dbhelper = new DBHelper())
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
-
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
@@ -1816,7 +1831,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<UtilityCostModel> GetUtilityCost(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<UtilityCostModel> GetUtilityCost(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<UtilityCostModel> _result = null;
             TryCatch.Run(() =>
@@ -1824,7 +1839,8 @@ namespace BellonaAPI.DataAccess.Class
                 using (DBHelper Dbhelper = new DBHelper())
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
-
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
@@ -1858,7 +1874,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<MarketingPromotion> GetMarketingPromotionCost(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<MarketingPromotion> GetMarketingPromotionCost(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<MarketingPromotion> _result = null;
             TryCatch.Run(() =>
@@ -1866,7 +1882,8 @@ namespace BellonaAPI.DataAccess.Class
                 using (DBHelper Dbhelper = new DBHelper())
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
-
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
@@ -1900,7 +1917,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
         
-        public List<OtherOperationalCostModel> GetOtherOperationalCost(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<OtherOperationalCostModel> GetOtherOperationalCost(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<OtherOperationalCostModel> _result = null;
             TryCatch.Run(() =>
@@ -1908,7 +1925,8 @@ namespace BellonaAPI.DataAccess.Class
                 using (DBHelper Dbhelper = new DBHelper())
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
-
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
@@ -1942,7 +1960,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<OccupationalCostModel> GetOccupationalCost(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<OccupationalCostModel> GetOccupationalCost(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<OccupationalCostModel> _result = null;
             TryCatch.Run(() =>
@@ -1950,7 +1968,8 @@ namespace BellonaAPI.DataAccess.Class
                 using (DBHelper Dbhelper = new DBHelper())
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
-
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
@@ -1984,7 +2003,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<CostBreakUpModel> GetCostBreakUp(string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<CostBreakUpModel> GetCostBreakUp(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
         {
             List<CostBreakUpModel> _result = null;
             TryCatch.Run(() =>
@@ -1992,7 +2011,8 @@ namespace BellonaAPI.DataAccess.Class
                 using (DBHelper Dbhelper = new DBHelper())
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
-
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")

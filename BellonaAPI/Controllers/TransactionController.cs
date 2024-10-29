@@ -369,9 +369,9 @@ namespace BellonaAPI.Controllers
         [Route("GetWeeklySaleDetails")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetWeeklySaleDetails(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetWeeklySaleDetails(Guid userId, int menuId,string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<WeeklyMIS> _result = _iRepo.GetWeeklySaleDetails(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<WeeklyMIS> _result = _iRepo.GetWeeklySaleDetails(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Weekly Sales Details."));
         }
@@ -379,9 +379,9 @@ namespace BellonaAPI.Controllers
         [Route("GetLast12Weeks_SalesVsBudget")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetLast12Weeks_SalesVsBudget(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetLast12Weeks_SalesVsBudget(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<SalesVsBudget> _result = _iRepo.GetLast12Weeks_SalesVsBudget(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<SalesVsBudget> _result = _iRepo.GetLast12Weeks_SalesVsBudget(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Last12Weeks_SalesVsBudget Details."));
         }
@@ -389,9 +389,9 @@ namespace BellonaAPI.Controllers
         [Route("GetWeeklyCoversTrend")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetWeeklyCoversTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetWeeklyCoversTrend(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<WeeklyCoversTrend> _result = _iRepo.GetWeeklyCoversTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<WeeklyCoversTrend> _result = _iRepo.GetWeeklyCoversTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
 
             if (_result != null)
                 return Ok(_result);
@@ -402,9 +402,9 @@ namespace BellonaAPI.Controllers
         [Route("GetBeverageVsBudgetTrend")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetBeverageVsBudgetTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetBeverageVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<BeverageVsBudgetTrend> _result = _iRepo.GetBeverageVsBudgetTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<BeverageVsBudgetTrend> _result = _iRepo.GetBeverageVsBudgetTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve BeverageVsBudgetTrend Details."));
         }
@@ -412,9 +412,9 @@ namespace BellonaAPI.Controllers
         [Route("GetTobaccoVsBudgetTrend")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetTobaccoVsBudgetTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetTobaccoVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<TobaccoVsBudgetTrend> _result = _iRepo.GetTobaccoVsBudgetTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<TobaccoVsBudgetTrend> _result = _iRepo.GetTobaccoVsBudgetTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve TobaccoVsBudgetTrend Details."));
         }
@@ -422,9 +422,9 @@ namespace BellonaAPI.Controllers
         [Route("GetTimeWiseSalesBreakup")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetTimeWiseSalesBreakup(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetTimeWiseSalesBreakup(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<TimeWiseSalesBreakup> _result = _iRepo.GetTimeWiseSalesBreakup(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<TimeWiseSalesBreakup> _result = _iRepo.GetTimeWiseSalesBreakup(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve GetTimeWiseSalesBreakup Details."));
         }
@@ -432,9 +432,9 @@ namespace BellonaAPI.Controllers
         [Route("GetAvgCoversTrend")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetAvgCoversTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetAvgCoversTrend(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<AverageCoverTrend> _result = _iRepo.GetAvgCoversTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<AverageCoverTrend> _result = _iRepo.GetAvgCoversTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve GetAvgCoversTrend Details."));
         }
@@ -442,9 +442,9 @@ namespace BellonaAPI.Controllers
         [Route("GetLiquorVsBudgetTrend")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetLiquorVsBudgetTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetLiquorVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<LiquorVsBudgetTrend> _result = _iRepo.GetLiquorVsBudgetTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<LiquorVsBudgetTrend> _result = _iRepo.GetLiquorVsBudgetTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve GetLiquorVsBudgetTrend Details."));
         }
@@ -452,9 +452,9 @@ namespace BellonaAPI.Controllers
         [Route("GetFoodVsBudgetTrend")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetFoodVsBudgetTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetFoodVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<FoodVsBudgetTrend> _result = _iRepo.GetFoodVsBudgetTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<FoodVsBudgetTrend> _result = _iRepo.GetFoodVsBudgetTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve GetFoodVsBudgetTrend Details."));
         }
@@ -462,9 +462,9 @@ namespace BellonaAPI.Controllers
         [Route("GetDailySaleTrend")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetDailySaleTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetDailySaleTrend(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<SaleTrendModel> _result = _iRepo.GetDailySaleTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<SaleTrendModel> _result = _iRepo.GetDailySaleTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Get Daily Sale Trend Details."));
         }
@@ -472,9 +472,9 @@ namespace BellonaAPI.Controllers
         [Route("GetGrossProfitTrend")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetGrossProfitTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetGrossProfitTrend(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<SaleTrendModel> _result = _iRepo.GetGrossProfitTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<SaleTrendModel> _result = _iRepo.GetGrossProfitTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Get Gross Profit Trend Details."));
         }   
@@ -482,9 +482,9 @@ namespace BellonaAPI.Controllers
         [Route("GetNetProfitTrend")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetNetProfitTrend(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetNetProfitTrend(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<SaleTrendModel> _result = _iRepo.GetNetProfitTrend(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<SaleTrendModel> _result = _iRepo.GetNetProfitTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Get Net Profit Trend Details."));
         }
@@ -492,9 +492,9 @@ namespace BellonaAPI.Controllers
         [Route("GetWeeklyMISData")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetWeeklyMISData(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetWeeklyMISData(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<MISWeeklyDataModel> _result = _iRepo.GetWeeklyMISData(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<MISWeeklyDataModel> _result = _iRepo.GetWeeklyMISData(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Get Weekly MISData Details."));
         }
@@ -502,9 +502,9 @@ namespace BellonaAPI.Controllers
         [Route("GetCogsBreakUp")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetCogsBreakUp(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetCogsBreakUp(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<CogsBreakUp> _result = _iRepo.GetCogsBreakUp(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<CogsBreakUp> _result = _iRepo.GetCogsBreakUp(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve GetCogsBreakUp Details."));
         }
@@ -512,9 +512,9 @@ namespace BellonaAPI.Controllers
         [Route("GetUtilityCost")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetUtilityCost(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetUtilityCost(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<UtilityCostModel> _result = _iRepo.GetUtilityCost(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<UtilityCostModel> _result = _iRepo.GetUtilityCost(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Get UtilityCost Details."));
         }
@@ -522,9 +522,9 @@ namespace BellonaAPI.Controllers
         [Route("GetMarketingPromotionCost")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetMarketingPromotionCost(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetMarketingPromotionCost(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<MarketingPromotion> _result = _iRepo.GetMarketingPromotionCost(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<MarketingPromotion> _result = _iRepo.GetMarketingPromotionCost(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Get MarketingPromotionCost Details."));
         }
@@ -532,9 +532,9 @@ namespace BellonaAPI.Controllers
         [Route("GetOtherOperationalCost")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetOtherOperationalCost(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetOtherOperationalCost(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<OtherOperationalCostModel> _result = _iRepo.GetOtherOperationalCost(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<OtherOperationalCostModel> _result = _iRepo.GetOtherOperationalCost(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Get Other Operational Cost Details."));
         }
@@ -543,9 +543,9 @@ namespace BellonaAPI.Controllers
         [Route("GetOccupationalCost")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetOccupationalCost(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetOccupationalCost(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<OccupationalCostModel> _result = _iRepo.GetOccupationalCost(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<OccupationalCostModel> _result = _iRepo.GetOccupationalCost(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Get Rent and Occupational Cost Details."));
         }
@@ -553,9 +553,9 @@ namespace BellonaAPI.Controllers
         [Route("GetCostBreakUp")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetCostBreakUp(string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
+        public IHttpActionResult GetCostBreakUp(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null)
         {
-            List<CostBreakUpModel> _result = _iRepo.GetCostBreakUp(financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
+            List<CostBreakUpModel> _result = _iRepo.GetCostBreakUp(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Get Cost BreakUp Details."));
         }

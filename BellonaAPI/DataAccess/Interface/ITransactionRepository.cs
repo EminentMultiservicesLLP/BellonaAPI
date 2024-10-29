@@ -48,25 +48,25 @@ namespace BellonaAPI.DataAccess.Interface
         List<DSR_Summary> GetDSR_Summary(string outletCode, string startDate, string endDate, int cityId, int clusterId);
 
         #region MIS weekly chart
-        List<WeeklyMIS> GetWeeklySaleDetails(string FinancialYear, string week, string branchCode, int cityId, int clusterId);
-        List<SalesVsBudget> GetLast12Weeks_SalesVsBudget(string financialYear, string week, string branchCode, int cityId, int clusterId);
-        List<WeeklyCoversTrend> GetWeeklyCoversTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
-        List<BeverageVsBudgetTrend> GetBeverageVsBudgetTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
-        List<TobaccoVsBudgetTrend> GetTobaccoVsBudgetTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
-        List<TimeWiseSalesBreakup> GetTimeWiseSalesBreakup(string financialYear, string week, string branchCode, int cityId, int clusterId);
-        List<AverageCoverTrend> GetAvgCoversTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
-        List<LiquorVsBudgetTrend> GetLiquorVsBudgetTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
-        List<FoodVsBudgetTrend> GetFoodVsBudgetTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
-        List<SaleTrendModel> GetDailySaleTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
-        List<SaleTrendModel> GetGrossProfitTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
-        List<SaleTrendModel> GetNetProfitTrend(string financialYear, string week, string branchCode, int cityId, int clusterId);
-        List<MISWeeklyDataModel> GetWeeklyMISData(string FinancialYear, string week, string branchCode, int cityId, int clusterId); 
-        List<CogsBreakUp> GetCogsBreakUp(string financialYear, string week, string branchCode, int cityId, int clusterId);
-        List<UtilityCostModel> GetUtilityCost(string financialYear, string week, string branchCode, int cityId, int clusterId);
-        List<MarketingPromotion> GetMarketingPromotionCost(string financialYear, string week, string branchCode, int cityId, int clusterId);
-        List<OtherOperationalCostModel> GetOtherOperationalCost(string financialYear, string week, string branchCode, int cityId, int clusterId);
-        List<OccupationalCostModel> GetOccupationalCost(string financialYear, string week, string branchCode, int cityId, int clusterId);
-        List<CostBreakUpModel> GetCostBreakUp(string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<WeeklyMIS> GetWeeklySaleDetails(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<SalesVsBudget> GetLast12Weeks_SalesVsBudget(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<WeeklyCoversTrend> GetWeeklyCoversTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<BeverageVsBudgetTrend> GetBeverageVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<TobaccoVsBudgetTrend> GetTobaccoVsBudgetTrend(Guid userId, int menuId,string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<TimeWiseSalesBreakup> GetTimeWiseSalesBreakup(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<AverageCoverTrend> GetAvgCoversTrend(Guid userId, int menuId,string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<LiquorVsBudgetTrend> GetLiquorVsBudgetTrend(Guid userId, int menuId,string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<FoodVsBudgetTrend> GetFoodVsBudgetTrend(Guid userId, int menuId,string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<SaleTrendModel> GetDailySaleTrend(Guid userId, int menuId,string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<SaleTrendModel> GetGrossProfitTrend(Guid userId, int menuId,string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<SaleTrendModel> GetNetProfitTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<MISWeeklyDataModel> GetWeeklyMISData(Guid userId, int menuId,string financialYear, string week, string branchCode, int cityId, int clusterId); 
+        List<CogsBreakUp> GetCogsBreakUp(Guid userId, int menuId,string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<UtilityCostModel> GetUtilityCost(Guid userId, int menuId,string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<MarketingPromotion> GetMarketingPromotionCost(Guid userId, int menuId,string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<OtherOperationalCostModel> GetOtherOperationalCost(Guid userId, int menuId,string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<OccupationalCostModel> GetOccupationalCost(Guid userId, int menuId,string financialYear, string week, string branchCode, int cityId, int clusterId);
+        List<CostBreakUpModel> GetCostBreakUp(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId);
         #endregion
         List<WeeklySnapshot> GetSanpshotWeeklyData(int WeekNo, string Year, int OutletId);
         bool SaveSnapshotEntry(SnapshotModel SnapshotEntry);

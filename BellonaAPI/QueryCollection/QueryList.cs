@@ -111,9 +111,10 @@
         public const string GetAvgCoversTrend = "dbsp_GetAvgCoversTrend";
         public const string GetLiquorVsBudgetTrend = "dbsp_GetLiquorVsBudgetTrend";
         public const string GetFoodVsBudgetTrend = "dbsp_GetFoodVsBudgetTrend";
-        public const string GetDailySaleTrend = "dbsp_GetDailySaleTrend";
-        public const string GetGrossProfitTrend = "dbsp_GetGrossProfitTrend";
-        public const string GetNetProfitTrend = "dbsp_GetNetProfitTrend";
+        //public const string GetDailySaleTrend = "dbsp_GetDailySaleTrend";
+        public const string GetDailySaleTrend = "dbsp_GetDailyWiseSale_chart";
+        public const string GetGrossProfitTrend = "dbsp_GetLast12Weeks_GrossProfit";
+        public const string GetNetProfitTrend = "dbsp_GetLast12Weeks_NetProfit";
         public const string GetWeeklyMISData = "dbsp_GetWeeklyMISData";
         public const string GetCogsBreakUp = "dbsp_GetCogsBreakUp";
         public const string GetUtilityCost = "dbsp_GetUtilityCost";
