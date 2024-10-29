@@ -39,13 +39,22 @@ namespace BellonaAPI.Controllers
         //    if (_result != null) return Ok(_result);
         //    else return InternalServerError(new System.Exception("Failed to retrieve DSREntry data"));
         //}
+        [Route("getCity")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetCity(string userId, int? BrandID = null)
+        {
+            List<City> _result = _iRepo.getCity(userId, BrandID).ToList();
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Citys"));
+        }
 
         [Route("getCluster")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetCluster(string userId, int? CityID = null)
+        public IHttpActionResult GetCluster(string userId, int? BrandID = null, int? CityID = null)
         {
-            List<Cluster> _result = _iRepo.getCluster(userId, CityID).ToList();
+            List<Cluster> _result = _iRepo.getCluster(userId, BrandID, CityID).ToList();
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Get Clusters"));
         }
