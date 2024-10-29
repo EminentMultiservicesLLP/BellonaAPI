@@ -227,7 +227,8 @@
         //********************************** B2C Billing ***************************************
 
         public const string GetDashboardCity = "dbsp_Bill_GetDashboardCity";  
-        public const string GetDashboardCluster = "dbsp_Bill_GetDashboardCluster";  
+        public const string GetDashboardCitiesByBrand = "dbsp_Bill_GetDashboardCitiesByBrand";  
+        public const string GetDashboardCluster = "dbsp_Bill_GetDashboardCluster";
         public const string GetDashboardOutlet = "dbsp_Bill_GetDashboardOutlet";  
         public const string GetFunctionForStatus = "dbsp_Bill_GetFunctionForStatus";  
         public const string GetAllInvoiceUpload = "dbsp_Bill_GetAllInvoiceUpload";  

@@ -36,6 +36,8 @@ namespace BellonaAPI.Models.Masters
     {
         public int CityID { get; set; }
         public string CityName { get; set; }
+        public int BrandID { get; set; }
+        public int BrandName { get; set; }
         public int CountryID { get; set; }
         public string CountryName { get; set; }
         public bool IsActive { get; set; }
