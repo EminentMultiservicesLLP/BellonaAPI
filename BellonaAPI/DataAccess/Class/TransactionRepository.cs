@@ -1218,7 +1218,7 @@ namespace BellonaAPI.DataAccess.Class
         #endregion GET_DSR_Summary    
 
         #region weeklyMIS
-        public List<WeeklyMIS> GetWeeklySaleDetails(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<WeeklyMIS> GetWeeklySaleDetails(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<WeeklyMIS> _result = null;
             TryCatch.Run(() =>
@@ -1243,6 +1243,10 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
                     }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
 
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeeklySaleDetails, dbCol, CommandType.StoredProcedure);
 
@@ -1265,7 +1269,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<SalesVsBudget> GetLast12Weeks_SalesVsBudget(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<SalesVsBudget> GetLast12Weeks_SalesVsBudget(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<SalesVsBudget> _result = null;
             TryCatch.Run(() =>
@@ -1289,7 +1293,10 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
                     }
-
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetLast12Weeks_SalesVsBudget, dbCol, CommandType.StoredProcedure);
 
                     _result = dtData.AsEnumerable().Select(row => new SalesVsBudget
@@ -1308,7 +1315,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<WeeklyCoversTrend> GetWeeklyCoversTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<WeeklyCoversTrend> GetWeeklyCoversTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<WeeklyCoversTrend> result = null;
             TryCatch.Run(() =>
@@ -1332,6 +1339,10 @@ namespace BellonaAPI.DataAccess.Class
                     if (cityId > 0)
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
                     }
 
                     // Execute the stored procedure and retrieve data
@@ -1363,7 +1374,7 @@ namespace BellonaAPI.DataAccess.Class
             return result;
         }
 
-        public List<BeverageVsBudgetTrend> GetBeverageVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<BeverageVsBudgetTrend> GetBeverageVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<BeverageVsBudgetTrend> _result = null;
             TryCatch.Run(() =>
@@ -1387,6 +1398,10 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
                     }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
 
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetBeverageVsBudgetTrend, dbCol, CommandType.StoredProcedure);
 
@@ -1406,7 +1421,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<TobaccoVsBudgetTrend> GetTobaccoVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<TobaccoVsBudgetTrend> GetTobaccoVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<TobaccoVsBudgetTrend> _result = null;
             TryCatch.Run(() =>
@@ -1430,6 +1445,10 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
                     }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
 
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetTobaccoVsBudgetTrend, dbCol, CommandType.StoredProcedure);
 
@@ -1449,7 +1468,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<TimeWiseSalesBreakup> GetTimeWiseSalesBreakup(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<TimeWiseSalesBreakup> GetTimeWiseSalesBreakup(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<TimeWiseSalesBreakup> _result = null;
             TryCatch.Run(() =>
@@ -1473,7 +1492,10 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
                     }
-
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetTimeWiseSalesBreakup, dbCol, CommandType.StoredProcedure);
 
                     _result = dtData.AsEnumerable().Select(row => new TimeWiseSalesBreakup
@@ -1493,7 +1515,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<AverageCoverTrend> GetAvgCoversTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<AverageCoverTrend> GetAvgCoversTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<AverageCoverTrend> _result = null;
             TryCatch.Run(() =>
@@ -1517,7 +1539,10 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
                     }
-
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetAvgCoversTrend, dbCol, CommandType.StoredProcedure);
 
                     _result = dtData.AsEnumerable().Select(row => new AverageCoverTrend
@@ -1535,7 +1560,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<LiquorVsBudgetTrend> GetLiquorVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<LiquorVsBudgetTrend> GetLiquorVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<LiquorVsBudgetTrend> _result = null;
             TryCatch.Run(() =>
@@ -1559,7 +1584,10 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
                     }
-
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetLiquorVsBudgetTrend, dbCol, CommandType.StoredProcedure);
 
                     _result = dtData.AsEnumerable().Select(row => new LiquorVsBudgetTrend
@@ -1578,7 +1606,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<FoodVsBudgetTrend> GetFoodVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<FoodVsBudgetTrend> GetFoodVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<FoodVsBudgetTrend> _result = null;
             TryCatch.Run(() =>
@@ -1602,7 +1630,10 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
                     }
-
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetFoodVsBudgetTrend, dbCol, CommandType.StoredProcedure);
 
                     _result = dtData.AsEnumerable().Select(row => new FoodVsBudgetTrend
@@ -1621,7 +1652,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<SaleTrendModel> GetDailySaleTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<SaleTrendModel> GetDailySaleTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<SaleTrendModel> _result = null;
             TryCatch.Run(() =>
@@ -1644,6 +1675,10 @@ namespace BellonaAPI.DataAccess.Class
                     else if (cityId > 0)
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
                     }
 
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetDailySaleTrend, dbCol, CommandType.StoredProcedure);
@@ -1664,7 +1699,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<SaleTrendModel> GetGrossProfitTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<SaleTrendModel> GetGrossProfitTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<SaleTrendModel> _result = null;
             TryCatch.Run(() =>
@@ -1688,7 +1723,10 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
                     }
-
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetGrossProfitTrend, dbCol, CommandType.StoredProcedure);
 
                     _result = dtData.AsEnumerable().Select(row => new SaleTrendModel
@@ -1707,7 +1745,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<SaleTrendModel> GetNetProfitTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<SaleTrendModel> GetNetProfitTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<SaleTrendModel> _result = null;
             TryCatch.Run(() =>
@@ -1730,6 +1768,10 @@ namespace BellonaAPI.DataAccess.Class
                     else if (cityId > 0)
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
                     }
 
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetNetProfitTrend, dbCol, CommandType.StoredProcedure);
@@ -1750,7 +1792,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<MISWeeklyDataModel> GetWeeklyMISData(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<MISWeeklyDataModel> GetWeeklyMISData(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<MISWeeklyDataModel> _result = null;
             TryCatch.Run(() =>
@@ -1774,7 +1816,10 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
                     }
-
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeeklyMISData, dbCol, CommandType.StoredProcedure);
 
                     _result = dtData.AsEnumerable().Select(row => new MISWeeklyDataModel
@@ -1801,7 +1846,13 @@ namespace BellonaAPI.DataAccess.Class
                         GROSSPERC = row.Field<decimal?>("GROSSPERC"),
                         NETPERC = row.Field<decimal?>("NETPERC"),
                         DININPERC = row.Field<decimal?>("DININPERC"),
-                        DELIVERYPERC = row.Field<decimal?>("DELIVERYPERC")
+                        DELIVERYPERC = row.Field<decimal?>("DELIVERYPERC"),
+
+                        ADSWeekdays = row.Field<decimal?>("ADSWEEKDAYS"),
+                        ADSWeekend = row.Field<decimal?>("ADSWEEKEND"),
+                        NetSale = row.Field<decimal?>("NETSALE"),
+                        
+
 
                     }).OrderBy(o => o.ActualSale).ToList();
 
@@ -1814,7 +1865,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<CogsBreakUp> GetCogsBreakUp(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<CogsBreakUp> GetCogsBreakUp(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<CogsBreakUp> _result = null;
             TryCatch.Run(() =>
@@ -1838,6 +1889,10 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
                     }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
 
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetCogsBreakUp, dbCol, CommandType.StoredProcedure);
 
@@ -1857,7 +1912,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<UtilityCostModel> GetUtilityCost(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<UtilityCostModel> GetUtilityCost(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<UtilityCostModel> _result = null;
             TryCatch.Run(() =>
@@ -1881,7 +1936,10 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
                     }
-
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetUtilityCost, dbCol, CommandType.StoredProcedure);
 
                     _result = dtData.AsEnumerable().Select(row => new UtilityCostModel
@@ -1900,7 +1958,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<MarketingPromotion> GetMarketingPromotionCost(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<MarketingPromotion> GetMarketingPromotionCost(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<MarketingPromotion> _result = null;
             TryCatch.Run(() =>
@@ -1924,6 +1982,10 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
                     }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
 
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetMarketingPromotionCost, dbCol, CommandType.StoredProcedure);
 
@@ -1943,7 +2005,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
         
-        public List<OtherOperationalCostModel> GetOtherOperationalCost(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<OtherOperationalCostModel> GetOtherOperationalCost(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<OtherOperationalCostModel> _result = null;
             TryCatch.Run(() =>
@@ -1967,6 +2029,10 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
                     }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
 
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetOtherOperationalCost, dbCol, CommandType.StoredProcedure);
 
@@ -1986,7 +2052,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<OccupationalCostModel> GetOccupationalCost(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<OccupationalCostModel> GetOccupationalCost(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<OccupationalCostModel> _result = null;
             TryCatch.Run(() =>
@@ -2010,6 +2076,10 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
                     }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
 
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetOccupationalCost, dbCol, CommandType.StoredProcedure);
 
@@ -2029,7 +2099,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public List<CostBreakUpModel> GetCostBreakUp(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId)
+        public List<CostBreakUpModel> GetCostBreakUp(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<CostBreakUpModel> _result = null;
             TryCatch.Run(() =>
@@ -2052,6 +2122,10 @@ namespace BellonaAPI.DataAccess.Class
                     else if (cityId > 0)
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
                     }
 
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetCostBreakUp, dbCol, CommandType.StoredProcedure);
@@ -2109,7 +2183,6 @@ namespace BellonaAPI.DataAccess.Class
 
             return _result;
         }
-
         public bool SaveSnapshotEntry(SnapshotModel SnapshotEntry)
         {
 
@@ -2137,9 +2210,6 @@ namespace BellonaAPI.DataAccess.Class
             });
             return IsSuccess;
         }
-
-
-
         public List<WeeklySalesSnapshot> GetWeeklySalesSnapshot(string Week, string Year, int OutletId)
         {
             List<WeeklySalesSnapshot> _result = null;
