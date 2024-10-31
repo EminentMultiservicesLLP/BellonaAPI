@@ -569,6 +569,26 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to retrieve Get Cost BreakUp Details."));
         }
 
+        [Route("GetWeekDays_CoverCapicityUtilization")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetWeekDays_CoverCapicityUtilization(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<TimeWiseSalesBreakup> _result = _iRepo.GetWeekDays_CoverCapicityUtilization(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetWeekDays_CoverCapicityUtilization Details."));
+        }
+
+        [Route("GetWeekend_CoverCapicityUtilization")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetWeekend_CoverCapicityUtilization(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<TimeWiseSalesBreakup> _result = _iRepo.GetWeekend_CoverCapicityUtilization(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetWeekend_CoverCapicityUtilization Details."));
+        }
+
         #endregion WeeklyMIS 
 
         #region DSR Sanpshot

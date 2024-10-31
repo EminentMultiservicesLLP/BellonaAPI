@@ -122,6 +122,8 @@
         public const string GetOtherOperationalCost = "dbsp_GetOtherOperationalCost";
         public const string GetOccupationalCost = "dbsp_GetOccupationalCost";
         public const string GetCostBreakUp = "dbsp_GetCostBreakUp";
+        public const string GetWeekDays_CoverCapicityUtilization = "dbsp_GetWeekDays_CoverCapicityUtilization";
+        public const string GetWeekend_CoverCapicityUtilization = "dbsp_GetWeekend_CoverCapicityUtilization";
 
 
         public const string GetSalesCategory = "dbsp_GetSalesCategory";
