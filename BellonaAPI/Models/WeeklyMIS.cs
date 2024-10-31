@@ -104,6 +104,7 @@ namespace BellonaAPI.Models
     public class SaleTrendModel
     {
         public string Date { get; set; }
+        public string Day { get; set; }
         public decimal? Percentage { get; set; }
         public decimal? Value { get; set; }
     }

@@ -548,7 +548,6 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to retrieve Get Other Operational Cost Details."));
         }
 
-
         [Route("GetOccupationalCost")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
@@ -567,6 +566,15 @@ namespace BellonaAPI.Controllers
             List<CostBreakUpModel> _result = _iRepo.GetCostBreakUp(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Get Cost BreakUp Details."));
+        }
+        [Route("GetLast12Weeks_CoverTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetLast12Weeks_CoverTrend(Guid userId, int menuId,string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<WeeklyCoversTrend> _result = _iRepo.GetLast12Weeks_CoverTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetLast12Weeks_CoverTrend Details."));
         }
 
         #endregion WeeklyMIS 
