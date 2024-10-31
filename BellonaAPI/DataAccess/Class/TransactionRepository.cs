@@ -2205,6 +2205,101 @@ namespace BellonaAPI.DataAccess.Class
 
             return result;
         }
+
+        public List<TimeWiseSalesBreakup> GetWeekDays_CoverCapicityUtilization(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<TimeWiseSalesBreakup> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeekDays_CoverCapicityUtilization, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new TimeWiseSalesBreakup
+                    {
+                        SessionName = row.Field<string>("SessionName"),
+                        Session_NetAmount = row.Field<decimal?>("SESSION_NETAMOUNT"),
+                        Total_NetAmount = row.Field<decimal?>("TOTAL_NETAMOUNT"),
+                        Percentage = row.Field<decimal>("Percentage")
+                    }).OrderBy(o => o.SessionName).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetWeekDays_CoverCapicityUtilization:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
+        public List<TimeWiseSalesBreakup> GetWeekend_CoverCapicityUtilization(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<TimeWiseSalesBreakup> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeekend_CoverCapicityUtilization, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new TimeWiseSalesBreakup
+                    {
+                        SessionName = row.Field<string>("SessionName"),
+                        Session_NetAmount = row.Field<decimal?>("SESSION_NETAMOUNT"),
+                        Total_NetAmount = row.Field<decimal?>("TOTAL_NETAMOUNT"),
+                        Percentage = row.Field<decimal>("Percentage")
+                    }).OrderBy(o => o.SessionName).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetWeekend_CoverCapicityUtilization:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
         #endregion weeklyMIS
 
         #region DSR Snapshot
