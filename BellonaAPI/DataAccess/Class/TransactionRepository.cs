@@ -2300,6 +2300,124 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
+        public List<WeeklyCoversTrend> GetLast12Weeks_WeekendCoversTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<WeeklyCoversTrend> result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper dbHelper = new DBHelper())
+                {
+                    var dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+
+                    if (!string.IsNullOrEmpty(branchCode))
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+
+                    // Execute the stored procedure and retrieve data
+                    DataTable dtData = dbHelper.ExecuteDataTable(QueryList.GetLast12Weeks_WeekendCoversTrend, dbCol, CommandType.StoredProcedure);
+
+                    // Get date columns, excluding "SessionName"
+                    var dateColumns = dtData.Columns.Cast<DataColumn>()
+                        .Where(col => col.ColumnName != "SessionName")
+                        .Select(col => col.ColumnName)
+                        .ToList();
+
+                    // Process the data into a list of WeeklyCoversTrend
+                    result = dtData.AsEnumerable()
+                        .Select(row => new WeeklyCoversTrend
+                        {
+                            SessionName = row.Field<string>("SessionName"),
+                            SessionDetails = dateColumns.ToDictionary(
+                                date => date,
+                                date => row.IsNull(date) ? 0 : Convert.ToInt32(row[date])
+                            )
+                        })
+                        .ToList();
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in MealRepository GetLast12Weeks_WeekendCoversTrend Trend: " + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return result;
+        }
+
+        public List<WeeklyCoversTrend> GetLast12Weeks_WeekDaysCoversTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<WeeklyCoversTrend> result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper dbHelper = new DBHelper())
+                {
+                    var dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+
+                    if (!string.IsNullOrEmpty(branchCode))
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+
+                    // Execute the stored procedure and retrieve data
+                    DataTable dtData = dbHelper.ExecuteDataTable(QueryList.GetLast12Weeks_WeekDaysCoversTrend, dbCol, CommandType.StoredProcedure);
+
+                    // Get date columns, excluding "SessionName"
+                    var dateColumns = dtData.Columns.Cast<DataColumn>()
+                        .Where(col => col.ColumnName != "SessionName")
+                        .Select(col => col.ColumnName)
+                        .ToList();
+
+                    // Process the data into a list of WeeklyCoversTrend
+                    result = dtData.AsEnumerable()
+                        .Select(row => new WeeklyCoversTrend
+                        {
+                            SessionName = row.Field<string>("SessionName"),
+                            SessionDetails = dateColumns.ToDictionary(
+                                date => date,
+                                date => row.IsNull(date) ? 0 : Convert.ToInt32(row[date])
+                            )
+                        })
+                        .ToList();
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in MealRepository GetLast12Weeks_WeekDaysCoversTrend Trend: " + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return result;
+        }
+
         #endregion weeklyMIS
 
         #region DSR Snapshot

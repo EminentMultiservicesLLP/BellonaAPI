@@ -71,6 +71,8 @@ namespace BellonaAPI.DataAccess.Interface
         List<WeeklyCoversTrend> GetLast12Weeks_CoverTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
         List<TimeWiseSalesBreakup> GetWeekDays_CoverCapicityUtilization(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
         List<TimeWiseSalesBreakup> GetWeekend_CoverCapicityUtilization(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
+        List<WeeklyCoversTrend> GetLast12Weeks_WeekendCoversTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
+        List<WeeklyCoversTrend> GetLast12Weeks_WeekDaysCoversTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
         #endregion
         List<WeeklySnapshot> GetSanpshotWeeklyData(int WeekNo, string Year, int OutletId);
         bool SaveSnapshotEntry(SnapshotModel SnapshotEntry);

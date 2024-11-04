@@ -576,7 +576,6 @@ namespace BellonaAPI.Controllers
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve GetLast12Weeks_CoverTrend Details."));
         }
-
         [Route("GetWeekDays_CoverCapicityUtilization")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
@@ -595,6 +594,26 @@ namespace BellonaAPI.Controllers
             List<TimeWiseSalesBreakup> _result = _iRepo.GetWeekend_CoverCapicityUtilization(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve GetWeekend_CoverCapicityUtilization Details."));
+        }
+
+        [Route("GetLast12Weeks_WeekendCoversTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetLast12Weeks_WeekendCoversTrend(Guid userId, int menuId,string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<WeeklyCoversTrend> _result = _iRepo.GetLast12Weeks_WeekendCoversTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetLast12Weeks_WeekendCoversTrend Details."));
+        }
+
+         [Route("GetLast12Weeks_WeekDaysCoversTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetLast12Weeks_WeekDaysCoversTrend(Guid userId, int menuId,string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<WeeklyCoversTrend> _result = _iRepo.GetLast12Weeks_WeekDaysCoversTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetLast12Weeks_WeekDaysCoversTrend Details."));
         }
 
         #endregion WeeklyMIS 
