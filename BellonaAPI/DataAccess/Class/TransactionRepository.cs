@@ -1278,7 +1278,7 @@ namespace BellonaAPI.DataAccess.Class
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
                     dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
-                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32)); 
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
