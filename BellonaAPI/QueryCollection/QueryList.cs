@@ -127,6 +127,12 @@
         public const string GetCostBreakUp = "dbsp_GetCostBreakUp";
         public const string GetWeekDays_CoverCapicityUtilization = "dbsp_GetWeekDays_CoverCapicityUtilization";
         public const string GetWeekend_CoverCapicityUtilization = "dbsp_GetWeekend_CoverCapicityUtilization";
+        public const string GetDeliveySaleTrends = "dbsp_GetDeliverySaleTrend";
+        public const string GetDeliveySaleBreakup = "dbsp_GetDeliverySaleBreakUp";
+        public const string GetFoodCostTrend = "dbsp_GetFoodCostTrend";
+        public const string GetLiquorCostTrend = "dbsp_GetLiquorCostTrend";
+        public const string GetBeverageCostTrend = "dbsp_GetBeverageCostTrend";
+        public const string GetCogsCostTrend = "dbsp_GetTotalCostTrend";
 
 
         public const string GetSalesCategory = "dbsp_GetSalesCategory";

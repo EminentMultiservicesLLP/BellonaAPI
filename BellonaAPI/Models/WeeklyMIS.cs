@@ -144,9 +144,25 @@ namespace BellonaAPI.Models
     }
 
     public class CostBreakUpModel
-    {
+    {        
         public string CostBreakUp { get; set; }
         public decimal? Amount { get; set; }
         public decimal? Percentage { get; set; }
+    }
+    public class DeliverySaleTrend
+    {
+        public string Week { get; set; }
+        public decimal? DeliverySale { get; set; }
+    }
+    public class DeliverySaleBreakup
+    {
+        public string Source { get; set; }
+        public decimal? SaleAmount { get; set; }
+        public decimal? Percentage { get; set; }
+    }
+    public class CostTrend
+    {
+        public string Week { get; set; }
+        public decimal? CostAmount { get; set; }
     }
 }

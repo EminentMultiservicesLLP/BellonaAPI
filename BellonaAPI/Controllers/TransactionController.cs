@@ -606,7 +606,7 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to retrieve GetLast12Weeks_WeekendCoversTrend Details."));
         }
 
-         [Route("GetLast12Weeks_WeekDaysCoversTrend")]
+        [Route("GetLast12Weeks_WeekDaysCoversTrend")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
         public IHttpActionResult GetLast12Weeks_WeekDaysCoversTrend(Guid userId, int menuId,string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
@@ -616,6 +616,65 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to retrieve GetLast12Weeks_WeekDaysCoversTrend Details."));
         }
 
+        [Route("GetDeliveySaleTrends")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetDeliveySaleTrends(Guid userId, int menuId,string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<DeliverySaleTrend> _result = _iRepo.GetDeliveySaleTrends(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve DeliveySaleTrends Details."));
+        }
+
+        [Route("GetDeliveySale")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetDeliveySale(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<DeliverySaleBreakup> _result = _iRepo.GetDeliveySale(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Delivey Sales Breakup Details."));
+        }
+        
+        [Route("GetFoodCostTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetFoodCostTrend(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<CostTrend> _result = _iRepo.GetFoodCostTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Food Cost Trend Details."));
+        }
+
+        [Route("GetLiquorCostTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetLiquorCostTrend(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<CostTrend> _result = _iRepo.GetLiquorCostTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Liquor Cost Trend Details."));
+        }
+
+        [Route("GetBeverageCostTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetBeverageCostTrend(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<CostTrend> _result = _iRepo.GetBeverageCostTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Beverage Cost Trend Details."));
+        }
+
+        [Route("GetCogsCostTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetCogsCostTrend(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<CostTrend> _result = _iRepo.GetCogsCostTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve COGS Cost Trend Details."));
+        }
         #endregion WeeklyMIS 
 
         #region DSR Sanpshot
