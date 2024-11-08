@@ -99,6 +99,7 @@ namespace BellonaAPI.Models
         public decimal? ADSWeekdays { get; set; }
         public decimal? ADSWeekend { get; set; }
         public decimal? NetSale { get; set; }
+        public decimal? DISCOUNTAMTPERC { get; set; }
     }
 
     public class SaleTrendModel

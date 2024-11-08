@@ -1852,6 +1852,7 @@ namespace BellonaAPI.DataAccess.Class
                         ADSWeekdays = row.Field<decimal?>("ADSWEEKDAYS"),
                         ADSWeekend = row.Field<decimal?>("ADSWEEKEND"),
                         NetSale = row.Field<decimal?>("NETSALE"),
+                        DISCOUNTAMTPERC = row.Field<decimal?>("DISCOUNTAMTPERC"),
                         
 
 
