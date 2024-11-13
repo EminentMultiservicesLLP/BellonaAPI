@@ -1685,7 +1685,7 @@ namespace BellonaAPI.DataAccess.Class
 
                     _result = dtData.AsEnumerable().Select(row => new SaleTrendModel
                     {
-                        Date = row.Field<string>("DATE"),
+                        //Date = row.Field<string>("DATE"),
                         Day = row.Field<string>("DAY"),
                         Percentage = row.Field<decimal?>("NETPERC"),
                         Value = row.Field<decimal?>("NETAMOUNT"),
