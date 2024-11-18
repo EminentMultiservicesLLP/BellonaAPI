@@ -2243,7 +2243,7 @@ namespace BellonaAPI.DataAccess.Class
                         Session_NetAmount = row.Field<decimal?>("SESSION_NETAMOUNT"),
                         Total_NetAmount = row.Field<decimal?>("TOTAL_NETAMOUNT"),
                         Percentage = row.Field<decimal>("Percentage")
-                    }).OrderBy(o => o.SessionName).ToList();
+                    }).ToList();
 
                 }
             }).IfNotNull((ex) =>
@@ -2290,7 +2290,7 @@ namespace BellonaAPI.DataAccess.Class
                         Session_NetAmount = row.Field<decimal?>("SESSION_NETAMOUNT"),
                         Total_NetAmount = row.Field<decimal?>("TOTAL_NETAMOUNT"),
                         Percentage = row.Field<decimal>("Percentage")
-                    }).OrderBy(o => o.SessionName).ToList();
+                    }).ToList();
 
                 }
             }).IfNotNull((ex) =>
