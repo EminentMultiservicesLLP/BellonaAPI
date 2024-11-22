@@ -681,9 +681,9 @@ namespace BellonaAPI.Controllers
         [Route("GetSanpshotWeeklyData")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetSanpshotWeeklyData(int WeekNo, string Year, int OutletId)
+        public IHttpActionResult GetSanpshotWeeklyData(int WeekNo, string Year, int OutletId, Guid UserId, int MenuId)
         {
-            List<WeeklySnapshot> _result = _iRepo.GetSanpshotWeeklyData(WeekNo, Year, OutletId);
+            List<WeeklySnapshot> _result = _iRepo.GetSanpshotWeeklyData(WeekNo, Year, OutletId, UserId, MenuId);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Weekly Snapshot Data."));
         }
@@ -700,9 +700,9 @@ namespace BellonaAPI.Controllers
         [Route("GetWeeklySalesSnapshot")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetWeeklySalesSnapshot(string Week, string Year, int OutletId)
+        public IHttpActionResult GetWeeklySalesSnapshot(string Week, string Year, int OutletId, Guid UserId, int MenuId)
         {
-            List<WeeklySalesSnapshot> _result = _iRepo.GetWeeklySalesSnapshot(Week, Year, OutletId);
+            List<WeeklySalesSnapshot> _result = _iRepo.GetWeeklySalesSnapshot(Week, Year, OutletId, UserId, MenuId);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Weekly Sales Data."));
         }
@@ -710,14 +710,46 @@ namespace BellonaAPI.Controllers
         [Route("GetItem86SnapshotDetails")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetItem86SnapshotDetails(int WeekNo, string Year)
+        public IHttpActionResult GetItem86SnapshotDetails(int WeekNo, string Year, Guid UserId, int MenuId)
         {
-            List<WeeklySnapshot> _result = _iRepo.GetItem86SnapshotDetails(WeekNo, Year);
+            List<WeeklySnapshot> _result = _iRepo.GetItem86SnapshotDetails(WeekNo, Year, UserId, MenuId);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Weekly Sales Data."));
         }
-
-
         #endregion  DSR Sanpshot
+
+
+        #region  DSR Comparison
+        [Route("GetWeekDays")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetWeekDays()
+        {
+            List<Weekdays> _result = _iRepo.GetWeekDays();
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Weekdays Data."));
+        }
+
+        [Route("GetDSRComparisonForSale")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetDSRComparisonForSale(string Week, string Day, string FinancialYear, string BranchCode, Guid UserId, int MenuId)
+        {
+            List<DsrComparisonModel> _result = _iRepo.Get_DSRComparisonForSale(Week, Day, FinancialYear, BranchCode, UserId, MenuId);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve DSRComparisonForSale."));
+        }
+        
+        [Route("GetDailySnapshotforComparison")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetDailySnapshotforComparison(Guid UserId, int MenuId, int Week, string Day, string FinancialYear, string BranchCode)
+        {
+            List<WeeklySnapshotsViewModel> _result = _iRepo.Get_DailySnapshotforComparison(Week, Day, FinancialYear, BranchCode, UserId, MenuId);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve  DailySnapshotforComparison."));
+        }
+        #endregion  DSR Comparison
+
     }
 }

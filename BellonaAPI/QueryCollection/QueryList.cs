@@ -102,10 +102,15 @@
         public const string GetWeekly_CoversTrend = "dbsp_GetWeekly_CoversTrend";
         public const string GetBeverageVsBudgetTrend = "dbsp_GetBeverageVsBudgetTrend";
         public const string GetTobaccoVsBudgetTrend = "dbsp_GetTobaccoVsBudgetTrend";
+
+        // DSR Snapshot and coparison
         public const string GetSanpshotWeeklyData = "dbsp_GetWeeklyDSRSnapshot";
         public const string SaveSnapshotEntry = "dbsp_SaveSnapshotEntry";
         public const string GetWeeklySalesData = "dbsp_getSnapshotWeeklySalesData";
         public const string GetItem86SnapshotDetails = "dbsp_GetItem86SnapshotDetails";
+        public const string GetWeekDays = "dbsp_Get_WeekDays";
+        public const string Get_DSRComparisonForSale = "dbsp_Get_DSRComparisonForSale";
+        public const string Get_DailySnapshotforComparison = "dbsp_Get_DailySnapshotforComparison";
 
         public const string GetTimeWiseSalesBreakup = "dbsp_GetWeekly_TimeWiseSaleBreakup";
         public const string GetAvgCoversTrend = "dbsp_GetAvgCoversTrend";

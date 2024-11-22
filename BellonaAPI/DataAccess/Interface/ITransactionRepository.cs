@@ -80,9 +80,17 @@ namespace BellonaAPI.DataAccess.Interface
         List<CostTrend> GetBeverageCostTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
         List<CostTrend> GetCogsCostTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
         #endregion
-        List<WeeklySnapshot> GetSanpshotWeeklyData(int WeekNo, string Year, int OutletId);
+
+        #region Dsr Snapshot
+        List<WeeklySnapshot> GetSanpshotWeeklyData(int WeekNo, string Year, int OutletId, Guid UserId, int MenuId);
         bool SaveSnapshotEntry(SnapshotModel SnapshotEntry);
-        List<WeeklySalesSnapshot> GetWeeklySalesSnapshot(string Week, string Year, int OutletId);
-        List<WeeklySnapshot> GetItem86SnapshotDetails(int WeekNo, string Year);
+        List<WeeklySalesSnapshot> GetWeeklySalesSnapshot(string Week, string Year, int OutletId, Guid UserId, int MenuId);
+        List<WeeklySnapshot> GetItem86SnapshotDetails(int WeekNo, string Year, Guid UserId, int MenuId);
+        #endregion
+        #region Dsr Snapshot
+        List<Weekdays> GetWeekDays();
+        List<DsrComparisonModel> Get_DSRComparisonForSale(string Week, string Day, string FinancialYear, string BranchCode, Guid UserId, int MenuId);
+        List<WeeklySnapshotsViewModel> Get_DailySnapshotforComparison(int Week, string Day, string FinancialYear, string BranchCode, Guid UserId, int MenuId);
+        #endregion
     }
 }

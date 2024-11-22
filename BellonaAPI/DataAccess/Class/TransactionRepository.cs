@@ -1278,7 +1278,7 @@ namespace BellonaAPI.DataAccess.Class
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
                     dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
-                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32)); 
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
@@ -1803,7 +1803,7 @@ namespace BellonaAPI.DataAccess.Class
                     DBParameterCollection dbCol = new DBParameterCollection();
                     dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
                     dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
-                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear,DbType.String));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
                     dbCol.Add(new DBParameter("WEEK", week, DbType.String));
                     if (branchCode != "")
                     {
@@ -1853,7 +1853,7 @@ namespace BellonaAPI.DataAccess.Class
                         ADSWeekend = row.Field<decimal?>("ADSWEEKEND"),
                         NetSale = row.Field<decimal?>("NETSALE"),
                         DISCOUNTAMTPERC = row.Field<decimal?>("DISCOUNTAMTPERC"),
-                        
+
 
 
                     }).OrderBy(o => o.ActualSale).ToList();
@@ -2006,7 +2006,7 @@ namespace BellonaAPI.DataAccess.Class
 
             return _result;
         }
-        
+
         public List<OtherOperationalCostModel> GetOtherOperationalCost(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<OtherOperationalCostModel> _result = null;
@@ -2452,7 +2452,7 @@ namespace BellonaAPI.DataAccess.Class
                     _result = dtData.AsEnumerable().Select(row => new DeliverySaleTrend
                     {
                         Week = row.Field<string>("WeekNo"),
-                        DeliverySale = row.Field<decimal?>("DeliverySale")                       
+                        DeliverySale = row.Field<decimal?>("DeliverySale")
                     }).OrderBy(o => o.Week).ToList();
 
                 }
@@ -2462,7 +2462,7 @@ namespace BellonaAPI.DataAccess.Class
             });
 
             return _result;
-        } 
+        }
         public List<DeliverySaleBreakup> GetDeliveySale(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<DeliverySaleBreakup> _result = null;
@@ -2496,8 +2496,8 @@ namespace BellonaAPI.DataAccess.Class
                     _result = dtData.AsEnumerable().Select(row => new DeliverySaleBreakup
                     {
                         Source = row.Field<string>("Source"),
-                        SaleAmount = row.Field<decimal?>("SaleAmount"),                       
-                        Percentage = row.Field<decimal?>("Percentage"),                       
+                        SaleAmount = row.Field<decimal?>("SaleAmount"),
+                        Percentage = row.Field<decimal?>("Percentage"),
                     }).OrderBy(o => o.Source).ToList();
 
                 }
@@ -2541,7 +2541,7 @@ namespace BellonaAPI.DataAccess.Class
                     _result = dtData.AsEnumerable().Select(row => new CostTrend
                     {
                         Week = row.Field<string>("WeekNo"),
-                        CostAmount = row.Field<decimal?>("CostAmount")                      
+                        CostAmount = row.Field<decimal?>("CostAmount")
                     }).OrderBy(o => o.Week).ToList();
 
                 }
@@ -2684,11 +2684,11 @@ namespace BellonaAPI.DataAccess.Class
 
             return _result;
         }
-        
+
         #endregion weeklyMIS
 
         #region DSR Snapshot
-        public List<WeeklySnapshot> GetSanpshotWeeklyData(int WeekNo, string Year, int OutletId)
+        public List<WeeklySnapshot> GetSanpshotWeeklyData(int WeekNo, string Year, int OutletId, Guid UserId, int MenuId)
         {
             List<WeeklySnapshot> _result = null;
             TryCatch.Run(() =>
@@ -2750,7 +2750,7 @@ namespace BellonaAPI.DataAccess.Class
             });
             return IsSuccess;
         }
-        public List<WeeklySalesSnapshot> GetWeeklySalesSnapshot(string Week, string Year, int OutletId)
+        public List<WeeklySalesSnapshot> GetWeeklySalesSnapshot(string Week, string Year, int OutletId, Guid UserId, int MenuId)
         {
             List<WeeklySalesSnapshot> _result = null;
             TryCatch.Run(() =>
@@ -2785,7 +2785,7 @@ namespace BellonaAPI.DataAccess.Class
 
             return _result;
         }
-        public List<WeeklySnapshot> GetItem86SnapshotDetails(int WeekNo, string Year)
+        public List<WeeklySnapshot> GetItem86SnapshotDetails(int WeekNo, string Year, Guid UserId, int MenuId)
         {
             List<WeeklySnapshot> _result = null;
             TryCatch.Run(() =>
@@ -2796,16 +2796,18 @@ namespace BellonaAPI.DataAccess.Class
 
                     dbCol.Add(new DBParameter("Week", WeekNo, DbType.Int32));
                     dbCol.Add(new DBParameter("FinancialYear", Year, DbType.String));
+                    dbCol.Add(new DBParameter("UserId", UserId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", MenuId, DbType.Int32));
 
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetItem86SnapshotDetails, dbCol, CommandType.StoredProcedure);
 
                     _result = dtData.AsEnumerable().Select(row => new WeeklySnapshot
                     {
-                        SnapshotType = row.Field<string>("SnapshotType"),
 
                         ClusterName = row.Field<string>("ClusterName"),
                         OutletName = row.Field<string>("OutletName"),
 
+                        SnapshotType = row.Field<string>("Category"),
                         Monday = row.Field<string>("Monday"),
                         Tuesday = row.Field<string>("Tuesday"),
                         Wednesday = row.Field<string>("Wednesday"),
@@ -2823,8 +2825,154 @@ namespace BellonaAPI.DataAccess.Class
 
             return _result;
         }
-
         #endregion DSR Snapshot
+
+        #region DSR_Comparison
+        public List<Weekdays> GetWeekDays()
+        {
+            List<Weekdays> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeekDays, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new Weekdays
+                    {
+                        DayID = row.Field<int>("DayID"),
+                        Days = row.Field<string>("Days"),
+
+                    }).OrderBy(o => o.DayID).ToList();
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetWeekDays:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
+        public List<DsrComparisonModel> Get_DSRComparisonForSale(string Week, string Day, string FinancialYear, string BranchCode, Guid UserId, int MenuId)
+        {
+            List<DsrComparisonModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("WeekNo", Week, DbType.String));
+                    dbCol.Add(new DBParameter("FinancialYear", FinancialYear, DbType.String));
+                    dbCol.Add(new DBParameter("Day", Day, DbType.String));
+                    dbCol.Add(new DBParameter("branchcode", BranchCode, DbType.String));
+                    dbCol.Add(new DBParameter("UserId", UserId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", MenuId, DbType.Int32));
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.Get_DSRComparisonForSale, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new DsrComparisonModel
+                    {
+                        Attribute = row.Field<string>("Attribute"),
+                        CurrentDailySale = row.Field<decimal>("DailySaleCurrent"),
+                        CurrentDailyBudget = row.Field<decimal>("DailyBudget"),
+                        LastWeekSale = row.Field<decimal>("DailySaleLW"),
+                        LastYearSale = row.Field<decimal>("DailySaleLY"),
+                        CurrentWeek_WeeklySale = row.Field<decimal>("weeklySaleCurrent"),
+                        WeeklyBudget = row.Field<decimal>("WeeklyBudget"),
+                        LastWeek_WeeklySale = row.Field<decimal>("weeklySaleLW"),
+                        LastYear_WeeklySale = row.Field<decimal>("weeklySaleLY"),
+
+                    }).ToList();
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Get_DSRComparisonForSale:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
+        public List<WeeklySnapshotsViewModel> Get_DailySnapshotforComparison(int Week, string Day, string FinancialYear, string BranchCode, Guid UserId, int MenuId)
+        {
+            List<WeeklySnapshotsViewModel> _result = new List<WeeklySnapshotsViewModel>(); // Initialize the list here
+
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("WeekNo", Week, DbType.Int32));
+                    dbCol.Add(new DBParameter("FinancialYear", FinancialYear, DbType.String));
+                    dbCol.Add(new DBParameter("Day", Day, DbType.String));
+                    dbCol.Add(new DBParameter("branchcode", BranchCode, DbType.String));
+                    dbCol.Add(new DBParameter("UserId", UserId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", MenuId, DbType.Int32));
+
+                    DataSet dtData = Dbhelper.ExecuteDataSet(QueryList.Get_DailySnapshotforComparison, dbCol, CommandType.StoredProcedure);
+
+                    if (dtData.Tables[0].Rows.Count > 0)
+                    {
+                        // Ensure the list has at least one element
+                        _result.Add(new WeeklySnapshotsViewModel()); // Add an item to the list
+
+                        // Populate the CurrentWeekSnapshot
+                        _result[0].CurrentWeekSnapshot = dtData.Tables[0].AsEnumerable().Select(row => new WeeklySnapshot
+                        {
+                            SnapshotType = row.Field<string>("SnapshotType"),
+                            Monday = row.Field<string>("Monday"),
+                            Tuesday = row.Field<string>("Tuesday"),
+                            Wednesday = row.Field<string>("Wednesday"),
+                            Thursday = row.Field<string>("Thursday"),
+                            Friday = row.Field<string>("Friday"),
+                            Saturday = row.Field<string>("Saturday"),
+                            Sunday = row.Field<string>("Sunday"),
+                        }).ToList();
+
+                        if (dtData.Tables[1].Rows.Count > 0)
+                        {
+                            // Populate the LastWeekSnapshot
+                            _result[0].LastWeekSnapshot = dtData.Tables[1].AsEnumerable().Select(row => new WeeklySnapshot
+                            {
+                                SnapshotType = row.Field<string>("SnapshotType"),
+                                Monday = row.Field<string>("Monday"),
+                                Tuesday = row.Field<string>("Tuesday"),
+                                Wednesday = row.Field<string>("Wednesday"),
+                                Thursday = row.Field<string>("Thursday"),
+                                Friday = row.Field<string>("Friday"),
+                                Saturday = row.Field<string>("Saturday"),
+                                Sunday = row.Field<string>("Sunday"),
+                            }).ToList();
+
+                            if (dtData.Tables[2].Rows.Count > 0)
+                            {
+                                // Populate the LastYearWeekSnapshot
+                                _result[0].LastYearWeekSnapshot = dtData.Tables[2].AsEnumerable().Select(row => new WeeklySnapshot
+                                {
+                                    SnapshotType = row.Field<string>("SnapshotType"),
+                                    Monday = row.Field<string>("Monday"),
+                                    Tuesday = row.Field<string>("Tuesday"),
+                                    Wednesday = row.Field<string>("Wednesday"),
+                                    Thursday = row.Field<string>("Thursday"),
+                                    Friday = row.Field<string>("Friday"),
+                                    Saturday = row.Field<string>("Saturday"),
+                                    Sunday = row.Field<string>("Sunday"),
+                                }).ToList();
+                            }
+                        }
+                    }
+                }
+
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Get SnapshotWeekly Comparison:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
+        #endregion DSR_Comparison
     }
 }
 

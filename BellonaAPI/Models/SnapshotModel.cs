@@ -44,6 +44,30 @@ namespace BellonaAPI.Models
         public decimal Sunday { get; set; }
     }
 
+    public class Weekdays
+    {
+        public int DayID { get; set; }
+        public string Days { get; set; }
+    }
+    public class DsrComparisonModel
+    {
+        public int ID { get; set; }
+        public string Attribute { get; set; }
+        public decimal CurrentDailySale { get; set; }
+        public decimal CurrentDailyBudget { get; set; }
+        public decimal LastWeekSale { get; set; }
+        public decimal LastYearSale { get; set; }
+        public decimal CurrentWeek_WeeklySale { get; set; }
+        public decimal WeeklyBudget { get; set; }
+        public decimal LastWeek_WeeklySale { get; set; }
+        public decimal LastYear_WeeklySale { get; set; }
+    }
 
+    public class WeeklySnapshotsViewModel
+    {
+        public List<WeeklySnapshot> CurrentWeekSnapshot { get; set; }
+        public List<WeeklySnapshot> LastWeekSnapshot { get; set; }
+        public List<WeeklySnapshot> LastYearWeekSnapshot { get; set; }
+    }
 
 }
