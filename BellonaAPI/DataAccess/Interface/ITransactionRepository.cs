@@ -17,13 +17,13 @@ namespace BellonaAPI.DataAccess.Interface
         MonthlyExpense GetMonthlyExpensesByID(Guid userId, int monthlyExpenseId, bool isActualExpense = false);
         MonthlyExpense GetMonthlyExpensesByOutlet_Month(Guid userId, int outletID, int monthlyExpenseYear, int monthlyExpenseMonth, bool isActualExpense = false);
 
-        IEnumerable<MonthlyExpenseList> GetMonthlyExpensesEntries(Guid user, int menuId,  int? outletID =0, int? expenseMonth= 0, int? expenseYear = 0, bool isActualExpense = false);
+        IEnumerable<MonthlyExpenseList> GetMonthlyExpensesEntries(Guid user, int menuId, int? outletID = 0, int? expenseMonth = 0, int? expenseYear = 0, bool isActualExpense = false);
         bool UpdateMonthlyExpense(MonthlyExpense _data, bool isActualExpense = false);
         bool DeleteMonthlyExpense(int MonthlyExpenseID, bool isActualExpense = false);
 
         List<BudgetList_ForGrid> GetBudgetList(Guid userId, int menuId);
         BudgetModel GetBudgetDetailsByID(int BudgetId);
-        
+
         bool UpdateBudget(BudgetModel _data, out string resultOutputMessage);
         bool DeleteBudget(int BudgetId);
         List<DailyExpense> GetDailyExpenseEntries(Guid userId, int menuId, int outletID, int expenseMonth, int expenseYear, int week);
@@ -34,18 +34,18 @@ namespace BellonaAPI.DataAccess.Interface
 
         #region SalesBudget
         List<SalesCategoryModel> GetSalesCategory();
-        SalesBudget GetSalesBudget(int? OutletID , int? Year, int? Month);
-        List<SalesCategoryBudget> GetSalesCategoryBudget(int? OutletID , int? Year, int? Month);
-        List<SalesDayBudget> GetSalesDayBudget(int? OutletID , int? Year, int? Month);
+        SalesBudget GetSalesBudget(int? OutletID, int? Year, int? Month);
+        List<SalesCategoryBudget> GetSalesCategoryBudget(int? OutletID, int? Year, int? Month);
+        List<SalesDayBudget> GetSalesDayBudget(int? OutletID, int? Year, int? Month);
         bool SaveSalesBudget(SalesBudget model);
-        List<SalesBudgetDetail> GetSalesBudgetDetails(int? OutletID , int? Year, int? Month);
+        List<SalesBudgetDetail> GetSalesBudgetDetails(int? OutletID, int? Year, int? Month);
         #endregion SalesBudget
 
         #region TBUpload
         List<TBErrorLog> CheckTBErrorLog();
         #endregion TBUpload
-        
-        List<WeeklyExpense> GetWeeklyExpense(Guid userId,int menuId,int outletID,string expenseYear,string week);
+
+        List<WeeklyExpense> GetWeeklyExpense(Guid userId, int menuId, int outletID, string expenseYear, string week);
         List<DSR_Summary> GetDSR_Summary(string outletCode, string startDate, string endDate, int cityId, int clusterId);
 
         #region MIS weekly chart
@@ -61,7 +61,7 @@ namespace BellonaAPI.DataAccess.Interface
         List<SaleTrendModel> GetDailySaleTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
         List<SaleTrendModel> GetGrossProfitTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
         List<SaleTrendModel> GetNetProfitTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
-        List<MISWeeklyDataModel> GetWeeklyMISData(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId); 
+        List<MISWeeklyDataModel> GetWeeklyMISData(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
         List<CogsBreakUp> GetCogsBreakUp(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
         List<UtilityCostModel> GetUtilityCost(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
         List<MarketingPromotion> GetMarketingPromotionCost(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
@@ -87,10 +87,20 @@ namespace BellonaAPI.DataAccess.Interface
         List<WeeklySalesSnapshot> GetWeeklySalesSnapshot(string Week, string Year, int OutletId, Guid UserId, int MenuId);
         List<WeeklySnapshot> GetItem86SnapshotDetails(int WeekNo, string Year, Guid UserId, int MenuId);
         #endregion
-        #region Dsr Snapshot
+        #region Dsr Comparison
         List<Weekdays> GetWeekDays();
         List<DsrComparisonModel> Get_DSRComparisonForSale(string Week, string Day, string FinancialYear, string BranchCode, Guid UserId, int MenuId);
         List<WeeklySnapshotsViewModel> Get_DailySnapshotforComparison(int Week, string Day, string FinancialYear, string BranchCode, Guid UserId, int MenuId);
         #endregion
+
+        #region Monthly_MIS
+        List<Months> GetAllMonths();
+        List<MonthlyMISDataModel> GetMonthlyMISData(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<Last12MonthBudgetSaleComparison> GetLast12MonthsSalesVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
+        List<Last12MonthBudgetSaleComparison> GetLast12MonthsFoodVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
+        List<Last12MonthBudgetSaleComparison> GetLast12MonthsLiquorVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
+        List<Last12MonthBudgetSaleComparison> GetLast12MonthsBeverageVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
+        List<MonthlyMTDSalesVsBudget> GetMonthlyMTDSalesvsBudget(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
+        #endregion Monthly_MIS
     }
 }

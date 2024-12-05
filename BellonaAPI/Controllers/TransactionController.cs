@@ -676,7 +676,6 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to retrieve COGS Cost Trend Details."));
         }
         #endregion WeeklyMIS 
-
         #region DSR Sanpshot
         [Route("GetSanpshotWeeklyData")]
         [AcceptVerbs("GET")]
@@ -717,8 +716,6 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to retrieve Weekly Sales Data."));
         }
         #endregion  DSR Sanpshot
-
-
         #region  DSR Comparison
         [Route("GetWeekDays")]
         [AcceptVerbs("GET")]
@@ -751,5 +748,75 @@ namespace BellonaAPI.Controllers
         }
         #endregion  DSR Comparison
 
+        #region Monthly_MIS
+        [Route("getAllMonths")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult getAllMonths()
+        {
+            List<Months> _result = _iRepo.GetAllMonths().ToList();
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Months"));
+        }
+
+
+        [Route("getMonthlyMISData")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetMonthlyMISData(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+         {
+            List<MonthlyMISDataModel> _result = _iRepo.GetMonthlyMISData(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Weekly MIS Data Details."));
+        }
+
+        [Route("getLast12MonthsSalesVsBudgetTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetLast12MonthsSalesVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<Last12MonthBudgetSaleComparison> _result = _iRepo.GetLast12MonthsSalesVsBudgetTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Last12MonthsSalesVsBudget Trend Details."));
+        }
+        
+        [Route("getLast12MonthsFoodVsBudgetTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetLast12MonthsFoodVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<Last12MonthBudgetSaleComparison> _result = _iRepo.GetLast12MonthsFoodVsBudgetTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get GetLast12MonthsFoodVsBudget Trend Details."));
+        }
+        [Route("getLast12MonthsLiquorVsBudgetTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetLast12MonthsLiquorVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<Last12MonthBudgetSaleComparison> _result = _iRepo.GetLast12MonthsLiquorVsBudgetTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get getLast12MonthsLiquorVsBudget Trend Details."));
+        }        
+        [Route("getLast12MonthsBeverageVsBudgetTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetLast12MonthsBeverageVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<Last12MonthBudgetSaleComparison> _result = _iRepo.GetLast12MonthsBeverageVsBudgetTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get GetLast12MonthsBeverageVsBudgetTrend Trend Details."));
+        }
+        
+        [Route("getMonthlyMTDSalesvsBudget")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetMonthlyMTDSalesvsBudget(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<MonthlyMTDSalesVsBudget> _result = _iRepo.GetMonthlyMTDSalesvsBudget(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get MonthlyChart_MTD_SalesvsBudget Trend Details."));
+        }
+        #endregion Monthly_MIS
     }
 }

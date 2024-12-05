@@ -97,11 +97,6 @@
         public const string GetDistinctYear = "dbsp_GetDistinctYear";
         public const string SaveWeeklyExpense = "dbsp_SAVE_WeeklyExpense";
         public const string GetWeeklyExpense = "dbsp_GET_WeeklyExpense";
-        public const string GetWeeklySaleDetails = "dbsp_GetWeekly_SaleTrend";
-        public const string GetLast12Weeks_SalesVsBudget = "dbsp_GetLast12Weeks_SalesVsBudget";
-        public const string GetWeekly_CoversTrend = "dbsp_GetWeekly_CoversTrend";
-        public const string GetBeverageVsBudgetTrend = "dbsp_GetBeverageVsBudgetTrend";
-        public const string GetTobaccoVsBudgetTrend = "dbsp_GetTobaccoVsBudgetTrend";
 
         // DSR Snapshot and coparison
         public const string GetSanpshotWeeklyData = "dbsp_GetWeeklyDSRSnapshot";
@@ -112,6 +107,12 @@
         public const string Get_DSRComparisonForSale = "dbsp_Get_DSRComparisonForSale";
         public const string Get_DailySnapshotforComparison = "dbsp_Get_DailySnapshotforComparison";
 
+        // Weekly MIS CHART
+        public const string GetWeeklySaleDetails = "dbsp_GetWeekly_SaleTrend";
+        public const string GetLast12Weeks_SalesVsBudget = "dbsp_GetLast12Weeks_SalesVsBudget";
+        public const string GetWeekly_CoversTrend = "dbsp_GetWeekly_CoversTrend";
+        public const string GetBeverageVsBudgetTrend = "dbsp_GetBeverageVsBudgetTrend";
+        public const string GetTobaccoVsBudgetTrend = "dbsp_GetTobaccoVsBudgetTrend";
         public const string GetTimeWiseSalesBreakup = "dbsp_GetWeekly_TimeWiseSaleBreakup";
         public const string GetAvgCoversTrend = "dbsp_GetAvgCoversTrend";
         public const string GetLiquorVsBudgetTrend = "dbsp_GetLiquorVsBudgetTrend";
@@ -133,13 +134,22 @@
         public const string GetWeekDays_CoverCapicityUtilization = "dbsp_GetWeekDays_CoverCapicityUtilization";
         public const string GetWeekend_CoverCapicityUtilization = "dbsp_GetWeekend_CoverCapicityUtilization";
         public const string GetDeliveySaleTrends = "dbsp_GetDeliverySaleTrend";
-        public const string GetDeliveySaleBreakup = "dbsp_GetDeliverySaleBreakUp";
+        public const string GetDeliveySaleBreakup = "dbsp_GetDeliverySaleBreakUp"; //Delivery Sale
         public const string GetFoodCostTrend = "dbsp_GetFoodCostTrend";
         public const string GetLiquorCostTrend = "dbsp_GetLiquorCostTrend";
         public const string GetBeverageCostTrend = "dbsp_GetBeverageCostTrend";
         public const string GetCogsCostTrend = "dbsp_GetTotalCostTrend";
 
+        //Transaction Monthly MIS CHART
+        public const string MonthlyChart_MTD_SalesvsBudget = "dbsp_MonthlyChart_MTD_SalesvsBudget";
+        public const string GetAllMonths = "dbsp_Get_AllMonths";
+        public const string GetMonthlyMISData = "dbsp_Monthly_GetMonthlyMISData";
+        public const string GetLast12MonthsBeverageVsBudgetTrend = "dbsp_Monthly_GetBeverageVsBudgetTrend";
+        public const string GetLast12MonthsLiquorVsBudgetTrend = "dbsp_Monthly_GetLiquorVsBudgetTrend";
+        public const string GetLast12MonthsFoodVsBudgetTrend = "dbsp_Monthly_GetFoodVsBudgetTrend";
+        public const string GetLast12MonthsSalesVsBudgetTrend = "dbsp_Monthly_GetLast12Months_SalesVsBudget";
 
+        
         public const string GetSalesCategory = "dbsp_GetSalesCategory";
         public const string GetSalesBudget = "dbsp_GetSalesBudget";
         public const string GetSalesCategoryBudget = "dbsp_GetSalesCategoryBudget";
