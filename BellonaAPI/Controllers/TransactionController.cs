@@ -503,7 +503,9 @@ namespace BellonaAPI.Controllers
         [ValidationActionFilter]
         public IHttpActionResult GetWeeklyMISData(Guid userId, int menuId,string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
         {
+          //  Logger.LogInfo("GetWeeklyMISData in TransactionController before send call to repo  :" + DateTime.UtcNow);
             List<MISWeeklyDataModel> _result = _iRepo.GetWeeklyMISData(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+           // Logger.LogInfo("GetWeeklyMISData in TransactionController after  call return from repo  :" + DateTime.UtcNow);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Get Weekly MISData Details."));
         }

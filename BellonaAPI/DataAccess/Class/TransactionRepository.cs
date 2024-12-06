@@ -1821,7 +1821,9 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
                     }
+                  //  Logger.LogInfo("GetWeeklyMISData in TransactionRepository before db :" +  DateTime.UtcNow);
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeeklyMISData, dbCol, CommandType.StoredProcedure);
+               //     Logger.LogInfo("GetWeeklyMISData in TransactionRepository after db :" + DateTime.UtcNow);
 
                     _result = dtData.AsEnumerable().Select(row => new MISWeeklyDataModel
                     {
@@ -1857,7 +1859,7 @@ namespace BellonaAPI.DataAccess.Class
 
 
                     }).OrderBy(o => o.ActualSale).ToList();
-
+                   // Logger.LogInfo("GetWeeklyMISData in TransactionRepository after binding to model  :" + DateTime.UtcNow);
                 }
             }).IfNotNull((ex) =>
             {
