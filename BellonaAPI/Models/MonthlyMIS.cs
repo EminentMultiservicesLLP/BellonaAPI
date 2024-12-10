@@ -50,6 +50,7 @@ namespace BellonaAPI.Models
         public string Date { get; set; }
         public decimal? NetAmount { get; set; }
         public decimal? BudgetAmount { get; set; }
+        public decimal? Percentage { get; set; }
     }
 
     public class MonthlyMTDSalesVsBudget
