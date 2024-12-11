@@ -298,6 +298,7 @@
     <Compile Include="Models\Masters\AdminModels.cs" />
     <Compile Include="Models\MenuUserRightsModel.cs" />
     <Compile Include="Models\MonthlyExpense.cs" />
+    <Compile Include="Models\MonthlyMIS.cs" />
     <Compile Include="Models\OutletAccess.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Prospect.cs" />
