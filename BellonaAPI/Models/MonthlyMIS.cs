@@ -58,5 +58,6 @@ namespace BellonaAPI.Models
         public string Category { get; set; }
         public decimal? NetAmount { get; set; }
         public decimal? BudgetAmount { get; set; }
+        public decimal? Percentage { get; set; }
     }
 }

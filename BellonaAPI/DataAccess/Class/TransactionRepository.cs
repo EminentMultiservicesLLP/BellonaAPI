@@ -3288,8 +3288,9 @@ namespace BellonaAPI.DataAccess.Class
                     {
                        
                         Category = row.Field<string>("Category"),
-                        NetAmount = row.Field<decimal?>("NETAMOUNT"),
+                        NetAmount = row.Field<decimal?>("NetAmount"),
                         BudgetAmount = row.Field<decimal?>("BudgetAmount"),                       
+                        Percentage = row.Field<decimal?>("Percentage"),                       
                     }).ToList();
                 }
             }).IfNotNull((ex) =>
