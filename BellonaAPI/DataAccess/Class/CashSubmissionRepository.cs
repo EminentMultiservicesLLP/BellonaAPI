@@ -16,7 +16,7 @@ namespace BellonaAPI.DataAccess.Class
     {
         private static readonly ILogger Logger = CommonLayer.Logger.Register(typeof(CashModuleRepository));
 
-        public IEnumerable<CashAuth> getCashAuth(int MenuId, int OutletID = 0)
+        public IEnumerable<CashAuth> getCashAuth(int MenuId, Guid UserId, int OutletID = 0)
         {
             List<CashAuth> _result = null;
             TryCatch.Run(() =>
@@ -26,6 +26,7 @@ namespace BellonaAPI.DataAccess.Class
                     DBParameterCollection paramCollection = new DBParameterCollection();
                     paramCollection.Add(new DBParameter("MenuId", MenuId, DbType.Int32));
                     paramCollection.Add(new DBParameter("OutletId", OutletID, DbType.Int32));
+                    paramCollection.Add(new DBParameter("UserId", UserId, DbType.Guid));
 
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetAllAuthCash, paramCollection, CommandType.StoredProcedure);
                     _result = dtData.AsEnumerable().Select(row => new CashAuth
@@ -39,7 +40,7 @@ namespace BellonaAPI.DataAccess.Class
                         DepositDate = row.Field<string>("DepositDate"),
                         Attachment=row.Field<string>("Attachment"),
                         RequestStatus=row.Field<int>("RequestStatus")
-                    }).OrderBy(o => o.RequestNo).ToList();
+                    }).OrderByDescending(o => o.RequestNo).ToList();
 
                 }
             }).IfNotNull((ex) =>
@@ -66,7 +67,6 @@ namespace BellonaAPI.DataAccess.Class
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.Authorize, paramCollection, CommandType.StoredProcedure);
                     _result = dtData.AsEnumerable().Select(row => new CashAuth
                     {
-
                         RequestId = row.Field<int>("RequestId"),
 
                     }).ToList();
@@ -95,10 +95,10 @@ namespace BellonaAPI.DataAccess.Class
 
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetAllCashDeposites, paramCollection, CommandType.StoredProcedure);
                     _result = dtData.AsEnumerable().Select(row => new CashDeposit
-                    {
-                        DSREntryID = row.Field<int>("DSREntryID"),
+                    {                       
                         EntryDate = row.Field<DateTime>("DSREntryDate"),
                         EntryDay = row.Field<string>("DSREntryDay"),
+                        strEntryDate = Convert.ToDateTime(row.Field<DateTime>("DSREntryDate")).ToString("yyyy-MM-dd"),
                         CashCollected = row.Field<decimal>("CashCollected"),
                         PendingAuthorization = Convert.ToBoolean(row.Field<int>("PendingAuthorization"))
                     }).OrderBy(o => o.EntryDate).ToList();

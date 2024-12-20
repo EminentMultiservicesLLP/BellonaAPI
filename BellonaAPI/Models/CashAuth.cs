@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web;
 
 namespace BellonaAPI.Models
@@ -10,6 +11,7 @@ namespace BellonaAPI.Models
         public int OutletId { get; set; }
         public string OutletName { get; set; }
         public List<int> DSREntries { get; set; }
+        public List<DateTime> DSRCashCollectedDates { get; set; }
         public decimal SystemAmount { get; set; }
         public decimal DepositAmount { get; set; }
         public decimal Variance { get; set; }
@@ -26,6 +28,7 @@ namespace BellonaAPI.Models
     {
         public int DSREntryID { get; set; }
         public System.DateTime EntryDate { get; set; }
+        public string strEntryDate { get; set; }
         public string EntryDay { get; set; }
         public decimal CashCollected { get; set; }
         public bool PendingAuthorization { get; set; }

@@ -32,9 +32,9 @@ namespace BellonaAPI.Controllers
         }
         [Route("getCashAuth")]
         [ValidationActionFilter]
-        public IHttpActionResult getCashAuth(int MenuId, int OutletID = 0)
+        public IHttpActionResult getCashAuth(int MenuId, Guid UserId, int OutletID = 0)
         {
-            List<CashAuth> _result = _IRepo.getCashAuth(MenuId, OutletID).ToList();
+            List<CashAuth> _result = _IRepo.getCashAuth(MenuId, UserId, OutletID).ToList();
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve getCashAuth"));
         }
