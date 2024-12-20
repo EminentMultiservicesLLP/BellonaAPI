@@ -194,8 +194,6 @@
         public const string SaveGuestData = "dbsp_Guest_SaveDetails";
         public const string GetGuestList = "dbsp_Guest_GetGuestList";
         public const string GetImagePath = "dbsp_Guest_GetImagePath";
-        public const string GetAllAuthCash = "dbsp_Cash_GetAllCashAuth";
-        public const string Authorize = "dbsp_DepositAuthorization";
         public const string GetGuestAge = "dbsp_Guest_GetGuestAge";
         public const string GetGuestBatch = "dbsp_Guest_GetGuestBatch";
         public const string GetBatchwiseGuest = "dbsp_Guest_GetBatchwiseGuest";
@@ -204,6 +202,8 @@
 
 
        /// ************ Cash Deposit Status****************************/
+        public const string GetAllAuthCash = "dbsp_Cash_GetAllCashAuth";
+        public const string Authorize = "dbsp_DepositAuthorization";
         public const string GetAllCashDeposites = "dbsp_Get_Pending_CashDeposites";
         public const string DeleteCashDeposits = "dbsp_Delete_CashDeposits";
         public const string GetCashDepositImagePath = "dbsp_CashDeposit_GetImagePath";
