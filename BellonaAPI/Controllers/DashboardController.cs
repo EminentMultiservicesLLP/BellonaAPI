@@ -50,17 +50,7 @@ namespace BellonaAPI.Controllers
             List<SaleDelivery> _result = _iRepo.GetSaleDelivery(new Guid(userId), menuid, Month, OutletId).ToList();
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve GetSaleDelivery data"));
-        }
-
-        [Route("GetCashDepositStatus")]
-        [AcceptVerbs("GET")]
-        [ValidationActionFilter]
-        public IHttpActionResult GetCashDepositStatus(Guid UserId, int MenuId, int CityId, int CountryId, int RegionId, int FromYear, int? OutletId = 0, int? Currency = 0)
-        {
-            List<CashDepositStatus> _result = _iRepo.GetCashDepositStatus(UserId, MenuId, CityId, CountryId, RegionId, FromYear, OutletId, Currency).ToList();
-            if (_result != null) return Ok(_result);
-            else return InternalServerError(new System.Exception("Failed to retrieve GetCashDepositStatus data"));
-        }
+        }       
 
 
     }

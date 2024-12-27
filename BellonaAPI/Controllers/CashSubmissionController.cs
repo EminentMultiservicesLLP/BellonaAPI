@@ -50,9 +50,9 @@ namespace BellonaAPI.Controllers
 
         [Route("getPendingCashDeposit")]
         [ValidationActionFilter]
-        public IHttpActionResult getPendingCashDeposit(int MenuId, int OutletId, DateTime StartDate, DateTime EndDate)
+        public IHttpActionResult getPendingCashDeposit(int MenuId, int OutletId, DateTime StartDate, DateTime EndDate, Guid UserId)
         {
-            List<CashDeposit> _result = _IRepo.getCashDeposites(MenuId, OutletId, StartDate, EndDate).ToList();
+            List<CashDeposit> _result = _IRepo.getCashDeposites(MenuId, OutletId, StartDate, EndDate, UserId).ToList();
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve getPendingCashDeposit"));
         }
@@ -139,5 +139,14 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to Load Image"));
         }
 
+        [Route("GetCashDepositStatus")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetCashDepositStatus(Guid UserId, int MenuId, int CityId, int CountryId, int RegionId, int FromYear, int? OutletId = 0, int? Currency = 0)
+        {
+            List<CashDepositStatus> _result = _IRepo.GetCashDepositStatus(UserId, MenuId, CityId, CountryId, RegionId, FromYear, OutletId, Currency).ToList();
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetCashDepositStatus data"));
+        }
     }
 }

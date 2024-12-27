@@ -1164,7 +1164,7 @@ namespace BellonaAPI.DataAccess.Class
 
         //}
 
-        public List<DSR_Summary> GetDSR_Summary(string outletCode, string startDate, string endDate, int cityId, int clusterId)
+        public List<DSR_Summary> GetDSR_Summary(string outletCode, string startDate, string endDate, int cityId, int clusterId, int brandId)
         {
             List<DSR_Summary> _result = null;
             TryCatch.Run(() =>
@@ -1187,6 +1187,10 @@ namespace BellonaAPI.DataAccess.Class
                     else if (cityId > 0)
                     {
                         dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
                     }
 
                     DataTable dsData = Dbhelper.ExecuteDataTable(QueryList.GetDSR_Summary, dbCol, CommandType.StoredProcedure);

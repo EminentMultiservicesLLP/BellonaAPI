@@ -121,42 +121,6 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
         
-        public IEnumerable<CashDepositStatus> GetCashDepositStatus(Guid UserId, int MenuId, int CityId, int CountryId, int RegionId, int FromYear, int? OutletId = 0, int? Currency = 0)
-        {
-            List<CashDepositStatus> _result = null;
-            TryCatch.Run(() =>
-            {
-                using (DBHelper Dbhelper = new DBHelper())                    
-                {
-                    DBParameterCollection dbCol = new DBParameterCollection();
-                    dbCol.Add(new DBParameter("UserId", UserId, DbType.Guid));
-                    dbCol.Add(new DBParameter("MenuId", MenuId, DbType.Int32));
-                    dbCol.Add(new DBParameter("OutletId", OutletId, DbType.Int32));
-                    dbCol.Add(new DBParameter("CityId", CityId, DbType.Int32));
-                    dbCol.Add(new DBParameter("CountryId", CountryId, DbType.Int32));                   
-                    dbCol.Add(new DBParameter("RegionId", RegionId, DbType.Int32));
-                    dbCol.Add(new DBParameter("CurrencyId", Currency, DbType.Int32));
-                    dbCol.Add(new DBParameter("Year", FromYear, DbType.Int32));               
-                    DataTable dt = Dbhelper.ExecuteDataTable(QueryList.GetCashDepositStatus, dbCol, CommandType.StoredProcedure);
-                    _result = dt.AsEnumerable().Select(row => new CashDepositStatus
-                    {
-                        OutletId = row.Field<int>("OutletID"),
-                        Outlet = row.Field<string>("OutletName"),
-                        SystemCashDeposited = row.Field<decimal>("SystemCashDeposited"),
-                        ActualCashDeposited = row.Field<decimal>("ActualCashDeposited"),
-                        Variance = row.Field<decimal>("Variance"),
-                        CashNotDeposited = row.Field<decimal>("CashNotDeposited"),
-                        CashNotDepositedDays = row.Field<int>("CashNotDepositedDays"),
-                    }).OrderBy(o => o.Outlet).ToList();
-
-
-                }
-            }).IfNotNull((ex) =>
-            {
-                Logger.LogError("Error in DashboardRepository GetCashDepositStatus:" + ex.Message + Environment.NewLine + ex.StackTrace);
-            });
-
-            return _result;
-        }
+      
     }
 }
