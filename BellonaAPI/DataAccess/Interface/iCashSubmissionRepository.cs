@@ -8,9 +8,10 @@ namespace BellonaAPI.DataAccess.Interface
     {
         IEnumerable<CashAuth> getCashAuth(int MenuId, Guid UserId, int OutletID = 0);
         IEnumerable<CashAuth> Authorize(int RequestId, string UserId);
-        IEnumerable<CashDeposit> getCashDeposites(int MenuId, int OutletId, DateTime StartDate, DateTime EndDate);
+        IEnumerable<CashDeposit> getCashDeposites(int MenuId, int OutletId, DateTime StartDate, DateTime EndDate, Guid UserId);
         bool savePendingCashDeposit(CashAuth cashAuth);
         bool deleteCashDeposits(string LoginId, int RequestID);
         IEnumerable<CashAuth> GetFilePath(int RequestId);
+        IEnumerable<CashDepositStatus> GetCashDepositStatus(Guid UserId, int MenuId, int CityId, int CountryId, int RegionId, int FromYear, int? OutletId = 0, int? Currency = 0);
     }
 }
