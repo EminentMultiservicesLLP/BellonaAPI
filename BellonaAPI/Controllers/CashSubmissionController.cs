@@ -142,9 +142,9 @@ namespace BellonaAPI.Controllers
         [Route("GetCashDepositStatus")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetCashDepositStatus(Guid UserId, int MenuId, int CityId, int CountryId, int RegionId, int FromYear, int? OutletId = 0, int? Currency = 0)
+        public IHttpActionResult GetCashDepositStatus(Guid UserId, int MenuId, string FromYear, int? OutletId = 0 , int? ClusterId = 0, int? CityId = 0, int? BrandId = 0)
         {
-            List<CashDepositStatus> _result = _IRepo.GetCashDepositStatus(UserId, MenuId, CityId, CountryId, RegionId, FromYear, OutletId, Currency).ToList();
+            List<CashDepositStatus> _result = _IRepo.GetCashDepositStatus(UserId, MenuId, FromYear, OutletId?? 0, ClusterId ?? 0, CityId ?? 0, BrandId ?? 0).ToList();
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve GetCashDepositStatus data"));
         }

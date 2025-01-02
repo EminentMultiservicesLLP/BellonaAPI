@@ -16,6 +16,7 @@ namespace BellonaAPI.Models
         public decimal DepositAmount { get; set; }
         public decimal Variance { get; set; }
         public string DepositDate { get; set; }
+        public string CashCollectionDate { get; set;  }
         public int RequestStatus { get; set; }
         public string Attachment { get; set; }
         public string DepositedBy { get; set; }

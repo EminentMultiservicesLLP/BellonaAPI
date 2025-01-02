@@ -1873,6 +1873,160 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
+        public List<MISWeeklyDataModel> GetWeeklyMISData_Part_I(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<MISWeeklyDataModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+                  
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeeklyMISData_Part_I, dbCol, CommandType.StoredProcedure);
+                   
+                    _result = dtData.AsEnumerable().Select(row => new MISWeeklyDataModel
+                    {
+                        NetSale = row.Field<decimal?>("NETSALE"),
+                        ActualSale = row.Field<decimal?>("ACTUALSALE"),
+                        SALEPERC = row.Field<decimal?>("SALEPERC"),
+                        Budget = row.Field<decimal?>("BUDGET"),
+                        Variance = row.Field<decimal?>("VARIANCE"),
+                        SALEVARPERC = row.Field<decimal?>("SALEVARPERC"),
+                        NetDiscountAmount = row.Field<decimal?>("NetDiscountAmount"),
+                        DISCOUNTAMTPERC = row.Field<decimal?>("DISCOUNTAMTPERC"),
+
+                    }).OrderBy(o => o.ActualSale).ToList();
+                    
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Weekly MIS Data Part I:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        public List<MISWeeklyDataModel> GetWeeklyMISData_Part_II(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<MISWeeklyDataModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+                  
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeeklyMISData_Part_II, dbCol, CommandType.StoredProcedure);
+                   
+                    _result = dtData.AsEnumerable().Select(row => new MISWeeklyDataModel
+                    {
+
+                        DineInSale = row.Field<decimal?>("DINEINSALE"),
+                        DININPERC = row.Field<decimal?>("DININPERC"),
+                        DeliverySale = row.Field<decimal?>("DELIVERYSALE"),
+                        DELIVERYPERC = row.Field<decimal?>("DELIVERYPERC"),
+                        APC = row.Field<decimal?>("APC"),
+                        Covers = row.Field<int?>("COVERS"),
+                        SalePerSQft = row.Field<decimal?>("SALEPERSQFT"),                       
+
+                    }).OrderBy(o => o.ActualSale).ToList();
+                    
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Weekly MIS Data Part II:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+         public List<MISWeeklyDataModel> GetWeeklyMISData_Part_III(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<MISWeeklyDataModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+                  
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeeklyMISData_Part_III, dbCol, CommandType.StoredProcedure);
+                   
+                    _result = dtData.AsEnumerable().Select(row => new MISWeeklyDataModel
+                    {
+
+                        NetChargeAmount = row.Field<decimal?>("NetChargeAmount"),
+                        TakeAway = row.Field<decimal?>("TakeAway"),
+                        OtherSale = row.Field<decimal?>("OtherSale"),
+                        ADSWeekdays = row.Field<decimal?>("ADSWEEKDAYS"),
+                        ADSWeekend = row.Field<decimal?>("ADSWEEKEND")   
+                    }).OrderBy(o => o.ActualSale).ToList();
+                    
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Weekly MIS Data Part III:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
         public List<CogsBreakUp> GetCogsBreakUp(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<CogsBreakUp> _result = null;
