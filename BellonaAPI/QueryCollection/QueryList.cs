@@ -125,6 +125,9 @@
         public const string GetGrossProfitTrend = "dbsp_GetLast12Weeks_GrossProfit";
         public const string GetNetProfitTrend = "dbsp_GetLast12Weeks_NetProfit";
         public const string GetWeeklyMISData = "dbsp_GetWeeklyMISData";
+        public const string GetWeeklyMISData_Part_I = "dbsp_GetWeeklyMISData_PartI";
+        public const string GetWeeklyMISData_Part_II = "dbsp_GetWeeklyMISData_PartII";
+        public const string GetWeeklyMISData_Part_III = "dbsp_GetWeeklyMISData_PartIII";
         public const string GetCogsBreakUp = "dbsp_GetCogsBreakUp";
         public const string GetUtilityCost = "dbsp_GetUtilityCost";
         public const string GetMarketingPromotionCost = "dbsp_GetBusinessPromotion";
