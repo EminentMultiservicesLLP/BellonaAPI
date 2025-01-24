@@ -37,6 +37,7 @@ namespace BellonaAPI.Models
     {
         public string InvoiceDay { get; set; }
         public decimal? ApcDineIn { get; set; }
+        public decimal? ApcBudget { get; set; }
         public decimal? TotalCovers { get; set; }
         public decimal? TotalSale { get; set; }
     }
