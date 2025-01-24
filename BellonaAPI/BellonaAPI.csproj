@@ -277,6 +277,7 @@
     </Compile>
     <Compile Include="Models\ActionUserDetail.cs" />
     <Compile Include="Models\AddDocument.cs" />
+    <Compile Include="Models\APCBudgetModel.cs" />
     <Compile Include="Models\BillingModel.cs" />
     <Compile Include="Models\BudgetModel.cs" />
     <Compile Include="Models\CashAuth.cs" />

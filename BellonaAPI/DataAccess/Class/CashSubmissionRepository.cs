@@ -37,10 +37,10 @@ namespace BellonaAPI.DataAccess.Class
                         SystemAmount= row.Field<decimal>("SystemAmount"),
                         DepositAmount = row.Field<decimal>("DepositAmount"),
                         Variance = row.Field<decimal>("Variance"),
-                        DepositDate = row.Field<string>("DepositDate"),
+                        DepositDate = row.Field<DateTime>("CashDepositDate").ToString("dd-MMM-yyyy"),
                         Attachment=row.Field<string>("Attachment"),
                         RequestStatus=row.Field<int>("RequestStatus"),
-                        CashCollectionDate=row.Field<DateTime>("CashDepositDate").ToString("dd MMM yyyy")
+                        CashCollectionDate= row.Field<string>("CashCollectionDates"),
                     }).OrderByDescending(o => o.RequestNo).ToList();
 
                 }

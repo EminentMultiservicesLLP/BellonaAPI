@@ -235,6 +235,25 @@ namespace BellonaAPI.Controllers
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve  Distinct Financial Year"));
         }
+        #region APCBudget
+        [Route("GetAPC_BudgetWeekwise")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetAPC_BudgetWeekwise(Guid userId, int menuId, string financialYear, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<APCBudgetModel> _result = _iRepo.GetAPC_BudgetWeekwise(userId, menuId, financialYear, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve  APc Budget Data"));
+        }
+        [Route("SaveAPC_BudgetWeekwise")]
+        [AcceptVerbs("POST")]
+        [ValidationActionFilter]
+        public IHttpActionResult SaveAPC_BudgetWeekwise(APCBudgetList model)
+        {
+            if (_iRepo.SaveAPC_BudgetWeekwise(model)) return Ok(new { IsSuccess = true, Message = "APC Budget Save Successfully." });
+            else return BadRequest("APC Budget Save Failed");
+        }
+        #endregion APCBudget
 
         #region SalesBudget
         [Route("GetSalesCategory")]
@@ -446,6 +465,16 @@ namespace BellonaAPI.Controllers
             List<AverageCoverTrend> _result = _iRepo.GetAvgCoversTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve GetAvgCoversTrend Details."));
+        }
+        
+        [Route("GetDayWise_AvgCoversTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetDayWise_AvgCoversTrend(Guid userId, int menuId,string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<AverageCoverTrend> _result = _iRepo.GetDayWise_AvgCoversTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetDayWise_AvgCoversTrend Details."));
         }
 
         [Route("GetLiquorVsBudgetTrend")]
