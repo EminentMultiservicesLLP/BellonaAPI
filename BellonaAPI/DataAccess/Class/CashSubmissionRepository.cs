@@ -37,9 +37,10 @@ namespace BellonaAPI.DataAccess.Class
                         SystemAmount= row.Field<decimal>("SystemAmount"),
                         DepositAmount = row.Field<decimal>("DepositAmount"),
                         Variance = row.Field<decimal>("Variance"),
-                        DepositDate = row.Field<string>("DepositDate"),
+                        DepositDate = row.Field<DateTime>("CashDepositDate").ToString("dd-MMM-yyyy"),
                         Attachment=row.Field<string>("Attachment"),
-                        RequestStatus=row.Field<int>("RequestStatus")
+                        RequestStatus=row.Field<int>("RequestStatus"),
+                        CashCollectionDate= row.Field<string>("CashCollectionDates"),
                     }).OrderByDescending(o => o.RequestNo).ToList();
 
                 }
@@ -178,7 +179,7 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public IEnumerable<CashDepositStatus> GetCashDepositStatus(Guid UserId, int MenuId, int CityId, int CountryId, int RegionId, int FromYear, int? OutletId = 0, int? Currency = 0)
+        public IEnumerable<CashDepositStatus> GetCashDepositStatus(Guid UserId, int MenuId, string FromYear, int OutletId, int ClusterId, int CityId, int BrandId)
         {
             List<CashDepositStatus> _result = null;
             TryCatch.Run(() =>
@@ -187,13 +188,13 @@ namespace BellonaAPI.DataAccess.Class
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
                     dbCol.Add(new DBParameter("UserId", UserId, DbType.Guid));
-                    dbCol.Add(new DBParameter("MenuId", MenuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("MenuId", MenuId, DbType.Int32));         
+                    dbCol.Add(new DBParameter("Year", FromYear, DbType.String));
                     dbCol.Add(new DBParameter("OutletId", OutletId, DbType.Int32));
-                    dbCol.Add(new DBParameter("CityId", CityId, DbType.Int32));
-                    dbCol.Add(new DBParameter("CountryId", CountryId, DbType.Int32));
-                    dbCol.Add(new DBParameter("RegionId", RegionId, DbType.Int32));
-                    dbCol.Add(new DBParameter("CurrencyId", Currency, DbType.Int32));
-                    dbCol.Add(new DBParameter("Year", FromYear, DbType.Int32));
+                    dbCol.Add(new DBParameter("clusterId", ClusterId, DbType.Int32));
+                    dbCol.Add(new DBParameter("cityId", CityId, DbType.Int32));
+                    dbCol.Add(new DBParameter("brandId", BrandId, DbType.Int32));                    
+                  
                     DataTable dt = Dbhelper.ExecuteDataTable(QueryList.GetCashDepositStatus, dbCol, CommandType.StoredProcedure);
                     _result = dt.AsEnumerable().Select(row => new CashDepositStatus
                     {

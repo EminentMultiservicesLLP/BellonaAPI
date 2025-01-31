@@ -235,6 +235,25 @@ namespace BellonaAPI.Controllers
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve  Distinct Financial Year"));
         }
+        #region APCBudget
+        [Route("GetAPC_BudgetWeekwise")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetAPC_BudgetWeekwise(Guid userId, int menuId, string financialYear, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<APCBudgetModel> _result = _iRepo.GetAPC_BudgetWeekwise(userId, menuId, financialYear, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve  APc Budget Data"));
+        }
+        [Route("SaveAPC_BudgetWeekwise")]
+        [AcceptVerbs("POST")]
+        [ValidationActionFilter]
+        public IHttpActionResult SaveAPC_BudgetWeekwise(APCBudgetList model)
+        {
+            if (_iRepo.SaveAPC_BudgetWeekwise(model)) return Ok(new { IsSuccess = true, Message = "APC Budget Save Successfully." });
+            else return BadRequest("APC Budget Save Failed");
+        }
+        #endregion APCBudget
 
         #region SalesBudget
         [Route("GetSalesCategory")]
@@ -447,6 +466,16 @@ namespace BellonaAPI.Controllers
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve GetAvgCoversTrend Details."));
         }
+        
+        [Route("GetDayWise_AvgCoversTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetDayWise_AvgCoversTrend(Guid userId, int menuId,string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<AverageCoverTrend> _result = _iRepo.GetDayWise_AvgCoversTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetDayWise_AvgCoversTrend Details."));
+        }
 
         [Route("GetLiquorVsBudgetTrend")]
         [AcceptVerbs("GET")]
@@ -510,6 +539,41 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to retrieve Get Weekly MISData Details."));
         }
 
+        [Route("GetWeeklyMISData_Part_I")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetWeeklyMISData_Part_I(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            //  Logger.LogInfo("GetWeeklyMISData in TransactionController before send call to repo  :" + DateTime.UtcNow);
+            List<MISWeeklyDataModel> _result = _iRepo.GetWeeklyMISData_Part_I(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            // Logger.LogInfo("GetWeeklyMISData in TransactionController after  call return from repo  :" + DateTime.UtcNow);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Weekly MISData Part I Details."));
+        }
+
+        [Route("GetWeeklyMISData_Part_II")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetWeeklyMISData_Part_II(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            //  Logger.LogInfo("GetWeeklyMISData in TransactionController before send call to repo  :" + DateTime.UtcNow);
+            List<MISWeeklyDataModel> _result = _iRepo.GetWeeklyMISData_Part_II(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            // Logger.LogInfo("GetWeeklyMISData in TransactionController after  call return from repo  :" + DateTime.UtcNow);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Weekly MISData Part II Details."));
+        }
+
+        [Route("GetWeeklyMISData_Part_III")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetWeeklyMISData_Part_III(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            //  Logger.LogInfo("GetWeeklyMISData in TransactionController before send call to repo  :" + DateTime.UtcNow);
+            List<MISWeeklyDataModel> _result = _iRepo.GetWeeklyMISData_Part_III(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            // Logger.LogInfo("GetWeeklyMISData in TransactionController after  call return from repo  :" + DateTime.UtcNow);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get Weekly MISData Part III Details."));
+        }
         [Route("GetCogsBreakUp")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]

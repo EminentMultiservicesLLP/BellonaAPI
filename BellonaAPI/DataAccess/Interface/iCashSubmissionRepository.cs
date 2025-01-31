@@ -12,6 +12,6 @@ namespace BellonaAPI.DataAccess.Interface
         bool savePendingCashDeposit(CashAuth cashAuth);
         bool deleteCashDeposits(string LoginId, int RequestID);
         IEnumerable<CashAuth> GetFilePath(int RequestId);
-        IEnumerable<CashDepositStatus> GetCashDepositStatus(Guid UserId, int MenuId, int CityId, int CountryId, int RegionId, int FromYear, int? OutletId = 0, int? Currency = 0);
+        IEnumerable<CashDepositStatus> GetCashDepositStatus(Guid UserId, int MenuId, string FromYear, int OutletId, int ClusterId, int CityId , int BrandId);
     }
 }

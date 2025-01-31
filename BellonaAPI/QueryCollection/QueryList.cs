@@ -107,6 +107,11 @@
         public const string Get_DSRComparisonForSale = "dbsp_Get_DSRComparisonForSale";
         public const string Get_DailySnapshotforComparison = "dbsp_Get_DailySnapshotforComparison";
 
+        // APC Budget Weekly 
+
+        public const string GetAPC_BudgetWeekwise = "dbsp_GetAPC_BudgetWeekwise";
+        public const string SaveAPC_BudgetWeekwise = "dbsp_SaveAPC_BudgetWeekwise";
+
         // Weekly MIS CHART
         public const string GetWeeklySaleDetails = "dbsp_GetWeekly_SaleTrend";
         public const string GetLast12Weeks_SalesVsBudget = "dbsp_GetLast12Weeks_SalesVsBudget";
@@ -115,6 +120,7 @@
         public const string GetTobaccoVsBudgetTrend = "dbsp_GetTobaccoVsBudgetTrend";
         public const string GetTimeWiseSalesBreakup = "dbsp_GetWeekly_TimeWiseSaleBreakup";
         public const string GetAvgCoversTrend = "dbsp_GetAvgCoversTrend";
+        public const string GetDayWise_AvgCoversTrend = "dbsp_GetDayWise_AvgCoversTrend";
         public const string GetLiquorVsBudgetTrend = "dbsp_GetLiquorVsBudgetTrend";
         public const string GetFoodVsBudgetTrend = "dbsp_GetFoodVsBudgetTrend";
         public const string GetLast12Weeks_CoversTrend = "dbsp_GetLast12Weeks_CoversTrend";
@@ -125,6 +131,9 @@
         public const string GetGrossProfitTrend = "dbsp_GetLast12Weeks_GrossProfit";
         public const string GetNetProfitTrend = "dbsp_GetLast12Weeks_NetProfit";
         public const string GetWeeklyMISData = "dbsp_GetWeeklyMISData";
+        public const string GetWeeklyMISData_Part_I = "dbsp_GetWeeklyMISData_PartI";
+        public const string GetWeeklyMISData_Part_II = "dbsp_GetWeeklyMISData_PartII";
+        public const string GetWeeklyMISData_Part_III = "dbsp_GetWeeklyMISData_PartIII";
         public const string GetCogsBreakUp = "dbsp_GetCogsBreakUp";
         public const string GetUtilityCost = "dbsp_GetUtilityCost";
         public const string GetMarketingPromotionCost = "dbsp_GetBusinessPromotion";
