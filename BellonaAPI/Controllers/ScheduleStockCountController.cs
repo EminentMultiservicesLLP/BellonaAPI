@@ -33,24 +33,97 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to retrieve getFinancialYear"));
         }
 
-        [Route("SaveScheduleStockCount")]
+        #region Schedule
+        [Route("GetOutletListForSchedule")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetOutletListForSchedule(int? FinancialYearID = null, int? SubCategoryID = null)
+        {
+            List<OutletList> _result = _IRepo.GetOutletListForSchedule(FinancialYearID, SubCategoryID).ToList();
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetOutletListForSchedule"));
+        }
+
+        [Route("SaveStockSchedule")]
         [AcceptVerbs("POST")]
         [ValidationActionFilter]
-        public IHttpActionResult SaveScheduleStockCount(ScheduleStockCount model)
+        public IHttpActionResult SaveStockSchedule(StockSchedule model)
         {
-            if (_IRepo.SaveScheduleStockCount(model)) return Ok(new { IsSuccess = true, Message = "Schedule Save Successfully." });
+            if (_IRepo.SaveStockSchedule(model)) return Ok(new { IsSuccess = true, Message = "Schedule Save Successfully." });
             else return BadRequest("Schedule Save Failed");
         }
 
-        [Route("GetScheduleStockCount")]
+        [Route("GetStockSchedule")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetScheduleStockCount(int? FinancialYearID,int? OutletID)
+        public IHttpActionResult GetStockSchedule(int? FinancialYearID = null)
         {
-            List<ScheduleStockCount> _result = _IRepo.GetScheduleStockCount(FinancialYearID, OutletID).ToList();
+            List<StockSchedule> _result = _IRepo.GetStockSchedule(FinancialYearID).ToList();
             if (_result != null) return Ok(_result);
-            else return InternalServerError(new System.Exception("Failed to retrieve GetScheduleStockCount"));
+            else return InternalServerError(new System.Exception("Failed to retrieve GetStockSchedule"));
         }
 
+        [Route("GetStockScheduleDetails")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetStockScheduleDetails(int? ScheduleID = null)
+        {
+            List<StockScheduleDetails> _result = _IRepo.GetStockScheduleDetails(ScheduleID).ToList();
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetStockScheduleDetails"));
+        }
+        #endregion Schedule
+
+        #region Count
+        [Route("GetStockScheduleForCount")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetStockScheduleForCount(int? FinancialYearID = null, int? OutletID = null)
+        {
+            List<StockScheduleDetails> _result = _IRepo.GetStockScheduleForCount(FinancialYearID, OutletID).ToList();
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetStockScheduleForCount"));
+        }
+
+        [Route("GetStockCount")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetStockCount(int? ScheduleDetailID = null)
+        {
+            List<StockCountDetails> _result = _IRepo.GetStockCount(ScheduleDetailID).ToList();
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetStockCount"));
+        }
+
+        [Route("SaveStockCount")]
+        [AcceptVerbs("POST")]
+        [ValidationActionFilter]
+        public IHttpActionResult SaveStockCount(StockCount model)
+        {
+            if (_IRepo.SaveStockCount(model)) return Ok(new { IsSuccess = true, Message = "StockCount Save Successfully." });
+            else return BadRequest("StockCount Save Failed");
+        }
+        #endregion Count
+
+        #region Count Authorization
+        [Route("GetStockScheduleForCountAuth")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetStockScheduleForCountAuth(Guid UserId, int? FinancialYearID = null)
+        {
+            List<StockScheduleDetails> _result = _IRepo.GetStockScheduleForCountAuth(UserId, FinancialYearID).ToList();
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetStockScheduleForCountAuth"));
+        }
+
+        [Route("AuthStockCount")]
+        [AcceptVerbs("POST")]
+        [ValidationActionFilter]
+        public IHttpActionResult AuthStockCount(StockScheduleDetails model)
+        {
+            if (_IRepo.AuthStockCount(model)) return Ok(new { IsSuccess = true, Message = "StockCount Authorized Successfully." });
+            else return BadRequest("StockCount Authorization Failed");
+        }
+        #endregion Count Authorization
     }
 }

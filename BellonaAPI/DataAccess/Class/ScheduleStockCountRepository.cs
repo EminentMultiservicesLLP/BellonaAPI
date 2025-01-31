@@ -12,7 +12,7 @@ using System.Web;
 
 namespace BellonaAPI.DataAccess.Class
 {
-    public class ScheduleStockCountRepository: IScheduleStockCountRepository
+    public class ScheduleStockCountRepository : IScheduleStockCountRepository
     {
         private static readonly ILogger Logger = CommonLayer.Logger.Register(typeof(ScheduleStockCountRepository));
 
@@ -39,9 +39,38 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public bool SaveScheduleStockCount(ScheduleStockCount model)
+        #region Schedule
+        public IEnumerable<OutletList> GetOutletListForSchedule(int? FinancialYearID, int? SubCategoryID)
+        {
+            List<OutletList> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection paramCollection = new DBParameterCollection();
+                    paramCollection.Add(new DBParameter("FinancialYearID", FinancialYearID, DbType.Int32));
+                    paramCollection.Add(new DBParameter("SubCategoryID", SubCategoryID, DbType.Int32));
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetOutletListForSchedule, paramCollection, CommandType.StoredProcedure);
+                    _result = dtData.AsEnumerable().Select(row => new OutletList
+                    {
+                        OutletID = row.Field<int>("OutletID"),
+                        OutletName = row.Field<string>("OutletName")
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in ScheduleStockCountRepository GetOutletListForSchedule:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+            return _result;
+        }
+
+        public bool SaveStockSchedule(StockSchedule model)
         {
             int iResult = 0;
+            string OutletList = model.OutletList != null ? Common.ToXML(model.OutletList) : string.Empty;
+            string StockScheduleDetails = model.StockScheduleDetails != null ? Common.ToXML(model.StockScheduleDetails) : string.Empty;
+
             using (DBHelper dbHelper = new DBHelper())
             {
                 IDbTransaction transaction = dbHelper.BeginTransaction();
@@ -50,34 +79,13 @@ namespace BellonaAPI.DataAccess.Class
                     DBParameterCollection paramCollection = new DBParameterCollection();
                     paramCollection.Add(new DBParameter("ScheduleID", model.ScheduleID, DbType.Int32));
                     paramCollection.Add(new DBParameter("FinancialYearID", model.FinancialYearID, DbType.Int32));
-                    paramCollection.Add(new DBParameter("OutletID", model.OutletID, DbType.Int32));
+                    paramCollection.Add(new DBParameter("SubCategoryID", model.SubCategoryID, DbType.Int32));
+                    paramCollection.Add(new DBParameter("OutletList", OutletList, DbType.Xml));
+                    paramCollection.Add(new DBParameter("StockScheduleDetails", StockScheduleDetails, DbType.Xml));
+                    paramCollection.Add(new DBParameter("InsertedBy", model.InsertedBy, DbType.String));
 
-                    paramCollection.Add(new DBParameter("AprFirstSchedule", model.AprFirstSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("MayFirstSchedule", model.MayFirstSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("JunFirstSchedule", model.JunFirstSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("JulFirstSchedule", model.JulFirstSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("AugFirstSchedule", model.AugFirstSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("SeptFirstSchedule", model.SeptFirstSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("OctFirstSchedule", model.OctFirstSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("NovFirstSchedule", model.NovFirstSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("DecFirstSchedule", model.DecFirstSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("JanFirstSchedule", model.JanFirstSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("FebFirstSchedule", model.FebFirstSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("MarFirstSchedule", model.MarFirstSchedule, DbType.String));
-
-                    paramCollection.Add(new DBParameter("AprSecondSchedule ", model.AprSecondSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("MaySecondSchedule ", model.MaySecondSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("JunSecondSchedule ", model.JunSecondSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("JulSecondSchedule ", model.JulSecondSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("AugSecondSchedule ", model.AugSecondSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("SeptSecondSchedule ", model.SeptSecondSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("OctSecondSchedule ", model.OctSecondSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("NovSecondSchedule ", model.NovSecondSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("DecSecondSchedule ", model.DecSecondSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("JanSecondSchedule ", model.JanSecondSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("FebSecondSchedule ", model.FebSecondSchedule, DbType.String));
-                    paramCollection.Add(new DBParameter("MarSecondSchedule ", model.MarSecondSchedule, DbType.String));
-                    iResult = dbHelper.ExecuteNonQuery(QueryList.SaveScheduleStockCount, paramCollection, transaction, CommandType.StoredProcedure);
+                    var Result = dbHelper.ExecuteScalar(QueryList.SaveStockSchedule, paramCollection, transaction, CommandType.StoredProcedure);
+                    iResult = Int32.Parse(Result.ToString());
                     dbHelper.CommitTransaction(transaction);
                 }).IfNotNull(ex =>
                 {
@@ -88,9 +96,67 @@ namespace BellonaAPI.DataAccess.Class
             else return false;
         }
 
-        public IEnumerable<ScheduleStockCount> GetScheduleStockCount(int? FinancialYearID, int? OutletID)
+        public IEnumerable<StockSchedule> GetStockSchedule(int? FinancialYearID)
         {
-            List<ScheduleStockCount> _result = null;
+            List<StockSchedule> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection paramCollection = new DBParameterCollection();
+                    paramCollection.Add(new DBParameter("FinancialYearID", FinancialYearID, DbType.Int32));
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetStockSchedule, paramCollection, CommandType.StoredProcedure);
+                    _result = dtData.AsEnumerable().Select(row => new StockSchedule
+                    {
+                        ScheduleID = row.Field<int>("ScheduleID"),
+                        FinancialYearID = row.Field<int>("FinancialYearID"),
+                        FinancialYearName = row.Field<string>("FinancialYearName"),
+                        SubCategoryID = row.Field<int>("SubCategoryID"),
+                        SubCategoryName = row.Field<string>("SubCategoryName"),
+                        OutletID = row.Field<int>("OutletID"),
+                        OutletName = row.Field<string>("OutletName")
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in StockScheduleRepository GetStockSchedule:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+            return _result;
+        }
+
+        public IEnumerable<StockScheduleDetails> GetStockScheduleDetails(int? ScheduleID)
+        {
+            List<StockScheduleDetails> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection paramCollection = new DBParameterCollection();
+                    paramCollection.Add(new DBParameter("ScheduleID", ScheduleID, DbType.Int32));
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetStockScheduleDetails, paramCollection, CommandType.StoredProcedure);
+                    _result = dtData.AsEnumerable().Select(row => new StockScheduleDetails
+                    {
+                        MonthName = row.Field<string>("MonthName"),
+                        ScheduleNumber = row.Field<int>("ScheduleNumber"),
+                        ScheduleDate = row.Field<string>("ScheduleDate"),
+                        ScheduleStatus = row.Field<int?>("ScheduleStatus"),
+                        ScheduleStatusName = row.Field<string>("ScheduleStatusName")
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in StockScheduleDetailsRepository GetStockScheduleDetails:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+            return _result;
+        }
+        #endregion Schedule
+
+        #region Count
+        public IEnumerable<StockScheduleDetails> GetStockScheduleForCount(int? FinancialYearID, int? OutletID)
+        {
+            List<StockScheduleDetails> _result = null;
             TryCatch.Run(() =>
             {
                 using (DBHelper Dbhelper = new DBHelper())
@@ -98,42 +164,144 @@ namespace BellonaAPI.DataAccess.Class
                     DBParameterCollection paramCollection = new DBParameterCollection();
                     paramCollection.Add(new DBParameter("FinancialYearID", FinancialYearID, DbType.Int32));
                     paramCollection.Add(new DBParameter("OutletID", OutletID, DbType.Int32));
-                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetScheduleStockCount, paramCollection, CommandType.StoredProcedure);
-                    _result = dtData.AsEnumerable().Select(row => new ScheduleStockCount
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetStockScheduleForCount, paramCollection, CommandType.StoredProcedure);
+                    _result = dtData.AsEnumerable().Select(row => new StockScheduleDetails
                     {
+                        DetailID = row.Field<int>("DetailID"),
+                        MonthName = row.Field<string>("MonthName"),
+                        ScheduleNumber = row.Field<int>("ScheduleNumber"),
+                        ScheduleDate = row.Field<string>("ScheduleDate"),
+                        ScheduleStatus = row.Field<int?>("ScheduleStatus"),
+                        ScheduleStatusName = row.Field<string>("ScheduleStatusName"),
                         ScheduleID = row.Field<int>("ScheduleID"),
-                        AprFirstSchedule = row.Field<string>("AprFirstSchedule"),
-                        MayFirstSchedule = row.Field<string>("MayFirstSchedule"),
-                        JunFirstSchedule = row.Field<string>("JunFirstSchedule"),
-                        JulFirstSchedule = row.Field<string>("JulFirstSchedule"),
-                        AugFirstSchedule = row.Field<string>("AugFirstSchedule"),
-                        SeptFirstSchedule = row.Field<string>("SeptFirstSchedule"),
-                        OctFirstSchedule = row.Field<string>("OctFirstSchedule"),
-                        NovFirstSchedule = row.Field<string>("NovFirstSchedule"),
-                        DecFirstSchedule = row.Field<string>("DecFirstSchedule"),
-                        JanFirstSchedule = row.Field<string>("JanFirstSchedule"),
-                        FebFirstSchedule = row.Field<string>("FebFirstSchedule"),
-                        MarFirstSchedule = row.Field<string>("MarFirstSchedule"),
-                        AprSecondSchedule = row.Field<string>("AprSecondSchedule"),
-                        MaySecondSchedule = row.Field<string>("MaySecondSchedule"),
-                        JunSecondSchedule = row.Field<string>("JunSecondSchedule"),
-                        JulSecondSchedule = row.Field<string>("JulSecondSchedule"),
-                        AugSecondSchedule = row.Field<string>("AugSecondSchedule"),
-                        SeptSecondSchedule = row.Field<string>("SeptSecondSchedule"),
-                        OctSecondSchedule = row.Field<string>("OctSecondSchedule"),
-                        NovSecondSchedule = row.Field<string>("NovSecondSchedule"),
-                        DecSecondSchedule = row.Field<string>("DecSecondSchedule"),
-                        JanSecondSchedule = row.Field<string>("JanSecondSchedule"),
-                        FebSecondSchedule = row.Field<string>("FebSecondSchedule"),
-                        MarSecondSchedule = row.Field<string>("MarSecondSchedule"),
+                        SubCategoryID = row.Field<int>("SubCategoryID"),
+                        SubCategoryName = row.Field<string>("SubCategoryName"),
                     }).ToList();
 
                 }
             }).IfNotNull((ex) =>
             {
-                Logger.LogError("Error in ScheduleStockCountRepository GetScheduleStockCount:" + ex.Message + Environment.NewLine + ex.StackTrace);
+                Logger.LogError("Error in ScheduleStockCountRepository GetStockScheduleForCount:" + ex.Message + Environment.NewLine + ex.StackTrace);
             });
             return _result;
         }
+
+        public IEnumerable<StockCountDetails> GetStockCount(int? ScheduleDetailID)
+        {
+            List<StockCountDetails> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection paramCollection = new DBParameterCollection();
+                    paramCollection.Add(new DBParameter("ScheduleDetailID", ScheduleDetailID, DbType.Int32));
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetStockCount, paramCollection, CommandType.StoredProcedure);
+                    _result = dtData.AsEnumerable().Select(row => new StockCountDetails
+                    {
+                        ItemID = row.Field<int>("ItemID"),
+                        ItemName = row.Field<string>("ItemName"),
+                        ClosingQty = row.Field<decimal?>("ClosingQty"),
+                        OpeningQty = row.Field<decimal?>("OpeningQty"),
+                        ItemOutletID = row.Field<int>("ItemOutletID"),
+                        strBatchDate = row.Field<DateTime?>("BatchDate")?.ToString("dd-MMM-yyyy") ?? string.Empty,
+                        UnitRate = row.Field<decimal?>("UnitRate"),
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in ScheduleStockCountRepository GetStockCount:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+            return _result;
+        }
+
+        public bool SaveStockCount(StockCount model)
+        {
+            int iResult = 0;
+            string StockCountDetails = model.StockCountDetails != null ? Common.ToXML(model.StockCountDetails) : string.Empty;
+
+            using (DBHelper dbHelper = new DBHelper())
+            {
+                IDbTransaction transaction = dbHelper.BeginTransaction();
+                TryCatch.Run(() =>
+                {
+                    DBParameterCollection paramCollection = new DBParameterCollection();
+                    paramCollection.Add(new DBParameter("ScheduleDetailID", model.ScheduleDetailID, DbType.Int32));
+                    paramCollection.Add(new DBParameter("StockCountDetails", StockCountDetails, DbType.Xml));
+                    paramCollection.Add(new DBParameter("InsertedBy", model.InsertedBy, DbType.String));
+
+                    var Result = dbHelper.ExecuteScalar(QueryList.SaveStockCount, paramCollection, transaction, CommandType.StoredProcedure);
+                    iResult = Int32.Parse(Result.ToString());
+                    dbHelper.CommitTransaction(transaction);
+                }).IfNotNull(ex =>
+                {
+                    dbHelper.RollbackTransaction(transaction);
+                });
+            }
+            if (iResult > 0) return true;
+            else return false;
+        }
+        #endregion Count
+
+        #region Count Authorization
+        public IEnumerable<StockScheduleDetails> GetStockScheduleForCountAuth(Guid UserId, int? FinancialYearID)
+        {
+            List<StockScheduleDetails> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection paramCollection = new DBParameterCollection();
+                    paramCollection.Add(new DBParameter("UserId", UserId, DbType.Guid));
+                    paramCollection.Add(new DBParameter("FinancialYearID", FinancialYearID, DbType.Int32));
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetStockScheduleForCountAuth, paramCollection, CommandType.StoredProcedure);
+                    _result = dtData.AsEnumerable().Select(row => new StockScheduleDetails
+                    {
+                        DetailID = row.Field<int>("DetailID"),
+                        MonthName = row.Field<string>("MonthName"),
+                        ScheduleNumber = row.Field<int>("ScheduleNumber"),
+                        ScheduleDate = row.Field<string>("ScheduleDate"),
+                        ScheduleStatus = row.Field<int?>("ScheduleStatus"),
+                        ScheduleStatusName = row.Field<string>("ScheduleStatusName"),
+                        ScheduleID = row.Field<int>("ScheduleID"),
+                        SubCategoryID = row.Field<int>("SubCategoryID"),
+                        SubCategoryName = row.Field<string>("SubCategoryName"),
+                        OutletName = row.Field<string>("OutletName"),
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in ScheduleStockCountRepository GetStockScheduleForCountAuth:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+            return _result;
+        }
+
+        public bool AuthStockCount(StockScheduleDetails model)
+        {
+            int iResult = 0;
+
+            using (DBHelper dbHelper = new DBHelper())
+            {
+                IDbTransaction transaction = dbHelper.BeginTransaction();
+                TryCatch.Run(() =>
+                {
+                    DBParameterCollection paramCollection = new DBParameterCollection();
+                    paramCollection.Add(new DBParameter("DetailID", model.DetailID, DbType.Int32));
+                    paramCollection.Add(new DBParameter("ScheduleStatus", model.ScheduleStatus, DbType.Int32));
+                    paramCollection.Add(new DBParameter("AuthorizedBy", model.AuthorizedBy, DbType.String));
+
+                    var Result = dbHelper.ExecuteScalar(QueryList.AuthStockCount, paramCollection, transaction, CommandType.StoredProcedure);
+                    iResult = Int32.Parse(Result.ToString());
+                    dbHelper.CommitTransaction(transaction);
+                }).IfNotNull(ex =>
+                {
+                    dbHelper.RollbackTransaction(transaction);
+                });
+            }
+            if (iResult > 0) return true;
+            else return false;
+        }
+        #endregion Count Authorization
     }
 }

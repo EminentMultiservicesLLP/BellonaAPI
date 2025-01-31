@@ -284,16 +284,31 @@
 
 
         // ********************************* Inventory ***************************************
-
+        //Item
         public const string GetSubCategory = "dbsp_Inv_GetSubCategory";
         public const string GetItemPackSize = "dbsp_Inv_GetItemPackSize";
         public const string SaveItem = "dbsp_Inv_SaveItem";
         public const string GetItem = "dbsp_Inv_GetItem";
+        //Stock
         public const string GetOutletItemMapping = "dbsp_Inv_GetOutletItemMapping";
         public const string SaveOutletItemMapping = "dbsp_Inv_SaveOutletItemMapping";
+        public const string GetStockDetails = "dbsp_Inv_GetStockDetails";
+
+        //Schdule
         public const string GetFinancialYear = "dbsp_Inv_GetFinancialYear";
-        public const string SaveScheduleStockCount = "dbsp_Inv_SaveScheduleStockCount";
-        public const string GetScheduleStockCount = "dbsp_Inv_GetScheduleStockCount";
+        public const string GetOutletListForSchedule = "dbsp_Inv_GetOutletListForSchedule";
+        public const string SaveStockSchedule = "dbsp_Inv_SaveStockSchedule";
+        public const string GetStockSchedule = "dbsp_Inv_GetStockSchedule";
+        //Count
+        public const string GetStockScheduleDetails = "dbsp_Inv_GetStockScheduleDetails";
+        public const string GetStockScheduleForCount = "dbsp_Inv_GetStockScheduleForCount";
+        public const string GetStockCount = "dbsp_Inv_GetStockCount";
+        public const string SaveStockCount = "dbsp_Inv_SaveStockCount";
+        //CountAuth
+        public const string GetStockScheduleForCountAuth = "dbsp_Inv_GetStockScheduleForCountAuth";
+        public const string AuthStockCount = "dbsp_Inv_AuthStockCount";
+
+        //Inventory
         public const string SaveInventoryEntry = "dbsp_Inv_SaveInventoryEntry";
         public const string GetInventoryEntry = "dbsp_Inv_GetInventoryEntry";
         public const string GetEntryDetails = "dbsp_Inv_GetEntryDetails";

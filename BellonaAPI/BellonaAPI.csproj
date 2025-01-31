@@ -249,17 +249,6 @@
     <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.2\THIRD-PARTY-NOTICES.TXT" />
     <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.2\useSharedDesignerContext.txt" />
     <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.2\version.txt" />
-    <Content Include="uploads\DMS\G-001245\un.jpg" />
-    <Content Include="uploads\GuestImage\21052024\un.jpg" />
-    <Content Include="uploads\GuestImage\21052024\underConstruction.png" />
-    <Content Include="uploads\Inventory\InventoryEntry\OutletID3\66366705-12ec-46f2-913d-bd207819b7c2 %282%29.jpg" />
-    <Content Include="uploads\Inventory\InventoryEntry\OutletID3\a 1b02e8f-47cb-48ee-8237-624e606d10a8.jpg" />
-    <Content Include="uploads\Inventory\InventoryEntry\OutletID4\66366705-12ec-46f2-913d-bd207819b7c2 %282%29.jpg" />
-    <Content Include="uploads\Inventory\InventoryEntry\OutletID4\a 1b02e8f-47cb-48ee-8237-624e606d10a8.jpg" />
-    <Content Include="uploads\Inventory\InventoryEntry\OutletID4\IMG_9324.JPEG" />
-    <Content Include="uploads\Inventory\InventoryEntry\OutletID4\zzz.jpg" />
-    <Content Include="uploads\Inventory\InventoryEntry\OutletID5\images.jpg" />
-    <Content Include="uploads\Inventory\ItemMaster\28052024\Mechcon-01.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -280,11 +269,11 @@
     <Compile Include="Models\BillingModel.cs" />
     <Compile Include="Models\BudgetModel.cs" />
     <Compile Include="Models\CashAuth.cs" />
+    <Compile Include="Models\CashDepositStatus.cs" />
     <Compile Include="Models\DailyExpense.cs" />
     <Compile Include="Models\DailySale.cs" />
     <Compile Include="Models\DailyTarget.cs" />
     <Compile Include="Models\DailyTargetCC.cs" />
-    <Compile Include="Models\Dashboard\CashDepositStatus.cs" />
     <Compile Include="Models\Dashboard\PresentDashboard.cs" />
     <Compile Include="Models\Dashboard\ProspectDashboard.cs" />
     <Compile Include="Models\Dashboard\SaleDineIn.cs" />
@@ -298,6 +287,7 @@
     <Compile Include="Models\Masters\AdminModels.cs" />
     <Compile Include="Models\MenuUserRightsModel.cs" />
     <Compile Include="Models\MonthlyExpense.cs" />
+    <Compile Include="Models\MonthlyMIS.cs" />
     <Compile Include="Models\OutletAccess.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Prospect.cs" />
@@ -366,28 +356,6 @@
     <Content Include="packages\Unity.5.11.7\.signature.p7s" />
     <Content Include="packages\Unity.5.11.7\Unity.5.11.7.nupkg" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
-    <Content Include="uploads\15052024\grn\PendingItemGRNWise.pdf" />
-    <Content Include="uploads\1\15052024\testGrn\PendingItemGRNWise.pdf" />
-    <Content Include="uploads\3\17052024\grn\PendingItemGRNWise.pdf" />
-    <Content Include="uploads\5\17052024\GRN-123456\MaterialIssueDetail.pdf" />
-    <Content Include="uploads\DMS\GRN Date\MaterialIssueDetail.pdf" />
-    <Content Include="uploads\DMS\GRN-123456\GRNDetails %2810%29.pdf" />
-    <Content Include="uploads\DMS\GRN-123456\GRNDetails %282%29.pdf" />
-    <Content Include="uploads\DMS\GRN-123456\Inferno Care LLP - Industrial safety Profile. %282%29.pdf" />
-    <Content Include="uploads\DMS\GRN-123456\MaterialIssueDetail.pdf" />
-    <Content Include="uploads\DMS\grn-87545\PendingItemGRNWise.pdf" />
-    <Content Include="uploads\DMS\GRN-878646\GRNDetails %2810%29.pdf" />
-    <Content Include="uploads\DMS\GRN77\PendingItemGRNWise.pdf" />
-    <Content Include="uploads\DMS\grn\GRNDetails %2810%29.pdf" />
-    <Content Include="uploads\DMS\grn\MaterialIssueDetail.pdf" />
-    <Content Include="uploads\DMS\testGrn\PurchaseIndentRpt %281%29.pdf" />
-    <Content Include="uploads\Inventory\InventoryEntry\OutletID3\Form6_S13163O6N1704241200071.pdf.pdf" />
-    <Content Include="uploads\Inventory\InventoryEntry\OutletID3\PurchaseReport %281%29.pdf" />
-    <Content Include="uploads\Inventory\InventoryEntry\OutletID3\PurchaseReport %282%29.pdf" />
-    <Content Include="uploads\Inventory\InventoryEntry\OutletID3\PurchaseReportVert %283%29.pdf" />
-    <Content Include="uploads\Inventory\InventoryEntry\OutletID3\PurchaseReportVert %284%29.pdf" />
-    <Content Include="uploads\Inventory\InventoryEntry\OutletID4\Form6_S13163O6N1704241200071.pdf.pdf" />
-    <Content Include="uploads\TBUploads\SalesBudgetDeatil_26-Sept-24.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

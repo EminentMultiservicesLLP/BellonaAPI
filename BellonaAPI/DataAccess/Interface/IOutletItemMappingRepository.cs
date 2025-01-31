@@ -11,5 +11,6 @@ namespace BellonaAPI.DataAccess.Interface
     {
         IEnumerable<MappedOutlet> GetOutletItemMapping(int? ItemID);
         bool SaveOutletItemMapping(OutletItemMapping model);
+        IEnumerable<StockDetails> GetStockDetails(int OutletID, int? SubCategoryID);
     }
 }
