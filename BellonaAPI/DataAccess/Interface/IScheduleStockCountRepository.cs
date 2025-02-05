@@ -28,5 +28,9 @@ namespace BellonaAPI.DataAccess.Interface
         IEnumerable<StockScheduleDetails> GetStockScheduleForCountAuth(Guid UserId, int? FinancialYearID);
         bool AuthStockCount(StockScheduleDetails model);
         #endregion Count Authorization
+
+        #region ScheduleStatus
+        IEnumerable<StockScheduleDetails> GetScheduleStatus(Guid UserId, int? FinancialYearID);
+        #endregion ScheduleStatus
     }
 }

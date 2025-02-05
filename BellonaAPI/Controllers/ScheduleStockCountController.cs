@@ -125,5 +125,18 @@ namespace BellonaAPI.Controllers
             else return BadRequest("StockCount Authorization Failed");
         }
         #endregion Count Authorization
+
+        #region ScheduleStatus
+        [Route("GetScheduleStatus")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetScheduleStatus(Guid UserId, int? FinancialYearID = null)
+        {
+            List<StockScheduleDetails> _result = _IRepo.GetScheduleStatus(UserId, FinancialYearID).ToList();
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetScheduleStatus"));
+        }
+        #endregion ScheduleStatus
+
     }
 }

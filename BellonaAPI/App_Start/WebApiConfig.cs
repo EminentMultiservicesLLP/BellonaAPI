@@ -61,6 +61,8 @@ namespace BellonaAPI
             container.RegisterType<IOutletItemMappingRepository, OutletItemMappingRepository>();
             container.RegisterType<IScheduleStockCountRepository, ScheduleStockCountRepository>();
             container.RegisterType<IInventoryEntryRepository, InventoryEntryRepository>();
+            container.RegisterType<IStockTransferRepository, StockTransferRepository>();
+
             container.RegisterType<ICommonRepository, CommonRepository>();
 
 

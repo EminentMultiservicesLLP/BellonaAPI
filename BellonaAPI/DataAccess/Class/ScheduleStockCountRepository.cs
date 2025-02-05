@@ -303,5 +303,41 @@ namespace BellonaAPI.DataAccess.Class
             else return false;
         }
         #endregion Count Authorization
+
+        #region ScheduleStatus
+
+        public IEnumerable<StockScheduleDetails> GetScheduleStatus(Guid UserId, int? FinancialYearID)
+        {
+            List<StockScheduleDetails> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection paramCollection = new DBParameterCollection();
+                    paramCollection.Add(new DBParameter("UserId", UserId, DbType.Guid));
+                    paramCollection.Add(new DBParameter("FinancialYearID", FinancialYearID, DbType.Int32));
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetScheduleStatus, paramCollection, CommandType.StoredProcedure);
+                    _result = dtData.AsEnumerable().Select(row => new StockScheduleDetails
+                    {
+                        DetailID = row.Field<int>("DetailID"),
+                        MonthName = row.Field<string>("MonthName"),
+                        ScheduleNumber = row.Field<int>("ScheduleNumber"),
+                        ScheduleDate = row.Field<string>("ScheduleDate"),
+                        ScheduleStatusName = row.Field<string>("ScheduleStatusName"),
+                        ScheduleID = row.Field<int>("ScheduleID"),
+                        SubCategoryID = row.Field<int>("SubCategoryID"),
+                        SubCategoryName = row.Field<string>("SubCategoryName"),
+                        OutletName = row.Field<string>("OutletName"),
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in ScheduleStockCountRepository GetScheduleStatus:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+            return _result;
+        }
+
+        #endregion ScheduleStatus
     }
 }

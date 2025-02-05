@@ -316,6 +316,8 @@
         //CountAuth
         public const string GetStockScheduleForCountAuth = "dbsp_Inv_GetStockScheduleForCountAuth";
         public const string AuthStockCount = "dbsp_Inv_AuthStockCount";
+        //ScheduleStatus
+        public const string GetScheduleStatus = "dbsp_Inv_GetScheduleStatus";
 
         //Inventory
         public const string SaveInventoryEntry = "dbsp_Inv_SaveInventoryEntry";
@@ -324,5 +326,11 @@
         public const string GetEntryAtt = "dbsp_Inv_GetEntryAtt";
         public const string DeleteEntryAtt = "dbsp_Inv_DeleteEntryAtt";
         public const string EntryVfyAndAuth = "dbsp_Inv_EntryVfyAndAuth";
+
+        //StockTransfer
+        public const string GetStockForTransfer = "dbsp_Inv_GetStockForTransfer";
+        public const string SaveTransfer = "dbsp_Inv_SaveTransfer";
+        public const string GetTransfer = "dbsp_Inv_GetTransfer";
+        public const string GetTransferDetail = "dbsp_Inv_GetTransferDetail";
     }
 }
