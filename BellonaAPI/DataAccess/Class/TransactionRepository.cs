@@ -907,7 +907,7 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         collection.Add(new DBParameter("brandId", brandId, DbType.Int32));
                     }
-                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetAPC_BudgetWeekwise, collection,CommandType.StoredProcedure);
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetAPC_BudgetWeekwise, collection, CommandType.StoredProcedure);
                     _result = dtData.AsEnumerable().Select(row => new APCBudgetModel
                     {
                         //FinancialYear = row.Field<string>("FinancialYear"),
@@ -938,7 +938,7 @@ namespace BellonaAPI.DataAccess.Class
                     dbCol.Add(new DBParameter("APCBudgetData", modelData, DbType.Xml));
                     dbCol.Add(new DBParameter("Message", ReturnMessage, DbType.String, ParameterDirection.Output));
 
-                    IsSuccess = Convert.ToBoolean(Dbhelper.ExecuteNonQuery(QueryList.SaveAPC_BudgetWeekwise, dbCol, CommandType.StoredProcedure));                      
+                    IsSuccess = Convert.ToBoolean(Dbhelper.ExecuteNonQuery(QueryList.SaveAPC_BudgetWeekwise, dbCol, CommandType.StoredProcedure));
                 }
             }).IfNotNull((ex) =>
             {
@@ -1939,9 +1939,9 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
                     }
-                  //  Logger.LogInfo("GetWeeklyMISData in TransactionRepository before db :" +  DateTime.UtcNow);
+                    //  Logger.LogInfo("GetWeeklyMISData in TransactionRepository before db :" +  DateTime.UtcNow);
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeeklyMISData, dbCol, CommandType.StoredProcedure);
-               //     Logger.LogInfo("GetWeeklyMISData in TransactionRepository after db :" + DateTime.UtcNow);
+                    //     Logger.LogInfo("GetWeeklyMISData in TransactionRepository after db :" + DateTime.UtcNow);
 
                     _result = dtData.AsEnumerable().Select(row => new MISWeeklyDataModel
                     {
@@ -1977,7 +1977,7 @@ namespace BellonaAPI.DataAccess.Class
 
 
                     }).OrderBy(o => o.ActualSale).ToList();
-                   // Logger.LogInfo("GetWeeklyMISData in TransactionRepository after binding to model  :" + DateTime.UtcNow);
+                    // Logger.LogInfo("GetWeeklyMISData in TransactionRepository after binding to model  :" + DateTime.UtcNow);
                 }
             }).IfNotNull((ex) =>
             {
@@ -2015,9 +2015,9 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
                     }
-                  
+
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeeklyMISData_Part_I, dbCol, CommandType.StoredProcedure);
-                   
+
                     _result = dtData.AsEnumerable().Select(row => new MISWeeklyDataModel
                     {
                         NetSale = row.Field<decimal?>("NETSALE"),
@@ -2030,7 +2030,7 @@ namespace BellonaAPI.DataAccess.Class
                         DISCOUNTAMTPERC = row.Field<decimal?>("DISCOUNTAMTPERC"),
 
                     }).OrderBy(o => o.ActualSale).ToList();
-                    
+
                 }
             }).IfNotNull((ex) =>
             {
@@ -2067,9 +2067,9 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
                     }
-                  
+
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeeklyMISData_Part_II, dbCol, CommandType.StoredProcedure);
-                   
+
                     _result = dtData.AsEnumerable().Select(row => new MISWeeklyDataModel
                     {
 
@@ -2079,10 +2079,10 @@ namespace BellonaAPI.DataAccess.Class
                         DELIVERYPERC = row.Field<decimal?>("DELIVERYPERC"),
                         APC = row.Field<decimal?>("APC"),
                         Covers = row.Field<int?>("COVERS"),
-                        SalePerSQft = row.Field<decimal?>("SALEPERSQFT"),                       
+                        SalePerSQft = row.Field<decimal?>("SALEPERSQFT"),
 
                     }).OrderBy(o => o.ActualSale).ToList();
-                    
+
                 }
             }).IfNotNull((ex) =>
             {
@@ -2091,7 +2091,7 @@ namespace BellonaAPI.DataAccess.Class
 
             return _result;
         }
-         public List<MISWeeklyDataModel> GetWeeklyMISData_Part_III(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
+        public List<MISWeeklyDataModel> GetWeeklyMISData_Part_III(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<MISWeeklyDataModel> _result = null;
             TryCatch.Run(() =>
@@ -2119,9 +2119,9 @@ namespace BellonaAPI.DataAccess.Class
                     {
                         dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
                     }
-                  
+
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetWeeklyMISData_Part_III, dbCol, CommandType.StoredProcedure);
-                   
+
                     _result = dtData.AsEnumerable().Select(row => new MISWeeklyDataModel
                     {
 
@@ -2129,9 +2129,9 @@ namespace BellonaAPI.DataAccess.Class
                         TakeAway = row.Field<decimal?>("TakeAway"),
                         OtherSale = row.Field<decimal?>("OtherSale"),
                         ADSWeekdays = row.Field<decimal?>("ADSWEEKDAYS"),
-                        ADSWeekend = row.Field<decimal?>("ADSWEEKEND")   
+                        ADSWeekend = row.Field<decimal?>("ADSWEEKEND")
                     }).OrderBy(o => o.ActualSale).ToList();
-                    
+
                 }
             }).IfNotNull((ex) =>
             {
@@ -3258,13 +3258,13 @@ namespace BellonaAPI.DataAccess.Class
             {
                 using (DBHelper Dbhelper = new DBHelper())
                 {
-                   DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetAllMonths,  CommandType.StoredProcedure);
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetAllMonths, CommandType.StoredProcedure);
 
                     _result = dtData.AsEnumerable().Select(row => new Months
                     {
                         MonthID = row.Field<int>("MonthId"),
-                        MonthName = row.Field<string>("Months")                       
-                    }).OrderBy(o => o.MonthID).ToList();
+                        MonthName = row.Field<string>("Months")
+                    }).ToList();
 
                 }
             }).IfNotNull((ex) =>
@@ -3344,7 +3344,153 @@ namespace BellonaAPI.DataAccess.Class
 
             return _result;
         }
-        public List<Last12MonthBudgetSaleComparison> GetLast12MonthsFoodVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
+
+        public List<MonthlyMISDataModel> GetMonthlyMISData_PartI(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<MonthlyMISDataModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetMonthlyMISData_PartI, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new MonthlyMISDataModel
+                    {
+                        NetSale = row.Field<decimal?>("NETSALE"),
+                        ActualSale = row.Field<decimal?>("ACTUALSALE"),
+                        SALEPERC = row.Field<decimal?>("SALEPERC"),
+                        Budget = row.Field<decimal?>("BUDGET"),
+                        Variance = row.Field<decimal?>("VARIANCE"),
+                        SALEVARPERC = row.Field<decimal?>("SALEVARPERC"),
+                        NetDiscountAmount = row.Field<decimal?>("NetDiscountAmount"),
+                        DISCOUNTAMTPERC = row.Field<decimal?>("DISCOUNTAMTPERC"),
+                    }).OrderBy(o => o.ActualSale).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Monthly MIS Data Part I:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        public List<MonthlyMISDataModel> GetMonthlyMISData_PartII(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<MonthlyMISDataModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetMonthlyMISData_PartII, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new MonthlyMISDataModel
+                    {
+                        DineInSale = row.Field<decimal?>("DINEINSALE"),
+                        DININPERC = row.Field<decimal?>("DININPERC"),
+                        DeliverySale = row.Field<decimal?>("DELIVERYSALE"),
+                        DELIVERYPERC = row.Field<decimal?>("DELIVERYPERC"),
+                        APC = row.Field<decimal?>("APC"),
+                        Covers = row.Field<int?>("COVERS"),
+                        SalePerSQft = row.Field<decimal?>("SALEPERSQFT"),
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Monthly MIS Data Part II:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        public List<MonthlyMISDataModel> GetMonthlyMISData_PartIII(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<MonthlyMISDataModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetMonthlyMISData_PartIII, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new MonthlyMISDataModel
+                    {
+                        NetChargeAmount = row.Field<decimal?>("NetChargeAmount"),
+                        TakeAway = row.Field<decimal?>("TakeAway"),
+                        OtherSale = row.Field<decimal?>("OtherSale"),
+                        ADSWeekdays = row.Field<decimal?>("ADSWEEKDAYS"),
+                        ADSWeekend = row.Field<decimal?>("ADSWEEKEND")
+                    }).ToList();
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Monthly MIS Data Part II:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        public List<Last12MonthBudgetSaleComparison> GetLast12MonthsFoodVsBudgetTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<Last12MonthBudgetSaleComparison> _result = null;
             TryCatch.Run(() =>
@@ -3355,7 +3501,7 @@ namespace BellonaAPI.DataAccess.Class
                     dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
                     dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
-                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
                     if (branchCode != "")
                     {
                         dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
@@ -3390,7 +3536,7 @@ namespace BellonaAPI.DataAccess.Class
             });
             return _result;
         }
-        public List<Last12MonthBudgetSaleComparison> GetLast12MonthsLiquorVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
+        public List<Last12MonthBudgetSaleComparison> GetLast12MonthsLiquorVsBudgetTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<Last12MonthBudgetSaleComparison> _result = null;
             TryCatch.Run(() =>
@@ -3401,7 +3547,7 @@ namespace BellonaAPI.DataAccess.Class
                     dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
                     dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
-                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
                     if (branchCode != "")
                     {
                         dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
@@ -3436,7 +3582,7 @@ namespace BellonaAPI.DataAccess.Class
             });
             return _result;
         }
-        public List<Last12MonthBudgetSaleComparison> GetLast12MonthsBeverageVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
+        public List<Last12MonthBudgetSaleComparison> GetLast12MonthsBeverageVsBudgetTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<Last12MonthBudgetSaleComparison> _result = null;
             TryCatch.Run(() =>
@@ -3447,7 +3593,7 @@ namespace BellonaAPI.DataAccess.Class
                     dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
                     dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
-                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
                     if (branchCode != "")
                     {
                         dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
@@ -3482,7 +3628,7 @@ namespace BellonaAPI.DataAccess.Class
             });
             return _result;
         }
-        public List<Last12MonthBudgetSaleComparison> GetLast12MonthsSalesVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
+        public List<Last12MonthBudgetSaleComparison> GetLast12MonthsSalesVsBudgetTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<Last12MonthBudgetSaleComparison> _result = null;
             TryCatch.Run(() =>
@@ -3493,7 +3639,7 @@ namespace BellonaAPI.DataAccess.Class
                     dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
                     dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
-                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
                     if (branchCode != "")
                     {
                         dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
@@ -3518,7 +3664,7 @@ namespace BellonaAPI.DataAccess.Class
                         Date = row.Field<string>("Date"),
                         NetAmount = row.Field<decimal?>("NETAMOUNT"),
                         BudgetAmount = row.Field<decimal?>("BudgetAmount"),
-                        Percentage = row.Field<decimal?>("Percentage"),
+                        //  Percentage = row.Field<decimal?>("Percentage"),
                     }).ToList();
                 }
             }).IfNotNull((ex) =>
@@ -3527,7 +3673,7 @@ namespace BellonaAPI.DataAccess.Class
             });
             return _result;
         }
-        public List<MonthlyMTDSalesVsBudget> GetMonthlyMTDSalesvsBudget(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
+        public List<MonthlyMTDSalesVsBudget> GetMonthlyMTDSalesvsBudget(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<MonthlyMTDSalesVsBudget> _result = null;
             TryCatch.Run(() =>
@@ -3538,7 +3684,7 @@ namespace BellonaAPI.DataAccess.Class
                     dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
                     dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
-                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
                     if (branchCode != "")
                     {
                         dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
@@ -3558,11 +3704,11 @@ namespace BellonaAPI.DataAccess.Class
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.MonthlyChart_MTD_SalesvsBudget, dbCol, CommandType.StoredProcedure);
                     _result = dtData.AsEnumerable().Select(row => new MonthlyMTDSalesVsBudget
                     {
-                       
+
                         Category = row.Field<string>("Category"),
                         NetAmount = row.Field<decimal?>("NetAmount"),
-                        BudgetAmount = row.Field<decimal?>("BudgetAmount"),                       
-                        Percentage = row.Field<decimal?>("Percentage"),                       
+                        BudgetAmount = row.Field<decimal?>("BudgetAmount"),
+                        Percentage = row.Field<decimal?>("Percentage"),
                     }).ToList();
                 }
             }).IfNotNull((ex) =>
@@ -3570,6 +3716,649 @@ namespace BellonaAPI.DataAccess.Class
                 Logger.LogError("Error in TransactionRepository MonthlyChart_MTD_SalesvsBudget:" + ex.Message + Environment.NewLine + ex.StackTrace);
             });
             return _result;
+        }
+
+        public List<DayWiseSaleTrend> Monthly_GetDaywiseSale(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<DayWiseSaleTrend> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.Monthly_GetDaywiseSale, dbCol, CommandType.StoredProcedure);
+                    _result = dtData.AsEnumerable().Select(row => new DayWiseSaleTrend
+                    {
+                        Day = row.Field<string>("Day"),
+                        NetAmount = row.Field<decimal?>("NETAMOUNT"),
+                        Percentage = row.Field<decimal?>("NETPERC"),
+                    }).ToList();
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetLast12MonthsSalesVsBudgetTrend:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+            return _result;
+        }
+        public List<Monthly_SalesBreakup> Monthly_GetSalesBreakup(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<Monthly_SalesBreakup> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.Monthly_GetSalesBreakup, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new Monthly_SalesBreakup
+                    {
+                        InvoiceDay = row.Field<string>("InvoiceDay"),
+                        FoodSale = row.Field<decimal?>("FoodSale"),
+                        BeverageSale = row.Field<decimal?>("BeverageSale"),
+                        LiquorSale = row.Field<decimal?>("LiquorSale"),
+                        OtherSale = row.Field<decimal?>("OtherSale")
+                    }).OrderBy(o => o.InvoiceDay).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Monthly_GetSalesBreakup:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        public List<Monthly_TimeWiseSalesBreakup> Monthly_GetTimeWiseSalesBreakup(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<Monthly_TimeWiseSalesBreakup> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.Monthly_GetTimeWiseSalesBreakup, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new Monthly_TimeWiseSalesBreakup
+                    {
+                        SessionName = row.Field<string>("SessionName"),
+                        Session_NetAmount = row.Field<decimal?>("SESSION_NETAMOUNT"),
+                        Total_NetAmount = row.Field<decimal?>("TOTAL_NETAMOUNT"),
+                        Percentage = row.Field<decimal>("Percentage")
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Monthly_GetTimeWiseSalesBreakup:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        public List<Monthly_TimeWiseSalesBreakup> Monthly_GetWeekDays_CoverCapicityUtilization(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<Monthly_TimeWiseSalesBreakup> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.Monthly_GetWeekDays_CoverCapicityUtilization, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new Monthly_TimeWiseSalesBreakup
+                    {
+                        SessionName = row.Field<string>("SessionName"),
+                        Session_NetAmount = row.Field<decimal?>("SESSION_NETAMOUNT"),
+                        Total_NetAmount = row.Field<decimal?>("TOTAL_NETAMOUNT"),
+                        Percentage = row.Field<decimal>("Percentage")
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Monthly_GetWeekDays_CoverCapicityUtilization:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        public List<Monthly_TimeWiseSalesBreakup> Monthly_GetWeekend_CoverCapicityUtilization(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<Monthly_TimeWiseSalesBreakup> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.Monthly_GetWeekend_CoverCapicityUtilization, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new Monthly_TimeWiseSalesBreakup
+                    {
+                        SessionName = row.Field<string>("SessionName"),
+                        Session_NetAmount = row.Field<decimal?>("SESSION_NETAMOUNT"),
+                        Total_NetAmount = row.Field<decimal?>("TOTAL_NETAMOUNT"),
+                        Percentage = row.Field<decimal>("Percentage")
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Monthly_GetWeekend_CoverCapicityUtilization:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        public List<Monthly_DeliverySaleBreakup> Monthly_GetDeliveySale(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<Monthly_DeliverySaleBreakup> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.Monthly_GetDeliveySale, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new Monthly_DeliverySaleBreakup
+                    {
+                        Source = row.Field<string>("Source"),
+                        SaleAmount = row.Field<decimal?>("SaleAmount"),
+                        Percentage = row.Field<decimal?>("Percentage"),
+                    }).OrderBy(o => o.Source).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Monthly_GetDeliverySale Breakup:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        public List<Monthly_AverageCoverTrend> Monthly_GetDayWiseAvgCoversTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<Monthly_AverageCoverTrend> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.Monthly_GetDayWiseAvgCoversTrend, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new Monthly_AverageCoverTrend
+                    {
+                        InvoiceDay = row.Field<string>("InvoiceDay"),
+                        ApcDineIn = row.Field<decimal?>("ApcDineIn")
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Monthly_GetDayWiseAvgCoversTrend for 12months:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        public List<Monthly_AverageCoverTrend> Monthly_GetAvgCoversTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<Monthly_AverageCoverTrend> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.Monthly_GetAvgCoversTrend, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new Monthly_AverageCoverTrend
+                    {
+                        InvoiceDay = row.Field<string>("InvoiceDay"),
+                        ApcDineIn = row.Field<decimal?>("ApcDineIn")
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository Monthly_GetAvgCoversTrend for 12months:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
+        public List<Monthly_DeliverySaleTrend> Monthly_GetDeliveySaleTrends(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<Monthly_DeliverySaleTrend> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
+                    if (branchCode != "")
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    else if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    else if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.Monthly_GetDeliveySaleTrends, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new Monthly_DeliverySaleTrend
+                    {
+                        Month = row.Field<string>("Month"),
+                        MonthId = row.Field<int>("MonthId"),
+                        DeliverySale = row.Field<decimal?>("DeliverySale")
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetDeliveySaleTrends:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+
+        public List<Monthly_CoversTrend> Monthly_DayWise_GetMonthlyCoversTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<Monthly_CoversTrend> result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper dbHelper = new DBHelper())
+                {
+                    var dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+
+                    if (!string.IsNullOrEmpty(branchCode))
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+                    // Execute the stored procedure and retrieve data
+                    DataTable dtData = dbHelper.ExecuteDataTable(QueryList.Monthly_DayWise_GetMonthlyCoversTrend, dbCol, CommandType.StoredProcedure);
+
+                    // Get date columns, excluding "SessionName"
+                    var dateColumns = dtData.Columns.Cast<DataColumn>()
+                        .Where(col => col.ColumnName != "SessionName")
+                        .Select(col => col.ColumnName)
+                        .ToList();
+
+                    // Process the data into a list of WeeklyCoversTrend
+                    result = dtData.AsEnumerable()
+                        .Select(row => new Monthly_CoversTrend
+                        {
+                            SessionName = row.Field<string>("SessionName"),
+                            SessionDetails = dateColumns.ToDictionary(
+                                date => date,
+                                date => row.IsNull(date) ? 0 : Convert.ToInt32(row[date])
+                            )
+                        })
+                        .ToList();
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in MealRepository Monthly_DayWise_GetMontlyCoversTrend: " + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return result;
+        }
+        public List<Monthly_CoversTrend> Monthly_GetLast12Weeks_CoverTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<Monthly_CoversTrend> result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper dbHelper = new DBHelper())
+                {
+                    var dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+
+                    if (!string.IsNullOrEmpty(branchCode))
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+
+                    // Execute the stored procedure and retrieve data
+                    DataTable dtData = dbHelper.ExecuteDataTable(QueryList.Monthly_GetLast12Weeks_CoversTrend, dbCol, CommandType.StoredProcedure);
+
+                    // Get date columns, excluding "SessionName"
+                    var dateColumns = dtData.Columns.Cast<DataColumn>()
+                        .Where(col => col.ColumnName != "SessionName")
+                        .Select(col => col.ColumnName)
+                        .ToList();
+
+                    // Process the data into a list of WeeklyCoversTrend
+                    result = dtData.AsEnumerable()
+                        .Select(row => new Monthly_CoversTrend
+                        {
+                            SessionName = row.Field<string>("SessionName"),
+                            SessionDetails = dateColumns.ToDictionary(
+                                date => date,
+                                date => row.IsNull(date) ? 0 : Convert.ToInt32(row[date])
+                            )
+                        })
+                        .ToList();
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in Repository Monthly_GetLast12Weeks_CoverTrend: " + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return result;
+        }
+        public List<Monthly_CoversTrend> Monthly_GetLast12Weeks_WeekendCoversTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<Monthly_CoversTrend> result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper dbHelper = new DBHelper())
+                {
+                    var dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+
+                    if (!string.IsNullOrEmpty(branchCode))
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+
+                    // Execute the stored procedure and retrieve data
+                    DataTable dtData = dbHelper.ExecuteDataTable(QueryList.Monthly_GetLast12Weeks_WeekendCoversTrend, dbCol, CommandType.StoredProcedure);
+
+                    // Get date columns, excluding "SessionName"
+                    var dateColumns = dtData.Columns.Cast<DataColumn>()
+                        .Where(col => col.ColumnName != "SessionName")
+                        .Select(col => col.ColumnName)
+                        .ToList();
+
+                    // Process the data into a list of WeeklyCoversTrend
+                    result = dtData.AsEnumerable()
+                        .Select(row => new Monthly_CoversTrend
+                        {
+                            SessionName = row.Field<string>("SessionName"),
+                            SessionDetails = dateColumns.ToDictionary(
+                                date => date,
+                                date => row.IsNull(date) ? 0 : Convert.ToInt32(row[date])
+                            )
+                        })
+                        .ToList();
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in Repository Monthly_GetLast12Weeks_WeekendCoversTrend Trend: " + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return result;
+        }
+        public List<Monthly_CoversTrend> Monthly_GetLast12Weeks_WeekDaysCoversTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<Monthly_CoversTrend> result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper dbHelper = new DBHelper())
+                {
+                    var dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("MONTH", month, DbType.String));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+
+                    if (!string.IsNullOrEmpty(branchCode))
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+
+                    // Execute the stored procedure and retrieve data
+                    DataTable dtData = dbHelper.ExecuteDataTable(QueryList.Monthly_GetLast12Weeks_WeekDaysCoversTrend, dbCol, CommandType.StoredProcedure);
+
+                    // Get date columns, excluding "SessionName"
+                    var dateColumns = dtData.Columns.Cast<DataColumn>()
+                        .Where(col => col.ColumnName != "SessionName")
+                        .Select(col => col.ColumnName)
+                        .ToList();
+
+                    // Process the data into a list of WeeklyCoversTrend
+                    result = dtData.AsEnumerable()
+                        .Select(row => new Monthly_CoversTrend
+                        {
+                            SessionName = row.Field<string>("SessionName"),
+                            SessionDetails = dateColumns.ToDictionary(
+                                date => date,
+                                date => row.IsNull(date) ? 0 : Convert.ToInt32(row[date])
+                            )
+                        })
+                        .ToList();
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in  Monthly_GetLast12Weeks_WeekDaysCoversTrend: " + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return result;
         }
 
         #endregion Monthly_MIS
