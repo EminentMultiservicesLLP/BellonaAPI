@@ -105,11 +105,28 @@ namespace BellonaAPI.DataAccess.Interface
         #region Monthly_MIS
         List<Months> GetAllMonths();
         List<MonthlyMISDataModel> GetMonthlyMISData(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
-        List<Last12MonthBudgetSaleComparison> GetLast12MonthsSalesVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
-        List<Last12MonthBudgetSaleComparison> GetLast12MonthsFoodVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
-        List<Last12MonthBudgetSaleComparison> GetLast12MonthsLiquorVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
-        List<Last12MonthBudgetSaleComparison> GetLast12MonthsBeverageVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
-        List<MonthlyMTDSalesVsBudget> GetMonthlyMTDSalesvsBudget(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
+        List<MonthlyMISDataModel> GetMonthlyMISData_PartI(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<MonthlyMISDataModel> GetMonthlyMISData_PartII(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<MonthlyMISDataModel> GetMonthlyMISData_PartIII(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<Last12MonthBudgetSaleComparison> GetLast12MonthsSalesVsBudgetTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<Last12MonthBudgetSaleComparison> GetLast12MonthsFoodVsBudgetTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<Last12MonthBudgetSaleComparison> GetLast12MonthsLiquorVsBudgetTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<Last12MonthBudgetSaleComparison> GetLast12MonthsBeverageVsBudgetTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<MonthlyMTDSalesVsBudget> GetMonthlyMTDSalesvsBudget(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<DayWiseSaleTrend> Monthly_GetDaywiseSale(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<Monthly_SalesBreakup> Monthly_GetSalesBreakup(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<Monthly_TimeWiseSalesBreakup> Monthly_GetTimeWiseSalesBreakup(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<Monthly_TimeWiseSalesBreakup> Monthly_GetWeekend_CoverCapicityUtilization(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<Monthly_TimeWiseSalesBreakup> Monthly_GetWeekDays_CoverCapicityUtilization(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<Monthly_DeliverySaleBreakup> Monthly_GetDeliveySale(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<Monthly_AverageCoverTrend> Monthly_GetAvgCoversTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<Monthly_DeliverySaleTrend> Monthly_GetDeliveySaleTrends(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<Monthly_AverageCoverTrend> Monthly_GetDayWiseAvgCoversTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<Monthly_CoversTrend> Monthly_DayWise_GetMonthlyCoversTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<Monthly_CoversTrend> Monthly_GetLast12Weeks_CoverTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<Monthly_CoversTrend> Monthly_GetLast12Weeks_WeekendCoversTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<Monthly_CoversTrend> Monthly_GetLast12Weeks_WeekDaysCoversTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+
         #endregion Monthly_MIS
     }
 }

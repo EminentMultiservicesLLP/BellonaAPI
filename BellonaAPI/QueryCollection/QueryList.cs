@@ -153,10 +153,26 @@
         public const string MonthlyChart_MTD_SalesvsBudget = "dbsp_MonthlyChart_MTD_SalesvsBudget";
         public const string GetAllMonths = "dbsp_Get_AllMonths";
         public const string GetMonthlyMISData = "dbsp_Monthly_GetMonthlyMISData";
+        public const string GetMonthlyMISData_PartI = "dbsp_Monthly_GetMonthlyMISData_PartI";
+        public const string GetMonthlyMISData_PartII = "dbsp_Monthly_GetMonthlyMISData_PartII";
+        public const string GetMonthlyMISData_PartIII = "dbsp_Monthly_GetMonthlyMISData_PartIII";
         public const string GetLast12MonthsBeverageVsBudgetTrend = "dbsp_Monthly_GetBeverageVsBudgetTrend";
         public const string GetLast12MonthsLiquorVsBudgetTrend = "dbsp_Monthly_GetLiquorVsBudgetTrend";
         public const string GetLast12MonthsFoodVsBudgetTrend = "dbsp_Monthly_GetFoodVsBudgetTrend";
         public const string GetLast12MonthsSalesVsBudgetTrend = "dbsp_Monthly_GetLast12Months_SalesVsBudget";
+        public const string Monthly_GetDaywiseSale = "dbsp_MonthlyChart_GetDayWiseSale";
+        public const string Monthly_GetSalesBreakup = "dbsp_MonthlyChart_GetSalesBreakup";
+        public const string Monthly_GetTimeWiseSalesBreakup = "dbsp_MonthlyChart_TimeWiseSaleBreakup";
+        public const string Monthly_GetDeliveySale = "dbsp_MonthlyChart_GetDeliverySale";
+        public const string Monthly_GetWeekDays_CoverCapicityUtilization = "dbsp_MonthlyChart_CoverCapacity_Weekdays";
+        public const string Monthly_GetWeekend_CoverCapicityUtilization = "dbsp_MonthlyChart_CoverCapacity_Weekend";
+        public const string Monthly_GetDayWiseAvgCoversTrend = "dbsp_MonthlyChart_GetDayWiseAvgCoversTrend";
+        public const string Monthly_GetAvgCoversTrend = "dbsp_MonthlyChart_GetAvgCoversTrend";
+        public const string Monthly_GetDeliveySaleTrends = "dbsp_MonthlyChart_GetDeliverySaleTrend";
+        public const string Monthly_DayWise_GetMonthlyCoversTrend = "dbsp_MonthlyChart_DayWise_GetMontlyCoversTrend";
+        public const string Monthly_GetLast12Weeks_CoversTrend = "dbsp_MonthlyChart_GetLast12Weeks_CoversTrend";
+        public const string Monthly_GetLast12Weeks_WeekendCoversTrend = "dbsp_MonthlyChart_GetLast12Weeks_WeekendCoversTrend";
+        public const string Monthly_GetLast12Weeks_WeekDaysCoversTrend = "dbsp_MonthlyChart_GetLast12Weeks_WeekDaysCoversTrend";
 
         
         public const string GetSalesCategory = "dbsp_GetSalesCategory";

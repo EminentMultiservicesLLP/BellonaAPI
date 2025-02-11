@@ -60,4 +60,54 @@ namespace BellonaAPI.Models
         public decimal? BudgetAmount { get; set; }
         public decimal? Percentage { get; set; }
     }
+    public class DayWiseSaleTrend
+    {
+        public string Day { get; set; }
+        public decimal? NetAmount { get; set; }
+        public decimal? Percentage { get; set; }
+    }
+
+    public class Monthly_SalesBreakup
+    {
+        public string InvoiceDay { get; set; }
+        public Decimal? FoodSale { get; set; }
+        public Decimal? BeverageSale { get; set; }
+        public Decimal? LiquorSale { get; set; }
+        public Decimal? TobaccoSale { get; set; }
+        public Decimal? OtherSale { get; set; }
+    }
+    public class Monthly_TimeWiseSalesBreakup
+    {
+        public int? Id { get; set; }
+        public string SessionName { get; set; }
+        public Decimal? Session_NetAmount { get; set; }
+        public Decimal? Total_NetAmount { get; set; }
+        public Decimal? Percentage { get; set; }
+    }
+
+    public class Monthly_DeliverySaleBreakup
+    {
+        public string Source { get; set; }
+        public decimal? SaleAmount { get; set; }
+        public decimal? Percentage { get; set; }
+    }
+    public class Monthly_AverageCoverTrend
+    {
+        public string InvoiceDay { get; set; }
+        public decimal? ApcDineIn { get; set; }
+        public decimal? ApcBudget { get; set; }
+        public decimal? TotalCovers { get; set; }
+        public decimal? TotalSale { get; set; }
+    }
+    public class Monthly_DeliverySaleTrend
+    {
+        public int MonthId { get; set; }
+        public string Month { get; set; }
+        public decimal? DeliverySale { get; set; }
+    }
+    public class Monthly_CoversTrend
+    {
+        public string SessionName { get; set; }
+        public Dictionary<string, int> SessionDetails { get; set; } = new Dictionary<string, int>();
+    }
 }
