@@ -170,9 +170,9 @@
         public const string Monthly_GetAvgCoversTrend = "dbsp_MonthlyChart_GetAvgCoversTrend";
         public const string Monthly_GetDeliveySaleTrends = "dbsp_MonthlyChart_GetDeliverySaleTrend";
         public const string Monthly_DayWise_GetMonthlyCoversTrend = "dbsp_MonthlyChart_DayWise_GetMontlyCoversTrend";
-        public const string Monthly_GetLast12Weeks_CoversTrend = "dbsp_MonthlyChart_GetLast12Weeks_CoversTrend";
-        public const string Monthly_GetLast12Weeks_WeekendCoversTrend = "dbsp_MonthlyChart_GetLast12Weeks_WeekendCoversTrend";
-        public const string Monthly_GetLast12Weeks_WeekDaysCoversTrend = "dbsp_MonthlyChart_GetLast12Weeks_WeekDaysCoversTrend";
+        public const string Monthly_GetLast12Weeks_CoversTrend = "dbsp_MonthlyChart_GetLast12Months_CoversTrend";
+        public const string Monthly_GetLast12Weeks_WeekendCoversTrend = "dbsp_MonthlyChart_GetLast12Months_WeekendCoversTrend";
+        public const string Monthly_GetLast12Weeks_WeekDaysCoversTrend = "dbsp_MonthlyChart_GetLast12Months_WeekDaysCoversTrend";
 
         
         public const string GetSalesCategory = "dbsp_GetSalesCategory";
