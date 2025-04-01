@@ -42,6 +42,7 @@ namespace BellonaAPI.Models
         public decimal? ADSWeekend { get; set; }
         public decimal? NetSale { get; set; }
         public decimal? DISCOUNTAMTPERC { get; set; }
+        public decimal? NETCHARGEPERC { get; set; }
     }
 
     public class Last12MonthBudgetSaleComparison
