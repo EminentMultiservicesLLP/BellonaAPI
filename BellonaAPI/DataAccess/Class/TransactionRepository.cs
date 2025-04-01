@@ -3480,7 +3480,8 @@ namespace BellonaAPI.DataAccess.Class
                         TakeAway = row.Field<decimal?>("TakeAway"),
                         OtherSale = row.Field<decimal?>("OtherSale"),
                         ADSWeekdays = row.Field<decimal?>("ADSWEEKDAYS"),
-                        ADSWeekend = row.Field<decimal?>("ADSWEEKEND")
+                        ADSWeekend = row.Field<decimal?>("ADSWEEKEND"),
+                        NETCHARGEPERC= row.Field<decimal?>("NETCHARGEPERC")
                     }).ToList();
                 }
             }).IfNotNull((ex) =>

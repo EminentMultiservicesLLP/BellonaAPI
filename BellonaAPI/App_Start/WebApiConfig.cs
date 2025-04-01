@@ -62,6 +62,7 @@ namespace BellonaAPI
             container.RegisterType<IScheduleStockCountRepository, ScheduleStockCountRepository>();
             container.RegisterType<IInventoryEntryRepository, InventoryEntryRepository>();
             container.RegisterType<ICommonRepository, CommonRepository>();
+            container.RegisterType<IHelpFileRepository, HelpFileRepository>();
 
 
             config.DependencyResolver = new UnityResolver(container);

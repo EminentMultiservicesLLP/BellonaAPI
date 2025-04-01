@@ -325,5 +325,11 @@
         public const string GetEntryAtt = "dbsp_Inv_GetEntryAtt";
         public const string DeleteEntryAtt = "dbsp_Inv_DeleteEntryAtt";
         public const string EntryVfyAndAuth = "dbsp_Inv_EntryVfyAndAuth";
+
+        // ********************************** Help File *********************************************
+
+        public const string GetAllMenuList = "dbsp_HelpFile_GetMenuDetails";
+        public const string SaveHelpFileEditorData = "dbsp_HelpFile_SaveHelpFileEditorData";
+        public const string GetHelpFileData = "dbsp_Help_GetHelpFileData";
     }
 }
