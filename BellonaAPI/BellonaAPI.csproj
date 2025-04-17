@@ -159,6 +159,7 @@
     <Compile Include="Controllers\ProspectDashboardController.cs" />
     <Compile Include="Controllers\ScheduleStockCountController.cs" />
     <Compile Include="Controllers\SiteMasterController.cs" />
+    <Compile Include="Controllers\StockTransferController.cs" />
     <Compile Include="DataAccess\Class\BillingDashboardRepository.cs" />
     <Compile Include="DataAccess\Class\BillingRepository.cs" />
     <Compile Include="DataAccess\Class\BrandRepository.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="DataAccess\Class\RegionRepository.cs" />
     <Compile Include="DataAccess\Class\ScheduleStockCountRepository.cs" />
     <Compile Include="DataAccess\Class\SiteMasterRepository.cs" />
+    <Compile Include="DataAccess\Class\StockTransferRepository.cs" />
     <Compile Include="DataAccess\Class\TransactionRepository.cs" />
     <Compile Include="DataAccess\Class\UserMenuRightsRepository.cs" />
     <Compile Include="DataAccess\Class\UserProfileReposiotory.cs" />
@@ -214,6 +216,7 @@
     <Compile Include="DataAccess\Interface\IRegionRepository.cs" />
     <Compile Include="DataAccess\Interface\IScheduleStockCountRepository.cs" />
     <Compile Include="DataAccess\Interface\ISiteMasterRepository.cs" />
+    <Compile Include="DataAccess\Interface\IStockTransferRepository.cs" />
     <Compile Include="DataAccess\Interface\ITransactionRepository.cs" />
     <Compile Include="DataAccess\Interface\IUserMenuRightsRepository.cs" />
     <Compile Include="DataAccess\Interface\IUserProfilRepository.cs" />
@@ -292,6 +295,7 @@
     <Compile Include="Models\Inventory\ItemMaster.cs" />
     <Compile Include="Models\Inventory\OutletItemMapping.cs" />
     <Compile Include="Models\Inventory\ScheduleStockCount.cs" />
+    <Compile Include="Models\Inventory\StockTransfer.cs" />
     <Compile Include="Models\Masters\AdminModels.cs" />
     <Compile Include="Models\MenuUserRightsModel.cs" />
     <Compile Include="Models\MonthlyExpense.cs" />
