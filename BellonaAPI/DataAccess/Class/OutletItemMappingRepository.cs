@@ -46,7 +46,7 @@ namespace BellonaAPI.DataAccess.Class
         public bool SaveOutletItemMapping(OutletItemMapping model)
         {
             int iResult = 0;
-            var MappedOutletList = Common.ToXML(model.MappedOutletList);
+            string MappedOutletList = model.MappedOutletList != null ? Common.ToXML(model.MappedOutletList) : string.Empty;
             using (DBHelper dbHelper = new DBHelper())
             {
                 IDbTransaction transaction = dbHelper.BeginTransaction();
@@ -67,5 +67,36 @@ namespace BellonaAPI.DataAccess.Class
             if (iResult > 0) return true;
             else return false;
         }
+
+        public IEnumerable<StockDetails> GetStockDetails(int OutletID, int? SubCategoryID)
+        {
+            List<StockDetails> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection paramCollection = new DBParameterCollection();
+                    paramCollection.Add(new DBParameter("OutletID", OutletID, DbType.Int32));
+                    paramCollection.Add(new DBParameter("SubCategoryID", SubCategoryID, DbType.Int32));
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetStockDetails, paramCollection, CommandType.StoredProcedure);
+                    _result = dtData.AsEnumerable().Select(row => new StockDetails
+                    {
+                        ItemID = row.Field<int>("ItemID"),
+                        ItemName = row.Field<string>("ItemName"),
+                        SubCategoryName = row.Field<string>("SubCategoryName"),
+                        strBatchDate = row.Field<DateTime?>("BatchDate")?.ToString("dd-MMM-yyyy") ?? string.Empty,
+                        Qty = row.Field<decimal?>("Qty"),
+                        Rate = row.Field<decimal?>("Rate"),
+                        Total = row.Field<decimal?>("Total")
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in OutletItemMappingRepository GetStockDetails:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+            return _result;
+        }
+
     }
 }
