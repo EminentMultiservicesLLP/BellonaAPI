@@ -10,7 +10,27 @@ namespace BellonaAPI.DataAccess.Interface
     public interface IScheduleStockCountRepository
     {
         IEnumerable<FinancialYear> getFinancialYear();
-        bool SaveScheduleStockCount(ScheduleStockCount model);
-        IEnumerable<ScheduleStockCount> GetScheduleStockCount(int? FinancialYearID, int? OutletID);
+
+        #region Schedule
+        IEnumerable<OutletList> GetOutletListForSchedule(int? FinancialYearID, int? SubCategoryID);
+        bool SaveStockSchedule(StockSchedule model);
+        IEnumerable<StockSchedule> GetStockSchedule(int? FinancialYearID);
+        IEnumerable<StockScheduleDetails> GetStockScheduleDetails(int? ScheduleID);
+        #endregion Schedule
+
+        #region Count
+        IEnumerable<StockScheduleDetails> GetStockScheduleForCount(int? FinancialYearID, int? OutletID);
+        IEnumerable<StockCountDetails> GetStockCount(int? ScheduleDetailID);
+        bool SaveStockCount(StockCount model);
+        #endregion Count
+
+        #region Count Authorization
+        IEnumerable<StockScheduleDetails> GetStockScheduleForCountAuth(Guid UserId, int? FinancialYearID);
+        bool AuthStockCount(StockScheduleDetails model);
+        #endregion Count Authorization
+
+        #region ScheduleStatus
+        IEnumerable<StockScheduleDetails> GetScheduleStatus(Guid UserId, int? FinancialYearID);
+        #endregion ScheduleStatus
     }
 }

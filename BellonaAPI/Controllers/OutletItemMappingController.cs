@@ -41,5 +41,16 @@ namespace BellonaAPI.Controllers
             if (_IRepo.SaveOutletItemMapping(model)) return Ok(new { IsSuccess = true, Message = "OutletItemMapping Save Successfully." });
             else return BadRequest("OutletItemMapping Save Failed");
         }
+
+        [Route("GetStockDetails")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetStockDetails(int OutletID, int? SubCategoryID = null)
+        {
+            List<StockDetails> _result = _IRepo.GetStockDetails(OutletID, SubCategoryID).ToList();
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetStockDetails"));
+        }
+
     }
 }

@@ -5,65 +5,65 @@ using System.Web;
 
 namespace BellonaAPI.Models.Inventory
 {
-
-    public class ScheduleStockCount
-    {
-        public int ScheduleID { get; set; }
-        public int FinancialYearID { get; set; }
-        public int OutletID { get; set; }
-        public string AprFirstSchedule { get; set; }
-        public bool AprFirstScheduleStatus { get; set; }
-        public string AprSecondSchedule { get; set; }
-        public bool AprSecondScheduleStatus { get; set; }
-        public string MayFirstSchedule { get; set; }
-        public bool MayFirstScheduleStatus { get; set; }
-        public string MaySecondSchedule { get; set; }
-        public bool MaySecondScheduleStatus { get; set; }
-        public string JunFirstSchedule { get; set; }
-        public bool JunFirstScheduleStatus { get; set; }
-        public string JunSecondSchedule { get; set; }
-        public bool JunSecondScheduleStatus { get; set; }
-        public string JulFirstSchedule { get; set; }
-        public bool JulFirstScheduleStatus { get; set; }
-        public string JulSecondSchedule { get; set; }
-        public bool JulSecondScheduleStatus { get; set; }
-        public string AugFirstSchedule { get; set; }
-        public bool AugFirstScheduleStatus { get; set; }
-        public string AugSecondSchedule { get; set; }
-        public bool AugSecondScheduleStatus { get; set; }
-        public string SeptFirstSchedule { get; set; }
-        public bool SeptFirstScheduleStatus { get; set; }
-        public string SeptSecondSchedule { get; set; }
-        public bool SeptSecondScheduleStatus { get; set; }
-        public string OctFirstSchedule { get; set; }
-        public bool OctFirstScheduleStatus { get; set; }
-        public string OctSecondSchedule { get; set; }
-        public bool OctSecondScheduleStatus { get; set; }
-        public string NovFirstSchedule { get; set; }
-        public bool NovFirstScheduleStatus { get; set; }
-        public string NovSecondSchedule { get; set; }
-        public bool NovSecondScheduleStatus { get; set; }
-        public string DecFirstSchedule { get; set; }
-        public bool DecFirstScheduleStatus { get; set; }
-        public string DecSecondSchedule { get; set; }
-        public bool DecSecondScheduleStatus { get; set; }
-        public string JanFirstSchedule { get; set; }
-        public bool JanFirstScheduleStatus { get; set; }
-        public string JanSecondSchedule { get; set; }
-        public bool JanSecondScheduleStatus { get; set; }
-        public string FebFirstSchedule { get; set; }
-        public bool FebFirstScheduleStatus { get; set; }
-        public string FebSecondSchedule { get; set; }
-        public bool FebSecondScheduleStatus { get; set; }
-        public string MarFirstSchedule { get; set; }
-        public bool MarFirstScheduleStatus { get; set; }
-        public string MarSecondSchedule { get; set; }
-        public bool MarSecondScheduleStatus { get; set; }
-        public bool Deactive { get; set; }
-    }
     public class FinancialYear
     {
         public int FinancialYearID { get; set; }
         public string FinancialYearName { get; set; }
+    }
+    public class StockSchedule
+    {
+        public int ScheduleID { get; set; }
+        public int FinancialYearID { get; set; }
+        public string FinancialYearName { get; set; }
+        public int SubCategoryID { get; set; }
+        public string SubCategoryName { get; set; }
+        public int OutletID { get; set; }
+        public string OutletName { get; set; }
+        public bool Deactive { get; set; }
+        public List<StockScheduleDetails> StockScheduleDetails { get; set; }
+        public List<OutletList> OutletList { get; set; }
+        public string InsertedBy { get; set; }
+        public DateTime? InsertedOn { get; set; }
+        public string UpdatedBy { get; set; }
+        public DateTime? UpdatedOn { get; set; }
+    }
+    public class StockScheduleDetails
+    {
+        public int DetailID { get; set; }
+        public int ScheduleID { get; set; }
+        public string MonthName { get; set; }
+        public int ScheduleNumber { get; set; }
+        public string ScheduleDate { get; set; }
+        public int? ScheduleStatus { get; set; }
+        public string ScheduleStatusName { get; set; }
+        public int SubCategoryID { get; set; }
+        public string SubCategoryName { get; set; }
+        public string AuthorizedBy { get; set; }
+        public DateTime? AuthorizedOn { get; set; }
+        public string OutletName { get; set; }
+    }
+    public class OutletList
+    {
+        public int OutletID { get; set; }
+        public string OutletName { get; set; }
+    }
+    public class StockCount
+    {
+        public int ScheduleDetailID { get; set; }
+        public List<StockCountDetails> StockCountDetails { get; set; }
+        public string InsertedBy { get; set; }
+        public DateTime? InsertedOn { get; set; }
+        public string UpdatedBy { get; set; }
+        public DateTime? UpdatedOn { get; set; }
+    }
+    public class StockCountDetails
+    {
+        public int ItemID { get; set; }
+        public string ItemName { get; set; }
+        public decimal? ClosingQty { get; set; }
+        public decimal? OpeningQty { get; set; }
+        public int ItemOutletID { get; set; }
+        public string strBatchDate { get; set; }
+        public decimal? UnitRate { get; set; }
     }
 }
