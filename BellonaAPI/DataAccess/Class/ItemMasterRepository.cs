@@ -81,7 +81,6 @@ namespace BellonaAPI.DataAccess.Class
                     paramCollection.Add(new DBParameter("Unit", model.Unit, DbType.String));
                     paramCollection.Add(new DBParameter("Attachment", model.FilePath, DbType.String));
                     paramCollection.Add(new DBParameter("SubCategoryID", model.SubCategoryID, DbType.Int32));
-                    paramCollection.Add(new DBParameter("PackSizeID", model.PackSizeID, DbType.Int32));
                     paramCollection.Add(new DBParameter("Deactive", model.Deactive, DbType.Boolean));
                     paramCollection.Add(new DBParameter("LoginId", model.LoginId, DbType.String));
                     iResult = dbHelper.ExecuteNonQuery(QueryList.SaveItem, paramCollection, transaction, CommandType.StoredProcedure);
@@ -113,8 +112,6 @@ namespace BellonaAPI.DataAccess.Class
                         FilePath = row.Field<string>("Attachment"),
                         SubCategoryID = row.Field<int>("SubCategoryID"),
                         SubCategoryName = row.Field<string>("SubCategoryName"),
-                        PackSizeID = row.Field<int>("PackSizeID"),
-                        PackSizeName = row.Field<string>("PackSizeName"),
                         Deactive = row.Field<bool>("Deactive")
 
                     }).OrderBy(o => o.ItemName).ToList();

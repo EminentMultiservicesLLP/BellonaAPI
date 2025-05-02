@@ -15,8 +15,6 @@ namespace BellonaAPI.Models.Inventory
         public string FilePath { get; set; }
         public int SubCategoryID { get; set; }
         public string SubCategoryName { get; set; }
-        public int PackSizeID { get; set; }
-        public string PackSizeName { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
         public string UpdatedBy { get; set; }

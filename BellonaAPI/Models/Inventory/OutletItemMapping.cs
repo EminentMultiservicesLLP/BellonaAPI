@@ -7,14 +7,14 @@ namespace BellonaAPI.Models.Inventory
 {
     public class OutletItemMapping
     {
-        public int ItemID { get; set; }
-        public List<MappedOutlet> MappedOutletList { get; set; }
+        public int OutletID { get; set; }
+        public List<MappedItem> MappedItemList { get; set; }
         public string LoginId { get; set; }
     }
-    public class MappedOutlet
+    public class MappedItem
     {
-        public int OutletID { get; set; }
-        public string OutletName { get; set; }
+        public int ItemID { get; set; }
+        public string ItemName { get; set; }
         public double Qty { get; set; }
         public double Rate { get; set; }
     }
