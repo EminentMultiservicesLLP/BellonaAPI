@@ -51,12 +51,13 @@ namespace BellonaAPI.DataAccess.Interface
         #endregion TBUpload
 
         List<WeeklyExpense> GetWeeklyExpense(Guid userId, int menuId, int outletID, string expenseYear, string week);
-        List<DSR_Summary> GetDSR_Summary(string outletCode, string startDate, string endDate, int cityId, int clusterId, int brandId);
+        List<DSR_Summary> GetDSR_Summary(Guid userId, int menuId, string outletCode, string startDate, string endDate, int cityId, int clusterId, int brandId);
 
         #region MIS weekly chart
         List<WeeklyMIS> GetWeeklySaleDetails(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
         List<SalesVsBudget> GetLast12Weeks_SalesVsBudget(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
         List<WeeklyCoversTrend> GetWeeklyCoversTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
+        List<WeeklyCoversTrend> GetWeekly_DaywiseSaleTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
         List<BeverageVsBudgetTrend> GetBeverageVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
         List<TobaccoVsBudgetTrend> GetTobaccoVsBudgetTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
         List<TimeWiseSalesBreakup> GetTimeWiseSalesBreakup(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId);
@@ -128,5 +129,20 @@ namespace BellonaAPI.DataAccess.Interface
         List<Monthly_CoversTrend> Monthly_GetLast12Weeks_WeekDaysCoversTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
 
         #endregion Monthly_MIS
+
+        #region Item Analysis Module
+        List<DropdownFilterModel> GetAccountNames();
+        List<DropdownFilterModel> GetCategoryNames(string AccountName);
+        List<ItemAnalysisModel> GetItemAnalysisReport(Guid userId, int menuId, string fromDate, string toDate,string AccountName, string CategoryName, string branchCode, int cityId, int clusterId, int brandId);
+        #endregion Item Analysis Module
+
+        #region Dashboard_ Item Analysis
+        List<Dashboard_BillCount> Dashboard_GetTotalBillNumbers(Guid userId, int menuId, string fromDate, string toDate, string branchCode, int cityId, int clusterId, int brandId);
+        List<Dashboard_PieChart> ItemChart_GetCategoryWiseSale(Guid userId, int menuId, string fromDate, string toDate, string branchCode, int cityId, int clusterId, int brandId);
+        List<Dashboard_MutliChart> ItemChart_GetFoodSale(Guid userId, int menuId, string fromDate, string toDate, string branchCode, int cityId, int clusterId, int brandId);
+        List<Dashboard_MutliChart> ItemChart_GetBeverageSale(Guid userId, int menuId, string fromDate, string toDate, string branchCode, int cityId, int clusterId, int brandId);
+        List<Dashboard_MutliChart> ItemChart_GetLiquorSale(Guid userId, int menuId, string fromDate, string toDate, string branchCode, int cityId, int clusterId, int brandId);
+        List<Dashboard_MutliChart> ItemChart_GetTobaccoSale(Guid userId, int menuId, string fromDate, string toDate, string branchCode, int cityId, int clusterId, int brandId);
+        #endregion Dashboard_ Item Analysis
     }
 }

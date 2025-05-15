@@ -1233,7 +1233,7 @@ namespace BellonaAPI.DataAccess.Class
 
         //}
 
-        public List<DSR_Summary> GetDSR_Summary(string outletCode, string startDate, string endDate, int cityId, int clusterId, int brandId)
+        public List<DSR_Summary> GetDSR_Summary(Guid userId, int menuId, string outletCode, string startDate, string endDate, int cityId, int clusterId, int brandId)
         {
             List<DSR_Summary> _result = null;
             TryCatch.Run(() =>
@@ -1242,26 +1242,15 @@ namespace BellonaAPI.DataAccess.Class
                 using (DBHelper Dbhelper = new DBHelper())
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("Enddt", endDate, DbType.String));
-                    dbCol.Add(new DBParameter("Startdt", startDate, DbType.String));
-
-                    if (outletCode != "")
-                    {
-                        dbCol.Add(new DBParameter("branchCode", outletCode, DbType.String));
-                    }
-                    else if (clusterId > 0)
-                    {
-                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
-                    }
-                    else if (cityId > 0)
-                    {
-                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
-                    }
-                    else if (brandId > 0)
-                    {
-                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
-                    }
-
+                    dbCol.Add(new DBParameter("Startdt", startDate, DbType.String));                    
+                    dbCol.Add(new DBParameter("branchCode", outletCode, DbType.String));                    
+                    dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));                    
+                    dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));                    
+                    dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                   
                     DataTable dsData = Dbhelper.ExecuteDataTable(QueryList.GetDSR_Summary, dbCol, CommandType.StoredProcedure);
                     _result = dsData.AsEnumerable().Select(row => CreateSummaryFromRow(row)).OrderBy(o => o.BranchName).ToList();
                 }
@@ -1420,6 +1409,65 @@ namespace BellonaAPI.DataAccess.Class
 
                     // Execute the stored procedure and retrieve data
                     DataTable dtData = dbHelper.ExecuteDataTable(QueryList.GetWeekly_CoversTrend, dbCol, CommandType.StoredProcedure);
+
+                    // Get date columns, excluding "SessionName"
+                    var dateColumns = dtData.Columns.Cast<DataColumn>()
+                        .Where(col => col.ColumnName != "SessionName")
+                        .Select(col => col.ColumnName)
+                        .ToList();
+
+                    // Process the data into a list of WeeklyCoversTrend
+                    result = dtData.AsEnumerable()
+                        .Select(row => new WeeklyCoversTrend
+                        {
+                            SessionName = row.Field<string>("SessionName"),
+                            SessionDetails = dateColumns.ToDictionary(
+                                date => date,
+                                date => row.IsNull(date) ? 0 : Convert.ToInt32(row[date])
+                            )
+                        })
+                        .ToList();
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in MealRepository GetWeeklyCoversTrend: " + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return result;
+        }
+
+        public List<WeeklyCoversTrend> GetWeekly_DaywiseSaleTrend(Guid userId, int menuId, string financialYear, string week, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<WeeklyCoversTrend> result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper dbHelper = new DBHelper())
+                {
+                    var dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("WEEK", week, DbType.String));
+                    dbCol.Add(new DBParameter("FINANCIALYEAR", financialYear, DbType.String));
+
+                    if (!string.IsNullOrEmpty(branchCode))
+                    {
+                        dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    }
+                    if (clusterId > 0)
+                    {
+                        dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    }
+                    if (cityId > 0)
+                    {
+                        dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+                    }
+                    else if (brandId > 0)
+                    {
+                        dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    }
+
+                    // Execute the stored procedure and retrieve data
+                    DataTable dtData = dbHelper.ExecuteDataTable(QueryList.GetWeekly_DaywiseSaleTrend, dbCol, CommandType.StoredProcedure);
 
                     // Get date columns, excluding "SessionName"
                     var dateColumns = dtData.Columns.Cast<DataColumn>()
@@ -3249,8 +3297,6 @@ namespace BellonaAPI.DataAccess.Class
         #endregion DSR_Comparison
 
         #region Monthly_MIS
-
-
         public List<Months> GetAllMonths()
         {
             List<Months> _result = null;
@@ -4129,7 +4175,6 @@ namespace BellonaAPI.DataAccess.Class
 
             return _result;
         }
-
         public List<Monthly_CoversTrend> Monthly_DayWise_GetMonthlyCoversTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
         {
             List<Monthly_CoversTrend> result = null;
@@ -4363,6 +4408,327 @@ namespace BellonaAPI.DataAccess.Class
         }
 
         #endregion Monthly_MIS
+
+        #region Item Analysis Module
+        public List<DropdownFilterModel> GetAccountNames()
+        {
+            List<DropdownFilterModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetAccountNames,  CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new DropdownFilterModel
+                    {
+                        AccountName = row.Field<string>("AccountName")                       
+                    }).OrderBy(o => o.AccountName).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetAccountNames:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        public List<DropdownFilterModel> GetCategoryNames(string AccountName)
+        {
+            List<DropdownFilterModel> _result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper Dbhelper = new DBHelper())
+                {
+                    DBParameterCollection dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("AccountName", AccountName, DbType.String));
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetCategoryNames, dbCol, CommandType.StoredProcedure);
+
+                    _result = dtData.AsEnumerable().Select(row => new DropdownFilterModel
+                    {
+                        AccountName = row.Field<string>("AccountName"),
+                        CategoryName = row.Field<string>("CategoryName")
+                    }).OrderBy(o => o.AccountName).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in TransactionRepository GetCategoryNames:" + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return _result;
+        }
+        public List<ItemAnalysisModel> GetItemAnalysisReport(Guid userId, int menuId, string fromDate, string toDate, string AccountName, string CategoryName, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<ItemAnalysisModel> result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper dbHelper = new DBHelper())
+                {
+                    var dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FromDate", fromDate, DbType.String));
+                    dbCol.Add(new DBParameter("ToDate", toDate, DbType.String));
+                    dbCol.Add(new DBParameter("AccountName", AccountName, DbType.String));
+                    dbCol.Add(new DBParameter("CategoryName", CategoryName, DbType.String));
+                    dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));                    
+
+                    // Execute the stored procedure and retrieve data
+                    DataTable dtData = dbHelper.ExecuteDataTable(QueryList.GetItemAnalysisReport, dbCol, CommandType.StoredProcedure);
+                    result = dtData.AsEnumerable().Select(row => new ItemAnalysisModel
+                    {
+                        OutletCode = row.Field<string>("OutletCode"),
+                        OutletName = row.Field<string>("OutletName"),                        
+                        AccountName = row.Field<string>("AccountName"),
+                        InvoiceDate = row.Field<string>("InvoiceDate"),
+                        CategoryName = row.Field<string>("CategoryName"),
+                        SubCategoryName = row.Field<string>("SubCategoryName"),
+                        ItemCode = row.Field<string>("ItemCode"),
+                        ItemShortName = row.Field<string>("ItemShortName"),
+                        QuantitySold = row.Field<int?>("QuantitySold"),
+                        QyantityNC = row.Field<int?>("QyantityNC"),
+                        QuantityTotal = row.Field<int?>("QuantityTotal"),
+                        TotalRevenue = row.Field<decimal?>("TotalRevenue"),
+                        AvgRevenue = row.Field<decimal?>("AvgRevenue")
+
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in  Get Item AnalysisReport: " + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return result;
+        }
+        #endregion Item Analysis Module
+
+        #region Dashboard_ Item Analysis
+        public List<Dashboard_BillCount> Dashboard_GetTotalBillNumbers(Guid userId, int menuId, string fromDate, string toDate, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<Dashboard_BillCount> result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper dbHelper = new DBHelper())
+                {
+                    var dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FromDate", fromDate, DbType.String));
+                    dbCol.Add(new DBParameter("ToDate", toDate, DbType.String));                 
+                    dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+
+                    // Execute the stored procedure and retrieve data
+                    DataTable dtData = dbHelper.ExecuteDataTable(QueryList.Dashboard_GetTotalBillNumbers, dbCol, CommandType.StoredProcedure);
+                    result = dtData.AsEnumerable().Select(row => new Dashboard_BillCount
+                    {
+                        TotalBillCount = row.Field<int?>("TotalBillCount"),
+                        FoodBillCount = row.Field<int?>("FoodBillCount"),
+                        FoodPerc = row.Field<double?>("FoodPerc"),
+                        FoodBevBillCount = row.Field<int?>("FoodBevBillCount"),
+                        FoodBevPerc= row.Field<double?>("FoodBevPerc"),
+                        FoodBevLiqBillCount= row.Field<int?>("FoodBevLiqBillCount"),
+                        FoodBevLiqPerc = row.Field<double?>("FoodBevLiqPerc"),
+                        DessertBillCount = row.Field<int>("DessertBillCount"),
+                        DessertPerc= row.Field<double?>("DessertPerc"),
+                        CocktailBillCount = row.Field<int?>("CocktailBillCount"),
+                        CocktailPerc = row.Field<double?>("CocktailPerc")
+
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in  Dashboard_GetTotalBillNumbers: " + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+
+            return result;
+        }
+
+        public List<Dashboard_PieChart> ItemChart_GetCategoryWiseSale(Guid userId, int menuId, string fromDate, string toDate, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<Dashboard_PieChart> result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper dbHelper = new DBHelper())
+                {
+                    var dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FromDate", fromDate, DbType.String));
+                    dbCol.Add(new DBParameter("ToDate", toDate, DbType.String));
+                    dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+
+                    // Execute the stored procedure and retrieve data
+                    DataTable dtData = dbHelper.ExecuteDataTable(QueryList.ItemChart_GetCategoryWiseSale, dbCol, CommandType.StoredProcedure);
+                    result = dtData.AsEnumerable().Select(row => new Dashboard_PieChart
+                    {
+                        TotalAmount = row.Field<decimal?>("TotalAmount"),
+                        Perc = row.Field<decimal?>("Perc"),
+                        ColumnName = row.Field<string>("ColumnName")
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in  ItemChart_GetCategoryWiseSale: " + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+            return result;
+        }
+
+        public List<Dashboard_MutliChart> ItemChart_GetFoodSale(Guid userId, int menuId, string fromDate, string toDate, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<Dashboard_MutliChart> result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper dbHelper = new DBHelper())
+                {
+                    var dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FromDate", fromDate, DbType.String));
+                    dbCol.Add(new DBParameter("ToDate", toDate, DbType.String));
+                    dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+
+                    // Execute the stored procedure and retrieve data
+                    DataTable dtData = dbHelper.ExecuteDataTable(QueryList.ItemChart_GetFoodSale, dbCol, CommandType.StoredProcedure);
+                    result = dtData.AsEnumerable().Select(row => new Dashboard_MutliChart
+                    {
+                        TotalAmount = row.Field<decimal?>("TotalAmount"),
+                        Perc = row.Field<decimal?>("Perc"),
+                        ColumnName = row.Field<string>("ColumnName"),
+                        SubColumnName = row.Field<string>("SubColumnName")
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in  Get ItemChart_GetFoodSale: " + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+            return result;
+        }
+
+        public List<Dashboard_MutliChart> ItemChart_GetBeverageSale(Guid userId, int menuId, string fromDate, string toDate, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<Dashboard_MutliChart> result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper dbHelper = new DBHelper())
+                {
+                    var dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FromDate", fromDate, DbType.String));
+                    dbCol.Add(new DBParameter("ToDate", toDate, DbType.String));
+                    dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+
+                    // Execute the stored procedure and retrieve data
+                    DataTable dtData = dbHelper.ExecuteDataTable(QueryList.ItemChart_GetBeverageSale, dbCol, CommandType.StoredProcedure);
+                    result = dtData.AsEnumerable().Select(row => new Dashboard_MutliChart
+                    {
+                        TotalAmount = row.Field<decimal?>("TotalAmount"),
+                        Perc = row.Field<decimal?>("Perc"),
+                        ColumnName = row.Field<string>("ColumnName"),
+                        SubColumnName = row.Field<string>("SubColumnName")
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in Get ItemChart_GetBeverageSale: " + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+            return result;
+        }
+
+        public List<Dashboard_MutliChart> ItemChart_GetTobaccoSale(Guid userId, int menuId, string fromDate, string toDate, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<Dashboard_MutliChart> result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper dbHelper = new DBHelper())
+                {
+                    var dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FromDate", fromDate, DbType.String));
+                    dbCol.Add(new DBParameter("ToDate", toDate, DbType.String));
+                    dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+
+                    // Execute the stored procedure and retrieve data
+                    DataTable dtData = dbHelper.ExecuteDataTable(QueryList.ItemChart_GetTobaccoSale, dbCol, CommandType.StoredProcedure);
+                    result = dtData.AsEnumerable().Select(row => new Dashboard_MutliChart
+                    {
+                        TotalAmount = row.Field<decimal?>("TotalAmount"),
+                        Perc = row.Field<decimal?>("Perc"),
+                        ColumnName = row.Field<string>("ColumnName"),
+                        SubColumnName = row.Field<string>("SubColumnName")
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in Get ItemChart_GetTobaccoSale: " + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+            return result;
+        }
+
+        public List<Dashboard_MutliChart> ItemChart_GetLiquorSale(Guid userId, int menuId, string fromDate, string toDate, string branchCode, int cityId, int clusterId, int brandId)
+        {
+            List<Dashboard_MutliChart> result = null;
+            TryCatch.Run(() =>
+            {
+                using (DBHelper dbHelper = new DBHelper())
+                {
+                    var dbCol = new DBParameterCollection();
+                    dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
+                    dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
+                    dbCol.Add(new DBParameter("FromDate", fromDate, DbType.String));
+                    dbCol.Add(new DBParameter("ToDate", toDate, DbType.String));
+                    dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
+                    dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
+                    dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
+
+                    // Execute the stored procedure and retrieve data
+                    DataTable dtData = dbHelper.ExecuteDataTable(QueryList.ItemChart_GetLiquorSale, dbCol, CommandType.StoredProcedure);
+                    result = dtData.AsEnumerable().Select(row => new Dashboard_MutliChart
+                    {
+                        TotalAmount = row.Field<decimal?>("TotalAmount"),
+                        Perc = row.Field<decimal?>("Perc"),
+                        ColumnName = row.Field<string>("ColumnName"),
+                        SubColumnName = row.Field<string>("SubColumnName")
+                    }).ToList();
+
+                }
+            }).IfNotNull((ex) =>
+            {
+                Logger.LogError("Error in Get ItemChart_GetLiquorSale: " + ex.Message + Environment.NewLine + ex.StackTrace);
+            });
+            return result;
+        }
+
+        #endregion Dashboard_ Item Analysis
+
     }
 }
 
