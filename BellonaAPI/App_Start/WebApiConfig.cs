@@ -66,6 +66,8 @@ namespace BellonaAPI
             container.RegisterType<ICommonRepository, CommonRepository>();
             container.RegisterType<IHelpFileRepository, HelpFileRepository>();
 
+            container.RegisterType<IManPowerRepository, ManPowerRepository>();
+
 
             config.DependencyResolver = new UnityResolver(container);
         }

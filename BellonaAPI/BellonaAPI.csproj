@@ -164,6 +164,7 @@
     <Compile Include="Controllers\HistoryDashboardController.cs" />
     <Compile Include="Controllers\InventoryEntryController.cs" />
     <Compile Include="Controllers\ItemMasterController.cs" />
+    <Compile Include="Controllers\ManPowerController.cs" />
     <Compile Include="Controllers\OutletItemMappingController.cs" />
     <Compile Include="Controllers\PresentDashboardController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -189,6 +190,7 @@
     <Compile Include="DataAccess\Class\HistoryDashboardRepository.cs" />
     <Compile Include="DataAccess\Class\InventoryEntryRepository.cs" />
     <Compile Include="DataAccess\Class\ItemMasterRepository.cs" />
+    <Compile Include="DataAccess\Class\ManPowerRepository.cs" />
     <Compile Include="DataAccess\Class\MastersRepository.cs" />
     <Compile Include="DataAccess\Class\OutletItemMappingRepository.cs" />
     <Compile Include="DataAccess\Class\OutletRepository.cs" />
@@ -219,6 +221,7 @@
     <Compile Include="DataAccess\Interface\IHistoryDashboardRepository.cs" />
     <Compile Include="DataAccess\Interface\IInventoryEntryRepository.cs" />
     <Compile Include="DataAccess\Interface\IItemMasterRepository.cs" />
+    <Compile Include="DataAccess\Interface\IManPowerRepository.cs" />
     <Compile Include="DataAccess\Interface\IMastersRepository.cs" />
     <Compile Include="DataAccess\Interface\IOutletItemMappingRepository.cs" />
     <Compile Include="DataAccess\Interface\IOutletRepository.cs" />
@@ -305,6 +308,8 @@
     <Compile Include="Models\Inventory\OutletItemMapping.cs" />
     <Compile Include="Models\Inventory\ScheduleStockCount.cs" />
     <Compile Include="Models\Inventory\StockTransfer.cs" />
+    <Compile Include="Models\ManPower\ManPowerBudgetModel.cs" />
+    <Compile Include="Models\ManPower\ManPowerDashBoardModel.cs" />
     <Compile Include="Models\Masters\AdminModels.cs" />
     <Compile Include="Models\MenuUserRightsModel.cs" />
     <Compile Include="Models\MonthlyExpense.cs" />
