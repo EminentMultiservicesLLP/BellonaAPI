@@ -383,9 +383,9 @@ namespace BellonaAPI.Controllers
         [Route("GetDSR_Summary")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetDSR_Summary(string startDate, string endDate, string outletCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        public IHttpActionResult GetDSR_Summary(Guid userId, int menuId, string startDate, string endDate, string outletCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
         {
-            List<DSR_Summary> _result = _iRepo.GetDSR_Summary(outletCode ?? "", startDate, endDate, cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            List<DSR_Summary> _result = _iRepo.GetDSR_Summary(userId, menuId, outletCode ?? "", startDate, endDate, cityId ?? 0, clusterId ?? 0, brandId ?? 0);
             if (_result != null)
                 return Ok(_result);
             else
@@ -425,6 +425,19 @@ namespace BellonaAPI.Controllers
                 return Ok(_result);
             else
                 return InternalServerError(new System.Exception("Failed to retrieve Weekly Covers Trend details."));
+        }
+        
+        [Route("GetWeekly_DaywiseSaleTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetWeekly_DaywiseSaleTrend(Guid userId, int menuId, string financialYear, string week, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<WeeklyCoversTrend> _result = _iRepo.GetWeekly_DaywiseSaleTrend(userId, menuId, financialYear, week, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+
+            if (_result != null)
+                return Ok(_result);
+            else
+                return InternalServerError(new System.Exception("Failed to retrieve Weekly Sale Trend details."));
         }
 
         [Route("GetBeverageVsBudgetTrend")]
@@ -1046,5 +1059,101 @@ namespace BellonaAPI.Controllers
         }
 
         #endregion Monthly_MIS
+
+        #region Item Analysis Module
+
+        [Route("GetAccountNames")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetAccountNames()
+        {
+            List<DropdownFilterModel> _result = _iRepo.GetAccountNames();
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetAccountNames."));
+        }
+
+        [Route("GetCategoryNames")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetCategoryNames(string AccountName = null)
+        {
+            List<DropdownFilterModel> _result = _iRepo.GetCategoryNames(AccountName);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetCategoryNames."));
+        }
+
+        [Route("GetItemAnalysisReport")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetItemAnalysisReport(Guid userId, int menuId, string fromDate, string toDate, string AccountName=null, string CategoryName=null, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<ItemAnalysisModel> _result = _iRepo.GetItemAnalysisReport(userId, menuId, fromDate, toDate,AccountName??"", CategoryName ??"" ,branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve GetItemAnalysisReport."));
+        }
+        #endregion Item Analysis Module
+
+        #region Dashboard_ Item Analysis
+
+        [Route("Dashboard_GetTotalBillNumbers")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult Dashboard_GetTotalBillNumbers(Guid userId, int menuId, string fromDate, string toDate, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<Dashboard_BillCount> _result = _iRepo.Dashboard_GetTotalBillNumbers(userId, menuId, fromDate, toDate, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Dashboard_GetTotalBillNumbers."));
+        }
+
+        [Route("ItemChart_GetCategoryWiseSale")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult ItemChart_GetCategoryWiseSale(Guid userId, int menuId, string fromDate, string toDate, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<Dashboard_PieChart> _result = _iRepo.ItemChart_GetCategoryWiseSale(userId, menuId, fromDate, toDate, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve ItemChart_GetCategoryWiseSale."));
+        }
+
+        [Route("ItemChart_GetFoodSale")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult ItemChart_GetFoodSale(Guid userId, int menuId, string fromDate, string toDate, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<Dashboard_MutliChart> _result = _iRepo.ItemChart_GetFoodSale(userId, menuId, fromDate, toDate, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve ItemChart_GetFoodSale."));
+        }
+
+        [Route("ItemChart_GetBeverageSale")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult ItemChart_GetBeverageSale(Guid userId, int menuId, string fromDate, string toDate, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<Dashboard_MutliChart> _result = _iRepo.ItemChart_GetBeverageSale(userId, menuId, fromDate, toDate, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve ItemChart_GetBeverageSale."));
+        }
+
+        [Route("ItemChart_GetLiquorSale")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult ItemChart_GetLiquorSale(Guid userId, int menuId, string fromDate, string toDate, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<Dashboard_MutliChart> _result = _iRepo.ItemChart_GetLiquorSale(userId, menuId, fromDate, toDate, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve ItemChart_GetLiquorSale."));
+        }
+
+        [Route("ItemChart_GetTobaccoSale")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult ItemChart_GetTobaccoSale(Guid userId, int menuId, string fromDate, string toDate, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<Dashboard_MutliChart> _result = _iRepo.ItemChart_GetTobaccoSale(userId, menuId, fromDate, toDate, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve ItemChart_GetTobaccoSale."));
+        }
+        #endregion Dashboard_ Item Analysis
     }
 }

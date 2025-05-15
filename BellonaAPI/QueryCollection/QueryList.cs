@@ -116,6 +116,7 @@
         public const string GetWeeklySaleDetails = "dbsp_GetWeekly_SaleTrend";
         public const string GetLast12Weeks_SalesVsBudget = "dbsp_GetLast12Weeks_SalesVsBudget";
         public const string GetWeekly_CoversTrend = "dbsp_GetWeekly_CoversTrend";
+        public const string GetWeekly_DaywiseSaleTrend = "dbsp_GetWeekly_DaywiseSaleTrend";
         public const string GetBeverageVsBudgetTrend = "dbsp_GetBeverageVsBudgetTrend";
         public const string GetTobaccoVsBudgetTrend = "dbsp_GetTobaccoVsBudgetTrend";
         public const string GetTimeWiseSalesBreakup = "dbsp_GetWeekly_TimeWiseSaleBreakup";
@@ -181,6 +182,16 @@
         public const string GetSalesDayBudget = "dbsp_GetSalesDayBudget";
         public const string SaveSalesBudget = "dbsp_SaveSalesBudget";
         public const string GetSalesBudgetDetails = "dbsp_GetSalesBudgetDetails";
+
+        public const string GetAccountNames = "dbsp_Trans_GetAccountNames";
+        public const string GetCategoryNames = "dbsp_Trans_GetCategoryNames";
+        public const string GetItemAnalysisReport = "dbsp_Trans_GetItemAnalysisReport";
+        public const string Dashboard_GetTotalBillNumbers = "dbsp_Dashboard_GetTotalBillNumbers";
+        public const string ItemChart_GetCategoryWiseSale = "dbsp_ItemChart_GetCategoryWiseSale";
+        public const string ItemChart_GetLiquorSale = "dbsp_ItemChart_GetLiquorSale";
+        public const string ItemChart_GetTobaccoSale = "dbsp_ItemChart_GetTobaccoSale";
+        public const string ItemChart_GetBeverageSale = "dbsp_ItemChart_GetBeverageSale";
+        public const string ItemChart_GetFoodSale = "dbsp_ItemChart_GetFoodSale";
 
         public const string CheckTBErrorLog = "dbsp_CheckTBErrorLog";
 
