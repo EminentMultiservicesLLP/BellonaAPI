@@ -4482,10 +4482,10 @@ namespace BellonaAPI.DataAccess.Class
                     DataTable dtData = dbHelper.ExecuteDataTable(QueryList.GetItemAnalysisReport, dbCol, CommandType.StoredProcedure);
                     result = dtData.AsEnumerable().Select(row => new ItemAnalysisModel
                     {
-                        OutletCode = row.Field<string>("OutletCode"),
-                        OutletName = row.Field<string>("OutletName"),                        
+                        //OutletCode = row.Field<string>("OutletCode"),
+                        //OutletName = row.Field<string>("OutletName"),                        
                         AccountName = row.Field<string>("AccountName"),
-                        InvoiceDate = row.Field<string>("InvoiceDate"),
+                        //InvoiceDate = row.Field<string>("InvoiceDate"),
                         CategoryName = row.Field<string>("CategoryName"),
                         SubCategoryName = row.Field<string>("SubCategoryName"),
                         ItemCode = row.Field<string>("ItemCode"),
