@@ -9,7 +9,7 @@ namespace BellonaAPI.DataAccess.Interface
 {
     public interface IOutletItemMappingRepository
     {
-        IEnumerable<MappedOutlet> GetOutletItemMapping(int? ItemID);
+        IEnumerable<MappedItem> GetOutletItemMapping(int? OutletID);
         bool SaveOutletItemMapping(OutletItemMapping model);
         IEnumerable<StockDetails> GetStockDetails(int OutletID, int? SubCategoryID);
     }

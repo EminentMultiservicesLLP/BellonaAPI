@@ -365,5 +365,12 @@
         public const string SaveTransfer = "dbsp_Inv_SaveTransfer";
         public const string GetTransfer = "dbsp_Inv_GetTransfer";
         public const string GetTransferDetail = "dbsp_Inv_GetTransferDetail";
+
+        // ********************************** Man Power *********************************************
+        public const string GetManPowerBudgetByOutletID = "dbsp_MP_GetManPowerBudgetByOutletID";
+        public const string SaveManPowerCounts = "dbsp_MP_SaveManPowerCounts";
+        public const string GetManPowerBudgetHistory = "dbsp_MP_GetManPowerBudgetHistory";
+        public const string GetManPowerBudgetForDashBoard = "dbsp_MP_GetManPowerBudgetForDashBoard";
+
     }
 }

@@ -36,6 +36,7 @@ namespace BellonaAPI.Models.Inventory
         public string ItemName { get; set; }
         public string Unit { get; set; }
         public string PackSizeName { get; set; }
+        public double PackQty { get; set; }
         public double Qty { get; set; }
         public double Rate { get; set; }
         public double TotalAmount { get; set; }

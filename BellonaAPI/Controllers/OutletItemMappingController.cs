@@ -26,9 +26,9 @@ namespace BellonaAPI.Controllers
         [Route("GetOutletItemMapping")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetOutletItemMapping(int? ItemID)
+        public IHttpActionResult GetOutletItemMapping(int? OutletID)
         {
-            List<MappedOutlet> _result = _IRepo.GetOutletItemMapping(ItemID).ToList();
+            List<MappedItem> _result = _IRepo.GetOutletItemMapping(OutletID).ToList();
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve GetOutletItemMapping"));
         }

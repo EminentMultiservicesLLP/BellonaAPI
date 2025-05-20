@@ -113,6 +113,7 @@ namespace BellonaAPI.DataAccess.Class
                         ItemName = row.Field<string>("ItemName"),
                         Unit = row.Field<string>("Unit"),
                         PackSizeName = row.Field<string>("PackSizeName"),
+                        PackQty = row.Field<double>("PackQty"),
                         Qty = row.Field<double>("Qty"),
                         Rate = row.Field<double>("Rate"),
                         TotalAmount = row.Field<double>("TotalAmount"),
