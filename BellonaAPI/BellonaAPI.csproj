@@ -308,6 +308,7 @@
     <Compile Include="Models\Inventory\OutletItemMapping.cs" />
     <Compile Include="Models\Inventory\ScheduleStockCount.cs" />
     <Compile Include="Models\Inventory\StockTransfer.cs" />
+    <Compile Include="Models\ItemAnalysisModel.cs" />
     <Compile Include="Models\ManPower\ManPowerBudgetModel.cs" />
     <Compile Include="Models\ManPower\ManPowerDashBoardModel.cs" />
     <Compile Include="Models\Masters\AdminModels.cs" />
