@@ -33,6 +33,15 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to retrieve GetManPowerBudgetByOutletID"));
         }
 
+        [Route("SaveManPowerBudget")]
+        [AcceptVerbs("POST")]
+        [ValidationActionFilter]
+        public IHttpActionResult SaveManPowerBudget(ManPowerBudgetModel model)
+        {
+            if (_IRepo.SaveManPowerBudget(model)) return Ok(new { IsSuccess = true, Message = "ManPowerBudget Save Successfully." });
+            else return BadRequest("ManPowerBudget Save Failed");
+        }
+
         [Route("SaveManPowerCounts")]
         [AcceptVerbs("POST")]
         [ValidationActionFilter]
@@ -42,14 +51,14 @@ namespace BellonaAPI.Controllers
             else return BadRequest("ManPowerBudget Save Failed");
         }
 
-        [Route("GetManPowerBudgetHistory")]
+        [Route("GetManPowerActualHistory")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetManPowerBudgetHistory(int? OutletID, int? Latest)
+        public IHttpActionResult GetManPowerActualHistory(int? OutletID, int? Latest)
         {
-            List<ManPowerBudgetDetailsModel> _result = _IRepo.GetManPowerBudgetHistory(OutletID, Latest).ToList();
+            List<ManPowerBudgetDetailsModel> _result = _IRepo.GetManPowerActualHistory(OutletID, Latest).ToList();
             if (_result != null) return Ok(_result);
-            else return InternalServerError(new System.Exception("Failed to retrieve GetManPowerBudgetHistory"));
+            else return InternalServerError(new System.Exception("Failed to retrieve GetManPowerActualHistory"));
         }
 
         [Route("GetManPowerBudgetForDashBoard")]
