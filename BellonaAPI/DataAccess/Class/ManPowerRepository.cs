@@ -45,10 +45,10 @@ namespace BellonaAPI.DataAccess.Class
             return _result;
         }
 
-        public bool SaveManPowerCounts(ManPowerBudgetModel model)
+        public bool SaveManPowerBudget(ManPowerBudgetModel model)
         {
             int iResult = 0;
-            var ManPowerBudgeDetails = Common.ToXML(model.ManPowerBudgeDetails);
+            var ManPowerBudgetDetails = Common.ToXML(model.ManPowerBudgetDetails);
 
             using (DBHelper dbHelper = new DBHelper())
             {
@@ -57,7 +57,33 @@ namespace BellonaAPI.DataAccess.Class
                 {
                     DBParameterCollection paramCollection = new DBParameterCollection();
                     paramCollection.Add(new DBParameter("OutletID", model.OutletID, DbType.Int32));
-                    paramCollection.Add(new DBParameter("ManPowerBudgeDetails", ManPowerBudgeDetails, DbType.Xml));
+                    paramCollection.Add(new DBParameter("ManPowerBudgetDetails", ManPowerBudgetDetails, DbType.Xml));
+                    paramCollection.Add(new DBParameter("CreatedBy", model.CreatedBy, DbType.String));
+                    var Result = dbHelper.ExecuteScalar(QueryList.SaveManPowerBudget, paramCollection, transaction, CommandType.StoredProcedure);
+                    iResult = Int32.Parse(Result.ToString());
+                    dbHelper.CommitTransaction(transaction);
+                }).IfNotNull(ex =>
+                {
+                    dbHelper.RollbackTransaction(transaction);
+                });
+            }
+            if (iResult > 0) return true;
+            else return false;
+        }
+
+        public bool SaveManPowerCounts(ManPowerBudgetModel model)
+        {
+            int iResult = 0;
+            var ManPowerBudgetDetails = Common.ToXML(model.ManPowerBudgetDetails);
+
+            using (DBHelper dbHelper = new DBHelper())
+            {
+                IDbTransaction transaction = dbHelper.BeginTransaction();
+                TryCatch.Run(() =>
+                {
+                    DBParameterCollection paramCollection = new DBParameterCollection();
+                    paramCollection.Add(new DBParameter("OutletID", model.OutletID, DbType.Int32));
+                    paramCollection.Add(new DBParameter("ManPowerBudgetDetails", ManPowerBudgetDetails, DbType.Xml));
                     paramCollection.Add(new DBParameter("CreatedBy", model.CreatedBy, DbType.String));
                     var Result = dbHelper.ExecuteScalar(QueryList.SaveManPowerCounts, paramCollection, transaction, CommandType.StoredProcedure);
                     iResult = Int32.Parse(Result.ToString());
@@ -71,7 +97,7 @@ namespace BellonaAPI.DataAccess.Class
             else return false;
         }
 
-        public IEnumerable<ManPowerBudgetDetailsModel> GetManPowerBudgetHistory(int? OutletID, int? Latest)
+        public IEnumerable<ManPowerBudgetDetailsModel> GetManPowerActualHistory(int? OutletID, int? Latest)
         {
             List<ManPowerBudgetDetailsModel> _result = null;
             TryCatch.Run(() =>
@@ -81,7 +107,7 @@ namespace BellonaAPI.DataAccess.Class
                     DBParameterCollection paramCollection = new DBParameterCollection();
                     paramCollection.Add(new DBParameter("OutletID", OutletID, DbType.Int32));
                     paramCollection.Add(new DBParameter("Latest", Latest, DbType.Int32));
-                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetManPowerBudgetHistory, paramCollection, CommandType.StoredProcedure);
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetManPowerActualHistory, paramCollection, CommandType.StoredProcedure);
                     _result = dtData.AsEnumerable().Select(row => new ManPowerBudgetDetailsModel
                     {
                         BudgetID = row.Field<int?>("BudgetID"),
@@ -98,7 +124,7 @@ namespace BellonaAPI.DataAccess.Class
                 }
             }).IfNotNull((ex) =>
             {
-                Logger.LogError("Error in ManPowerRepository GetManPowerBudgetHistory:" + ex.Message + Environment.NewLine + ex.StackTrace);
+                Logger.LogError("Error in ManPowerRepository GetManPowerActualHistory:" + ex.Message + Environment.NewLine + ex.StackTrace);
             });
             return _result;
         }

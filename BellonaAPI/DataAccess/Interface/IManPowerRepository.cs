@@ -10,8 +10,9 @@ namespace BellonaAPI.DataAccess.Interface
     public interface IManPowerRepository
     {
         IEnumerable<ManPowerBudgetDetailsModel> GetManPowerBudgetByOutletID(int? OutletID);
+        bool SaveManPowerBudget(ManPowerBudgetModel model);
         bool SaveManPowerCounts(ManPowerBudgetModel model);
-        IEnumerable<ManPowerBudgetDetailsModel> GetManPowerBudgetHistory(int? OutletID, int? Latest);
+        IEnumerable<ManPowerBudgetDetailsModel> GetManPowerActualHistory(int? OutletID, int? Latest);
         IEnumerable<ManPowerBudgetDashboardModel> GetManPowerBudgetForDashBoard();
     }
 }

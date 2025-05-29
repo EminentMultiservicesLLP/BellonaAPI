@@ -368,8 +368,9 @@
 
         // ********************************** Man Power *********************************************
         public const string GetManPowerBudgetByOutletID = "dbsp_MP_GetManPowerBudgetByOutletID";
+        public const string SaveManPowerBudget = "dbsp_MP_SaveManPowerBudget";
         public const string SaveManPowerCounts = "dbsp_MP_SaveManPowerCounts";
-        public const string GetManPowerBudgetHistory = "dbsp_MP_GetManPowerBudgetHistory";
+        public const string GetManPowerActualHistory = "dbsp_MP_GetManPowerActualHistory";
         public const string GetManPowerBudgetForDashBoard = "dbsp_MP_GetManPowerBudgetForDashBoard";
 
     }
