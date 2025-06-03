@@ -9,7 +9,8 @@ namespace BellonaAPI.Models.ManPower
     {
         public int? OutletID { get; set; }
         public string EntryDate { get; set; }
-        public List<ManPowerBudgetDetailsModel> ManPowerBudgeDetails { get; set; }
+        public bool IsBudget { get; set; }
+        public List<ManPowerBudgetDetailsModel> ManPowerBudgetDetails { get; set; }
         public string CreatedBy { get; set; }
     }
     public class ManPowerBudgetDetailsModel
