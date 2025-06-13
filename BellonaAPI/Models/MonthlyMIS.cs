@@ -111,4 +111,10 @@ namespace BellonaAPI.Models
         public string SessionName { get; set; }
         public Dictionary<string, int> SessionDetails { get; set; } = new Dictionary<string, int>();
     }
+    public class Monthly_YTDChartModel
+    {
+        public decimal? SaleAmount { get; set; }
+        public decimal? BudgetAmount { get; set; }
+        public decimal? Percentage { get; set; }
+    }
 }

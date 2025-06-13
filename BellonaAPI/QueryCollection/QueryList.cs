@@ -68,6 +68,7 @@
         public const string GetMenuforRWAccess = "dbsp_GetMenuforRWAccess";
         public const string SaveReadWriteAccess = "dbsp_SaveReadWriteAccess";
         public const string GetFormMenuAccess = "dbsp_GetFormMenuAccess";
+        public const string SaveDashboardFilterUserActivityLog = "dbsp_Log_StoreDashboardFilterActivity";
 
 
         public const string GetSaleDineIn = "dbsp_GetSaleDineInForMonth";
@@ -161,6 +162,7 @@
         public const string GetLast12MonthsLiquorVsBudgetTrend = "dbsp_Monthly_GetLiquorVsBudgetTrend";
         public const string GetLast12MonthsFoodVsBudgetTrend = "dbsp_Monthly_GetFoodVsBudgetTrend";
         public const string GetLast12MonthsSalesVsBudgetTrend = "dbsp_Monthly_GetLast12Months_SalesVsBudget";
+        public const string GetYTDSalesVsBudgetTrend = "dbsp_Monthly_GetYTD_SalesVsBudget";
         public const string Monthly_GetDaywiseSale = "dbsp_MonthlyChart_GetDayWiseSale";
         public const string Monthly_GetSalesBreakup = "dbsp_MonthlyChart_GetSalesBreakup";
         public const string Monthly_GetTimeWiseSalesBreakup = "dbsp_MonthlyChart_TimeWiseSaleBreakup";

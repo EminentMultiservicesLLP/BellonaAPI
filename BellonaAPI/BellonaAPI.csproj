@@ -295,6 +295,7 @@
     <Compile Include="Models\BudgetModel.cs" />
     <Compile Include="Models\CashAuth.cs" />
     <Compile Include="Models\CashDepositStatus.cs" />
+    <Compile Include="Models\CommonModel\DashboardUserActivityModel.cs" />
     <Compile Include="Models\DailyExpense.cs" />
     <Compile Include="Models\DailySale.cs" />
     <Compile Include="Models\DailyTarget.cs" />

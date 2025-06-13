@@ -880,6 +880,16 @@ namespace BellonaAPI.Controllers
             else return InternalServerError(new System.Exception("Failed to retrieve Get Weekly MIS Data PartIII Details."));
         }
 
+        [Route("getYTDSalesVsBudgetTrend")]
+        [AcceptVerbs("GET")]
+        [ValidationActionFilter]
+        public IHttpActionResult GetYTDSalesVsBudgetTrend(Guid userId, int menuId, string financialYear, string month, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        {
+            List<Last12MonthBudgetSaleComparison> _result = _iRepo.GetYTDSalesVsBudgetTrend(userId, menuId, financialYear, month, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            if (_result != null) return Ok(_result);
+            else return InternalServerError(new System.Exception("Failed to retrieve Get YTDSalesVsBudget Trend Details."));
+        }
+
         [Route("getLast12MonthsSalesVsBudgetTrend")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
