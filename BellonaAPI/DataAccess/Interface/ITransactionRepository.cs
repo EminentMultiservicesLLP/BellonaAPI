@@ -109,7 +109,7 @@ namespace BellonaAPI.DataAccess.Interface
         List<MonthlyMISDataModel> GetMonthlyMISData_PartI(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
         List<MonthlyMISDataModel> GetMonthlyMISData_PartII(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
         List<MonthlyMISDataModel> GetMonthlyMISData_PartIII(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
-        List<Last12MonthBudgetSaleComparison> GetYTDSalesVsBudgetTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
+        List<Monthly_YTDChartModel> GetYTDSalesVsBudgetTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
         List<Last12MonthBudgetSaleComparison> GetLast12MonthsSalesVsBudgetTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
         List<Last12MonthBudgetSaleComparison> GetLast12MonthsFoodVsBudgetTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
         List<Last12MonthBudgetSaleComparison> GetLast12MonthsLiquorVsBudgetTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId);
@@ -134,7 +134,7 @@ namespace BellonaAPI.DataAccess.Interface
         #region Item Analysis Module
         List<DropdownFilterModel> GetAccountNames();
         List<DropdownFilterModel> GetCategoryNames(string AccountName);
-        List<ItemAnalysisModel> GetItemAnalysisReport(Guid userId, int menuId, string fromDate, string toDate,string AccountName, string CategoryName, string branchCode, int cityId, int clusterId, int brandId);
+        List<ItemAnalysisModel> GetItemAnalysisReport(Guid userId, int menuId, string fromDate, string toDate, string AccountName, string CategoryName, string branchCode, int cityId, int clusterId, int brandId);
         #endregion Item Analysis Module
 
         #region Dashboard_ Item Analysis

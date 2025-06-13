@@ -426,7 +426,7 @@ namespace BellonaAPI.Controllers
             else
                 return InternalServerError(new System.Exception("Failed to retrieve Weekly Covers Trend details."));
         }
-        
+
         [Route("GetWeekly_DaywiseSaleTrend")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
@@ -885,7 +885,7 @@ namespace BellonaAPI.Controllers
         [ValidationActionFilter]
         public IHttpActionResult GetYTDSalesVsBudgetTrend(Guid userId, int menuId, string financialYear, string month, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
         {
-            List<Last12MonthBudgetSaleComparison> _result = _iRepo.GetYTDSalesVsBudgetTrend(userId, menuId, financialYear, month, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            List<Monthly_YTDChartModel> _result = _iRepo.GetYTDSalesVsBudgetTrend(userId, menuId, financialYear, month, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Get YTDSalesVsBudget Trend Details."));
         }
@@ -996,8 +996,8 @@ namespace BellonaAPI.Controllers
             List<Monthly_DeliverySaleBreakup> _result = _iRepo.Monthly_GetDeliveySale(userId, menuId, financialYear, month, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Get Monthly_GetDeliveySale Trend Details."));
-        }   
-        
+        }
+
         [Route("Monthly_GetDayWiseAvgCoversTrend")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
@@ -1006,8 +1006,8 @@ namespace BellonaAPI.Controllers
             List<Monthly_AverageCoverTrend> _result = _iRepo.Monthly_GetDayWiseAvgCoversTrend(userId, menuId, financialYear, month, branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Get Monthly_GetDayWiseAvgCovers Trend Details."));
-        } 
-        
+        }
+
         [Route("Monthly_GetAvgCoversTrend")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
@@ -1027,7 +1027,7 @@ namespace BellonaAPI.Controllers
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Get Monthly_GetDeliveySale Trend Details."));
         }
-        
+
         [Route("Monthly_DayWise_GetMonthlyCoversTrend")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
@@ -1037,7 +1037,7 @@ namespace BellonaAPI.Controllers
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve Get Monthly_DayWise_GetMonthlyCoversTrend Details."));
         }
-        
+
         [Route("Monthly_GetLast12Weeks_CoverTrend")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
@@ -1095,9 +1095,9 @@ namespace BellonaAPI.Controllers
         [Route("GetItemAnalysisReport")]
         [AcceptVerbs("GET")]
         [ValidationActionFilter]
-        public IHttpActionResult GetItemAnalysisReport(Guid userId, int menuId, string fromDate, string toDate, string AccountName=null, string CategoryName=null, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
+        public IHttpActionResult GetItemAnalysisReport(Guid userId, int menuId, string fromDate, string toDate, string AccountName = null, string CategoryName = null, string branchCode = null, int? cityId = null, int? clusterId = null, int? brandId = null)
         {
-            List<ItemAnalysisModel> _result = _iRepo.GetItemAnalysisReport(userId, menuId, fromDate, toDate,AccountName??"", CategoryName ??"" ,branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
+            List<ItemAnalysisModel> _result = _iRepo.GetItemAnalysisReport(userId, menuId, fromDate, toDate, AccountName ?? "", CategoryName ?? "", branchCode ?? "", cityId ?? 0, clusterId ?? 0, brandId ?? 0);
             if (_result != null) return Ok(_result);
             else return InternalServerError(new System.Exception("Failed to retrieve GetItemAnalysisReport."));
         }

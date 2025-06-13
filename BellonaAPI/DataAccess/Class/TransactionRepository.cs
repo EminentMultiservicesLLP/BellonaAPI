@@ -1245,12 +1245,12 @@ namespace BellonaAPI.DataAccess.Class
                     dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
                     dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("Enddt", endDate, DbType.String));
-                    dbCol.Add(new DBParameter("Startdt", startDate, DbType.String));                    
-                    dbCol.Add(new DBParameter("branchCode", outletCode, DbType.String));                    
-                    dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));                    
-                    dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));                    
+                    dbCol.Add(new DBParameter("Startdt", startDate, DbType.String));
+                    dbCol.Add(new DBParameter("branchCode", outletCode, DbType.String));
+                    dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
+                    dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
                     dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
-                   
+
                     DataTable dsData = Dbhelper.ExecuteDataTable(QueryList.GetDSR_Summary, dbCol, CommandType.StoredProcedure);
                     _result = dsData.AsEnumerable().Select(row => CreateSummaryFromRow(row)).OrderBy(o => o.BranchName).ToList();
                 }
@@ -3527,7 +3527,7 @@ namespace BellonaAPI.DataAccess.Class
                         OtherSale = row.Field<decimal?>("OtherSale"),
                         ADSWeekdays = row.Field<decimal?>("ADSWEEKDAYS"),
                         ADSWeekend = row.Field<decimal?>("ADSWEEKEND"),
-                        NETCHARGEPERC= row.Field<decimal?>("NETCHARGEPERC")
+                        NETCHARGEPERC = row.Field<decimal?>("NETCHARGEPERC")
                     }).ToList();
                 }
             }).IfNotNull((ex) =>
@@ -3675,9 +3675,9 @@ namespace BellonaAPI.DataAccess.Class
             });
             return _result;
         }
-        public List<Last12MonthBudgetSaleComparison> GetYTDSalesVsBudgetTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
+        public List<Monthly_YTDChartModel> GetYTDSalesVsBudgetTrend(Guid userId, int menuId, string financialYear, string month, string branchCode, int cityId, int clusterId, int brandId)
         {
-            List<Last12MonthBudgetSaleComparison> _result = null;
+            List<Monthly_YTDChartModel> _result = null;
             TryCatch.Run(() =>
             {
                 using (DBHelper Dbhelper = new DBHelper())
@@ -3705,13 +3705,12 @@ namespace BellonaAPI.DataAccess.Class
                     }
 
                     DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetYTDSalesVsBudgetTrend, dbCol, CommandType.StoredProcedure);
-                    _result = dtData.AsEnumerable().Select(row => new Last12MonthBudgetSaleComparison
+                    _result = dtData.AsEnumerable().Select(row => new Monthly_YTDChartModel
                     {
-                        MonthId = row.Field<int>("MonthId"),
-                        Date = row.Field<string>("Date"),
-                        NetAmount = row.Field<decimal?>("NETAMOUNT"),
+                        SaleAmount = row.Field<decimal?>("SaleAmount"),
                         BudgetAmount = row.Field<decimal?>("BudgetAmount"),
-                        //  Percentage = row.Field<decimal?>("Percentage"),
+                        Percentage = row.Field<decimal?>("Percentage"),
+
                     }).ToList();
                 }
             }).IfNotNull((ex) =>
@@ -4464,11 +4463,11 @@ namespace BellonaAPI.DataAccess.Class
                 {
                     DBParameterCollection dbCol = new DBParameterCollection();
 
-                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetAccountNames,  CommandType.StoredProcedure);
+                    DataTable dtData = Dbhelper.ExecuteDataTable(QueryList.GetAccountNames, CommandType.StoredProcedure);
 
                     _result = dtData.AsEnumerable().Select(row => new DropdownFilterModel
                     {
-                        AccountName = row.Field<string>("AccountName")                       
+                        AccountName = row.Field<string>("AccountName")
                     }).OrderBy(o => o.AccountName).ToList();
 
                 }
@@ -4521,7 +4520,7 @@ namespace BellonaAPI.DataAccess.Class
                     dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
                     dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
                     dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
-                    dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));                    
+                    dbCol.Add(new DBParameter("cityId", cityId, DbType.Int32));
 
                     // Execute the stored procedure and retrieve data
                     DataTable dtData = dbHelper.ExecuteDataTable(QueryList.GetItemAnalysisReport, dbCol, CommandType.StoredProcedure);
@@ -4565,7 +4564,7 @@ namespace BellonaAPI.DataAccess.Class
                     dbCol.Add(new DBParameter("UserId", userId, DbType.Guid));
                     dbCol.Add(new DBParameter("MenuId", menuId, DbType.Int32));
                     dbCol.Add(new DBParameter("FromDate", fromDate, DbType.String));
-                    dbCol.Add(new DBParameter("ToDate", toDate, DbType.String));                 
+                    dbCol.Add(new DBParameter("ToDate", toDate, DbType.String));
                     dbCol.Add(new DBParameter("branchCode", branchCode, DbType.String));
                     dbCol.Add(new DBParameter("brandId", brandId, DbType.Int32));
                     dbCol.Add(new DBParameter("clusterId", clusterId, DbType.Int32));
@@ -4579,11 +4578,11 @@ namespace BellonaAPI.DataAccess.Class
                         FoodBillCount = row.Field<int?>("FoodBillCount"),
                         FoodPerc = row.Field<double?>("FoodPerc"),
                         FoodBevBillCount = row.Field<int?>("FoodBevBillCount"),
-                        FoodBevPerc= row.Field<double?>("FoodBevPerc"),
-                        FoodBevLiqBillCount= row.Field<int?>("FoodBevLiqBillCount"),
+                        FoodBevPerc = row.Field<double?>("FoodBevPerc"),
+                        FoodBevLiqBillCount = row.Field<int?>("FoodBevLiqBillCount"),
                         FoodBevLiqPerc = row.Field<double?>("FoodBevLiqPerc"),
                         DessertBillCount = row.Field<int>("DessertBillCount"),
-                        DessertPerc= row.Field<double?>("DessertPerc"),
+                        DessertPerc = row.Field<double?>("DessertPerc"),
                         CocktailBillCount = row.Field<int?>("CocktailBillCount"),
                         CocktailPerc = row.Field<double?>("CocktailPerc")
 

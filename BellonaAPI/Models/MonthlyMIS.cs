@@ -117,4 +117,5 @@ namespace BellonaAPI.Models
         public decimal? BudgetAmount { get; set; }
         public decimal? Percentage { get; set; }
     }
+
 }

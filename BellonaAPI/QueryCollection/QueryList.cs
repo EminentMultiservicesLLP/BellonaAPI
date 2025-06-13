@@ -162,7 +162,7 @@
         public const string GetLast12MonthsLiquorVsBudgetTrend = "dbsp_Monthly_GetLiquorVsBudgetTrend";
         public const string GetLast12MonthsFoodVsBudgetTrend = "dbsp_Monthly_GetFoodVsBudgetTrend";
         public const string GetLast12MonthsSalesVsBudgetTrend = "dbsp_Monthly_GetLast12Months_SalesVsBudget";
-        public const string GetYTDSalesVsBudgetTrend = "dbsp_Monthly_GetYTD_SalesVsBudget";
+        public const string GetYTDSalesVsBudgetTrend = "dbsp_MonthlyChart_GetYTD_SalesVsBudget";
         public const string Monthly_GetDaywiseSale = "dbsp_MonthlyChart_GetDayWiseSale";
         public const string Monthly_GetSalesBreakup = "dbsp_MonthlyChart_GetSalesBreakup";
         public const string Monthly_GetTimeWiseSalesBreakup = "dbsp_MonthlyChart_TimeWiseSaleBreakup";
@@ -177,7 +177,7 @@
         public const string Monthly_GetLast12Weeks_WeekendCoversTrend = "dbsp_MonthlyChart_GetLast12Months_WeekendCoversTrend";
         public const string Monthly_GetLast12Weeks_WeekDaysCoversTrend = "dbsp_MonthlyChart_GetLast12Months_WeekDaysCoversTrend";
 
-        
+
         public const string GetSalesCategory = "dbsp_GetSalesCategory";
         public const string GetSalesBudget = "dbsp_GetSalesBudget";
         public const string GetSalesCategoryBudget = "dbsp_GetSalesCategoryBudget";
@@ -207,7 +207,7 @@
         public const string GetAllExchageRates = "dbsp_GetExchangeRatesAll";
         public const string GetExchangeRateByMonth = "dbsp_GetExchangeRateByMonth";
         public const string SaveExchangeRate = "dbsp_SaveExchangeRate";
-       public const string SaveUploadDocument = "dbsp_Dms_SaveDocument";
+        public const string SaveUploadDocument = "dbsp_Dms_SaveDocument";
         public const string SaveUploadDocumentPath = "dbsp_DMS_SaveUploadDocumentPath";
         public const string SavePropertyContent = "dbsp_DMS_SaveDocumentValues";
         public const string GetVendor = "dbsp_GetVendorByCityId";
@@ -239,7 +239,7 @@
         public const string getLinkedOutlet = "dbsp_Guest_getLinkedOutlet";
 
 
-       /// ************ Cash Deposit Status****************************/
+        /// ************ Cash Deposit Status****************************/
         public const string GetAllAuthCash = "dbsp_Cash_GetAllCashAuth";
         public const string Authorize = "dbsp_DepositAuthorization";
         public const string GetAllCashDeposites = "dbsp_Get_Pending_CashDeposites";
@@ -275,7 +275,7 @@
         public const string GetAllProspectForStatus = "dbsp_Prospect_GetAllProspectForStatus";
         public const string GetDashboardData = "dbsp_Prospect_GetDashboardData";
         public const string GetProspectForAllocation = "dbsp_Prospect_GetProspectForAllocation";
-        public const string SaveProspectAllocation = "dbsp_Prospect_SaveProspectAllocation"; 
+        public const string SaveProspectAllocation = "dbsp_Prospect_SaveProspectAllocation";
         public const string GetProspectAllocation = "dbsp_Prospect_GetProspectAllocation";
 
 
@@ -290,19 +290,19 @@
 
         //********************************** B2C Billing ***************************************
 
-        public const string GetDashboardCity = "dbsp_Bill_GetDashboardCity";  
-        public const string GetDashboardCitiesByBrand = "dbsp_Bill_GetDashboardCitiesByBrand";  
+        public const string GetDashboardCity = "dbsp_Bill_GetDashboardCity";
+        public const string GetDashboardCitiesByBrand = "dbsp_Bill_GetDashboardCitiesByBrand";
         public const string GetDashboardCluster = "dbsp_Bill_GetDashboardCluster";
-        public const string GetDashboardOutlet = "dbsp_Bill_GetDashboardOutlet";  
-        public const string GetFunctionForStatus = "dbsp_Bill_GetFunctionForStatus";  
-        public const string GetAllInvoiceUpload = "dbsp_Bill_GetAllInvoiceUpload";  
-        public const string GetFunctionForExport = "dbsp_Bill_GetFunctionForExport";  
+        public const string GetDashboardOutlet = "dbsp_Bill_GetDashboardOutlet";
+        public const string GetFunctionForStatus = "dbsp_Bill_GetFunctionForStatus";
+        public const string GetAllInvoiceUpload = "dbsp_Bill_GetAllInvoiceUpload";
+        public const string GetFunctionForExport = "dbsp_Bill_GetFunctionForExport";
 
-        public const string GetOutletforBilling = "dbsp_Bill_GetOutletforBilling";  
-        public const string SaveBillingDetails = "dbsp_Bill_SaveBillingDetails"; 
+        public const string GetOutletforBilling = "dbsp_Bill_GetOutletforBilling";
+        public const string SaveBillingDetails = "dbsp_Bill_SaveBillingDetails";
         public const string updateBalance = "dbsp_Bill_UpdateBalance";
         public const string GetBillDetailsbyId = "dbsp_Bill_GetBillDetailsbyId";
-        public const string GetAllBillData = "dbsp_Bill_GetAllBillData";      
+        public const string GetAllBillData = "dbsp_Bill_GetAllBillData";
         public const string AuthourizeBillReceipt = "dbsp_Bill_AuthourizeBillReceipt";
         public const string SaveFunctionEntry = "dbsp_Bill_SaveFunctionEntry";
         public const string UpdateFunctionEntry = "dbsp_Bill_UpdateFunctionEntry";
